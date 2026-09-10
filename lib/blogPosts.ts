@@ -9,7 +9,7 @@ export const blogPosts: BlogPost[] = [
       "A practical, plain-language guide to how chiropractic care addresses chronic lower back pain what an exam looks like, what adjustments do, and when to seek help.",
     excerpt:
       "Chronic lower back pain rarely has a single cause. Here's how a chiropractic exam, gentle adjustments, and targeted exercise work together to address the root issues not just the symptoms.",
-    publishedAt: "2025-04-15",
+    publishedAt: "2026-06-11",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -175,7 +175,7 @@ export const blogPosts: BlogPost[] = [
       "How often should you see a chiropractor? It depends on your goal pain relief, recovery, or maintenance. Here's a clear, plain-language framework from Dr. Levitt.",
     excerpt:
       "There's no single answer that fits every patient but there is a clear framework. Here's how visit frequency typically works for pain relief, recovery, and long-term maintenance.",
-    publishedAt: "2025-05-08",
+    publishedAt: "2026-06-18",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -317,7 +317,7 @@ export const blogPosts: BlogPost[] = [
       "Learn what happens during a chiropractic adjustment in Saint Louis Park, how to prepare, and what results to expect for spine and nervous system support.",
     excerpt:
       "A step-by-step look at what actually happens during a chiropractic adjustment from the first conversation to post-visit recovery so you feel calm, informed, and ready.",
-    publishedAt: "2026-06-29",
+    publishedAt: "2026-06-25",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -589,7 +589,7 @@ export const blogPosts: BlogPost[] = [
       "Discover ergonomic tips and neck pain treatment in Saint Louis Park for desk workers, plus holistic chiropractic care to ease tension and restore mobility.",
     excerpt:
       "Long hours at a screen can quietly turn into steady neck pain. Here's why desk work triggers it, what to change today, and how chiropractic care addresses the deeper causes.",
-    publishedAt: "2026-07-06",
+    publishedAt: "2026-07-02",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -835,7 +835,7 @@ export const blogPosts: BlogPost[] = [
       "Learn key warning signs and options for headache treatment in Saint Louis Park, including how chiropractic care may help address root causes.",
     excerpt:
       "Recurring headaches are not just a normal part of a busy life. Here's how to spot the warning signs, why your neck and spine may be involved, and what chiropractic care can do about it.",
-    publishedAt: "2026-07-13",
+    publishedAt: "2026-07-09",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -1089,7 +1089,7 @@ export const blogPosts: BlogPost[] = [
       "Learn how common routines strain your spine and how posture correction in Saint Louis Park can restore alignment, ease pain, and boost comfort.",
     excerpt:
       "Posture rarely disappears from one big injury. Here's how screen time, desk work, summer activities, and home habits quietly pull your spine out of alignment and what to do about it.",
-    publishedAt: "2026-07-20",
+    publishedAt: "2026-07-16",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -1336,7 +1336,7 @@ export const blogPosts: BlogPost[] = [
       "Learn how a sports injury chiropractor in Minneapolis helps athletes recover faster with holistic, personalized care and advanced therapies like cold laser.",
     excerpt:
       "Sports chiropractic care looks at how an athlete moves, not just where it hurts. Here's how personalized evaluation, hands-on care, and advanced therapies support faster recovery and better performance.",
-    publishedAt: "2026-07-27",
+    publishedAt: "2026-07-23",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -1550,7 +1550,7 @@ export const blogPosts: BlogPost[] = [
       "Explore functional medicine in Saint Louis Park with chiropractic care, nutrition guidance, and nervous system therapies at Levitt Chiropractic Center, P.A.",
     excerpt:
       "Back pain, fatigue, digestive trouble, and stress rarely show up in isolation. Here's how blending functional medicine with chiropractic care helps address the root imbalances connecting them.",
-    publishedAt: "2026-08-04",
+    publishedAt: "2026-07-30",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -1857,7 +1857,7 @@ export const blogPosts: BlogPost[] = [
       "Find natural relief and lasting support with sciatica treatment in Minneapolis through holistic chiropractic care focused on spine and nervous system health.",
     excerpt:
       "Sciatica can turn a short walk or a workday at a desk into a struggle. Here's how gentle chiropractic care, cold laser therapy, and functional medicine work together to calm the sciatic nerve and address its root cause.",
-    publishedAt: "2026-08-11",
+    publishedAt: "2026-08-06",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -2110,7 +2110,7 @@ export const blogPosts: BlogPost[] = [
       "Learn common daily signs your body needs chiropractic care in Saint Louis Park, plus how holistic adjustments and therapies can support lasting wellness.",
     excerpt:
       "Stiffness, nagging aches, low energy, and brain fog are often your body's early warning signs. Here's how to spot them and how chiropractic care in Saint Louis Park can help.",
-    publishedAt: "2026-08-18",
+    publishedAt: "2026-08-13",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -2354,7 +2354,7 @@ export const blogPosts: BlogPost[] = [
       "Morning stiffness, recurring headaches, and low energy can all be everyday clues your spine needs attention. Here's how chiropractic care in Saint Louis Park can help.",
     excerpt:
       "Chiropractic care is not just for sudden injuries or severe back pain. Many people walk around every day with small but important clues that their body is not working as well as it could. Those signals can show up as stiffness, nagging aches, low energy, or trouble thinking clearly.",
-    publishedAt: "2026-08-25",
+    publishedAt: "2026-08-20",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -2537,7 +2537,7 @@ export const blogPosts: BlogPost[] = [
       "Back pain relief is often just the beginning. Here's how chiropractic care in Minneapolis supports sleep, energy, focus, and whole-body wellness beyond the spine.",
     excerpt:
       "Back pain is often the push that finally gets someone to call a chiropractor in Minneapolis. What surprises many people is how often other parts of life start to feel better too, like energy, sleep, focus, and mood.",
-    publishedAt: "2026-09-01",
+    publishedAt: "2026-08-27",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -2677,7 +2677,7 @@ export const blogPosts: BlogPost[] = [
       "Not sure if it's a pulled muscle or a spine problem? A Minneapolis chiropractor explains how to tell the difference and when imaging is actually needed.",
     excerpt:
       "Back pain can show up fast, and guessing wrong about the cause can slow healing. Here's how spine pain and muscle strain really feel different, and when imaging is actually needed.",
-    publishedAt: "2026-09-07",
+    publishedAt: "2026-09-03",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -2804,7 +2804,7 @@ export const blogPosts: BlogPost[] = [
       "Looking for a holistic chiropractor in Minneapolis? Here's what whole-body care actually looks like and the questions to ask before you choose one.",
     excerpt:
       "Choosing a holistic chiropractor in Minneapolis matters if you want more than quick pain relief. Here's what makes chiropractic care truly holistic, and how to find the right fit.",
-    publishedAt: "2026-09-08",
+    publishedAt: "2026-09-10",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
