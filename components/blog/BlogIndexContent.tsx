@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
 import { PageHero } from "@/components/ui/PageHero";
@@ -22,8 +23,26 @@ const fadeUp = {
   },
 };
 
+const ALL_CATEGORY = "All";
+
 export function BlogIndexContent({ posts }: BlogIndexContentProps) {
-  const [lead, ...rest] = posts;
+  const categories = useMemo(() => {
+    const set = new Set<string>();
+    for (const p of posts) set.add(p.category);
+    return [ALL_CATEGORY, ...Array.from(set).sort()];
+  }, [posts]);
+
+  const [activeCategory, setActiveCategory] = useState<string>(ALL_CATEGORY);
+
+  const filtered = useMemo(
+    () =>
+      activeCategory === ALL_CATEGORY
+        ? posts
+        : posts.filter((p) => p.category === activeCategory),
+    [posts, activeCategory],
+  );
+
+  const [lead, ...rest] = filtered;
 
   return (
     <>
@@ -52,6 +71,37 @@ export function BlogIndexContent({ posts }: BlogIndexContentProps) {
         watermark="Blog"
       />
 
+      {/* Category filter */}
+      <section className="relative border-b border-slate-200 bg-white py-6">
+        <div className="mx-auto max-w-7xl px-6">
+          <div
+            role="group"
+            aria-label="Filter articles by category"
+            className="flex flex-wrap gap-2"
+          >
+            {categories.map((category) => {
+              const isActive = category === activeCategory;
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => setActiveCategory(category)}
+                  aria-pressed={isActive}
+                  className={
+                    "rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-colors " +
+                    (isActive
+                      ? "border-[#F97316] bg-[#F97316] text-white"
+                      : "border-slate-200 bg-white text-slate-600 hover:border-[#F97316]/40 hover:text-[#F97316]")
+                  }
+                >
+                  {category}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Lead post */}
       {lead && (
         <section className="relative bg-white py-14 sm:py-20">
@@ -64,13 +114,24 @@ export function BlogIndexContent({ posts }: BlogIndexContentProps) {
               className="mb-10"
             >
               <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#F97316]">
-                Latest article
+                {activeCategory === ALL_CATEGORY ? "Latest article" : activeCategory}
               </p>
               <h2 className="mt-2 font-heading text-2xl font-bold tracking-tight text-[#0F172A] sm:text-3xl">
                 Just published
               </h2>
             </motion.div>
             <BlogCard post={lead} feature />
+          </div>
+        </section>
+      )}
+
+      {!lead && (
+        <section className="relative bg-white py-20 text-center">
+          <div className="mx-auto max-w-7xl px-6">
+            <p className="text-base text-slate-600">
+              No articles found in this category yet. Check back soon or
+              browse another topic above.
+            </p>
           </div>
         </section>
       )}
