@@ -146,11 +146,12 @@ export default function BackPainTreatmentsContent() {
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                When back pain is interfering with your life, you want relief
- and you want it now. However, you don’t want to rely on
-                addictive medications or resort to surgical procedures to
-                make it happen. Chiropractic back pain treatments can help
-                you gain the relief you want, in the way you want it.
+                Most back pain we see in Saint Louis Park is not a medical
+                mystery. It is a desk, a commute on Highway 100 or 394, and a
+                weekend that asked the disc to lift something it was not warm
+                for. Medication can take the edge off. Surgery has a place.
+                Neither is the first conversation for a mechanical lumbar
+                problem we can examine and treat in Suite 201.
               </p>
 
               <motion.ul
@@ -284,9 +285,10 @@ export default function BackPainTreatmentsContent() {
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Learn more about chiropractic back pain treatments and how
-                they can benefit you by visiting Dr. Levitt and the team at
-                Levitt Chiropractic Center in Saint Louis Park, MN. Call{" "}
+                If the pain is new, shooting down a leg with weakness, or
+                coming with fever or bowel/bladder change, that is not a
+                “stop living with it” problem — that is a medical screen. For
+                the rest, call{" "}
                 <a
                   href={siteConfig.phoneHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
@@ -299,8 +301,9 @@ export default function BackPainTreatmentsContent() {
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
                   schedule online
-                </Link>{" "}
-                today.
+                </Link>
+                . Methodist Hospital is less than a mile east if you need that
+                campus first.
               </p>
             </motion.div>
 

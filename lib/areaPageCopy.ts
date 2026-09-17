@@ -1,6 +1,8 @@
 import type { ServedCity } from "./areasData";
 import type { PseoService } from "./pseoServices";
 import { siteConfig } from "./siteConfig";
+import { localFact } from "./cityLocalFacts";
+import { serviceExtra } from "./serviceCopyExtras";
 
 export function neighborsPhrase(city: Pick<ServedCity, "neighbors">): string {
   const n = city.neighbors;
@@ -28,84 +30,121 @@ export function driveLabel(city: Pick<ServedCity, "distanceMi" | "name">): strin
   return `About ${city.distanceMi} miles · ${min} min`;
 }
 
-function regionLifestyle(city: ServedCity): string {
-  switch (city.region) {
-    case "West Metro":
-      return `West Metro patients often split time between desk work and an active lakeside life. We see a lot of neck and low-back strain from I-394 / Hwy 100 commutes, plus overuse from walking, cycling, and time on Lake Minnetonka.`;
-    case "Minneapolis":
-      return `Minneapolis patients typically sit more than they realize — Uptown, downtown, and the Chain of Lakes loop. Desk posture, bike-commute tightness, and recurring neck pain are the patterns we treat most from the city.`;
-    case "Saint Paul":
-      return `Saint Paul patients often come after a week of river-city commuting and desk hours. We look at the whole pattern: driving on I-94, sitting at work, and whatever sport or walking routine they are trying to keep.`;
-    case "South Metro":
-      return `South Metro patients usually reach us via 35W, 62, or 494. Long highway sits plus standing jobs (retail, warehouse, healthcare) show up as low-back, hip, and sciatica complaints.`;
-    case "North Metro":
-      return `North Metro patients often drive 169 or 94 to get here. We plan visits around that commute so care is efficient — evaluate, treat, and send you home with a plan you can actually keep.`;
-    case "East Metro":
-      return `East Metro patients make a longer but straightforward drive across the metro. If the visit is worth the trip, we make it count: a full evaluation, a clear plan, and techniques that do not require living next door to the office.`;
-  }
-}
+export function cityIntro(city: ServedCity): {
+  lead: string;
+  support: string;
+  local: string;
+  typical: string;
+} {
+  const fact = localFact(city);
 
-export function cityIntro(city: ServedCity): { lead: string; support: string } {
   if (city.distanceMi === 0) {
     return {
-      lead: `Our clinic is in ${city.name}. The office is at ${siteConfig.address.street}, near ${city.landmark}, serving ZIP codes ${zipPhrase(city)}.`,
-      support: `Dr. Alan Levitt has practiced in this community since 1999. Care is drug-free and built around your case — spinal adjustments, cold laser, cryotherapy, therapeutic exercise, and custom orthotics when they help the cause, not just the symptom. ${regionLifestyle(city)}`,
+      lead: `Levitt Chiropractic Center is in ${city.name}, at ${siteConfig.address.street}, near ${city.landmark}. ZIP codes we see most days: ${zipPhrase(city)}.`,
+      support: `Dr. Alan Levitt has practiced here since 1999 (and as a chiropractor since 1987). Care is drug-free on purpose: spinal adjustments, cold laser, targeted ice, therapeutic exercise, and custom orthotics when the exam says they would change the load — not because they are on a menu.`,
+      local: fact.note,
+      typical: fact.typical,
     };
   }
 
   return {
-    lead: `We do not have a second office in ${city.name}. Patients who live near ${city.landmark} or in ZIP ${zipPhrase(city)} are seen at our Saint Louis Park clinic — about ${city.distanceMi} miles, typically ${driveMinutes(city)} minutes depending on traffic.`,
-    support: `That drive is why the first visit is unhurried and specific. Dr. Levitt has treated ${city.region.toLowerCase()} families since 1987, including people who also come from ${neighborsPhrase(city)}. ${regionLifestyle(city)} You leave with a plan, not a sales script.`,
+    lead: `There is no second office in ${city.name}. If you live near ${city.landmark} or in ZIP ${zipPhrase(city)}, you are seen in Saint Louis Park — about ${city.distanceMi} miles, typically ${driveMinutes(city)} minutes when ${fact.corridor} is moving.`,
+    support: `That drive is why the first visit is unhurried. Dr. Levitt has treated ${city.region.toLowerCase()} families for decades, including people who also come from ${neighborsPhrase(city)}. You leave with a plan you can keep from ${city.name}, not a schedule that pretends you live on Excelsior Boulevard.`,
+    local: fact.note,
+    typical: fact.typical,
   };
 }
 
 export function cityWhyPoints(city: ServedCity): Array<{ title: string; body: string }> {
+  const fact = localFact(city);
   const drive =
     city.distanceMi === 0
-      ? `You are already in the neighborhood. Parking and a first-visit plan are straightforward.`
-      : `Most ${city.name} patients treat this as a dedicated appointment, not a drop-in. We work around your calendar so the ${driveMinutes(city)}-minute drive is worth it.`;
+      ? `You are already in the neighborhood. Suite 201 has parking; Methodist Hospital is less than a mile east if you are coming from that campus.`
+      : `Most ${city.name} patients treat this as a dedicated appointment. We work around your calendar so the ${driveMinutes(city)}-minute drive via ${fact.corridor} is worth it.`;
 
   return [
     {
-      title: "One clinic, honest geography",
+      title: "How people actually get here",
       body: drive,
     },
     {
-      title: `Built for ${city.region} lives`,
-      body: regionLifestyle(city),
+      title: `What we see from ${city.name}`,
+      body: fact.typical,
     },
     {
-      title: "Root-cause care",
-      body: `No generic protocol. Dr. Levitt uses exam findings — and imaging only when it would change the plan — then chooses among adjustments, laser, cryotherapy, exercise, and orthotics.`,
+      title: "Root-cause, not a script",
+      body: `Dr. Levitt uses the exam — and imaging only when it would change the plan — then chooses among adjustments, laser, cryotherapy, exercise, and orthotics. Nearby medical context for ${city.name}: ${fact.hospital}.`,
     },
   ];
 }
 
+export function firstVisitSteps(city: ServedCity): Array<{ title: string; body: string }> {
+  const fact = localFact(city);
+  return [
+    {
+      title: "Tell the real story",
+      body: `When it started, what makes it worse, what you already tried. ${city.name} patients often leave out the commute or the weekend miles — those belong in the history.`,
+    },
+    {
+      title: "Exam before any technique",
+      body: `Posture, motion, and the nervous system. Red flags (night pain, unexplained weight loss, bowel or bladder change, recent major trauma) mean we refer, not adjust first.`,
+    },
+    {
+      title: "A plan you can keep",
+      body:
+        city.distanceMi === 0
+          ? `Because you live here, follow-ups can be tighter if the exam needs them. You still get homework so you are not living on the table.`
+          : `Because you are coming from ${city.name}, we do not write a fantasy of three visits a week. Home work has to survive ${fact.corridor}.`,
+    },
+    {
+      title: "Practical next step",
+      body: `You leave knowing whether the next visit is treatment, a hold, or a medical referral. Call ${siteConfig.phone} if the drive timing is the thing you need to settle first.`,
+    },
+  ];
+}
+
+export function insuranceNote(city: ServedCity): string {
+  const crash =
+    city.distanceMi === 0
+      ? `After a crash on Highway 100, Excelsior, or Highway 7, Minnesota no-fault (PIP) can cover chiropractic as a medical expense — you do not have to “win” a lawsuit first.`
+      : `If the problem started with a Twin Cities crash, Minnesota no-fault (PIP) can cover chiropractic medical expense through your own auto policy. That is a Minnesota rule, not a clinic slogan.`;
+  return `${crash} Health insurance is a separate conversation; we will tell you what we can verify. No referral is required to book a first visit.`;
+}
+
 export function cityFaqs(city: ServedCity): Array<{ q: string; a: string }> {
+  const fact = localFact(city);
   const officeQ =
     city.distanceMi === 0
       ? {
           q: `Where is the chiropractor's office in ${city.name}?`,
-          a: `Levitt Chiropractic Center is at ${siteConfig.address.full}, near ${city.landmark}. Call ${siteConfig.phone} or request an appointment online.`,
+          a: `Levitt Chiropractic Center is at ${siteConfig.address.full}, near ${city.landmark}, along ${fact.corridor}. ${fact.hospital} is the medical campus most neighbors already know. Call ${siteConfig.phone} or request a visit online.`,
         }
       : {
           q: `Do you have a chiropractic office in ${city.name}?`,
-          a: `No. There is one clinic, in Saint Louis Park at ${siteConfig.address.street}. ${city.name} is about ${city.distanceMi} miles away (typically ${driveMinutes(city)} minutes). We regularly see patients from ${city.name} and ${neighborsPhrase(city)}.`,
+          a: `No. There is one clinic, in Saint Louis Park at ${siteConfig.address.street}. From ${city.name} that is about ${city.distanceMi} miles (typically ${driveMinutes(city)} minutes) via ${fact.corridor}. We regularly see patients from ${city.name} and ${neighborsPhrase(city)}.`,
         };
 
   return [
     officeQ,
     {
       q: `Are you accepting new patients from ${city.name}?`,
-      a: `Yes. New patients from ${city.name} can request a visit online or call ${siteConfig.phone}. Most people are seen within the same week.`,
+      a: `Yes. New patients from ${city.name} can request a visit online or call ${siteConfig.phone}. Most people are seen within the same week. Minnesota does not require a physician referral to see a chiropractor.`,
     },
     {
       q: `What should I expect on a first visit from ${city.name}?`,
-      a: `Dr. Levitt listens first, then evaluates history, posture, and the nervous system. You leave with a clear next step. Imaging is ordered only when it would change care.`,
+      a: `Dr. Levitt listens first, then evaluates history, posture, and the nervous system. You leave with a next step. Imaging is ordered only when it would change care. ${fact.typical}`,
     },
     {
-      q: `Is parking available?`,
-      a: `Yes. The office is in Suite 201 at 6200 Excelsior Blvd. If you are coming from ${city.name}, give yourself a few extra minutes the first time so you are not rushed into the exam.`,
+      q: `How do I park and find Suite 201?`,
+      a: `The office is Suite 201 at 6200 Excelsior Blvd. If you are coming from ${city.name}, give yourself extra minutes the first time so you are not rushed into the exam. Nearby context: ${fact.hospital}.`,
+    },
+    {
+      q: `Does insurance cover chiropractic after a car accident in Minnesota?`,
+      a: insuranceNote(city),
+    },
+    {
+      q: `What is a red flag that means I should not just “get adjusted”?`,
+      a: `Unexplained weight loss, pain that is worse at rest or at night, fever, bowel or bladder changes, progressive weakness, or a significant recent trauma. Those need medical screening. A sore neck after a week at a desk is a different story — that is most of what we treat from ${city.name}.`,
     },
   ];
 }
@@ -113,17 +152,23 @@ export function cityFaqs(city: ServedCity): Array<{ q: string; a: string }> {
 export function cityServiceIntro(
   city: ServedCity,
   service: PseoService,
-): { lead: string; support: string } {
+): { lead: string; support: string; local: string } {
+  const fact = localFact(city);
+  const extra = serviceExtra(service);
   const conditions = formatList(service.conditions);
+
   if (city.distanceMi === 0) {
     return {
-      lead: `${service.name} is available at our ${city.name} office near ${city.landmark}.`,
-      support: `Dr. Levitt uses ${service.inlineNoun} as part of a whole-case plan — not an isolated gadget. People in ZIP ${zipPhrase(city)} typically come in for ${conditions}.`,
+      lead: `${service.name} is available in our ${city.name} office near ${city.landmark}, along ${fact.corridor}.`,
+      support: extra.whoItsFor,
+      local: `${fact.note} People in ZIP ${zipPhrase(city)} typically book this for ${conditions}.`,
     };
   }
+
   return {
-    lead: `${city.name} residents receive ${service.inlineNoun} at our Saint Louis Park clinic, about ${city.distanceMi} miles (${driveMinutes(city)} minutes) from ${city.landmark}.`,
-    support: `We do not franchise a ${city.name} location. If you are making that drive for ${service.inlineNoun}, the visit is built to count: exam, the right technique for your findings, and a plan you can follow at home. Common reasons ${city.name} patients book this: ${conditions}.`,
+    lead: `${city.name} residents receive ${service.inlineNoun} in Saint Louis Park — about ${city.distanceMi} miles (${driveMinutes(city)} minutes) from ${city.landmark} via ${fact.corridor}.`,
+    support: extra.whoItsFor,
+      local: `This is not a second ${city.name} office. ${fact.note} Common reasons ${city.name} patients book ${service.inlineNoun}: ${conditions}.`,
   };
 }
 
@@ -131,17 +176,28 @@ export function cityServiceFaqs(
   city: ServedCity,
   service: PseoService,
 ): Array<{ q: string; a: string }> {
-  const localized = service.faqs;
+  const extra = serviceExtra(service);
+  const fact = localFact(city);
 
   const travel = {
     q: `Can I get ${service.name.toLowerCase()} if I live in ${city.name}?`,
     a:
       city.distanceMi === 0
         ? `Yes — you will be seen here in ${city.name} at ${siteConfig.address.street}.`
-        : `Yes. There is no ${city.name} branch. Appointments are at the Saint Louis Park office, typically a ${driveMinutes(city)}-minute drive. Call ${siteConfig.phone} if you want to confirm timing before you come.`,
+        : `Yes. There is no ${city.name} branch. Appointments are at the Saint Louis Park office, typically a ${driveMinutes(city)}-minute drive via ${fact.corridor}. Call ${siteConfig.phone} if you want to confirm timing before you come.`,
   };
 
-  return [...localized, travel];
+  const fit = {
+    q: `Who is ${service.name.toLowerCase()} actually for?`,
+    a: extra.whoItsFor,
+  };
+
+  const skip = {
+    q: `When is this the wrong first step?`,
+    a: extra.notFor,
+  };
+
+  return [...service.faqs, fit, skip, travel];
 }
 
 export function visitFacts(city: ServedCity): Array<{ label: string; value: string }> {
@@ -151,6 +207,24 @@ export function visitFacts(city: ServedCity): Array<{ label: string; value: stri
     { label: "County", value: `${city.county} County` },
     { label: "Phone", value: siteConfig.phone },
   ];
+}
+
+export function cityMetaDescription(city: ServedCity): string {
+  const fact = localFact(city);
+  if (city.distanceMi === 0) {
+    return `Chiropractor in Saint Louis Park at 6200 Excelsior Blvd. Adjustments, laser, and orthotics near Methodist Hospital and the West End. Call ${siteConfig.phone}.`;
+  }
+  return `${city.name} chiropractic care in Saint Louis Park — about ${driveMinutes(city)} min via ${fact.corridor}. ${serviceClip(fact.typical)} Call ${siteConfig.phone}.`;
+}
+
+export function cityServiceMetaDescription(city: ServedCity, service: PseoService): string {
+  const mins = city.distanceMi === 0 ? "in Saint Louis Park" : `~${driveMinutes(city)} min from ${city.name}`;
+  return `${service.name} ${mins}. ${service.tagline} Call ${siteConfig.phone}.`;
+}
+
+function serviceClip(text: string): string {
+  const sentence = text.split(/(?<=\.)\s/)[0] ?? text;
+  return sentence.length > 140 ? `${sentence.slice(0, 137)}…` : sentence;
 }
 
 function formatList(items: string[]): string {

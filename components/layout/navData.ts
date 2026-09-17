@@ -79,6 +79,18 @@ export const primaryNav: NavEntry[] = [
     ],
   },
   {
+    label: "Areas We Serve",
+    href: "/areas-we-serve",
+    groups: [
+      { label: "Saint Louis Park", href: "/areas-we-serve/saint-louis-park" },
+      { label: "Edina", href: "/areas-we-serve/edina" },
+      { label: "Minneapolis", href: "/areas-we-serve/minneapolis" },
+      { label: "Hopkins", href: "/areas-we-serve/hopkins" },
+      { label: "Minnetonka", href: "/areas-we-serve/minnetonka" },
+      { label: "Golden Valley", href: "/areas-we-serve/golden-valley" },
+    ],
+  },
+  {
     label: "Contact",
     href: "/contact",
     groups: [

@@ -4,11 +4,10 @@ import { notFound } from "next/navigation";
 import { generateMeta } from "@/lib/metadata";
 import { servedCities, getCityBySlug } from "@/lib/areasData";
 import { pseoServices, getServiceBySlug } from "@/lib/pseoServices";
-import { siteConfig } from "@/lib/siteConfig";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqPageJsonLd } from "@/lib/jsonLd";
-import { cityServiceFaqs } from "@/lib/areaPageCopy";
+import { breadcrumbJsonLd, faqPageJsonLd } from "@/lib/jsonLd";
+import { cityServiceFaqs, cityServiceMetaDescription } from "@/lib/areaPageCopy";
 import AreaServicePageContent from "@/components/areas/AreaServicePageContent";
 
 type Params = { city: string; service: string };
@@ -36,7 +35,7 @@ export async function generateMetadata({
   if (!city || !service) return {};
 
   const title = `${service.name} in ${city.name}, MN`;
-  const description = `${service.name} for ${city.name}, Minnesota residents at Levitt Chiropractic Center. ${service.tagline} Call ${siteConfig.phone}.`;
+  const description = cityServiceMetaDescription(city, service);
 
   return generateMeta({
     title,
@@ -60,9 +59,23 @@ export default async function Page({
       <ServiceSchema
         name={`${service.name} in ${city.name}, MN`}
         slug={`areas-we-serve/${city.slug}/${service.slug}`}
-        description={`${service.name} for ${city.name}, Minnesota patients at Levitt Chiropractic Center, P.A. ${service.tagline}`}
+        description={cityServiceMetaDescription(city, service)}
         serviceType={service.serviceType ?? service.name}
         areaServed={city.name}
+      />
+      <JsonLd
+        id={`ld-crumbs-${city.slug}-${service.slug}`}
+        data={breadcrumbJsonLd({
+          items: [
+            { name: "Home", url: "/" },
+            { name: "Areas We Serve", url: "/areas-we-serve" },
+            { name: city.name, url: `/areas-we-serve/${city.slug}` },
+            {
+              name: service.name,
+              url: `/areas-we-serve/${city.slug}/${service.slug}`,
+            },
+          ],
+        })}
       />
       <JsonLd
         id={`ld-faq-${city.slug}-${service.slug}`}

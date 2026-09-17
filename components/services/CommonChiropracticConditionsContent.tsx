@@ -288,9 +288,11 @@ export default function CommonChiropracticConditionsContent() {
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Tap any condition below to learn how chiropractic care from Dr.
-              Levitt can help addressing the underlying cause, not just the
-              symptoms. Have a question?{" "}
+              Headaches, sciatica, a wrist that complains after a desk week,
+              a heel that hurts on the first step in the morning — tap the
+              condition that sounds like yours. Some of these belong in a
+              chiropractic exam. Some (fracture, infection, unexplained weight
+              loss) do not. We will say which. Questions?{" "}
               <Link
                 href="/contact"
                 className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"

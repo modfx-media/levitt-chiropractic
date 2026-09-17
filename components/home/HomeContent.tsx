@@ -34,19 +34,35 @@ const HERO_IMAGE_ALTS = [
 const homeFaqs = [
   {
     q: "Is Levitt Chiropractic accepting new patients in Saint Louis Park?",
-    a: "Yes. Dr. Alan Levitt is accepting new patients at 6200 Excelsior Blvd, Suite 201 in Saint Louis Park. Request an appointment online or call 952-920-7535.",
+    a: "Yes. Dr. Alan Levitt is accepting new patients at 6200 Excelsior Blvd, Suite 201. Minnesota does not require a physician referral. Request a visit online or call 952-920-7535 — most people are seen the same week.",
   },
   {
-    q: "Where is the clinic located?",
-    a: "Levitt Chiropractic Center is at 6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416 — near the West End, with patients also coming from Minneapolis, Edina, Hopkins, and Minnetonka.",
+    q: "Where is the clinic, and how do I get there?",
+    a: "Suite 201 at 6200 Excelsior Blvd, Saint Louis Park, MN 55416. Highway 100 and Excelsior are the usual routes. Park Nicollet Methodist Hospital is less than a mile east on the same street. Patients also come from Minneapolis, Edina, Hopkins, Minnetonka, and Golden Valley.",
   },
   {
     q: "What happens on a first visit?",
-    a: "Dr. Levitt listens first, then evaluates history, posture, and the nervous system. You leave with a clear plan — not a one-size-fits-all protocol — and we only recommend imaging when it would change your care.",
+    a: "You tell the real story — commute, desk, weekend miles, the crash if there was one. Then a hands-on exam. You leave knowing the next step. Imaging only when it would change care. No generic protocol.",
   },
   {
     q: "Do you treat back pain without drugs or surgery?",
-    a: "Yes. Care is drug-free and non-surgical: chiropractic adjustments, cold laser, cryotherapy, therapeutic exercise, and custom orthotics when they help the underlying cause.",
+    a: "Yes. Adjustments, cold laser, targeted ice, therapeutic exercise, and custom orthotics when the exam says they would change the load. The goal is the cause, not a pill that lasts until Thursday.",
+  },
+  {
+    q: "What is a red flag in chiropractic?",
+    a: "A red flag is a sign we should not just adjust: unexplained weight loss, night pain, fever, bowel or bladder changes, progressive weakness, or a significant recent trauma. Those need medical screening. A stiff neck after a week on Highway 100 is a different story.",
+  },
+  {
+    q: "Can a chiropractor help heel spurs?",
+    a: "Often, yes — by calming the tissue around the spur and fixing the gait that keeps irritating it. Custom orthotics are sometimes part of that. We cannot sand a spur off the bone. If the pain is new, hot, and you cannot bear weight, we start with an exam, not a promise.",
+  },
+  {
+    q: "Can a chiropractor fix a wrist?",
+    a: "Many wrists, yes: joint restriction, repetitive strain, some carpal-tunnel patterns. Fractures, major ligament tears, and advanced arthritis need an orthopedic look first. We will say so if the exam is not a chiropractic case.",
+  },
+  {
+    q: "Does Minnesota no-fault cover chiropractic after a car accident?",
+    a: "Minnesota is a no-fault state. PIP medical benefits can include chiropractic care after an auto crash, through your own auto policy, without first proving who was at fault. Health insurance is a separate question. Bring ER notes if you have them.",
   },
 ];
 
@@ -67,8 +83,8 @@ const quickLinks = [
     image: "/images/therapeutic-exercise.jpg",
   },
   {
-    title: "Insights & Articles",
-    href: "/blog",
+    title: "Saint Louis Park office",
+    href: "/areas-we-serve/saint-louis-park",
     image: "/images/og-default.jpg",
   },
   {
@@ -91,7 +107,7 @@ const valueProps = [
   {
     title: "Holistic Approach",
     description:
-      "We address the underlying cause combining chemical, nutritional, and structural care.",
+      "We address the underlying cause, combining chemical, nutritional, and structural care.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M12 21s-7-4.35-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.65-7 10-7 10z" strokeLinecap="round" strokeLinejoin="round" />
@@ -112,7 +128,7 @@ const valueProps = [
   {
     title: "Personalized Plans",
     description:
-      "No generic protocols every patient receives a treatment plan built around their needs.",
+      "No generic protocols. Every patient receives a treatment plan built around their actual week — including the commute.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M4 4h16v16H4z" strokeLinecap="round" strokeLinejoin="round" />
@@ -149,7 +165,7 @@ const steps = [
     n: "03",
     title: "Care",
     body:
-      "Gentle adjustments and modern modalities cold laser, cryotherapy, therapeutic exercise.",
+      "Gentle adjustments and modern modalities: cold laser, cryotherapy, therapeutic exercise.",
   },
   {
     n: "04",
@@ -316,22 +332,25 @@ export default function HomeContent() {
 
             <div className="mt-8 space-y-5 text-base leading-relaxed text-slate-700 sm:text-lg">
               <p>
-                Dr. Alan Levitt at the Levitt Chiropractic Center offers
-                superior chiropractic care to the residents of Saint Louis Park,
-                MN. His mission is to improve and maximize every patient&rsquo;s
-                quality of life regardless of diagnosis, with innovative and
-                traditional therapeutic practices.
+                If you live in Saint Louis Park, you already know Excelsior
+                Boulevard. The clinic is in Suite 201 at 6200 — west of Park
+                Nicollet Methodist Hospital, near the West End, not a downtown
+                skyway office. Dr. Alan Levitt has practiced here since 1999
+                (and as a chiropractor since 1987).
               </p>
               <p>
-                Dr. Levitt opened his practice doors to the local community in
-                1999. Still, he has been a chiropractor since 1987 bringing a
-                wealth of experience and knowledge to every appointment.
+                Most first visits are not dramatic injuries. They are Highway
+                100 necks, a disc that “went” lifting a cooler, or stiffness
+                that stretching only fixes for a day. Care is drug-free on
+                purpose: adjustments, cold laser, targeted ice, exercise, and
+                custom orthotics when the exam says they would actually change
+                the load.
               </p>
               <p>
-                Our patient care doesn&rsquo;t only focus on symptoms. Instead,
-                Dr. Levitt addresses the underlying cause through a holistic
-                approach combining chemical, nutritional, and structural
-                interventions for overall well-being.
+                We look at the whole pattern — how you sit, how you walk, what
+                you eat, what the nervous system is doing — and we will send
+                you to a physician first if the story sounds like a red flag,
+                not a mechanical spine problem.
               </p>
             </div>
 
@@ -695,6 +714,49 @@ export default function HomeContent() {
         </div>
       </section>
 
+      <section className="relative bg-white py-12 sm:py-16">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+              West metro
+            </p>
+            <h2 className="mt-3 font-heading text-2xl font-bold tracking-tight text-dark sm:text-3xl">
+              Neighborhoods we see every week
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">
+              One clinic in Saint Louis Park. Patients drive from the cities
+              below — usually via Highway 100, 394, or Excelsior Boulevard.
+            </p>
+          </div>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            {[
+              ["saint-louis-park", "Saint Louis Park"],
+              ["edina", "Edina"],
+              ["hopkins", "Hopkins"],
+              ["minnetonka", "Minnetonka"],
+              ["minneapolis", "Minneapolis"],
+              ["golden-valley", "Golden Valley"],
+              ["richfield", "Richfield"],
+              ["plymouth", "Plymouth"],
+            ].map(([slug, name]) => (
+              <Link
+                key={slug}
+                href={`/areas-we-serve/${slug}`}
+                className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-dark transition hover:border-primary hover:text-primary"
+              >
+                {name}
+              </Link>
+            ))}
+            <Link
+              href="/areas-we-serve"
+              className="rounded-full border border-primary/30 bg-primary/5 px-4 py-2 text-sm font-semibold text-primary"
+            >
+              All areas we serve
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ — visible answers that match the FAQPage schema */}
       <section className="relative bg-slate-50 py-14 sm:py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
@@ -885,6 +947,12 @@ export default function HomeContent() {
               aria-hidden
               className="mx-auto mt-4 block h-1 w-16 rounded-full bg-primary"
             />
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600">
+              6200 Excelsior Blvd, Suite 201. Highway 100 and Excelsior are
+              the usual routes. Methodist Hospital is less than a mile east
+              on the same street — useful if you are coming from that campus
+              or giving a rideshare the landmark.
+            </p>
           </motion.div>
 
           <motion.div

@@ -3,9 +3,8 @@ import { notFound } from "next/navigation";
 
 import { generateMeta } from "@/lib/metadata";
 import { servedCities, getCityBySlug } from "@/lib/areasData";
-import { siteConfig } from "@/lib/siteConfig";
-import { cityServiceAreaJsonLd, faqPageJsonLd } from "@/lib/jsonLd";
-import { cityFaqs } from "@/lib/areaPageCopy";
+import { breadcrumbJsonLd, cityServiceAreaJsonLd, faqPageJsonLd } from "@/lib/jsonLd";
+import { cityFaqs, cityMetaDescription } from "@/lib/areaPageCopy";
 import { JsonLd } from "@/components/seo/JsonLd";
 import AreaCityPageContent from "@/components/areas/AreaCityPageContent";
 
@@ -27,7 +26,7 @@ export async function generateMetadata({
   if (!city) return {};
 
   const title = `Chiropractor in ${city.name}, MN`;
-  const description = `Drug-free chiropractic care for ${city.name}, Minnesota — adjustments, cold laser, cryotherapy, custom orthotics and more at our Saint Louis Park office. Call ${siteConfig.phone}.`;
+  const description = cityMetaDescription(city);
 
   return generateMeta({
     title,
@@ -52,7 +51,17 @@ export default async function Page({
         data={cityServiceAreaJsonLd({
           citySlug: city.slug,
           cityName: city.name,
-          description: `Chiropractic care for ${city.name}, MN from Levitt Chiropractic Center in Saint Louis Park.`,
+          description: cityMetaDescription(city),
+        })}
+      />
+      <JsonLd
+        id={`ld-city-crumbs-${city.slug}`}
+        data={breadcrumbJsonLd({
+          items: [
+            { name: "Home", url: "/" },
+            { name: "Areas We Serve", url: "/areas-we-serve" },
+            { name: city.name, url: `/areas-we-serve/${city.slug}` },
+          ],
         })}
       />
       <JsonLd

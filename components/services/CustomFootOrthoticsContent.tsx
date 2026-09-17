@@ -118,8 +118,9 @@ export default function CustomFootOrthoticsContent() {
             transition={{ duration: 0.6, delay: 0.32 }}
             className="mt-5 max-w-2xl text-base text-white/70 sm:text-lg"
           >
-            Prescription orthotics built around your feet easing knee, foot,
-            hip, and back pain by realigning the body from the ground up.
+            Prescription orthotics built around your feet. Heel-spur and
+            plantar pain often calm down when the gait stops grinding the same
+            spot — we cannot sand a spur off the bone.
           </motion.p>
         </div>
       </section>
@@ -145,13 +146,12 @@ export default function CustomFootOrthoticsContent() {
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Orthotics are a great way to help with issues related to walking
-              and alignment, including knee, foot, and lower back pain. They
-              can help to realign the bones in the foot and ankle, and take
-              stress off other parts of the body, such as the back, neck,
-              shoulders, and hips. Custom foot orthotics also cushion your
-              feet, provide comfort, support your arches, and evenly distribute
-              your body weight to eliminate pressure on your feet.
+              If the heel hurts first thing in the morning, or the knee tracks
+              badly after a West End walk, the foot is often the missing
+              lever. Custom devices are molded to your foot, not pulled from a
+              wall rack. Over-the-counter inserts are cheaper and usually the
+              wrong shape. We will say so if the problem is a hip that is not
+              coming from the ground up — or if you need a surgeon first.
             </p>
           </motion.div>
 

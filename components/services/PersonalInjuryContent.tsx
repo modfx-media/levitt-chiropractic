@@ -148,8 +148,11 @@ export default function PersonalInjuryContent() {
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Personal injury is defined as bodily harm that comes from being
-              involved in any type of accident or mishap.
+              Personal injury here means the body after a crash, a fall, a
+              bike hit, or a workplace mishap — not a slogan. Minnesota
+              no-fault (PIP) can cover chiropractic medical expense after an
+              auto crash through your own auto policy. We still examine you
+              as a patient. Bring ER or urgent-care notes if you have them.
             </p>
           </motion.div>
         </div>
@@ -337,16 +340,17 @@ export default function PersonalInjuryContent() {
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-7 text-base leading-relaxed text-white/75 sm:text-lg">
-                If you’ve been through a personal injury accident, even
-                seemingly minor issues can develop into something more serious
-                if left untreated. Call{" "}
+                Whiplash and lumbar strain often feel “not that bad” the night
+                of a Highway 100 or I-394 rear-end and worse two days later.
+                Early documentation matters for PIP and for your own recovery.
+                Call{" "}
                 <a
                   href={siteConfig.phoneHref}
                   className="font-semibold text-orange-300 transition-colors hover:text-orange-200"
                 >
                   (952) 920-7535
                 </a>{" "}
-                to schedule a consultation with Dr. Levitt.
+                — we do not write injury letters without an exam.
               </p>
             </motion.div>
 

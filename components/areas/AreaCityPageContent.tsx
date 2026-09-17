@@ -12,9 +12,12 @@ import {
   cityIntro,
   cityWhyPoints,
   driveLabel,
+  firstVisitSteps,
+  insuranceNote,
   visitFacts,
   zipPhrase,
 } from "@/lib/areaPageCopy";
+import { localFact } from "@/lib/cityLocalFacts";
 import { ServiceHero } from "@/components/services/ServiceHero";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { CtaCard } from "@/components/services/CtaCard";
@@ -36,6 +39,16 @@ export default function AreaCityPageContent({ city }: { city: ServedCity }) {
   const why = cityWhyPoints(city);
   const faqs = cityFaqs(city);
   const facts = visitFacts(city);
+  const steps = firstVisitSteps(city);
+  const fact = localFact(city);
+  const corePages = [
+    { href: "/adjustments-and-manipulation", label: "Adjustments" },
+    { href: "/back-pain-treatments", label: "Back pain" },
+    { href: "/personal-injury", label: "Personal injury" },
+    { href: "/cold-laser-therapy", label: "Cold laser" },
+    { href: "/custom-foot-orthotics", label: "Custom orthotics" },
+    { href: "/new-patient-center/what-to-expect", label: "What to expect" },
+  ];
 
   return (
     <>
@@ -44,7 +57,7 @@ export default function AreaCityPageContent({ city }: { city: ServedCity }) {
         subtitle={
           city.distanceMi === 0
             ? `Drug-free chiropractic care in ${city.name} — adjustments, cold laser, cryotherapy, and custom orthotics at ${siteConfig.address.street}.`
-            : `${city.name} patients are seen in Saint Louis Park, about ${driveLabel(city).toLowerCase()} from ${city.landmark}.`
+            : `${city.name} patients are seen in Saint Louis Park — ${driveLabel(city).toLowerCase()} from ${city.landmark}.`
         }
         crumbs={[
           { label: "Home", href: "/" },
@@ -78,6 +91,16 @@ export default function AreaCityPageContent({ city }: { city: ServedCity }) {
             </p>
             <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg">
               {copy.support}
+            </p>
+            <p className="mt-4 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
+              {copy.local}
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg">
+              {copy.typical}
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-slate-600">
+              Usual route from {city.name}: {fact.corridor}. Nearby medical
+              context: {fact.hospital}.
             </p>
           </motion.div>
 
@@ -138,6 +161,61 @@ export default function AreaCityPageContent({ city }: { city: ServedCity }) {
                   {item.body}
                 </p>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-10 sm:py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="mx-auto max-w-2xl text-center"
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
+              First visit from {city.name}
+            </p>
+            <h2 className="mt-3 font-heading text-2xl font-bold tracking-tight text-[#0F172A] sm:text-3xl">
+              What actually happens
+            </h2>
+          </motion.div>
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {steps.map((step, idx) => (
+              <motion.div
+                key={step.title}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-6"
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-orange-600">
+                  Step {String(idx + 1).padStart(2, "0")}
+                </p>
+                <h3 className="mt-2 font-heading text-lg font-bold text-[#0F172A]">
+                  {step.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  {step.body}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+          <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-relaxed text-slate-600">
+            {insuranceNote(city)}
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            {corePages.map((p) => (
+              <Link
+                key={p.href}
+                href={p.href}
+                className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-[#0F172A] transition hover:border-[#F97316]"
+              >
+                {p.label}
+              </Link>
             ))}
           </div>
         </div>

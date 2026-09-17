@@ -13,6 +13,8 @@ import {
   driveLabel,
   visitFacts,
 } from "@/lib/areaPageCopy";
+import { localFact } from "@/lib/cityLocalFacts";
+import { serviceExtra } from "@/lib/serviceCopyExtras";
 import { ServiceHero } from "@/components/services/ServiceHero";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { CtaCard } from "@/components/services/CtaCard";
@@ -35,6 +37,8 @@ export default function AreaServicePageContent({ city, service }: Props) {
   const copy = cityServiceIntro(city, service);
   const faqs = cityServiceFaqs(city, service);
   const facts = visitFacts(city);
+  const extra = serviceExtra(service);
+  const fact = localFact(city);
   const relatedServices = pseoServices
     .filter((s) => s.slug !== service.slug)
     .slice(0, 6);
@@ -46,7 +50,7 @@ export default function AreaServicePageContent({ city, service }: Props) {
         subtitle={
           city.distanceMi === 0
             ? `${service.tagline} Available at our ${city.name} office.`
-            : `${service.tagline} ${city.name} patients drive about ${driveLabel(city).toLowerCase()} to Saint Louis Park.`
+            : `${service.tagline} ${city.name} patients drive ${driveLabel(city).toLowerCase()} to Saint Louis Park.`
         }
         crumbs={[
           { label: "Home", href: "/" },
@@ -80,6 +84,24 @@ export default function AreaServicePageContent({ city, service }: Props) {
             <p className="mt-4 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
               {copy.support}
             </p>
+            <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg">
+              {copy.local}
+            </p>
+            <p className="mt-6 text-sm">
+              <Link
+                href={`/${service.slug}`}
+                className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
+              >
+                Full {service.name.toLowerCase()} page
+              </Link>
+              {" · "}
+              <Link
+                href={`/areas-we-serve/${city.slug}`}
+                className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
+              >
+                All care for {city.name}
+              </Link>
+            </p>
           </motion.div>
 
           <dl className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -103,6 +125,38 @@ export default function AreaServicePageContent({ city, service }: Props) {
               </div>
             ))}
           </dl>
+        </div>
+      </section>
+
+      <section className="bg-slate-50 py-10 sm:py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              { title: "Who this is for", body: extra.whoItsFor },
+              { title: "How a visit runs", body: extra.visitFlow },
+              { title: "When this is the wrong first step", body: extra.notFor },
+            ].map((item) => (
+              <motion.div
+                key={item.title}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                className="rounded-2xl border-t-4 border-[#F97316] bg-white p-6 shadow-sm ring-1 ring-slate-200"
+              >
+                <h3 className="font-heading text-lg font-bold text-[#0F172A]">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  {item.body}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+          <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-relaxed text-slate-600">
+            From {city.name}, the usual route is {fact.corridor}. Nearby
+            medical context: {fact.hospital}.
+          </p>
         </div>
       </section>
 

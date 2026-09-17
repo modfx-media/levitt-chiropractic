@@ -7,7 +7,7 @@ export const siteConfig = {
   shortName: "Levitt Chiropractic",
   tagline: "Your Spine Health Specialists",
   description:
-    "Drug-free chiropractic care in Saint Louis Park, MN. Personalized spinal manipulation, cold laser therapy, cryotherapy and custom orthotics from Dr. Alan Levitt.",
+    "Chiropractor in Saint Louis Park at 6200 Excelsior Blvd. Adjustments, cold laser, and orthotics near Methodist Hospital and Highway 100. Dr. Alan Levitt since 1999.",
   url: SITE_URL,
   locale: "en_US",
   phone: "952-920-7535",
@@ -22,8 +22,8 @@ export const siteConfig = {
     full: "6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416",
   },
   geo: { latitude: 44.9305, longitude: -93.3673 },
-  mapsUrl:
-    "https://www.google.com/maps/search/?api=1&query=Alan+G.+Levitt+DC+6200+Excelsior+Blvd+Saint+Louis+Park+MN+55416",
+  mapsPlaceCid: "11756519935370171536",
+  mapsUrl: "https://maps.google.com/?cid=11756519935370171536",
   mapsEmbedUrl:
     "https://www.google.com/maps?q=6200+Excelsior+Blvd+%23201,+Saint+Louis+Park,+MN+55416&output=embed",
   mapsDirectionsUrl:

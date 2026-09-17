@@ -288,13 +288,12 @@ export default function AdjustmentsContent() {
               className="mx-auto mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-7 text-base leading-relaxed text-white/75 sm:text-lg">
-              Chiropractic adjustments, also known as spinal manipulations, are
-              a variety of highly effective and therapeutic procedures that can
-              minimize pain, alleviate tension, and reduce inflammation while
-              improving spinal flexibility and spinal alignment as well as
-              fostering healing in the entire body. Chiropractic adjustments
-              involve either gentle or forceful pressure to help realign the
-              spine into its natural position.
+              An adjustment is a specific contact on a joint that is not moving
+              the way it should — often the neck after Highway 100, or the low
+              back after a week at a desk. Dr. Levitt uses Diversified, Zone
+              Therapy, or Torque Release depending on the exam, not a one-move
+              routine. Some contacts are quick; some are gentle. You should
+              know which one and why before it happens.
             </p>
           </motion.div>
 
@@ -382,10 +381,11 @@ export default function AdjustmentsContent() {
               className="mx-auto mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-5 text-base leading-relaxed text-slate-600 sm:text-lg">
-              Chiropractors use a variety of chiropractic adjustments,
-              including: The Diversified Technique, Zone Therapy, and Torque
-              Release Technique. Each technique utilizes different modalities
-              to treat different issues.
+              Diversified is the classic high-velocity move. Zone Therapy and
+              Torque Release are quieter. The choice is the exam, not a brand
+              preference. If red flags are present — night pain, unexplained
+              weight loss, bowel or bladder change, recent major trauma — we
+              refer first.
             </p>
           </motion.div>
 

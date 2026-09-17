@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 
 import { generateMeta } from "@/lib/metadata";
-import { servedCities } from "@/lib/areasData";
 import AreasWeServeContent from "@/components/areas/AreasWeServeContent";
 
 export const metadata: Metadata = generateMeta({
   title: "Areas We Serve | Twin Cities Chiropractor",
-  description: `Drug-free chiropractic care for ${servedCities.length}+ Twin Cities communities served by Dr. Alan Levitt in Saint Louis Park, MN. Find your city and book today.`,
+  description:
+    "Chiropractic care from our Saint Louis Park clinic for 82 Twin Cities communities. Find your city, the real drive, and how to book with Dr. Alan Levitt.",
   slug: "areas-we-serve",
 });
 

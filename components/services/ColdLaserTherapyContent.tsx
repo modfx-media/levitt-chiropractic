@@ -409,10 +409,10 @@ export default function ColdLaserTherapyContent() {
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-7 text-base leading-relaxed text-white/75 sm:text-lg">
-                If you’re dealing with stubborn pain, an old injury, or a
-                chronic condition, cold laser therapy may be the next step in
-                your care. Ask Dr. Levitt whether cold laser therapy fits into
-                your treatment plan call{" "}
+                Cold laser is a light stimulus, not a heat lamp and not a
+                surgery. Stubborn tendon or spinal irritation sometimes calms
+                when we add it to the plan. Ask Dr. Levitt whether it fits —
+                then call{" "}
                 <a
                   href={siteConfig.phoneHref}
                   className="font-semibold text-orange-300 transition-colors hover:text-orange-200"

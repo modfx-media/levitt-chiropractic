@@ -63,7 +63,7 @@ export default function AreasWeServeContent() {
     <>
       <ServiceHero
         title="Areas We Serve"
-        subtitle={`Drug-free chiropractic care for the entire Twin Cities metro ${servedCities.length} communities, ${totalServices} specialty services, one trusted clinic.`}
+        subtitle={`One Saint Louis Park clinic. ${servedCities.length} Twin Cities communities — each with its own drive, hospital orbit, and complaint pattern. Not a cloned city list.`}
         crumbs={[{ label: "Home", href: "/" }, { label: "Areas We Serve" }]}
       />
 
@@ -253,8 +253,8 @@ export default function AreasWeServeContent() {
               Available in every city
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-              {totalServices} specialty services,{" "}
-              <span className="text-[#F97316]">delivered locally</span>
+              {totalServices} services,{" "}
+              <span className="text-[#F97316]">one Saint Louis Park clinic</span>
             </h2>
             <span
               aria-hidden

@@ -145,13 +145,6 @@ export function localBusinessJsonLd() {
       jobTitle: siteConfig.physician.jobTitle,
     },
     founder: { "@id": PHYSICIAN_ID },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: String(siteConfig.googleRating.value),
-      reviewCount: String(siteConfig.googleRating.count),
-      bestRating: String(siteConfig.googleRating.best),
-      worstRating: "1",
-    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Chiropractic services",

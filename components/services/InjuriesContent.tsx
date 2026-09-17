@@ -74,17 +74,12 @@ export default function InjuriesContent() {
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              We offer a variety of services to treat common injuries. We
-              encourage you to learn more about what we provide and how we can
-              help by exploring the cards below. If you have any questions,
-              please{" "}
-              <Link
-                href="/contact"
-                className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
-              >
-                contact us
-              </Link>
-              {" "} we&rsquo;re always happy to hear from you!
+              A strain that should have been gone in a week, a fall on packed
+              snow, or a lift that “went” in the low back — that is the injury
+              work here. We map what was hurt, what still moves, and whether
+              Methodist or another ER already cleared the danger. Then
+              adjustments, ice or laser, and a few exercises you can actually
+              do at home.
             </p>
           </motion.div>
         </div>

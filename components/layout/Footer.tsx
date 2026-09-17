@@ -45,10 +45,11 @@ function PinIcon({ className = "" }: { className?: string }) {
 const exploreLinks = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
+  { label: "Adjustments", href: "/adjustments-and-manipulation" },
+  { label: "Back Pain", href: "/back-pain-treatments" },
   { label: "New Patient Center", href: "/new-patient-center" },
-  { label: "Resources", href: "/resources" },
+  { label: "Saint Louis Park office", href: "/areas-we-serve/saint-louis-park" },
   { label: "Areas We Serve", href: "/areas-we-serve" },
-  { label: "Testimonials", href: "/testimonials" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -104,8 +105,9 @@ export function Footer() {
                 />
               </Link>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-white/65">
-                {siteConfig.tagline} proudly serving Saint Louis Park and
-                the Twin Cities since 1999.
+                Chiropractic care in Saint Louis Park since 1999 — Highway 100
+                and Excelsior Boulevard, near Methodist Hospital and the West
+                End.
               </p>
 
               {/* Contact row */}
