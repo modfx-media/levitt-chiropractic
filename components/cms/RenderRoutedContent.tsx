@@ -67,7 +67,7 @@ export function RenderRoutedContent({ doc }: { doc: RoutedDoc }) {
                     {block.heading}
                   </h2>
                 ) : null}
-                {block.body ? (
+                {typeof block.body === "string" && block.body ? (
                   <p className="mt-3 text-white/75">{block.body}</p>
                 ) : null}
                 {block.href && block.label ? (
