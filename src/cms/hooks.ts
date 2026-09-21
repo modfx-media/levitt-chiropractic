@@ -5,7 +5,7 @@ function safeRevalidate(path: string | null | undefined) {
   if (!path || !path.startsWith("/")) return;
   try {
     revalidatePath(path);
-    revalidateTag("cms");
+    revalidateTag("cms", { expire: 0 });
   } catch (error) {
     console.error("[cms] revalidate failed", error);
   }

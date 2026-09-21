@@ -140,11 +140,7 @@ export async function querySitemapOverlay(): Promise<{
         excludeFromSitemap?: boolean | null;
       };
       const lastmod =
-        typeof doc.updatedAt === "string"
-          ? doc.updatedAt
-          : typeof doc.sourceUpdatedAt === "string"
-            ? doc.sourceUpdatedAt
-            : undefined;
+        typeof doc.updatedAt === "string" ? doc.updatedAt : undefined;
       if (meta.noIndex || meta.excludeFromSitemap) {
         skip.add(path);
         continue;
