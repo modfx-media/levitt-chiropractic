@@ -37,7 +37,11 @@ export async function queryRoutedContentByPath(
           where: { slug: { equals: slug } },
         });
         const post = posts.docs[0];
-        if (post) return { collection: "posts", doc: post as Record<string, unknown> };
+        if (post)
+          return {
+            collection: "posts",
+            doc: post as unknown as Record<string, unknown>,
+          };
       }
     }
 
@@ -50,7 +54,11 @@ export async function queryRoutedContentByPath(
       where: { path: { equals: normalized } },
     });
     const page = pages.docs[0];
-    if (page) return { collection: "pages", doc: page as Record<string, unknown> };
+    if (page)
+      return {
+        collection: "pages",
+        doc: page as unknown as Record<string, unknown>,
+      };
     return null;
   }, null);
 }
