@@ -1,8 +1,11 @@
 import Link from "next/link";
+import type { ComponentProps } from "react";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 
 import { Button } from "@/components/ui/Button";
 import type { RoutedDoc } from "@/lib/cms/queries";
+
+type LexicalData = NonNullable<ComponentProps<typeof RichText>["data"]>;
 
 type ContentBlock = {
   blockType?: string;
@@ -12,7 +15,7 @@ type ContentBlock = {
   href?: string;
 };
 
-function isLexical(value: unknown): value is { root: unknown } {
+function isLexical(value: unknown): value is LexicalData {
   return Boolean(value && typeof value === "object" && "root" in value);
 }
 
