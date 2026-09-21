@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withPayload } from "@payloadcms/next/withPayload";
 
 const nextConfig: NextConfig = {
   images: {
@@ -8,12 +9,14 @@ const nextConfig: NextConfig = {
     ],
   },
   outputFileTracingExcludes: {
-    '*': [
-      './public/images/**',
-      './public/**/*.mp4',
-      './public/**/*.webm',
-    ],
+    "*": ["./public/images/**", "./public/**/*.mp4", "./public/**/*.webm"],
   },
+  serverExternalPackages: [
+    "pg",
+    "@payloadcms/db-vercel-postgres",
+    "@neondatabase/serverless",
+    "@vercel/postgres",
+  ],
   async redirects() {
     return [
       { source: "/about-us", destination: "/about", permanent: true },
@@ -77,4 +80,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPayload(nextConfig, { devBundleServerPackages: false });

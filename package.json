@@ -2,18 +2,36 @@
   "name": "levitt-chiropractic",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "payload": "payload",
+    "generate:types": "payload generate:types",
+    "generate:importmap": "payload generate:importmap",
+    "cms:create-user": "bun --env-file=.env.local scripts/create-first-user.ts",
+    "cms:import": "bun --env-file=.env.local scripts/import-content.ts"
   },
   "dependencies": {
+    "@payloadcms/db-vercel-postgres": "^3.90.1",
+    "@payloadcms/live-preview-react": "^3.90.1",
+    "@payloadcms/next": "^3.90.1",
+    "@payloadcms/plugin-redirects": "^3.90.1",
+    "@payloadcms/plugin-search": "^3.90.1",
+    "@payloadcms/plugin-seo": "^3.90.1",
+    "@payloadcms/richtext-lexical": "^3.90.1",
+    "@payloadcms/storage-vercel-blob": "^3.90.1",
     "@vercel/blob": "^2.8.0",
     "framer-motion": "^12.40.0",
+    "graphql": "^17.0.2",
     "next": "16.2.7",
+    "payload": "^3.90.1",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "sharp": "^0.35.4",
+    "dotenv": "^18.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -23,6 +41,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }
