@@ -27,11 +27,45 @@ const disablePush =
   process.env.CMS_IMPORT_APPLY === "1" ||
   process.env.PAYLOAD_DISABLE_PUSH === "1";
 
-const serverURL = (
-  process.env.NEXT_PUBLIC_SERVER_URL ||
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  siteConfig.url
+const siteOrigin = (
+  process.env.NEXT_PUBLIC_SITE_URL || siteConfig.url
 ).replace(/\/+$/, "");
+
+function resolveServerURL() {
+  const configured = (process.env.NEXT_PUBLIC_SERVER_URL || "").replace(
+    /\/+$/,
+    "",
+  );
+  const configuredIsLocal =
+    !configured || /localhost|127\.0\.0\.1/.test(configured);
+  if (process.env.VERCEL === "1" && configuredIsLocal) return siteOrigin;
+  return configured || siteOrigin;
+}
+
+const serverURL = resolveServerURL();
+
+function allowedOrigins() {
+  const origins = new Set<string>([
+    serverURL,
+    siteOrigin,
+    "http://localhost:3000",
+    "http://localhost:3003",
+  ]);
+  try {
+    const url = new URL(siteOrigin);
+    const host = url.hostname.startsWith("www.")
+      ? url.hostname.slice(4)
+      : `www.${url.hostname}`;
+    origins.add(`${url.protocol}//${host}`);
+  } catch {
+    // site origin is still included above
+  }
+  if (process.env.VERCEL_URL) origins.add(`https://${process.env.VERCEL_URL}`);
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    origins.add(`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`);
+  }
+  return [...origins].filter(Boolean);
+}
 
 export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || "",
@@ -57,12 +91,8 @@ export default buildConfig({
     push: !disablePush,
   }),
   plugins: cmsPlugins(),
-  cors: [serverURL, "http://localhost:3000", "http://localhost:3003"].filter(
-    Boolean,
-  ),
-  csrf: [serverURL, "http://localhost:3000", "http://localhost:3003"].filter(
-    Boolean,
-  ),
+  cors: allowedOrigins(),
+  csrf: allowedOrigins(),
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),

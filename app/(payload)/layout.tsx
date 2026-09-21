@@ -11,6 +11,9 @@ import React from "react";
 import { importMap } from "./admin/importMap.js";
 import "./custom.css";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 type Args = {
   children: React.ReactNode;
 };
