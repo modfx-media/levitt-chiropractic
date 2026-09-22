@@ -4,6 +4,7 @@ import { CMSRoute } from "@/components/cms/CMSRoute";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import HomeContent from "@/components/home/HomeContent";
 import { StickyBookNowBanner } from "@/components/layout/StickyBookNowBanner";
+import { getDisplayedGoogleReviews } from "@/lib/google-reviews";
 
 const fallbackMeta: Metadata = generateMeta({
   title: "Chiropractor in Saint Louis Park, MN",
@@ -17,11 +18,13 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/", fallbackMeta);
 }
 
-export default function Page() {
+export default async function Page() {
+  const payload = await getDisplayedGoogleReviews();
+
   return (
     <CMSRoute path="/">
       <>
-        <HomeContent />
+        <HomeContent reviews={payload.reviews} meta={payload.meta} />
         <StickyBookNowBanner />
       </>
     </CMSRoute>

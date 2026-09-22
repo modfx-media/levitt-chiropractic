@@ -8,6 +8,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { getDisplayedGoogleReviews } from "@/lib/google-reviews";
 import { siteConfig } from "@/lib/siteConfig";
 import { localBusinessJsonLd, websiteJsonLd } from "@/lib/jsonLd";
 
@@ -70,9 +71,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function SiteLayout({
+export default async function SiteLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const { reviews, meta } = await getDisplayedGoogleReviews();
+
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
       <body className="min-h-screen flex flex-col bg-white text-slate-900 antialiased font-sans">
@@ -104,7 +107,10 @@ export default function SiteLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <JsonLd id="ld-website" data={websiteJsonLd()} />
-        <JsonLd id="ld-localbusiness" data={localBusinessJsonLd()} />
+        <JsonLd
+          id="ld-localbusiness"
+          data={localBusinessJsonLd({ reviews, meta })}
+        />
       </body>
     </html>
   );

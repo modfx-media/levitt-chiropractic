@@ -30,6 +30,9 @@ type Props = {
   backgroundImageAlts?: string[];
   /** Cross-fade interval in ms. Defaults to 6000. */
   rotateInterval?: number;
+  googleRating?: number;
+  googleReviewCount?: number;
+  reviewsUrl?: string;
 };
 
 const containerVariants = {
@@ -71,6 +74,9 @@ export function HeroSection({
   backgroundImages,
   backgroundImageAlts,
   rotateInterval = 3500,
+  googleRating = siteConfig.googleRating.value,
+  googleReviewCount = siteConfig.googleRating.count,
+  reviewsUrl = siteConfig.mapsUrl,
 }: Props) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
@@ -373,6 +379,9 @@ export function HeroSection({
             slideIndex={slideIndex}
             slideTick={slideTick}
             alts={backgroundImageAlts}
+            googleRating={googleRating}
+            googleReviewCount={googleReviewCount}
+            reviewsUrl={reviewsUrl}
           />
         </motion.div>
       </div>
@@ -450,12 +459,18 @@ function SpineGraphic({
   slideIndex,
   slideTick,
   alts,
+  googleRating,
+  googleReviewCount,
+  reviewsUrl,
 }: {
   reduce: boolean;
   slides: string[];
   slideIndex: number;
   slideTick: number;
   alts?: string[];
+  googleRating: number;
+  googleReviewCount: number;
+  reviewsUrl: string;
 }) {
   const cardSlides = slides.length > 0 ? slides : ["/images/adjustment-1.jpg"];
   const activeSrc = cardSlides[slideIndex % cardSlides.length];
@@ -634,11 +649,11 @@ function SpineGraphic({
             className="rounded-2xl bg-white p-4 shadow-2xl shadow-black/30 ring-1 ring-black/5"
           >
             <a
-              href={siteConfig.mapsUrl}
+              href={reviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="block"
-              aria-label={`${siteConfig.googleRating.value.toFixed(1)} stars from ${siteConfig.googleRating.count} Google reviews`}
+              aria-label={`${googleRating.toFixed(1)} stars from ${googleReviewCount} Google reviews`}
             >
               <div className="flex items-center gap-1">
                 {[0, 1, 2, 3, 4].map((i) => (
@@ -654,10 +669,10 @@ function SpineGraphic({
                 ))}
               </div>
               <p className="mt-2 font-heading text-2xl font-black leading-none text-dark">
-                {siteConfig.googleRating.value.toFixed(1)}
+                {googleRating.toFixed(1)}
               </p>
               <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-                {siteConfig.googleRating.count} Google reviews
+                {googleReviewCount} Google reviews
               </p>
             </a>
           </motion.div>

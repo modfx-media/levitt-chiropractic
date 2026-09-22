@@ -1,3 +1,4 @@
+import { isFiveStarReview, type GoogleReview, type GoogleReviewsMeta } from "./reviews";
 import { siteConfig } from "./siteConfig";
 
 function absUrl(path: string): string {
@@ -92,7 +93,10 @@ const PRIMARY_SERVICES = [
   { name: "Therapeutic Exercise", url: "/therapeutic-exercise" },
 ];
 
-export function localBusinessJsonLd() {
+export function localBusinessJsonLd(input?: {
+  reviews?: GoogleReview[];
+  meta?: GoogleReviewsMeta;
+}) {
   const logo = absUrl("/images/logo.png");
   const photo = absUrl("/images/og-default.jpg");
   const doctorPhoto = absUrl(siteConfig.physician.image);
@@ -162,6 +166,32 @@ export function localBusinessJsonLd() {
       target: absUrl(siteConfig.appointmentUrl),
       name: "Request an appointment",
     },
+    ...(input?.meta && input.meta.rating > 0 && input.meta.reviewCount > 0
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: String(input.meta.rating),
+            reviewCount: String(input.meta.reviewCount),
+            bestRating: "5",
+          },
+        }
+      : {}),
+    ...(() => {
+      const visible = (input?.reviews ?? []).filter(isFiveStarReview);
+      if (visible.length === 0) return {};
+      return {
+        review: visible.map((review) => ({
+          "@type": "Review",
+          author: { "@type": "Person", name: review.name },
+          reviewRating: {
+            "@type": "Rating",
+            ratingValue: "5",
+            bestRating: "5",
+          },
+          reviewBody: review.quote,
+        })),
+      };
+    })(),
   };
 }
 

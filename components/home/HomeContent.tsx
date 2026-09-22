@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/Button";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqPageJsonLd } from "@/lib/jsonLd";
+import type { GoogleReview, GoogleReviewsMeta } from "@/lib/reviews";
 import { siteConfig } from "@/lib/siteConfig";
 
 const HERO_IMAGES = [
@@ -175,52 +176,12 @@ const steps = [
   },
 ];
 
-const testimonials = [
-  {
-    quote:
-      "Dr. Levitt has provided continued excellent care in treating my condition ankylosing spondylitis. He has helped me maintain as much movement as possible and keep the rest of my skeletal structure aligned and tuned.",
-    author: "Richard B.",
-    location: "Patient",
-  },
-  {
-    quote:
-      "Upon the recommendation of a friend, I saw Dr. Levitt for a sudden back problem. The problem went away after only 2 visits.",
-    author: "Barbara N.",
-    location: "Patient",
-  },
-  {
-    quote:
-      "I hurt my knee after running in a marathon. I went to physical therapy for over a year, with very little relief. I went to see Dr. Levitt within a month I was running again, pain free!",
-    author: "Sanoma62",
-    location: "Patient",
-  },
-  {
-    quote:
-      "I’ve seen Dr. Levitt many times over the years. He is able to perceive and treat my issues with a variety of methods in a short amount of time each visit.",
-    author: "Barb W.",
-    location: "Patient",
-  },
-  {
-    quote:
-      "Excellent and very helpful. Dr. Levitt is practical and yet thorough in his treatment. I feel like he listens well, pushes when necessary and also respects my preferences.",
-    author: "Catherine G.",
-    location: "Patient",
-  },
-  {
-    quote:
-      "I have seen Dr. Levitt for the past 10+ years with a lifelong history of musculoskeletal issues. He has always been able to keep me functional with his muscle-testing and various ways of getting to what is really going on.",
-    author: "Linda M.",
-    location: "Patient",
-  },
-  {
-    quote:
-      "Dr. Levitt is not the conventional in-and-out chiropractor. He actually listens to what you say and runs tests against your own body to find the root cause of a problem.",
-    author: "Handy H.",
-    location: "Patient",
-  },
-];
+type HomeContentProps = {
+  reviews: GoogleReview[];
+  meta: GoogleReviewsMeta;
+};
 
-export default function HomeContent() {
+export default function HomeContent({ reviews, meta }: HomeContentProps) {
   const welcomeRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: welcomeProgress } = useScroll({
     target: welcomeRef,
@@ -245,6 +206,9 @@ export default function HomeContent() {
         secondaryCtaHref="/meet-the-doctor"
         backgroundImages={HERO_IMAGES}
         backgroundImageAlts={HERO_IMAGE_ALTS}
+        googleRating={meta.rating}
+        googleReviewCount={meta.reviewCount}
+        reviewsUrl={meta.reviewsUrl}
       />
 
       {/* SECTION 2 TICKER */}
@@ -274,11 +238,6 @@ export default function HomeContent() {
             { value: 39, suffix: "", label: "Years of Experience" },
             { value: 1999, prefix: "", suffix: "", label: "Serving Since" },
             { value: 6, suffix: "+", label: "Specialty Techniques" },
-            {
-              value: siteConfig.googleRating.value,
-              suffix: ".0",
-              label: "Google Rating",
-            },
           ].map((s, i) => (
             <motion.div
               key={s.label}
@@ -301,6 +260,27 @@ export default function HomeContent() {
               </p>
             </motion.div>
           ))}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            className="text-center"
+          >
+            <a
+              href={meta.reviewsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block transition-colors hover:text-primary"
+            >
+              <p className="font-heading text-3xl font-bold text-primary sm:text-4xl md:text-5xl">
+                <StatCounter to={meta.reviewCount} duration={1.6} />
+              </p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                Google reviews
+              </p>
+            </a>
+          </motion.div>
         </div>
       </section>
 
@@ -442,12 +422,19 @@ export default function HomeContent() {
               }}
               className="absolute -right-4 bottom-12 hidden rounded-2xl bg-primary p-5 text-white shadow-2xl shadow-orange-500/30 sm:block"
             >
-              <p className="font-heading text-2xl font-bold">
-                {siteConfig.googleRating.value.toFixed(1)}
-              </p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/90">
-                {siteConfig.googleRating.count} Google reviews
-              </p>
+              <a
+                href={meta.reviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <p className="font-heading text-2xl font-bold">
+                  {meta.rating.toFixed(1)}
+                </p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/90">
+                  {meta.reviewCount} Google reviews
+                </p>
+              </a>
             </motion.div>
 
             {/* Decorative ring */}
@@ -646,27 +633,25 @@ export default function HomeContent() {
         </div>
       </section>
 
-      {/* SECTION 9 TESTIMONIALS MARQUEE */}
+      {reviews.length > 0 ? (
       <section className="relative overflow-hidden bg-white py-14 sm:py-24 md:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-              Patient Testimonials
+              Google reviews
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-dark sm:text-5xl">
               Real stories. <span className="text-primary">Real relief.</span>
             </h2>
             <p className="mt-4 text-base text-slate-600">
-              {siteConfig.googleRating.value.toFixed(1)} from{" "}
-              {siteConfig.googleRating.count} Google reviews, plus the notes
-              patients leave after care.{" "}
+              {meta.rating.toFixed(1)} from {meta.reviewCount} Google reviews.{" "}
               <a
-                href={siteConfig.mapsUrl}
+                href={meta.reviewsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-primary underline-offset-4 hover:underline"
               >
-                Read reviews on Google
+                View all Google reviews
               </a>
             </p>
           </div>
@@ -691,21 +676,39 @@ export default function HomeContent() {
               ease: "linear",
             }}
           >
-            {[...testimonials, ...testimonials, ...testimonials].map((t, i) => (
+            {[...reviews, ...reviews, ...reviews].map((t, i) => (
               <article
-                key={i}
+                key={`${t.name}-${i}`}
                 className="flex w-[88vw] max-w-md flex-shrink-0 flex-col rounded-3xl bg-slate-50 p-8 ring-1 ring-slate-100"
               >
-                <span className="text-5xl leading-none text-primary">“</span>
-                <p className="mt-2 text-base leading-relaxed text-slate-700">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-5xl leading-none text-primary">“</span>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    Google
+                  </span>
+                </div>
+                <div className="mt-2 flex items-center gap-0.5" aria-label="5 stars">
+                  {[0, 1, 2, 3, 4].map((star) => (
+                    <svg
+                      key={star}
+                      viewBox="0 0 24 24"
+                      fill="#F97316"
+                      className="h-4 w-4"
+                      aria-hidden
+                    >
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="mt-3 text-base leading-relaxed text-slate-700">
                   {t.quote}
                 </p>
                 <div className="mt-6 border-t border-slate-200 pt-5">
                   <p className="font-heading font-semibold text-dark">
-                    {t.author}
+                    {t.name}
                   </p>
                   <p className="text-xs uppercase tracking-wider text-slate-500">
-                    {t.location}
+                    {t.relativeTime ?? "Posted on Google"}
                   </p>
                 </div>
               </article>
@@ -713,6 +716,7 @@ export default function HomeContent() {
           </motion.div>
         </div>
       </section>
+      ) : null}
 
       <section className="relative bg-white py-12 sm:py-16">
         <div className="mx-auto max-w-7xl px-6">
