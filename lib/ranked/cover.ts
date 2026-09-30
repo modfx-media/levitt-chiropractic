@@ -6,7 +6,7 @@ function coverPathname(contentId: string): string {
   return `blog-covers/${contentId}.png`
 }
 
-function committedCoverUrl(slug?: string): string | null {
+export function committedCoverUrl(slug?: string): string | null {
   if (!slug) return null
   return COMMITTED_COVER_SLUGS.includes(slug) ? `/images/blog/covers/${slug}.png` : null
 }

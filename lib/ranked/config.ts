@@ -33,4 +33,5 @@ export const COMMITTED_COVER_SLUGS: readonly string[] = [
   'beyond-back-pain-relief-with-a-chiropractor-in-minneapolis',
   'choosing-a-holistic-chiropractor-in-minneapolis-for-whole-body-healing',
   'everyday-clues-you-need-chiropractic-care-in-saint-louis-park',
+  'winter-spine-strain-triggers-in-saint-louis-park-and-how-chiropractors-help',
 ]

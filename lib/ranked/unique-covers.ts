@@ -112,6 +112,8 @@ const COMMITTED_COVER_ALTS: Record<string, string> = {
     'Holistic wellness still life with a spine model, fresh food, tea, and a yoga mat.',
   'everyday-clues-you-need-chiropractic-care-in-saint-louis-park':
     'Person at a home desk rubbing their neck after computer work, an everyday sign of spinal strain.',
+  'winter-spine-strain-triggers-in-saint-louis-park-and-how-chiropractors-help':
+    'Person shoveling heavy snow on an icy driveway, one hand pressed into a painful lower back, with a snow-covered car nearby.',
 }
 
 export function rankedCoverAlt(slug: string, title: string): string {

@@ -1,18 +1,36 @@
 import { DEFAULT_COVER, DEFAULT_COVER_ALT, DEFAULT_CTA } from './config'
 import type { BlogPostData } from './types'
 
+const NAMED_ENTITIES: Record<string, string> = {
+  amp: '&',
+  lt: '<',
+  gt: '>',
+  quot: '"',
+  apos: "'",
+  nbsp: ' ',
+  bull: '\u2022',
+  middot: '\u00b7',
+  ldquo: '\u201c',
+  rdquo: '\u201d',
+  lsquo: '\u2018',
+  rsquo: '\u2019',
+  mdash: '\u2014',
+  ndash: '\u2013',
+  hellip: '\u2026',
+}
+
 function decodeEntities(text: string): string {
-  return text
-    .replace(/&nbsp;/gi, ' ')
-    .replace(/&amp;/gi, '&')
-    .replace(/&lt;/gi, '<')
-    .replace(/&gt;/gi, '>')
-    .replace(/&quot;/gi, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&#x27;/gi, "'")
-    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
-    .replace(/\s+/g, ' ')
-    .trim()
+  let out = text
+  // A second pass turns double-encoded entities such as &amp;bull; into •.
+  for (let pass = 0; pass < 2; pass += 1) {
+    const next = out
+      .replace(/&#x([0-9a-f]+);/gi, (_, hex: string) => String.fromCodePoint(Number.parseInt(hex, 16)))
+      .replace(/&#(\d+);/g, (_, n: string) => String.fromCodePoint(Number(n)))
+      .replace(/&([a-z]+);/gi, (entity, name: string) => NAMED_ENTITIES[name.toLowerCase()] ?? entity)
+    if (next === out) break
+    out = next
+  }
+  return out.replace(/\s+/g, ' ').trim()
 }
 
 function stripTags(html: string): string {
