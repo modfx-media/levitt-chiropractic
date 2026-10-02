@@ -3,8 +3,11 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
+import { useFooterInView } from "@/lib/useFooterInView";
+
 export function ScrollToTop() {
   const [visible, setVisible] = useState(false);
+  const footerInView = useFooterInView();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 300);
@@ -15,7 +18,7 @@ export function ScrollToTop() {
 
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && !footerInView && (
         <motion.button
           type="button"
           aria-label="Scroll to top"

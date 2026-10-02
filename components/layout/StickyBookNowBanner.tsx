@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { useFooterInView } from "@/lib/useFooterInView";
 
 function PhoneIcon({ className = "" }: { className?: string }) {
   return (
@@ -45,6 +46,7 @@ function CalendarIcon({ className = "" }: { className?: string }) {
 
 export function StickyBookNowBanner() {
   const [visible, setVisible] = useState(false);
+  const footerInView = useFooterInView();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 320);
@@ -55,7 +57,7 @@ export function StickyBookNowBanner() {
 
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && !footerInView && (
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

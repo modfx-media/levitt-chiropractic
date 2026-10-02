@@ -181,10 +181,9 @@ export function Footer() {
               href="https://modfxmedia.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-primary"
+              className="font-semibold uppercase tracking-[0.14em] transition-colors hover:text-primary"
             >
-              Powered by{" "}
-              <span className="font-semibold text-white/75">ModFX Media</span>
+              Powered by ModFXMedia
             </a>
           </div>
         </div>
