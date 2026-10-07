@@ -2537,7 +2537,7 @@ export const blogPosts: BlogPost[] = [
       "Back pain relief is often just the beginning. Here's how chiropractic care in Minneapolis supports sleep, energy, focus, and whole-body wellness beyond the spine.",
     excerpt:
       "Back pain is often the push that finally gets someone to call a chiropractor in Minneapolis. What surprises many people is how often other parts of life start to feel better too, like energy, sleep, focus, and mood.",
-    publishedAt: "2026-08-27",
+    publishedAt: "2026-08-25",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -2677,7 +2677,7 @@ export const blogPosts: BlogPost[] = [
       "Not sure if it's a pulled muscle or a spine problem? A Minneapolis chiropractor explains how to tell the difference and when imaging is actually needed.",
     excerpt:
       "Back pain can show up fast, and guessing wrong about the cause can slow healing. Here's how spine pain and muscle strain really feel different, and when imaging is actually needed.",
-    publishedAt: "2026-09-03",
+    publishedAt: "2026-09-08",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -2804,7 +2804,7 @@ export const blogPosts: BlogPost[] = [
       "Looking for a holistic chiropractor in Minneapolis? Here's what whole-body care actually looks like and the questions to ask before you choose one.",
     excerpt:
       "Choosing a holistic chiropractor in Minneapolis matters if you want more than quick pain relief. Here's what makes chiropractic care truly holistic, and how to find the right fit.",
-    publishedAt: "2026-09-10",
+    publishedAt: "2026-09-01",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -2939,12 +2939,12 @@ export const blogPosts: BlogPost[] = [
 
   {
     slug: "spine-health-tips-for-every-age-and-life-stage",
-    title: "Spine Health Tips for Every Age and Life Stage",
+    title: "Life Stages and Spine Health with a Saint Louis Park Chiropractor",
     description:
       "Discover how a chiropractor in Saint Louis Park supports spine and nervous system health through every life stage with personalized holistic care",
     excerpt:
       "Spine health touches almost everything we do. How we move, how we sleep, and how much energy we feel in a day are all linked to how well the spine and nervous system are working together.",
-    publishedAt: "2026-09-16",
+    publishedAt: "2026-09-15",
     author: {
       name: "Dr. Alan Levitt, D.C.",
       title: "Chiropractor, Levitt Chiropractic Center",
@@ -3162,7 +3162,7 @@ export const blogPosts: BlogPost[] = [
 
   {
     slug: "spine-pain-warning-signs-and-care-options-in-minneapolis",
-    title: "Spine Pain Warning Signs and Care Options in Minneapolis",
+    title: "Spine Pain Red Flags: Chiropractor vs. Urgent Care in Minneapolis",
     description:
       "Learn key red flags and next steps for spine pain treatment in Minneapolis, including when to see a chiropractor vs urgent care and what to do first",
     excerpt:

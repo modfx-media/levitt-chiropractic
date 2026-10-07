@@ -12,7 +12,15 @@ import {
   slugFromTitle,
 } from './html-to-post'
 import { getLocalBlogPosts } from './local-posts'
+import { canonicalPublishDate } from './publish-dates'
 import type { BlogPostData, RankedContentDetail, RankedContentListItem } from './types'
+
+function rankedPublishDate(item: RankedContentListItem): string {
+  return (
+    canonicalPublishDate(item.title) ??
+    publishDateFromRanked(item.scheduled_date, item.created_at)
+  )
+}
 
 function normalizeTitle(title: string): string {
   return title
@@ -85,12 +93,12 @@ export async function getLiveRankedBlogPosts(
       .filter(
         (item) =>
           isBlogContentType(item.content_type) &&
-          isRankedPostLive(item.status, item.scheduled_date) &&
+          isRankedPostLive(item.status, rankedPublishDate(item)) &&
           !isDuplicateOfLocal(item.title, local),
       )
       .sort((a, b) => {
-        const da = publishDateFromRanked(a.scheduled_date, a.created_at)
-        const db = publishDateFromRanked(b.scheduled_date, b.created_at)
+        const da = rankedPublishDate(a)
+        const db = rankedPublishDate(b)
         return da.localeCompare(db) || a.title.localeCompare(b.title)
       })
     const taken = new Set(local.map((p) => p.slug))
@@ -121,10 +129,13 @@ export async function getLiveRankedBlogPosts(
       if (!row) continue
       const { source, html } = row
       const slug = uniqueSlug(source.title, source.id, taken)
-      const publishDate = nextFreePublishDate(
-        publishDateFromRanked(source.scheduled_date, source.created_at),
-        takenDates,
-      )
+      const canonical = canonicalPublishDate(source.title, slug)
+      const publishDate =
+        canonical ??
+        nextFreePublishDate(
+          publishDateFromRanked(source.scheduled_date, source.created_at),
+          takenDates,
+        )
       const post = htmlToBlogPost({
         title: source.title,
         html,
