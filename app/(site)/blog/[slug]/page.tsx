@@ -9,8 +9,8 @@ import {
   getAllSlugs,
   getPostBySlug,
   getRelatedPosts,
-  getAllPosts,
 } from "@/lib/blog";
+import { queryPublishedPostSlugs } from "@/lib/cms/posts";
 import { BlogPostContent } from "@/components/blog/BlogPostContent";
 import { getLiveRankedBlogPosts } from "@/lib/ranked/posts";
 import { rankedToBlogPost } from "@/lib/ranked/adapter";
@@ -25,7 +25,8 @@ export async function generateStaticParams(): Promise<RouteParams[]> {
   const localSlugs = getAllSlugs();
   const rankedPosts = await getLiveRankedBlogPosts().catch(() => []);
   const rankedSlugs = rankedPosts.map((p) => p.slug);
-  const all = [...new Set([...localSlugs, ...rankedSlugs])];
+  const cmsSlugs = await queryPublishedPostSlugs();
+  const all = [...new Set([...localSlugs, ...rankedSlugs, ...cmsSlugs])];
   return all.map((slug) => ({ slug }));
 }
 

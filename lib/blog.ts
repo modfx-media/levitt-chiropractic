@@ -6,14 +6,23 @@
 
 import { blogPosts } from "./blogPosts";
 
+export type InlineSpan = {
+  text: string;
+  href?: string;
+  external?: boolean;
+  bold?: boolean;
+  italic?: boolean;
+};
+
 export type BlogBlock =
-  | { type: "p"; text: string }
+  | { type: "p"; text: string; spans?: InlineSpan[] }
   | { type: "h2"; text: string; id?: string }
   | { type: "h3"; text: string; id?: string }
   | { type: "ul"; items: string[] }
   | { type: "ol"; items: string[] }
   | { type: "quote"; text: string; cite?: string }
   | { type: "callout"; title?: string; text: string }
+  | { type: "image"; src: string; alt: string; width?: number; height?: number }
   | {
       type: "cta";
       title: string;

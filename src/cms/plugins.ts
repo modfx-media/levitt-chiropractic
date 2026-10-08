@@ -74,15 +74,33 @@ export function cmsPlugins(): Plugin[] {
     }),
   ];
 
-  if (process.env.BLOB_READ_WRITE_TOKEN) {
-    plugins.push(
-      vercelBlobStorage({
-        enabled: true,
-        collections: { media: true },
-        token: process.env.BLOB_READ_WRITE_TOKEN,
-      }),
+  // Always register the adapter so the admin import map includes the client
+  // upload handler. Payload only accepts public Blob stores and a static
+  // vercel_blob_rw_ token. Private OIDC stores (BLOB_STORE_ID) are ignored.
+  // A malformed token would throw while the config loads and 500 the site.
+  const rawToken = process.env.BLOB_READ_WRITE_TOKEN;
+  const token =
+    rawToken && /^vercel_blob_rw_[a-z\d]+_[a-z\d]+$/i.test(rawToken)
+      ? rawToken
+      : undefined;
+  if (rawToken && !token) {
+    console.error(
+      "[cms] BLOB_READ_WRITE_TOKEN is not a public vercel_blob_rw_ token; blob uploads are disabled",
     );
   }
+  plugins.push(
+    vercelBlobStorage({
+      enabled: Boolean(token),
+      token,
+      clientUploads: true,
+      collections: {
+        media: {
+          // Store the public blob URL on media.url instead of proxying /api/media/file.
+          disablePayloadAccessControl: true,
+        },
+      },
+    }),
+  );
 
   return plugins;
 }

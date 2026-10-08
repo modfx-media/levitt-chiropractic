@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { formatPostDate, type BlogPost } from "@/lib/blog";
+import { isRemoteImage } from "@/lib/cms/mediaUrl";
 
 type BlogCardProps = {
   post: BlogPost;
@@ -48,6 +49,7 @@ export function BlogCard({ post, index = 0, feature = false }: BlogCardProps) {
           fill
           sizes={feature ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 33vw, 100vw"}
           className="object-cover transition-transform duration-700 group-hover:scale-105"
+          unoptimized={isRemoteImage(post.coverImage)}
         />
         <div
           aria-hidden

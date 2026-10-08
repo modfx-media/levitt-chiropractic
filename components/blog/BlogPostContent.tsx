@@ -11,7 +11,8 @@ import {
   blogPostingJsonLd,
   faqPageJsonLd,
 } from "@/lib/jsonLd";
-import { formatPostDate, type BlogBlock, type BlogPost } from "@/lib/blog";
+import { formatPostDate, type BlogBlock, type BlogPost, type InlineSpan } from "@/lib/blog";
+import { isRemoteImage } from "@/lib/cms/mediaUrl";
 import { siteConfig } from "@/lib/siteConfig";
 
 type BlogPostContentProps = {
@@ -28,6 +29,50 @@ const fadeUp = {
   },
 };
 
+const inlineLinkClass =
+  "font-semibold text-[#F97316] underline decoration-[#F97316]/40 underline-offset-4 transition-colors hover:decoration-[#F97316]";
+
+function renderSpans(spans: InlineSpan[]) {
+  return spans.map((span, i) => {
+    const emphasis = [
+      span.bold ? "font-semibold" : "",
+      span.italic ? "italic" : "",
+    ]
+      .filter(Boolean)
+      .join(" ");
+    if (!span.href) {
+      return (
+        <span key={i} className={emphasis || undefined}>
+          {span.text}
+        </span>
+      );
+    }
+    const isExternal =
+      span.external ??
+      (/^https?:\/\//.test(span.href) && !span.href.startsWith(siteConfig.url));
+    if (isExternal) {
+      return (
+        <a
+          key={i}
+          href={span.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={inlineLinkClass}
+        >
+          {span.text}
+        </a>
+      );
+    }
+    const internalHref =
+      span.href.replace(siteConfig.url, "").replace(/^https?:\/\/[^/]+/, "") || "/";
+    return (
+      <Link key={i} href={internalHref} className={inlineLinkClass}>
+        {span.text}
+      </Link>
+    );
+  });
+}
+
 function renderBlock(block: BlogBlock, index: number) {
   switch (block.type) {
     case "p":
@@ -36,8 +81,23 @@ function renderBlock(block: BlogBlock, index: number) {
           key={index}
           className="mt-5 text-base leading-[1.75] text-slate-700 sm:text-[1.0625rem]"
         >
-          {block.text}
+          {block.spans?.length ? renderSpans(block.spans) : block.text}
         </p>
+      );
+    case "image":
+      return (
+        <figure key={index} className="mt-8">
+          <Image
+            src={block.src}
+            alt={block.alt}
+            width={block.width || 1600}
+            height={block.height || 900}
+            sizes="(min-width: 1024px) 48rem, 100vw"
+            className="h-auto w-full rounded-2xl"
+            style={{ width: "100%", height: "auto" }}
+            unoptimized={isRemoteImage(block.src)}
+          />
+        </figure>
       );
     case "h2":
       return (
@@ -249,6 +309,7 @@ export function BlogPostContent({ post, related }: BlogPostContentProps) {
               sizes="(min-width: 1024px) 64rem, 100vw"
               priority
               className="object-cover"
+              unoptimized={isRemoteImage(post.coverImage)}
             />
           </motion.div>
         </div>

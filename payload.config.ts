@@ -3,7 +3,7 @@ import { fileURLToPath } from "url";
 import { config as loadEnv } from "dotenv";
 import { buildConfig } from "payload";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
+import { sql, vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
 import sharp from "sharp";
 
 import { Users } from "./src/cms/collections/Users";
@@ -38,6 +38,11 @@ function resolveServerURL() {
   );
   const configuredIsLocal =
     !configured || /localhost|127\.0\.0\.1/.test(configured);
+  // Preview /admin must upload against this deployment. Production keeps the
+  // public https origin (never localhost).
+  if (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
   if (process.env.VERCEL === "1" && configuredIsLocal) return siteOrigin;
   return configured || siteOrigin;
 }
@@ -93,6 +98,22 @@ export default buildConfig({
   plugins: cmsPlugins(),
   cors: allowedOrigins(),
   csrf: allowedOrigins(),
+  onInit: async (payload) => {
+    const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
+    if (!blobToken || !/^vercel_blob_rw_[a-z\d]+_[a-z\d]+$/i.test(blobToken)) return;
+    // push is disabled on Vercel. The blob adapter adds media._objectkey;
+    // add it idempotently so uploads do not fail on a missing column.
+    try {
+      await payload.db.drizzle.execute(
+        sql`ALTER TABLE "media" ADD COLUMN IF NOT EXISTS "_objectkey" varchar`,
+      );
+    } catch (error) {
+      payload.logger.error({
+        err: error,
+        msg: "Could not ensure media blob column",
+      });
+    }
+  },
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
