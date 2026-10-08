@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { queryRoutedContentByPath } from "./queries";
 import { withCMS } from "./safe";
+import { mediaPublicUrl } from "./mediaUrl";
 import { absoluteURL, normalizePath } from "./url";
 
 type MetaShape = {
@@ -37,12 +38,16 @@ export function cmsDocToMetadata(
     meta.description ||
     (typeof doc.excerpt === "string" ? doc.excerpt : undefined) ||
     (typeof fallback.description === "string" ? fallback.description : "");
-  const image =
+  const metaImage =
     typeof meta.image === "string"
       ? meta.image
       : meta.image && typeof meta.image === "object" && meta.image.url
         ? meta.image.url
         : undefined;
+  const cover = mediaPublicUrl(doc.coverImage);
+  const image =
+    (metaImage && !metaImage.startsWith("/media/") ? metaImage : undefined) ||
+    cover?.url;
   const canonical =
     meta.canonicalUrl || absoluteURL(normalizePath(path));
   const noindex = Boolean(meta.noIndex);

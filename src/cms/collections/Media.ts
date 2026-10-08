@@ -15,6 +15,25 @@ export const Media: CollectionConfig = {
       name: "alt",
       type: "text",
       required: true,
+      hooks: {
+        beforeValidate: [
+          ({ value, data, req }) => {
+            if (typeof value === "string" && value.trim()) return value.trim();
+            const record = (data ?? {}) as { filename?: unknown };
+            const file = req.file as { name?: string; filename?: string } | undefined;
+            const filename =
+              (typeof record.filename === "string" && record.filename) ||
+              file?.filename ||
+              file?.name ||
+              "";
+            const base = filename
+              .replace(/\.[^.]+$/, "")
+              .replace(/[-_]+/g, " ")
+              .trim();
+            return base || "Article image";
+          },
+        ],
+      },
     },
   ],
   upload: {
