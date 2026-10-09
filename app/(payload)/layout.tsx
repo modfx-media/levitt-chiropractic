@@ -37,6 +37,5 @@ const Layout = ({ children }: Args) => (
   </RootLayout>
 );
 
-export { metadata } from "@payloadcms/next/layouts";
 export default Layout;
 
