@@ -15,6 +15,12 @@ import { getLocalBlogPosts } from './local-posts'
 import { canonicalPublishDate } from './publish-dates'
 import type { BlogPostData, RankedContentDetail, RankedContentListItem } from './types'
 
+/** Ranked copies that duplicate a CMS article. Hidden so only the CMS post stays live. */
+const HIDDEN_RANKED_CONTENT_IDS = new Set([
+  // Ranked duplicate of the CMS post "Managing Spine Pain After a Minor Crash..." (publish date Oct 6)
+  'a64e93df-02c6-4c61-95ee-d898cf9a4ea9',
+])
+
 function rankedPublishDate(item: RankedContentListItem): string {
   return (
     canonicalPublishDate(item.title) ??
@@ -94,6 +100,7 @@ export async function getLiveRankedBlogPosts(
         (item) =>
           isBlogContentType(item.content_type) &&
           isRankedPostLive(item.status, rankedPublishDate(item)) &&
+          !HIDDEN_RANKED_CONTENT_IDS.has(item.id) &&
           !isDuplicateOfLocal(item.title, local),
       )
       .sort((a, b) => {

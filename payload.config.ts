@@ -22,7 +22,10 @@ loadEnv({ path: path.resolve(dirname, ".env") });
 
 const databaseUrl = process.env.DATABASE_URL || process.env.POSTGRES_URL || "";
 const isLocalhost = /localhost|127\.0\.0\.1/.test(databaseUrl);
+// Remote DBs (Neon) already have columns the local schema does not declare,
+// like media._objectkey from Vercel Blob. Pushing would prompt and can drop them.
 const disablePush =
+  !isLocalhost ||
   process.env.VERCEL === "1" ||
   process.env.CMS_IMPORT_APPLY === "1" ||
   process.env.PAYLOAD_DISABLE_PUSH === "1";

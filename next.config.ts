@@ -83,6 +83,11 @@ const nextConfig: NextConfig = {
       { source: "/q-and-a", destination: "/resources/qa", permanent: true },
       { source: "/wellness-tips", destination: "/resources/wellness-tips", permanent: true },
       { source: "/what-can-i-expect", destination: "/new-patient-center/what-to-expect", permanent: true },
+      {
+        source: "/blog/managing-spine-pain-after-a-minor-crash-with-a-minneapolis-chiropractor",
+        destination: "/blog/managing-spine-pain-after-a-minor-crash",
+        permanent: true,
+      },
     ];
   },
 };
