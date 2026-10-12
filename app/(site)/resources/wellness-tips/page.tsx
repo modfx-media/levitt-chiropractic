@@ -5,6 +5,8 @@ import { CMSRoute } from "@/components/cms/CMSRoute";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import WellnessTipsContent from "@/components/resources/WellnessTipsContent";
 
+
+export const revalidate = 300;
 const fallbackMeta: Metadata = generateMeta({
   title: "Spinal Wellness Tips",
   description:

@@ -15,7 +15,7 @@ import { BlogPostContent } from "@/components/blog/BlogPostContent";
 import { getLiveRankedBlogPosts } from "@/lib/ranked/posts";
 import { rankedToBlogPost } from "@/lib/ranked/adapter";
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 type RouteParams = { slug: string };
 

@@ -5,6 +5,8 @@ import { CMSRoute } from "@/components/cms/CMSRoute";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import ResourcesHubContent from "@/components/resources/ResourcesHubContent";
 
+
+export const revalidate = 300;
 const fallbackMeta: Metadata = generateMeta({
   title: "Patient Resources",
   description:

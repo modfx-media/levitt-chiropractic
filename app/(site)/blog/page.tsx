@@ -9,7 +9,7 @@ import { BlogIndexContent } from "@/components/blog/BlogIndexContent";
 import { getLiveRankedBlogPosts } from "@/lib/ranked/posts";
 import { rankedToBlogPost } from "@/lib/ranked/adapter";
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 const fallbackMeta: Metadata = generateMeta({
   title: "Blog & Insights",
