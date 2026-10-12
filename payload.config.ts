@@ -14,6 +14,7 @@ import { Header, Footer, SiteSettings } from "./src/cms/globals";
 import { cmsPlugins } from "./src/cms/plugins";
 import { siteConfig } from "./lib/siteConfig";
 
+import { scheduledPublishPlugin } from "./scheduled-publish";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
@@ -98,7 +99,7 @@ export default buildConfig({
     forceUseVercelPostgres: !isLocalhost,
     push: !disablePush,
   }),
-  plugins: cmsPlugins(),
+  plugins: [scheduledPublishPlugin(), ...cmsPlugins()],
   cors: allowedOrigins(),
   csrf: allowedOrigins(),
   onInit: async (payload) => {
