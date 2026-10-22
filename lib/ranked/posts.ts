@@ -20,10 +20,6 @@ import type { BlogPostData, RankedContentDetail, RankedContentListItem } from '.
 const HIDDEN_RANKED_CONTENT_IDS = new Set([
   // Ranked duplicate of the CMS post "Managing Spine Pain After a Minor Crash..." (publish date Oct 6)
   'a64e93df-02c6-4c61-95ee-d898cf9a4ea9',
-  // Ranked duplicate of CMS "Unlocking Applied Kinesiology in Minneapolis Chiropractic Care"
-  '7e4e87b5-d4a1-4d9c-baf2-538d38fdb5c0',
-  // Ranked duplicate of CMS "Everyday Therapeutic Exercise in Minneapolis to Support Chiropractic Care"
-  '74c53dfc-bef2-4eb3-8d97-0a4869bc3667',
 ])
 
 function rankedPublishDate(item: RankedContentListItem): string {
@@ -103,7 +99,7 @@ export async function getLiveRankedBlogPosts(
   try {
     const items = await listRankedContent(id)
     const local = getLocalBlogPosts()
-    const cms = await queryPublishedPostSummaries()
+    const cms = await queryPublishedPostSummaries().catch(() => [])
     const candidates = items
       .filter(
         (item) =>

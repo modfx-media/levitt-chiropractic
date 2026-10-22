@@ -114,6 +114,14 @@ const COMMITTED_COVER_ALTS: Record<string, string> = {
     'Person at a home desk rubbing their neck after computer work, an everyday sign of spinal strain.',
   'winter-spine-strain-triggers-in-saint-louis-park-and-how-chiropractors-help':
     'Person shoveling heavy snow on an icy driveway, one hand pressed into a painful lower back, with a snow-covered car nearby.',
+  'everyday-therapeutic-exercise-in-minneapolis-to-support-chiropractic-care':
+    'Person at home on a living-room floor, one hand pressed into a stiff lower back, trying a gentle stretch after sitting too long.',
+  'therapeutic-exercise-support-chiropractic-care':
+    'Person at home on a living-room floor, one hand pressed into a stiff lower back, trying a gentle stretch after sitting too long.',
+  'unlocking-applied-kinesiology-in-minneapolis-chiropractic-care':
+    'Tired person sitting on the edge of a bed in the morning, one hand on the neck and one on the stomach, showing whole-body strain.',
+  'applied-kinesiology-minneapolis-chiropractic-care':
+    'Tired person sitting on the edge of a bed in the morning, one hand on the neck and one on the stomach, showing whole-body strain.',
 }
 
 export function rankedCoverAlt(slug: string, title: string): string {

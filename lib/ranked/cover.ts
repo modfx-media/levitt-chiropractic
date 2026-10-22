@@ -1,5 +1,5 @@
 import { BlobNotFoundError, head, put } from '@vercel/blob'
-import { COMMITTED_COVER_SLUGS, coverPrompt } from './config'
+import { COMMITTED_COVER_FILES, COMMITTED_COVER_SLUGS, coverPrompt } from './config'
 import { pickUniqueCover } from './unique-covers'
 
 function coverPathname(contentId: string): string {
@@ -8,6 +8,7 @@ function coverPathname(contentId: string): string {
 
 export function committedCoverUrl(slug?: string): string | null {
   if (!slug) return null
+  if (COMMITTED_COVER_FILES[slug]) return COMMITTED_COVER_FILES[slug]
   return COMMITTED_COVER_SLUGS.includes(slug) ? `/images/blog/covers/${slug}.png` : null
 }
 

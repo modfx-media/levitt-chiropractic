@@ -5,8 +5,19 @@ import { slugFromTitle } from './html-to-post'
  */
 const CANONICAL_DATES: { date: string; prefixes: string[]; titles: string[] }[] = [
   {
+    date: '2026-10-20',
+    prefixes: [
+      'everyday-therapeutic-exercise',
+      'therapeutic-exercise-support-chiropractic-care',
+    ],
+    titles: ['Everyday Therapeutic Exercise in Minneapolis to Support Chiropractic Care'],
+  },
+  {
     date: '2026-10-13',
-    prefixes: ['unlocking-applied-kinesiology'],
+    prefixes: [
+      'unlocking-applied-kinesiology',
+      'applied-kinesiology-minneapolis-chiropractic-care',
+    ],
     titles: ['Unlocking Applied Kinesiology in Minneapolis Chiropractic Care'],
   },
   {

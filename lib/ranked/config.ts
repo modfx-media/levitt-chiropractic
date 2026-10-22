@@ -35,3 +35,15 @@ export const COMMITTED_COVER_SLUGS: readonly string[] = [
   'everyday-clues-you-need-chiropractic-care-in-saint-louis-park',
   'winter-spine-strain-triggers-in-saint-louis-park-and-how-chiropractors-help',
 ]
+
+/** Extra committed files that are not `{slug}.png`. */
+export const COMMITTED_COVER_FILES: Record<string, string> = {
+  'everyday-therapeutic-exercise-in-minneapolis-to-support-chiropractic-care':
+    '/images/blog/covers/therapeutic-exercise-support-chiropractic-care.jpg',
+  'therapeutic-exercise-support-chiropractic-care':
+    '/images/blog/covers/therapeutic-exercise-support-chiropractic-care.jpg',
+  'unlocking-applied-kinesiology-in-minneapolis-chiropractic-care':
+    '/images/blog/covers/applied-kinesiology-minneapolis-chiropractic-care.jpg',
+  'applied-kinesiology-minneapolis-chiropractic-care':
+    '/images/blog/covers/applied-kinesiology-minneapolis-chiropractic-care.jpg',
+}

@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog";
+import { canonicalPublishDate } from "@/lib/ranked/publish-dates";
 
 import { getCMS } from "./payload";
 import { cmsDocToBlogPost } from "./postToBlog";
@@ -6,6 +7,14 @@ import { withCMS } from "./safe";
 
 function sortByPublishedDesc(posts: BlogPost[]): BlogPost[] {
   return [...posts].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+}
+
+function withCanonicalDate(post: BlogPost): BlogPost {
+  const canonical = canonicalPublishDate(post.title, post.slug);
+  if (!canonical) return post;
+  const current = post.publishedAt.slice(0, 10);
+  if (current === canonical) return post;
+  return { ...post, publishedAt: canonical };
 }
 
 function normalizePostTitle(title: string): string {
@@ -46,7 +55,7 @@ export async function queryPublishedPostSummaries(): Promise<PublishedPostSummar
 
 /** Published CMS posts merged onto the designed list. The designed list is the fallback. */
 export async function mergePublishedCmsPosts(hardcoded: BlogPost[]): Promise<BlogPost[]> {
-  const fallback = sortByPublishedDesc(hardcoded);
+  const fallback = sortByPublishedDesc(hardcoded.map(withCanonicalDate));
   return withCMS(async () => {
     const payload = await getCMS();
     const result = await payload.find({
@@ -73,7 +82,7 @@ export async function mergePublishedCmsPosts(hardcoded: BlogPost[]): Promise<Blo
       bySlug.set(post.slug, post);
     }
     for (const mapped of cmsPosts) bySlug.set(mapped.slug, mapped);
-    return sortByPublishedDesc([...bySlug.values()]);
+    return sortByPublishedDesc([...bySlug.values()].map(withCanonicalDate));
   }, fallback);
 }
 
