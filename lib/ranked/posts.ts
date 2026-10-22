@@ -13,12 +13,17 @@ import {
 } from './html-to-post'
 import { getLocalBlogPosts } from './local-posts'
 import { canonicalPublishDate } from './publish-dates'
+import { queryPublishedPostSummaries } from '@/lib/cms/posts'
 import type { BlogPostData, RankedContentDetail, RankedContentListItem } from './types'
 
 /** Ranked copies that duplicate a CMS article. Hidden so only the CMS post stays live. */
 const HIDDEN_RANKED_CONTENT_IDS = new Set([
   // Ranked duplicate of the CMS post "Managing Spine Pain After a Minor Crash..." (publish date Oct 6)
   'a64e93df-02c6-4c61-95ee-d898cf9a4ea9',
+  // Ranked duplicate of CMS "Unlocking Applied Kinesiology in Minneapolis Chiropractic Care"
+  '7e4e87b5-d4a1-4d9c-baf2-538d38fdb5c0',
+  // Ranked duplicate of CMS "Everyday Therapeutic Exercise in Minneapolis to Support Chiropractic Care"
+  '74c53dfc-bef2-4eb3-8d97-0a4869bc3667',
 ])
 
 function rankedPublishDate(item: RankedContentListItem): string {
@@ -36,15 +41,18 @@ function normalizeTitle(title: string): string {
     .trim()
 }
 
-/** Skip Ranked items that duplicate a hand-written local article (slug or title). */
-function isDuplicateOfLocal(rankedTitle: string, localPosts: BlogPostData[]): boolean {
+/** Skip Ranked items that duplicate a hand-written local or CMS article (slug or title). */
+function isDuplicateOfExisting(
+  rankedTitle: string,
+  existing: { title: string; slug: string }[],
+): boolean {
   const rankedNorm = normalizeTitle(rankedTitle)
   const rankedSlug = slugFromTitle(rankedTitle)
-  for (const local of localPosts) {
-    const localNorm = normalizeTitle(local.title)
-    if (local.slug === rankedSlug || slugFromTitle(local.title) === rankedSlug) return true
-    if (localNorm === rankedNorm) return true
-    if (localNorm.startsWith(rankedNorm) || rankedNorm.startsWith(localNorm)) return true
+  for (const post of existing) {
+    const existingNorm = normalizeTitle(post.title)
+    if (post.slug === rankedSlug || slugFromTitle(post.title) === rankedSlug) return true
+    if (existingNorm === rankedNorm) return true
+    if (existingNorm.startsWith(rankedNorm) || rankedNorm.startsWith(existingNorm)) return true
   }
   return false
 }
@@ -95,13 +103,15 @@ export async function getLiveRankedBlogPosts(
   try {
     const items = await listRankedContent(id)
     const local = getLocalBlogPosts()
+    const cms = await queryPublishedPostSummaries()
     const candidates = items
       .filter(
         (item) =>
           isBlogContentType(item.content_type) &&
           isRankedPostLive(item.status, rankedPublishDate(item)) &&
           !HIDDEN_RANKED_CONTENT_IDS.has(item.id) &&
-          !isDuplicateOfLocal(item.title, local),
+          !isDuplicateOfExisting(item.title, local) &&
+          !isDuplicateOfExisting(item.title, cms),
       )
       .sort((a, b) => {
         const da = rankedPublishDate(a)
