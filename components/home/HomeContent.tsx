@@ -329,27 +329,16 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
               </p>
               <p>
                 We combine chiropractic adjustments with complementary
-<<<<<<< HEAD
-                therapies, including cold laser therapy, targeted exercises,
-                and custom orthotics when appropriate. Every treatment plan is
-=======
                 therapies, including cold laser therapy, targeted exercises, and
                 custom orthotics when appropriate. Every treatment plan is
->>>>>>> 0f3309e (new edits)
                 tailored to your individual needs, with an emphasis on restoring
                 function and helping you feel your best.
               </p>
               <p>
                 Our whole-body philosophy considers how your posture, movement,
-<<<<<<< HEAD
-                lifestyle, and overall health influence your well-being. We
-                take the time to listen, evaluate, and develop a thoughtful
-                care plan that supports your health and quality of life.
-=======
                 lifestyle, and overall health influence your well-being. We take
                 the time to listen, evaluate, and develop a thoughtful care plan
                 that supports your health and quality of life.
->>>>>>> 0f3309e (new edits)
               </p>
             </div>
 
