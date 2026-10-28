@@ -100,10 +100,20 @@ export function localBusinessJsonLd(input?: {
   const logo = absUrl("/images/logo.png");
   const photo = absUrl("/images/og-default.jpg");
   const doctorPhoto = absUrl(siteConfig.physician.image);
+  const visible = (input?.reviews ?? []).filter(isFiveStarReview);
+  const rating = input?.meta?.rating ?? 0;
+  const reviewCount = input?.meta?.reviewCount ?? 0;
+  // Only mark up ratings that are actually shown on the page.
+  const showRatings = visible.length > 0 && rating > 0 && reviewCount > 0;
 
   return {
     "@context": "https://schema.org",
-    "@type": "Chiropractor",
+    // Google's review-snippet parser does not treat the schema.org subtype
+    // Chiropractor as a valid parent. LocalBusiness is the allowed type.
+    // additionalType keeps the more specific medical type without making
+    // Review / AggregateRating children of an unsupported node.
+    "@type": "LocalBusiness",
+    additionalType: "https://schema.org/Chiropractor",
     "@id": BUSINESS_ID,
     name: siteConfig.name,
     alternateName: [
@@ -166,32 +176,29 @@ export function localBusinessJsonLd(input?: {
       target: absUrl(siteConfig.appointmentUrl),
       name: "Request an appointment",
     },
-    ...(input?.meta && input.meta.rating > 0 && input.meta.reviewCount > 0
+    ...(showRatings
       ? {
           aggregateRating: {
             "@type": "AggregateRating",
-            ratingValue: String(input.meta.rating),
-            reviewCount: String(input.meta.reviewCount),
-            bestRating: "5",
+            ratingValue: rating,
+            reviewCount,
+            ratingCount: reviewCount,
+            bestRating: 5,
+            worstRating: 1,
           },
+          review: visible.map((review) => ({
+            "@type": "Review",
+            author: { "@type": "Person", name: review.name },
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: review.rating,
+              bestRating: 5,
+              worstRating: 1,
+            },
+            reviewBody: review.quote,
+          })),
         }
       : {}),
-    ...(() => {
-      const visible = (input?.reviews ?? []).filter(isFiveStarReview);
-      if (visible.length === 0) return {};
-      return {
-        review: visible.map((review) => ({
-          "@type": "Review",
-          author: { "@type": "Person", name: review.name },
-          reviewRating: {
-            "@type": "Rating",
-            ratingValue: "5",
-            bestRating: "5",
-          },
-          reviewBody: review.quote,
-        })),
-      };
-    })(),
   };
 }
 

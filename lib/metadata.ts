@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { composeSeoTitle } from "./seoTitle";
 import { siteConfig } from "./siteConfig";
 
 const SITE_NAME = siteConfig.name;
@@ -6,17 +7,17 @@ const SITE_URL = siteConfig.url;
 const OG_DEFAULT = "/images/og-default.jpg";
 
 type GenerateMetaInput = {
-  /** Page title WITHOUT the brand suffix the root layout template appends it. */
+  /**
+   * Primary phrase. `composeSeoTitle` turns this plus `slug` into one
+   * absolute title of at most 60 characters, including the brand.
+   */
   title: string;
   description: string;
   /** Path slug without leading/trailing slashes. Use "" for the homepage. */
   slug: string;
   image?: string;
   noindex?: boolean;
-  /**
-   * Skip the root layout `%s | Brand` template. Use on the homepage so the
-   * SERP title is exactly what we set (keyword + brand).
-   */
+  /** @deprecated Titles are always absolute so the layout template cannot double the brand. */
   absoluteTitle?: boolean;
 };
 
@@ -31,15 +32,12 @@ export function generateMeta({
   slug,
   image = OG_DEFAULT,
   noindex = false,
-  absoluteTitle = false,
 }: GenerateMetaInput): Metadata {
   const url = buildUrl(slug);
-  const fullTitle = absoluteTitle
-    ? `${title} | ${siteConfig.shortName}`
-    : title;
+  const fullTitle = composeSeoTitle(title, slug);
 
   return {
-    title: absoluteTitle ? { absolute: fullTitle } : title,
+    title: { absolute: fullTitle },
     description,
     alternates: { canonical: url },
     openGraph: {

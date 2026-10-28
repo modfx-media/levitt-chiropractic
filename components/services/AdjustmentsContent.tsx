@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { LocalPracticeLinks } from "@/components/seo/LocalPracticeLinks";
 import { LocationStrip } from "@/components/services/LocationStrip";
 
 const techniques = [
@@ -253,6 +254,7 @@ export default function AdjustmentsContent() {
                   address the fundamental structure and health of the spine.
                 </p>
               </div>
+              <LocalPracticeLinks topic="adjustments" />
             </motion.div>
           </div>
         </div>

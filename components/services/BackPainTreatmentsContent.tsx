@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { LocalPracticeLinks } from "@/components/seo/LocalPracticeLinks";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
@@ -153,6 +154,7 @@ export default function BackPainTreatmentsContent() {
                 Neither is the first conversation for a mechanical lumbar
                 problem we can examine and treat in Suite 201.
               </p>
+              <LocalPracticeLinks topic="back-pain" />
 
               <motion.ul
                 initial="hidden"

@@ -11,7 +11,6 @@ const fallbackMeta: Metadata = generateMeta({
   description:
     "Chiropractor in Saint Louis Park at 6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416. Back pain, injuries, cold laser, and custom orthotics with Dr. Alan Levitt.",
   slug: "",
-  absoluteTitle: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {

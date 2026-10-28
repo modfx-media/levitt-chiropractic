@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { LocalPracticeLinks } from "@/components/seo/LocalPracticeLinks";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
@@ -122,6 +123,28 @@ const services: Service[] = [
         aria-hidden
       >
         <path d="M9 2l4 4-4 4M15 22l-4-4 4-4M22 9l-4 4 4 4M2 15l4-4-4-4" />
+      </svg>
+    ),
+  },
+  {
+    title: "Personal Injury",
+    description:
+      "Chiropractic care after a crash, fall, or workplace injury, with an exam and a plan you can follow.",
+    href: "/personal-injury",
+    group: "Conditions",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="h-6 w-6"
+        aria-hidden
+      >
+        <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" />
+        <path d="M9 12l2 2 4-4" />
       </svg>
     ),
   },
@@ -328,6 +351,7 @@ export default function ServicesContent() {
                 if you&rsquo;re not sure where to start we&rsquo;ll guide
                 you to the right care.
               </p>
+              <LocalPracticeLinks topic="services" />
             </motion.div>
 
             <motion.div

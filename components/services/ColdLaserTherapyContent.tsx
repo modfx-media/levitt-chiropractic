@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { LocalPracticeLinks } from "@/components/seo/LocalPracticeLinks";
 import { LocationStrip } from "@/components/services/LocationStrip";
 
 const conditions = [
@@ -205,6 +206,7 @@ export default function ColdLaserTherapyContent() {
                   promoted as an effective way to produce pain relief.
                 </p>
               </div>
+              <LocalPracticeLinks topic="cold-laser" />
             </motion.div>
           </div>
         </div>

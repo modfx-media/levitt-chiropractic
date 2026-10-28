@@ -12,6 +12,7 @@ import { QuickLinkCard } from "@/components/ui/QuickLinkCard";
 import { Button } from "@/components/ui/Button";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { LocalPracticeLinks } from "@/components/seo/LocalPracticeLinks";
 import { faqPageJsonLd } from "@/lib/jsonLd";
 import type { GoogleReview, GoogleReviewsMeta } from "@/lib/reviews";
 import { siteConfig } from "@/lib/siteConfig";
@@ -92,6 +93,11 @@ const quickLinks = [
     title: "Contact Us",
     href: "/contact",
     image: "/images/contact-us.jpg",
+  },
+  {
+    title: "Personal Injury",
+    href: "/personal-injury",
+    image: "/images/auto-injury.jpg",
   },
 ];
 
@@ -627,6 +633,8 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
             </Link>
           </div>
 
+          <LocalPracticeLinks topic="home" />
+
           <div className="mt-8 sm:mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             {quickLinks.map((q, i) => (
               <QuickLinkCard
@@ -634,6 +642,11 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                 title={q.title}
                 href={q.href}
                 image={q.image}
+                imageAlt={
+                  q.href === "/personal-injury"
+                    ? "Chiropractic care for someone recovering from a personal injury"
+                    : undefined
+                }
                 index={i}
               />
             ))}

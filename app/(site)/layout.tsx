@@ -64,6 +64,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
+    // Both tokens stay. They are two Search Console properties, not a repeated value.
     google: [
       "LoV0krtbUGNKX41xVZWN5M1ATO8zIlP_TtBco4Ty84Y",
       "DLvWH-jh8pWWIs6rZ553tSyoMUNIMRrBMV5mS8uBK0o",

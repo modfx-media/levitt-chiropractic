@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { LocalPracticeLinks } from "@/components/seo/LocalPracticeLinks";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
@@ -81,6 +82,7 @@ export default function InjuriesContent() {
               adjustments, ice or laser, and a few exercises you can actually
               do at home.
             </p>
+            <LocalPracticeLinks topic="injuries" />
           </motion.div>
         </div>
       </section>

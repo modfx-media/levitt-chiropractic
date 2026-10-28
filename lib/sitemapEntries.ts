@@ -59,8 +59,8 @@ export const sitemapEntries: SitemapEntry[] = [
   { path: "/contact/new-patient-appointment", priority: 0.9, changefreq: "monthly" },
   { path: "/contact/existing-patient-appointment", priority: 0.8, changefreq: "monthly" },
 
-  // User-facing sitemap
-  { path: "/site-map", priority: 0.4, changefreq: "monthly" },
+  // /site-map is noindex. It stays as a page and in the footer, but it is
+  // not listed in sitemap.xml. See SITEMAP_EXCLUSIONS in the XML route.
 
   // Legal
   { path: "/privacy-policy", priority: 0.3, changefreq: "yearly" },
