@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
@@ -194,12 +195,18 @@ export function BlogIndexContent({ posts }: BlogIndexContentProps) {
               </p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
-              <a
-                href="/contact/appointment-request"
+              <Link
+                href={siteConfig.appointmentUrl}
                 className="inline-flex items-center justify-center rounded-full bg-[#F97316] px-7 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-orange-600"
               >
-                Request appointment
-              </a>
+                NEW Patient Appointment
+              </Link>
+              <Link
+                href={siteConfig.existingPatientAppointmentUrl}
+                className="inline-flex items-center justify-center rounded-full border border-white/20 px-7 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-white/10"
+              >
+                Existing Patient Appointment
+              </Link>
               <a
                 href={`tel:${siteConfig.phone}`}
                 className="inline-flex items-center justify-center rounded-full border border-white/20 px-7 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-white/10"

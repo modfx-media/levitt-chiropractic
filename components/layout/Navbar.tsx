@@ -81,24 +81,24 @@ function Logo() {
   return (
     <Link
       href="/"
-      className="flex items-center gap-2.5 transition-opacity hover:opacity-90"
+      className="flex flex-shrink-0 items-center gap-2 transition-opacity hover:opacity-90"
       aria-label={`${siteConfig.name} home`}
     >
       <Image
         src="/images/fevicon.png"
         alt=""
-        width={48}
-        height={48}
+        width={70}
+        height={70}
         priority
-        className="h-9 w-9 flex-shrink-0 object-contain sm:h-10 sm:w-10"
+        className="h-10 w-10 flex-shrink-0 object-contain sm:h-12 sm:w-12 xl:h-10 xl:w-10 min-[1400px]:h-11 min-[1400px]:w-11 2xl:h-12 2xl:w-12"
       />
       <Image
         src={LOGO_SRC}
         alt={siteConfig.name}
-        width={220}
-        height={56}
+        width={546}
+        height={206}
         priority
-        className="h-10 w-auto object-contain sm:h-11"
+        className="h-12 w-auto object-contain sm:h-14 xl:h-11 min-[1400px]:h-12 2xl:h-14"
       />
     </Link>
   );
@@ -118,13 +118,13 @@ function Dropdown({ entry, pathname }: DropdownProps) {
     return (
       <Link
         href={entry.href}
-        className={`group relative inline-flex h-16 items-center whitespace-nowrap px-3 text-[12px] font-semibold uppercase tracking-[0.1em] transition-colors xl:px-3.5 xl:text-[12.5px] xl:tracking-[0.12em] ${
+        className={`group relative inline-flex h-16 items-center whitespace-nowrap px-[6px] text-[12px] font-semibold transition-colors min-[1400px]:px-[8px] min-[1400px]:text-[12.5px] 2xl:px-2 2xl:text-[13px] ${
           active ? "text-primary" : "text-white/85 hover:text-white"
         }`}
       >
         {entry.label}
         <span
-          className={`absolute inset-x-3 bottom-3 h-0.5 origin-left rounded-full bg-primary transition-transform duration-300 xl:inset-x-3.5 ${
+          className={`absolute inset-x-[6px] bottom-3 h-0.5 origin-left rounded-full bg-primary transition-transform duration-300 min-[1400px]:inset-x-[8px] 2xl:inset-x-2 ${
             active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
           }`}
         />
@@ -144,7 +144,7 @@ function Dropdown({ entry, pathname }: DropdownProps) {
     >
       <Link
         href={entry.href}
-        className={`group relative inline-flex h-16 items-center gap-1.5 whitespace-nowrap px-3 text-[12px] font-semibold uppercase tracking-[0.1em] transition-colors xl:px-3.5 xl:text-[12.5px] xl:tracking-[0.12em] ${
+        className={`group relative inline-flex h-16 items-center gap-1 whitespace-nowrap px-[6px] text-[12px] font-semibold transition-colors min-[1400px]:px-[8px] min-[1400px]:text-[12.5px] 2xl:px-2 2xl:text-[13px] ${
           active ? "text-primary" : "text-white/85 hover:text-white"
         }`}
         aria-haspopup="true"
@@ -157,7 +157,7 @@ function Dropdown({ entry, pathname }: DropdownProps) {
           }`}
         />
         <span
-          className={`absolute inset-x-3 bottom-3 h-0.5 origin-left rounded-full bg-primary transition-transform duration-300 xl:inset-x-3.5 ${
+          className={`absolute inset-x-[6px] bottom-3 h-0.5 origin-left rounded-full bg-primary transition-transform duration-300 min-[1400px]:inset-x-[8px] 2xl:inset-x-2 ${
             active || open ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
           }`}
         />
@@ -201,23 +201,6 @@ function Dropdown({ entry, pathname }: DropdownProps) {
                   </Link>
                 );
               })}
-
-              {entry.href !== siteConfig.appointmentUrl && (
-                <>
-                  <div
-                    aria-hidden
-                    className="my-1.5 h-px bg-white/10"
-                  />
-                  <Link
-                    href={siteConfig.appointmentUrl}
-                    role="menuitem"
-                    className="flex items-center justify-between gap-2 rounded-lg bg-primary/15 px-3 py-2 text-sm font-semibold text-primary ring-1 ring-primary/30 transition-colors hover:bg-primary hover:text-white"
-                  >
-                    <span>Book Appointment</span>
-                    <span aria-hidden>→</span>
-                  </Link>
-                </>
-              )}
             </div>
           </motion.div>
         )}
@@ -343,7 +326,7 @@ export function Navbar() {
     <>
       {/* Top utility bar (lg+) */}
       <div className="hidden border-b border-white/5 bg-dark/80 text-white/70 lg:block">
-        <div className="mx-auto flex h-9 max-w-7xl items-center justify-between gap-6 px-6 text-[11px] font-medium uppercase tracking-[0.16em]">
+        <div className="mx-auto flex h-9 max-w-[1520px] items-center justify-between gap-6 px-6 xl:px-5 2xl:px-6 text-[11px] font-medium uppercase tracking-[0.16em]">
           <div className="flex items-center gap-5">
             <span>Saint Louis Park, MN</span>
             <span className="h-3 w-px bg-white/15" aria-hidden />
@@ -382,13 +365,13 @@ export function Navbar() {
             : "bg-dark border-b border-white/5"
         }`}
       >
-        <div className="mx-auto grid h-20 max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-4 sm:px-6 lg:gap-6 xl:gap-10">
+        <div className="mx-auto flex h-20 max-w-[1520px] items-center justify-between gap-4 px-4 sm:px-6 xl:gap-3 xl:px-5 min-[1400px]:gap-4 2xl:gap-5 2xl:px-6">
           {/* Left logo */}
           <Logo />
 
           {/* Center primary nav */}
           <nav
-            className="hidden items-center justify-center lg:flex"
+            className="hidden min-w-0 flex-1 items-center justify-center xl:flex"
             aria-label="Primary"
           >
             {primaryNav.map((entry) => (
@@ -397,26 +380,25 @@ export function Navbar() {
           </nav>
 
           {/* Right CTAs */}
-          <div className="flex items-center justify-end gap-3">
-            <a
-              href={siteConfig.phoneHref}
-              className="hidden items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-primary lg:hidden"
-              aria-label={`Call ${siteConfig.phone}`}
-            >
-              <PhoneIcon className="h-4 w-4 text-primary" />
-            </a>
-
+          <div className="flex flex-shrink-0 items-center justify-end gap-2">
             <Link
               href={siteConfig.appointmentUrl}
-              className="hidden items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-[12.5px] font-semibold uppercase tracking-[0.12em] text-white shadow-lg shadow-orange-500/30 transition hover:bg-orange-600 hover:shadow-xl hover:shadow-orange-500/40 sm:inline-flex"
+              className="hidden items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-3 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.03em] text-white shadow-lg shadow-orange-500/30 transition hover:bg-orange-600 hover:shadow-xl hover:shadow-orange-500/40 sm:inline-flex min-[1400px]:px-3.5 min-[1400px]:tracking-[0.04em] 2xl:px-4 2xl:text-[11px] 2xl:tracking-[0.05em]"
             >
-              Request Appointment
-              <span aria-hidden>→</span>
+              NEW Patient Appointment
+              <span aria-hidden className="hidden 2xl:inline">→</span>
+            </Link>
+
+            <Link
+              href={siteConfig.existingPatientAppointmentUrl}
+              className="hidden items-center justify-center whitespace-nowrap rounded-full border border-white/25 px-3 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.03em] text-white transition hover:border-primary hover:text-primary md:inline-flex min-[1400px]:px-3.5 min-[1400px]:tracking-[0.04em] 2xl:px-4 2xl:text-[11px] 2xl:tracking-[0.05em]"
+            >
+              Existing Patient Appointment
             </Link>
 
             <button
               type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10 lg:hidden"
+              className="ml-1 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10 xl:hidden"
               aria-label="Open menu"
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen(true)}

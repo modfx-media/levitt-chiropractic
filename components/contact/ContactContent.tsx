@@ -304,7 +304,7 @@ export default function ContactContent() {
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
                 If you&rsquo;re ready to book, our{" "}
                 <Link
-                  href="/contact/appointment-request"
+                  href="/contact/new-patient-appointment"
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
                   appointment request form
