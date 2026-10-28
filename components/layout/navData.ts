@@ -49,6 +49,7 @@ export const primaryNav: NavEntry[] = [
         label: "Common Chiropractic Conditions",
         href: "/common-chiropractic-conditions",
         items: [
+          { label: "Neck Pain", href: "/neck-pain" },
           { label: "Back Pain Treatments", href: "/back-pain-treatments" },
           {
             label: "Degenerative Disc Disease",

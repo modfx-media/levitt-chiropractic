@@ -6,10 +6,11 @@ import CommonChiropracticConditionsContent from "@/components/services/CommonChi
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 
 const fallbackMeta: Metadata = generateMeta({
-  title: "Common Chiropractic Conditions We Treat",
+  title: "Chiropractic Conditions",
   description:
-    "Chiropractic care for headaches, sciatica, whiplash, carpal tunnel, fibromyalgia, joint pain and more from Dr. Alan Levitt in Saint Louis Park, MN.",
+    "A map of chiropractic conditions in Saint Louis Park. Neck, back, discs, and crash injuries each have their own page.",
   slug: "common-chiropractic-conditions",
+  absoluteTitle: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {

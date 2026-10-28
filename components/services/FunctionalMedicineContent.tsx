@@ -1,290 +1,288 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
+import { FaqBlock, RelatedCare, SectionIntro } from "@/components/services/enrichment";
 
-const facts = [
+const questions = [
   {
-    title: "It Gets to the Heart of the Matter",
-    body: "Functional medicine provides an approach through which you can experience true healing and health. It focuses on assessing the body, its various systems, and how everything is functioning to determine what is actually causing the symptoms you experience. It’s incredibly effective because it digs up the root and treats it.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <path d="M12 21s-7-5-7-11a7 7 0 0114 0c0 6-7 11-7 11z" />
-      </svg>
-    ),
+    title: "What hurts, and what else is off",
+    body: "Musculoskeletal pain can sit next to poor sleep, a limited diet, or a day with no real movement. The visit writes those down. It does not assume they are the cause.",
   },
   {
-    title: "It’s Highly Personalized",
-    body: "Functional medicine providers don’t glaze over your symptoms and provide a generic treatment plan. They take a look at various factors in your life, including everything from genetics to daily habits.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <circle cx="12" cy="8" r="4" />
-        <path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
-      </svg>
-    ),
+    title: "What you already take",
+    body: "List medicines and supplements another clinician prescribed. This office does not stop them. Functional medicine here is added beside that care, not instead of your physician.",
   },
   {
-    title: "It Utilizes a Holistic Approach",
-    body: "Treatment includes a variety of areas. In addition to adjustments for back pain, your plan might address poor sleep positions, nutrition issues, and weakened muscles. Headaches might be treated through stress management, chiropractic manipulation, diet, and exercise.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <circle cx="12" cy="12" r="9" />
-        <path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18" />
-      </svg>
-    ),
+    title: "What a normal week looks like",
+    body: "Sleep position, meals you actually eat, and how you load the spine at work. A plan that ignores the week does not get followed.",
   },
   {
-    title: "It’s Effective for a Wide Range of Conditions",
-    body: "This method of care is beneficial in many treatment plans, including for fibromyalgia, sciatica, joint pain, degenerative disc disease, and more.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <path d="M9 11h6M9 15h4" />
-        <path d="M5 7a2 2 0 012-2h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" />
-      </svg>
-    ),
-  },
-  {
-    title: "It Creates Lasting Results",
-    body: "Functional medicine focuses on addressing underlying issues that cause your symptoms. In doing so, it provides a path to optimal healing benefits you can reap for years, or decades, to come.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <path d="M12 2l3 7h7l-5.5 4 2 8-6.5-4.5L5.5 21l2-8L2 9h7z" />
-      </svg>
-    ),
+    title: "What the spine exam shows",
+    body: "Adjustments are still available when a joint is not moving. Functional medicine does not retire the structural visit. It adds questions when the history says the pain is not only a joint.",
   },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+const faqs = [
+  {
+    q: "How is functional medicine different from an adjustment?",
+    a: "An adjustment is a contact on a joint. Functional medicine, as this office describes it, looks at the wider picture: sleep, nutrition, habits, and how those sit next to the pain. You can have both in one plan. You do not have to pick a philosophy.",
   },
-};
+  {
+    q: "Will I have lab work or genetic testing?",
+    a: "We do not offer a lab menu or a genetic test. The history can run from what you already know about your health to daily habits. If a test would help, that order belongs with the physician who runs it. We will not invent a panel to justify the visit.",
+  },
+  {
+    q: "Do I stop my medication?",
+    a: "No. Functional medicine here is complementary. Do not change a prescription because of a chiropractic visit. Your prescribing clinician stays in charge of those drugs.",
+  },
+  {
+    q: "Which problems does the office connect to this visit?",
+    a: "We already connect fibromyalgia, sciatica, joint pain, and degenerative disc disease as examples where a wider plan is sometimes useful. Each of those still needs its own exam. Sciatica and disc findings are examined for what they are. This visit does not replace that exam.",
+  },
+  {
+    q: "Is this a cure for chronic illness?",
+    a: "No. The office talks about looking for contributors and about habits that can be changed. It does not promise years or decades of relief, and it does not claim to cure a medical disease. If the story sounds like infection, cancer, or a psychiatric crisis, that is not this appointment.",
+  },
+];
 
 export default function FunctionalMedicineContent() {
   return (
     <>
       <ServiceHero
         title="Functional Medicine"
-        subtitle="From chronic pain to chronic illness Dr. Alan Levitt provides functional medicine to help you achieve optimal relief."
+        subtitle="Chiropractic care plus the sleep, food, and daily-load questions that sometimes sit under a stubborn pain problem."
         crumbs={[
           { label: "Home", href: "/" },
-          { label: "Services" },
+          { label: "Services", href: "/services" },
           { label: "Functional Medicine" },
         ]}
       />
 
-      {/* SECTION 2 WHITE: INTRO */}
-      <section className="relative bg-white py-12 sm:py-20 md:py-24">
+      <section className="bg-white py-12 sm:py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
+          <SectionIntro
+            eyebrow="What the phrase means here"
+            title="A wider history, not a second clinic"
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              5 Facts to Know
+            <p>
+              Functional medicine at Levitt Chiropractic Center is Dr. Alan
+              Levitt’s whole-person visit. He still examines the spine. He
+              also asks what else is going on when pain will not behave like
+              a simple joint problem. The office describes that as looking at
+              how the body is functioning, not only at the sore spot.
             </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Functional medicine, demystified
-            </h2>
-            <span
-              aria-hidden
-              className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-            />
-            <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Functional medicine is becoming a more common term, but there is
-              still some confusion around the topic. To help provide some
-              clarity, Dr. Levitt and the team at Levitt Chiropractic Center
-              in Saint Louis Park, MN share five important facts below.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SECTION 3 DARK NAVY: 5 FACTS */}
-      <section className="relative overflow-hidden bg-[#0F172A] py-20 text-white sm:py-24">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-32 top-20 -z-10 h-96 w-96 rounded-full bg-[#F97316]/10 blur-[140px]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 bottom-10 -z-10 h-96 w-96 rounded-full bg-[#1E3A5F]/60 blur-[140px]"
-        />
-
-        <div className="relative mx-auto max-w-7xl px-6">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mx-auto max-w-2xl text-center"
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              The Five Facts
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              Why functional medicine works
-            </h2>
-            <span
-              aria-hidden
-              className="mx-auto mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-            />
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={{
-              hidden: {},
-              show: { transition: { staggerChildren: 0.1 } },
-            }}
-            className="mt-8 sm:mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
-          >
-            {facts.map((f, i) => (
-              <motion.div
-                key={f.title}
-                variants={{
-                  hidden: { opacity: 0, y: 28 },
-                  show: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-                  },
-                }}
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.2 }}
-                className="group relative overflow-hidden rounded-2xl border-t-4 border-[#F97316] bg-[#1E3A5F]/60 p-7 ring-1 ring-white/10 backdrop-blur-sm"
+            <p>
+              The chemical, nutritional, and structural ideas on the{" "}
+              <Link
+                href="/meet-the-doctor"
+                className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
-                <span
-                  aria-hidden
-                  className="absolute right-5 top-5 font-heading text-4xl font-black text-white/[0.06]"
-                >
-                  0{i + 1}
-                </span>
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#F97316]/15 text-[#F97316] ring-1 ring-[#F97316]/30">
-                  {f.icon}
-                </span>
-                <h3 className="mt-5 font-heading text-lg font-bold text-white">
-                  {f.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/75">
-                  {f.body}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
+                meet the doctor
+              </Link>{" "}
+              are the frame: nutrition and supplements as a conversation,
+              and adjustments plus soft-tissue work for the structure. This
+              visit does not add a dispensary price list. Supplements, if they
+              are discussed, are recommendations, not a required purchase.
+            </p>
+            <p>
+              “Root cause” is easy to overread. Here it means
+              we try not to chase a single symptom with a single trick. It
+              does not mean we have found a hidden diagnosis the rest of
+              medicine missed. If the history sounds medical, you keep your
+              physician, and we say so.
+            </p>
+          </SectionIntro>
         </div>
       </section>
 
-      {/* SECTION 4 WHITE: CLOSING + CTA */}
-      <section className="relative bg-white py-12 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-12 lg:grid-cols-5 lg:items-start">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              className="lg:col-span-3"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Get Started
-              </p>
-              <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Discover what functional medicine can do for you
-              </h2>
-              <span
-                aria-hidden
-                className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-              />
-              <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Learn more about functional medicine with a visit to Dr. Alan
-                Levitt at Levitt Chiropractic Center in Saint Louis Park, MN.
-                Call{" "}
-                <a
-                  href={siteConfig.phoneHref}
-                  className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
-                >
-                  {siteConfig.phone}
-                </a>{" "}
-                or{" "}
-                <Link
-                  href="/contact"
-                  className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
-                >
-                  request a visit online
-                </Link>{" "}
-                today.
-              </p>
-            </motion.div>
+      <section className="bg-[#0F172A] py-20 text-white sm:py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionIntro dark center eyebrow="The interview" title="Questions that change the plan">
+            <p>These are the practical parts of the visit, not a protocol in a box.</p>
+          </SectionIntro>
+          <ul className="mt-10 grid gap-5 md:grid-cols-2">
+            {questions.map((item) => (
+              <li key={item.title} className="rounded-2xl border-t-4 border-[#F97316] bg-[#1E3A5F]/60 p-6">
+                <h3 className="font-heading text-lg font-bold">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/75">{item.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-            <div className="lg:col-span-2">
-              <CtaCard
-                eyebrow="Functional Medicine"
-                title="Heal at the root"
-                body="Schedule a personalized consultation with Dr. Levitt."
-              />
-            </div>
+      <section className="bg-white py-12 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionIntro eyebrow="Examples" title="Where a wider plan shows up in real complaints">
+            <p>
+              Back pain that returns every Sunday night may be a joint, and
+              it may also be a chair and a sleep position. The{" "}
+              <Link href="/back-pain-treatments" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
+                back pain
+              </Link>{" "}
+              visit owns the mechanical sort. This visit adds the week around
+              it when the mechanical sort is not the whole story.
+            </p>
+            <p>
+              Headaches are another example already on the site: stress,
+              diet, movement, and manipulation can all be discussed. That is
+              not a migraine program, and a sudden severe headache is an
+              emergency. Neck pain itself is on the{" "}
+              <Link href="/neck-pain" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
+                neck pain
+              </Link>
+              .
+            </p>
+            <p>
+              Fibromyalgia, as the conditions notes say, has no single known
+              cause and no cure we can offer. A visit can still look for
+              contributors to the pain and for sleep trouble. It should not
+              be sold as the answer to the syndrome. Sciatica and disc
+              disease stay on their own pages; functional questions are extra,
+              not a replacement exam.
+            </p>
+            <p>
+              Nutrition advice here is ordinary and specific: what you eat,
+              what you skip, and whether a supplement you already bought is
+              doing anything you can notice. We do not publish calorie
+              targets or sell a detox. If you need a dietitian or a medical
+              workup for weight, blood sugar, or gut disease, that referral
+              is part of an honest plan.
+            </p>
+          </SectionIntro>
+        </div>
+      </section>
+
+      <section className="bg-[#F8FAFC] py-12 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionIntro eyebrow="Boundaries" title="What this visit refuses to be">
+            <p>
+              It is not anti-medicine. Alternative medicine uses
+              that same line: non-surgical and non-opioid first, not opposed
+              to physicians. Read{" "}
+              <Link href="/alternative-medicine" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
+                alternative medicine
+              </Link>{" "}
+              if you want the drug-free framing. Stay here if you want the
+              habit and nutrition questions spelled out.
+            </p>
+            <p>
+              It is not a guarantee of lasting results. Older marketing on
+              Some descriptions promise benefits for years or decades. That is a
+              hope, not a finding we can promise. Chronic problems often
+              change slowly, and some do not change with this kind of care.
+            </p>
+            <p>
+              Bring a photo ID, a medication list, and a rough picture of
+              sleep and meals. The address is {siteConfig.address.full}. Call{" "}
+              {siteConfig.phone} or book a{" "}
+              <Link href="/contact/new-patient-appointment" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
+                new-patient appointment
+              </Link>
+              . Dr. Levitt has practiced since 1987 and at this office since
+              1999.
+            </p>
+          </SectionIntro>
+        </div>
+      </section>
+
+      <section className="bg-[#0F172A] py-20 text-white sm:py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-5">
+          <div className="lg:col-span-3">
+            <SectionIntro dark eyebrow="Afterward" title="The plan should fit a week you actually have">
+              <p>
+                You should leave knowing which part is structural, which part
+                is a habit, and which part needs another clinician. Two
+                changes you can keep are better than a binder. If nothing in
+                the exam or the habits is moving after a fair trial, we stop
+                pretending the next month will be different and we refer.
+              </p>
+            </SectionIntro>
+          </div>
+          <div className="lg:col-span-2">
+            <CtaCard
+              eyebrow="Functional medicine"
+              title="Start with the wider history"
+              body="Bring your medication list. We will not take you off anything a physician prescribed."
+            />
           </div>
         </div>
       </section>
 
+      <section className="bg-white py-12 sm:py-20">
+        <div className="mx-auto max-w-3xl px-6 space-y-4 text-base leading-relaxed text-slate-700">
+          <h2 className="font-heading text-3xl font-bold text-[#0F172A]">A week of notes that is actually usable</h2>
+          <p>
+            If sleep is part of the story, write down the hour you get in bed
+            and the hour you give up, for a few nights. Do not produce a
+            perfect diary. A pattern of waking at 3 a.m. with a stiff back is
+            different from a pattern of never getting horizontal before
+            midnight. Those two nights suggest different next steps, and
+            neither one is a supplement.
+          </p>
+          <p>
+            Food notes can be equally plain. What you ate on the day the pain
+            spiked, and whether you skipped meals, is enough to start. We are
+            not scoring macros. A person who is dizzy because they do not eat
+            before a morning visit does not need a protocol. They need
+            breakfast and a clearer exam. Gut disease, unexplained weight
+            change, and blood in the stool are physician problems we will
+            name as such.
+          </p>
+          <p>
+            Movement notes belong here too, but the exercises themselves are
+            written with the exercises so this visit does not become a
+            workout sheet. “I sit nine hours and walk to the printer” is a
+            functional finding. The response might be a walking break. It
+            might be a chair change. It might be irrelevant if the exam shows
+            a disc with a true nerve deficit. The wider history loses when it
+            competes with a dangerous finding.
+          </p>
+          <p>
+            Bring the bottles you already own if you want them looked at.
+            We will not add a stack of new ones to look thorough. If a
+            product is interacting with a prescription, that question goes
+            back to the prescriber.             Our role is not to referee the pharmacy.
+          </p>
+          <p>
+            Bring a short list of questions you actually want answered, not a
+            printout of a forum thread. “Should I change breakfast, or is the
+            back the whole story?” is a usable question. “Can you balance my
+            hormones?” is not a service we advertise, and we will not pretend
+            a spinal visit does that. If the honest answer is a referral to
+            primary care, you should hear it in the first visit rather than
+            after a month of vague advice. Write down what we agreed to try
+            and what we agreed not to touch. That note is the plan.
+          </p>
+        </div>
+      </section>
+
+      <FaqBlock
+        id="ld-faq-functional"
+        eyebrow="Questions"
+        title="Questions about functional medicine"
+        intro="Plain answers about what this office does and does not add to chiropractic care."
+        faqs={faqs}
+      />
+
+      <RelatedCare
+        eyebrow="Goes with"
+        title="Structural pages this visit does not replace"
+        intro="The painful condition is explained with that condition. Sleep, food, and daily habits are explained here."
+        links={[
+          { href: "/adjustments-and-manipulation", label: "Adjustments", note: "Still the structural tool when a joint is restricted." },
+          { href: "/back-pain-treatments", label: "Back pain and sciatica", note: "The mechanical sort for the low back and the leg." },
+          { href: "/degenerative-disc-disease", label: "Disc disease", note: "Imaging and nerve findings live here." },
+          { href: "/therapeutic-exercise", label: "Exercise", note: "The movement piece of a habit plan." },
+          { href: "/alternative-medicine", label: "Alternative medicine", note: "The drug-free framing, written separately so the two pages do not repeat." },
+          { href: "/meet-the-doctor", label: "Dr. Alan Levitt", note: "Training and the chemical, nutritional, and structural frame." },
+        ]}
+      />
       <LocationStrip />
     </>
   );

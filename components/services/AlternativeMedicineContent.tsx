@@ -1,358 +1,263 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
+import { FaqBlock, RelatedCare, SectionIntro } from "@/components/services/enrichment";
 
-const techniques = ["Acupuncture", "Chiropractic Care", "Functional Medicine"];
-
-const conditions = [
-  "Back pain",
-  "Neck pain",
-  "Migraines",
-  "Headaches",
-  "Pinched nerves",
-  "Herniated discs",
-  "Digestive issues",
+const means = [
+  { title: "Hands-on structural care", body: "Adjustments and soft-tissue work when the exam finds a joint or muscle problem. “Alternative” does not skip the exam." },
+  { title: "Non-drug first, not anti-drug", body: "The office prefers to start without opioids or surgery when the problem is mechanical. It does not ask you to abandon medicine or a prescription." },
+  { title: "Habits you can actually keep", body: "Sleep, walking, and the short exercise list. The unglamorous part is the part that changes a month, if anything does." },
+  { title: "A referral when the story is medical", body: "Infection, cancer treatment, a psychiatric crisis, and chest pain are not alternative-medicine cases. We collaborate with the clinician who owns those." },
 ];
 
-const benefits = [
+const faqs = [
   {
-    title: "Care for Many Different Issues",
-    body: "Alternative medicine can treat various symptoms and conditions from back and neck pain to migraines, pinched nerves, herniated discs, digestive issues, and much more.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <path d="M12 2v20M2 12h20" />
-      </svg>
-    ),
+    q: "What does alternative medicine mean at this office?",
+    a: "Drug-free, non-surgical chiropractic care, plus the habit and nutrition conversations Dr. Levitt already uses. It does not mean untested remedies, and it does not mean you should avoid physicians.",
   },
   {
-    title: "It’s Personalized",
-    body: "Care is customized to the individual. Two people experiencing the same issue rarely got there the same way your plan reflects that.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <circle cx="12" cy="8" r="4" />
-        <path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
-      </svg>
-    ),
+    q: "How is this different from functional medicine?",
+    a: "Functional medicine is the wider history: sleep, food, and what you already take. Alternative medicine is the stance: try the non-operative, non-opioid options first when the exam supports them. Many visits use both ideas. They are not the same conversation twice.",
   },
   {
-    title: "It Focuses on Natural Healing",
-    body: "Removing restrictions through adjustments and soft-tissue therapies, fueling the body through nutritional guidance, and building healthy habits.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <path d="M12 2c3 5 3 9 0 14-3-5-3-9 0-14z" />
-        <path d="M5 22c5-1 9-4 14-9" />
-      </svg>
-    ),
+    q: "Can this replace my medical treatment?",
+    a: "No. It can sit beside it. Do not stop a prescribed drug because you booked here. Emergency symptoms, cancer care, and mental-health crises stay with those clinicians.",
+  },
+  {
+    q: "Which complaints are a reasonable fit?",
+    a: "Mechanical pain in the neck, back, and joints, and people who want that pain approached without leading with medication or surgery. Headaches that the exam ties to the neck can be discussed. We do not promise results, and we do not treat the word “natural” as evidence.",
+  },
+  {
+    q: "Where do I book?",
+    a: "Call 952-920-7535 or use the new-patient form. The office is at 6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416. The first visit is an exam, the same standard as every other service.",
   },
 ];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
 
 export default function AlternativeMedicineContent() {
   return (
     <>
       <ServiceHero
         title="Alternative Medicine"
-        subtitle="Looking for effective and natural relief? Dr. Alan Levitt is the alternative medicine doctor you can trust."
+        subtitle="Non-surgical, non-opioid chiropractic care first, when the exam says that is safe. Not a rejection of medicine."
         crumbs={[
           { label: "Home", href: "/" },
-          { label: "Services" },
+          { label: "Services", href: "/services" },
           { label: "Alternative Medicine" },
         ]}
       />
 
-      {/* SECTION 2 WHITE: WHAT IS / WHY VISIT */}
-      <section className="relative bg-white py-12 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-12 lg:grid-cols-12">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.25 }}
-              className="lg:col-span-7"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                What Is Alternative Medicine?
-              </p>
-              <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Methods that lie outside the mainstream
-              </h2>
-              <span
-                aria-hidden
-                className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-              />
-              <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Alternative medicine is a term used to describe methods and
-                techniques that lie outside the standard or mainstream medical
-                methods. Though the type of techniques used depends on the
-                provider you visit, some examples include:
-              </p>
-
-              <motion.ul
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={{
-                  hidden: {},
-                  show: { transition: { staggerChildren: 0.08 } },
-                }}
-                className="mt-6 flex flex-wrap gap-2.5"
-              >
-                {techniques.map((t) => (
-                  <motion.li
-                    key={t}
-                    variants={{
-                      hidden: { opacity: 0, y: 12 },
-                      show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-                    }}
-                    className="inline-flex items-center gap-2 rounded-full border border-[#F97316]/30 bg-[#F97316]/8 px-4 py-2 text-sm font-semibold text-[#0F172A]"
-                  >
-                    <span
-                      aria-hidden
-                      className="h-1.5 w-1.5 rounded-full bg-[#F97316]"
-                    />
-                    {t}
-                  </motion.li>
-                ))}
-              </motion.ul>
-            </motion.div>
-
-            <motion.aside
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.25 }}
-              className="lg:col-span-5"
-            >
-              <div className="relative overflow-hidden rounded-2xl border-t-4 border-[#F97316] bg-[#0F172A] p-7 text-white shadow-xl ring-1 ring-white/10">
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#F97316]/15 blur-2xl"
-                />
-                <p className="relative text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-300">
-                  Why Visit an Alternative Medicine Provider?
-                </p>
-                <p className="relative mt-4 text-sm leading-relaxed text-white/80">
-                  Standard care tends to focus on relieving your symptoms.
-                  That isn’t the issue the issue is that the symptoms are
-                  the main, and usually only, focus. This leaves the root
-                  cause free to bring those symptoms back.
-                </p>
-                <p className="relative mt-3 text-sm leading-relaxed text-white/80">
-                  The two main methods for treating symptoms are medication
-                  and surgery. Sometimes these are necessary, but not as
-                  often as they are prescribed and they can leave patients
-                  relying on substances or living with the aftereffects of
-                  procedures.
-                </p>
-                <p className="relative mt-3 text-sm font-semibold leading-relaxed text-orange-200">
-                  Alternative medicine is much different. It focuses on
-                  healing from the root cause using methods that enable the
-                  body to heal itself.
-                </p>
-              </div>
-            </motion.aside>
-          </div>
+      <section className="bg-white py-12 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionIntro eyebrow="The label" title="Alternative, in this building, is a sequence">
+            <p>
+              The word is doing too much work on the internet. Here it means
+              Dr. Alan Levitt starts with hands-on chiropractic care and with
+              habits, and he does not lead with drugs or an operation when
+              the problem is mechanical. He has practiced since 1987. The
+              Saint Louis Park office, {siteConfig.address.full}, has been
+              his location since 1999.
+            </p>
+            <p>
+              It does not mean secret cures, detox kits, or a request that
+              you distrust your physician. The functional-medicine notes say
+              the same thing in the other direction: complementary, not a
+              replacement. If you want the sleep-and-nutrition interview
+              spelled out, use{" "}
+              <Link href="/functional-medicine" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
+                functional medicine
+              </Link>
+              . Ask here if you want to know whether a non-operative
+              start is even appropriate.
+            </p>
+          </SectionIntro>
         </div>
       </section>
 
-      {/* SECTION 3 DARK NAVY: BENEFITS */}
-      <section className="relative overflow-hidden bg-[#0F172A] py-20 text-white sm:py-24">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-32 top-20 -z-10 h-96 w-96 rounded-full bg-[#F97316]/10 blur-[140px]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 bottom-10 -z-10 h-96 w-96 rounded-full bg-[#1E3A5F]/60 blur-[140px]"
-        />
-
-        <div className="relative mx-auto max-w-7xl px-6">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mx-auto max-w-2xl text-center"
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              The Benefits
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              What alternative medicine can do
-            </h2>
-            <span
-              aria-hidden
-              className="mx-auto mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-            />
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={{
-              hidden: {},
-              show: { transition: { staggerChildren: 0.12 } },
-            }}
-            className="mt-8 sm:mt-14 grid gap-6 lg:grid-cols-3 lg:gap-8"
-          >
-            {benefits.map((b, i) => (
-              <motion.div
-                key={b.title}
-                variants={{
-                  hidden: { opacity: 0, y: 28 },
-                  show: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-                  },
-                }}
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.2 }}
-                className="group relative overflow-hidden rounded-2xl border-t-4 border-[#F97316] bg-[#1E3A5F]/60 p-7 ring-1 ring-white/10 backdrop-blur-sm"
-              >
-                <span
-                  aria-hidden
-                  className="absolute right-5 top-5 font-heading text-4xl font-black text-white/[0.06]"
-                >
-                  0{i + 1}
-                </span>
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#F97316]/15 text-[#F97316] ring-1 ring-[#F97316]/30">
-                  {b.icon}
-                </span>
-                <h3 className="mt-5 font-heading text-lg font-bold text-white">
-                  {b.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/75">
-                  {b.body}
-                </p>
-              </motion.div>
+      <section className="bg-[#0F172A] py-20 text-white sm:py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionIntro dark center eyebrow="What you actually get" title="Four parts, all ordinary">
+            <p>Nothing on this list is a product line.</p>
+          </SectionIntro>
+          <ul className="mt-10 grid gap-5 md:grid-cols-2">
+            {means.map((item) => (
+              <li key={item.title} className="rounded-2xl border-t-4 border-[#F97316] bg-[#1E3A5F]/60 p-6">
+                <h3 className="font-heading text-lg font-bold">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/75">{item.body}</p>
+              </li>
             ))}
-          </motion.div>
-
-          {/* Conditions strip */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mt-14 rounded-2xl bg-white/[0.03] p-7 ring-1 ring-white/10"
-          >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-300">
-              Commonly Treated
-            </p>
-            <ul className="mt-4 flex flex-wrap gap-2.5">
-              {conditions.map((c) => (
-                <li
-                  key={c}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-3.5 py-1.5 text-sm text-white/85"
-                >
-                  <span
-                    aria-hidden
-                    className="h-1.5 w-1.5 rounded-full bg-[#F97316]"
-                  />
-                  {c}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+          </ul>
         </div>
       </section>
 
-      {/* SECTION 4 WHITE: CLOSING + CTA */}
-      <section className="relative bg-white py-12 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-12 lg:grid-cols-5 lg:items-start">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              className="lg:col-span-3"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Get Started
-              </p>
-              <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Visit your alternative medicine doctor
-              </h2>
-              <span
-                aria-hidden
-                className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-              />
-              <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Learn more by visiting Dr. Levitt at Levitt Chiropractic
-                Center in Saint Louis Park, MN. Call{" "}
-                <a
-                  href={siteConfig.phoneHref}
-                  className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
-                >
-                  {siteConfig.phone}
-                </a>{" "}
-                or{" "}
-                <Link
-                  href="/contact"
-                  className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
-                >
-                  schedule online
-                </Link>{" "}
-                today.
-              </p>
-            </motion.div>
+      <section className="bg-white py-12 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionIntro eyebrow="A reasonable fit" title="Mechanical pain, examined, then a non-operative option if it fits">
+            <p>
+              Neck pain, back pain, joint pain, and headaches that start in
+              the neck are the complaints that belong in a conversation about
+              starting here. More detail is under{" "}
+              <Link href="/neck-pain" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">neck</Link>,{" "}
+              <Link href="/back-pain-treatments" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">back</Link>,{" "}
+              <Link href="/adjustments-and-manipulation" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">adjustments</Link>.
+              Soft-tissue work and exercise are part of that world. So is
+              laser or ice when the tissue is the issue. Those are services
+              with their own explanations, not synonyms for “alternative.”
+            </p>
+            <p>
+              Digestion, allergies, and a long list of other symptoms are
+              sometimes grouped with “natural” care as if adjustments,
+              nutrition, and habits were one method for all of them. That is
+              broader than we will claim. Digestion, allergies, and similar
+              medical problems need the clinician who manages them. We can
+              still look at the spine if you also have mechanical pain. We
+              will not tell you the spine visit treated the other disease.
+            </p>
+            <p>
+              Stress-related muscle guarding is fair game because it shows up
+              in the exam as muscle and joint stiffness. A mental-health
+              crisis is not. Please use emergency or psychiatric care for
+              that, and do not wait on a chiropractic opening.
+            </p>
+          </SectionIntro>
+        </div>
+      </section>
 
-            <div className="lg:col-span-2">
-              <CtaCard
-                eyebrow="Natural Healing"
-                title="Try a different approach"
-                body="Schedule your alternative medicine consultation."
-              />
-            </div>
+      <section className="bg-[#F8FAFC] py-12 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionIntro eyebrow="The visit" title="Same clinical bar as the rest of the practice">
+            <p>
+              Paperwork, history, exam, and a plan you can repeat. X-rays
+              only if they would change the plan. You hear what we think is
+              mechanical, what we are not willing to call mechanical, and
+              which tool is actually on the table. If the answer is “see
+              your physician first,” that is a complete visit.
+            </p>
+            <p>
+              Bring a medication list. We will not edit it. Bring prior
+              records if the story is long. Wear clothes you can move in.
+              Call {siteConfig.phone} or{" "}
+              <Link href="/contact/new-patient-appointment" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
+                request a new-patient visit
+              </Link>
+              . There is no package and no price listed in advance.
+            </p>
+            <p>
+              Expectations stay modest. Some mechanical problems become more
+              comfortable. Some do not, and the useful response is to change
+              the plan or the clinician. “Natural” is a description of the
+              tools. It is not evidence, and it is not a timeline. The first
+              visit is still an exam, and the plan is only the care that exam
+              supports.
+            </p>
+          </SectionIntro>
+        </div>
+      </section>
+
+      <section className="bg-[#0F172A] py-20 text-white sm:py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-5">
+          <div className="lg:col-span-3">
+            <SectionIntro dark eyebrow="A line we keep" title="Collaborate. Do not compete with your internist.">
+              <p>
+                Most people who come here keep a primary clinician. That is
+                the intended setup. If two offices are giving you opposite
+                instructions about a drug or a surgery, ask them to talk, or
+                pick the clinician whose license covers that decision. We
+                will not quietly overrule a surgeon or a prescriber.
+              </p>
+            </SectionIntro>
+          </div>
+          <div className="lg:col-span-2">
+            <CtaCard
+              eyebrow="Alternative care"
+              title="Start with an exam"
+              body="We will tell you if a non-operative start is even the right first step."
+            />
           </div>
         </div>
       </section>
 
+      <section className="bg-white py-12 sm:py-20">
+        <div className="mx-auto max-w-3xl px-6 space-y-4 text-base leading-relaxed text-slate-700">
+          <h2 className="font-heading text-3xl font-bold text-[#0F172A]">What a month of this approach can look like</h2>
+          <p>
+            Week one is the exam and, if it is safe, the first structural
+            visit. You leave with one or two changes, not a new identity.
+            Week two asks whether those changes were possible in a real
+            schedule. If the exercise did not happen because it required a
+            gym you do not have, the exercise was wrong. If the neck is
+            worse, we do not congratulate you for “detoxing.” We retest.
+          </p>
+          <p>
+            Later weeks are allowed to get boring. Boring is a sign the plan
+            fits. A plan that needs a new supplement, a new device, and a new
+            explanation every visit is not more alternative. It is less
+            accountable. We would rather repeat a small set that is changing
+            the exam than refresh the menu.
+          </p>
+          <p>
+            Your physician’s month continues in parallel. Labs they ordered,
+            drugs they manage, and referrals they made are not paused because
+            you like the way a visit feels here. If our advice would collide
+            with theirs, we stop and we sort it. Collision is a reason to
+            talk, not a reason for you to pick the advice you prefer.
+          </p>
+          <p>
+            People sometimes ask for this kind of care because they are tired of being
+            told to take something. Tired is understandable. It is not a
+            diagnosis. If the exam is mechanical, we proceed. If the exam is
+            not, we will disappoint you on purpose rather than invent a
+            natural explanation for a medical problem.
+          </p>
+          <p>
+            Friends will offer remedies with more confidence than we
+            will. A tea, a magnet, a cleanse, or a spine “reset” you saw in a
+            video is not automatically part of care here because it is
+            natural. If we do not use it, we will say we do not use it. You
+            can still choose it on your own. You should not expect us to
+            build the chart around it or to defend it to your physician.
+            The work we will defend is the exam, the joint contact when it
+            is indicated, and the small habit changes you agreed to try.
+          </p>
+          <p>
+            If you are comparing offices, compare the limits they will say
+            out loud. An office that will not name a red flag, a referral, or
+            a problem it does not treat is not more open-minded. It is less
+            specific.             Specific is the standard on the rest of these service
+            pages, and it is the standard here too. Bring the name of any
+            approach you want us to react to. A clear “we don’t do that” is
+            more useful than a vague nod. You will still get the exam. The
+            exam is the part that does not depend on the label you arrived
+            with.
+          </p>
+        </div>
+      </section>
+
+      <FaqBlock
+        id="ld-faq-alternative"
+        eyebrow="Questions"
+        title="Questions about alternative medicine here"
+        intro="Definitions and limits. The tone is the same as the rest of the service pages."
+        faqs={faqs}
+      />
+
+      <RelatedCare
+        eyebrow="The actual services"
+        title="“Alternative” points at these pages"
+        intro="Book the service that matches the problem once you know which one it is."
+        links={[
+          { href: "/functional-medicine", label: "Functional medicine", note: "Sleep, food, and medications you already take." },
+          { href: "/adjustments-and-manipulation", label: "Adjustments", note: "The hands-on structural visit." },
+          { href: "/therapeutic-exercise", label: "Exercise", note: "The habit that is specific enough to repeat." },
+          { href: "/cold-laser-therapy", label: "Cold laser", note: "A non-drug option for some soft-tissue pain." },
+          { href: "/common-chiropractic-conditions", label: "Other conditions", note: "A guide if you are not sure which pain you have." },
+          { href: "/meet-the-doctor", label: "Meet Dr. Levitt", note: "Training and how he frames chemical, nutritional, and structural care." },
+        ]}
+      />
       <LocationStrip />
     </>
   );

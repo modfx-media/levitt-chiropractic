@@ -1,494 +1,308 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
-import { LocalPracticeLinks } from "@/components/seo/LocalPracticeLinks";
+import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
+import { ServiceHero } from "@/components/services/ServiceHero";
+import {
+  FaqBlock,
+  RelatedCare,
+  SectionIntro,
+} from "@/components/services/enrichment";
 
-const conditions = [
+const uses = [
   "Acute and chronic pain",
-  "Ligament sprains",
-  "Muscle strain",
-  "Soft tissue injuries",
-  "Tendonitis",
-  "Arthritis",
-  "Tennis elbow",
+  "Ligament sprains and muscle strain",
+  "Soft-tissue injuries",
+  "Tendonitis and tennis elbow",
+  "Arthritis and bursitis",
   "Back pain",
-  "Bursitis",
   "Carpal tunnel syndrome",
   "Fibromyalgia",
-  "Wound healing",
+  "Wound healing, as an adjunct, not a substitute for medical wound care",
 ];
 
-const advantages = [
+const faqs = [
   {
-    title: "No surgery",
-    body: "Non-invasive the device sits over the skin without any incision.",
+    q: "What is cold laser therapy?",
+    a: "It is a low-level light treatment. The device is handheld, about the size of a flashlight, and the doctor holds it on the skin over the irritated area. A session on one region runs from 30 seconds to several minutes, depending on the area and the dose the unit delivers. It is not a heat lamp and not a surgical laser.",
   },
   {
-    title: "No drugs",
-    body: "Drug-free pain relief that supports the body’s natural healing response.",
+    q: "Does cold laser therapy hurt or burn?",
+    a: "It is non-invasive, with no incision and no drug in the device. The intensity raises tissue temperature only minimally, on the order of 0.1 to 0.5 degrees Celsius if the skin warms at all. Most people feel little or nothing while it is on. Tell us if the skin is uncomfortable.",
   },
   {
-    title: "Minimal heat",
-    body: "Uses radiation intensities that induce minimal temperature elevation (0.1–0.5°C, if any).",
+    q: "Can I book cold laser therapy by itself?",
+    a: "It is one option inside a plan, after an exam. It is not a walk-in light treatment and it does not replace a history. If the exam says the problem is not something light can reasonably affect, we will not add it to fill the visit.",
+  },
+  {
+    q: "How many cold laser sessions are typical?",
+    a: "We do not quote a number before we see you. A recent strain and a long-standing tendon problem are not the same plan. If the findings are not changing, laser stops. There is no promise that a set of sessions will clear the pain.",
+  },
+  {
+    q: "Who should not start with laser?",
+    a: "Laser is not a clearance for a red-flag illness: unexplained weight loss, night pain that never changes, fever, a known cancer in the area being treated, or an eye problem under the beam. Those need a physician. We also do not aim the device at the eyes.",
   },
 ];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
 
 export default function ColdLaserTherapyContent() {
-  const reduce = useReducedMotion();
-
   return (
     <>
-      {/* SECTION 1 NARROW DARK NAVY HERO (45vh) */}
-      <section
-        className="relative isolate flex items-center overflow-hidden bg-[#0F172A] text-white min-h-[38vh] sm:min-h-[45vh]"
-      >
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(249,115,22,0.6) 1px, transparent 1px), linear-gradient(to bottom, rgba(249,115,22,0.6) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
-        <motion.div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 top-0 -z-10 h-96 w-96 rounded-full bg-[#F97316]/15 blur-[140px]"
-          animate={reduce ? undefined : { y: [0, 22, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-32 bottom-0 -z-10 h-96 w-96 rounded-full bg-[#1E3A5F]/60 blur-[140px]"
-        />
+      <ServiceHero
+        title="Cold Laser Therapy"
+        subtitle="A handheld, low-level light used on the skin after an exam. No incision, no drug in the device, and no meaningful heat."
+        crumbs={[
+          { label: "Home", href: "/" },
+          { label: "Services", href: "/services" },
+          { label: "Cold Laser Therapy" },
+        ]}
+      />
 
-        <div className="relative mx-auto w-full max-w-7xl px-5 pt-24 pb-10 sm:px-6 sm:pt-28 sm:pb-12 lg:pt-32">
-          <motion.nav
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            aria-label="Breadcrumb"
-            className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-400"
+      <section className="bg-white py-12 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionIntro
+            eyebrow="The device"
+            title="Cold laser therapy is light on the skin, for a short time"
           >
-            <Link href="/" className="transition-colors hover:text-orange-300">
-              Home
-            </Link>{" "}
-            <span className="text-white/30">/</span>{" "}
-            <span className="text-white/55">Services</span>{" "}
-            <span className="text-white/30">/</span>{" "}
-            <span className="text-orange-200">Cold Laser Therapy</span>
-          </motion.nav>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-4 font-heading text-3xl font-black leading-[1.1] tracking-tight sm:mt-5 sm:text-4xl sm:leading-[1.05] md:text-5xl lg:text-[3.6rem]"
-          >
-            Cold Laser Therapy
-          </motion.h1>
-
-          <motion.span
-            aria-hidden
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            style={{ transformOrigin: "left" }}
-            className="mt-4 block h-1 w-20 rounded-full bg-[#F97316]"
-          />
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.32 }}
-            className="mt-5 max-w-2xl text-base text-white/70 sm:text-lg"
-          >
-            Low-level laser therapy for drug-free pain relief no surgery, no
-            medication, just focused light that accelerates healing.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* SECTION 2 WHITE: SPLIT visual badge + intro paragraph */}
-      <section className="relative bg-white py-12 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid items-center gap-12 lg:grid-cols-12">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.25 }}
-              className="lg:col-span-5"
-            >
-              <div className="relative mx-auto h-72 w-72 sm:h-80 sm:w-80">
-                <div
-                  aria-hidden
-                  className="absolute inset-0 -z-10 rounded-full bg-[#F97316]/15 blur-2xl"
-                />
-                <motion.div
-                  animate={
-                    reduce
-                      ? undefined
-                      : { opacity: [0.35, 1, 0.35], scale: [1, 1.04, 1] }
-                  }
-                  transition={{
-                    duration: 3.4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="absolute inset-0 grid place-items-center rounded-full border border-[#F97316]/30 bg-[#0F172A] shadow-2xl ring-1 ring-white/10"
-                >
-                  <motion.span
-                    aria-hidden
-                    animate={
-                      reduce
-                        ? undefined
-                        : { scale: [1, 1.25, 1], opacity: [0.6, 0, 0.6] }
-                    }
-                    transition={{
-                      duration: 3.4,
-                      repeat: Infinity,
-                      ease: "easeOut",
-                    }}
-                    className="absolute inset-0 rounded-full border border-[#F97316]/40"
-                  />
-                  <div className="relative text-center">
-                    <p className="font-heading text-6xl font-black text-[#F97316] drop-shadow-[0_0_24px_rgba(249,115,22,0.55)]">
-                      ✦
-                    </p>
-                    <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/65">
-                      Low Level Laser
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.25 }}
-              className="lg:col-span-7"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                The Treatment
-              </p>
-              <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                What is Cold Laser Therapy?
-              </h2>
-              <span
-                aria-hidden
-                className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-              />
-              <div className="mt-6 space-y-5 text-base leading-relaxed text-slate-700 sm:text-lg">
-                <p>
-                  Cold laser therapy, also known as low level laser therapy, is
-                  a treatment that utilizes specific wavelengths of light to
-                  interact with tissue and is known to accelerate the healing
-                  process of a variety of clinical conditions. By definition,
-                  this type of therapy uses radiation intensities that induce
-                  minimal temperature elevation (not more than 0.1 to 0.5
-                  degrees Celsius), if any. Low­-energy lasers have been
-                  promoted as an effective way to produce pain relief.
-                </p>
-              </div>
-              <LocalPracticeLinks topic="cold-laser" />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 3 DARK NAVY: CONDITIONS GRID (stagger) */}
-      <section className="relative overflow-hidden bg-[#0F172A] py-20 text-white sm:py-24">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-32 top-20 -z-10 h-96 w-96 rounded-full bg-[#F97316]/10 blur-[140px]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 bottom-10 -z-10 h-96 w-96 rounded-full bg-[#1E3A5F]/60 blur-[140px]"
-        />
-
-        <div className="relative mx-auto max-w-6xl px-6">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mx-auto max-w-2xl text-center"
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              Commonly Treats
+            <p>
+              Cold lasers at this office are handheld. Dr. Levitt places the
+              unit directly over the area being treated. The time is 30
+              seconds to several minutes. The clock depends on how large the
+              region is and on the dose that unit is set to deliver. You stay
+              dressed except where the skin has to be reached. There is no
+              incision.
             </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              Cold laser therapy is widely used for treatment of:
-            </h2>
-            <span
-              aria-hidden
-              className="mx-auto mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-            />
-          </motion.div>
+            <p>
+              “Cold” means the beam is not trying to cut or to cook tissue.
+              The practical difference is minimal temperature change:
+              about 0.1 to 0.5 degrees Celsius if the skin warms at all. If
+              you came in expecting a hot lamp or a surgical laser, this is
+              a different tool. Cold laser therapy also does not put a
+              medication through the skin.
+            </p>
+            <p>
+              It sits beside the other care already offered here, not in
+              front of the exam. Adjustments, targeted ice, exercise, and
+              orthotics are separate decisions. Laser is added when the
+              finding is something a light stimulus might reasonably calm,
+              such as a stubborn tendon or a sore spinal region, and it is
+              dropped when repeat checks show no change.
+            </p>
+          </SectionIntro>
+        </div>
+      </section>
 
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={{
-              hidden: {},
-              show: {
-                transition: { delayChildren: 0.1, staggerChildren: 0.04 },
-              },
-            }}
-            className="mt-8 sm:mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3"
+      <section className="bg-[#0F172A] py-20 text-white sm:py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionIntro
+            dark
+            center
+            eyebrow="Where it is used"
+            title="Problems cold laser therapy may be considered for"
           >
-            {conditions.map((c) => (
-              <motion.div
-                key={c}
-                variants={{
-                  hidden: { opacity: 0, y: 18 },
-                  show: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
-                  },
-                }}
-                whileHover={{
-                  borderColor: "rgba(249,115,22,0.55)",
-                  y: -3,
-                }}
-                transition={{ duration: 0.2 }}
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-[#1E3A5F]/60 px-5 py-4 text-sm font-semibold text-white/90 ring-1 ring-white/5 backdrop-blur-sm sm:text-base"
+            <p>
+              The list is the one this office publishes. It is not a claim
+              that light fixes each of them.
+            </p>
+          </SectionIntro>
+          <ul className="mx-auto mt-10 grid max-w-4xl gap-3 sm:grid-cols-2">
+            {uses.map((item) => (
+              <li
+                key={item}
+                className="rounded-xl border border-white/10 bg-[#1E3A5F]/60 px-4 py-3 text-sm text-white/85"
               >
-                <span
-                  aria-hidden
-                  className="grid h-6 w-6 flex-shrink-0 place-items-center rounded-full bg-[#F97316]/15 text-[#F97316] ring-1 ring-[#F97316]/40"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="h-3.5 w-3.5"
-                    aria-hidden
-                  >
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                </span>
-                <span>{c}</span>
-              </motion.div>
+                {item}
+              </li>
             ))}
-          </motion.div>
+          </ul>
+          <p className="mx-auto mt-8 max-w-3xl text-base leading-relaxed text-white/75">
+            Back pain is a larger problem, because laser is only one piece of
+            that plan. Carpal tunnel, tennis elbow, bursitis, and tendonitis
+            are local tendon and joint problems the exam has to confirm.
+            Arthritis here means the joint wear people already know they
+            have, not a promise to rebuild cartilage. Fibromyalgia is a
+            widespread pain problem without a single known cause on our
+            conditions notes. Laser does not become the treatment for it by
+            default. Wound healing, if it is discussed at all, is an adjunct.
+            Open, infected, or surgical wounds belong with the clinician
+            managing the wound.
+          </p>
         </div>
       </section>
 
-      {/* SECTION 4 WHITE: HOW IT WORKS + ADVANTAGE CARDS */}
-      <section className="relative bg-white py-12 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-start">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              className="lg:col-span-6"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                How It Works
-              </p>
-              <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                A simple, in-office treatment
-              </h2>
-              <span
-                aria-hidden
-                className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-              />
-              <div className="mt-6 space-y-5 text-base leading-relaxed text-slate-700 sm:text-lg">
-                <p>
-                  Cold lasers are handheld devices used by the doctor and are
-                  typically the size of a flashlight. The laser is placed
-                  directly over the injured area for 30 seconds to several
-                  minutes, depending on the size of the area being treated and
-                  the dose provided by the cold laser unit.
-                </p>
-                <p>
-                  Cold laser therapy is one option among a variety of treatment
-                  approaches that can potentially alleviate pain symptoms
-                  without the use of surgery or drugs.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={{
-                hidden: {},
-                show: { transition: { staggerChildren: 0.12 } },
-              }}
-              className="space-y-4 lg:col-span-6"
-            >
-              {advantages.map((a, i) => (
-                <motion.article
-                  key={a.title}
-                  variants={{
-                    hidden: { opacity: 0, y: 22 },
-                    show: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-                    },
-                  }}
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.2 }}
-                  className="group relative overflow-hidden rounded-2xl border-t-4 border-[#F97316] bg-[#0F172A] p-7 shadow-xl shadow-slate-900/10"
-                >
-                  <span
-                    aria-hidden
-                    className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[#F97316]/10 blur-2xl"
-                  />
-                  <span
-                    aria-hidden
-                    className="absolute right-5 top-5 font-heading text-4xl font-black text-white/[0.06]"
-                  >
-                    0{i + 1}
-                  </span>
-                  <div className="relative">
-                    <h3 className="font-heading text-lg font-bold text-white">
-                      {a.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-white/75">
-                      {a.body}
-                    </p>
-                  </div>
-                </motion.article>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 5 DARK NAVY: CLOSING + FLOATING CTA */}
-      <section className="relative overflow-hidden bg-[#0F172A] py-20 text-white sm:py-24">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 top-10 -z-10 h-96 w-96 rounded-full bg-[#F97316]/10 blur-[140px]"
-        />
-
-        <div className="relative mx-auto max-w-7xl px-6">
-          <div className="grid gap-12 lg:grid-cols-5 lg:items-start">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              className="lg:col-span-3"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-                Drug-free Relief
-              </p>
-              <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                Healing light. No drugs, no downtime.
-              </h2>
-              <span
-                aria-hidden
-                className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-              />
-              <p className="mt-7 text-base leading-relaxed text-white/75 sm:text-lg">
-                Cold laser is a light stimulus, not a heat lamp and not a
-                surgery. Stubborn tendon or spinal irritation sometimes calms
-                when we add it to the plan. Ask Dr. Levitt whether it fits —
-                then call{" "}
-                <a
-                  href={siteConfig.phoneHref}
-                  className="font-semibold text-orange-300 transition-colors hover:text-orange-200"
-                >
-                  952-920-7535
-                </a>{" "}
-                to learn more.
-              </p>
-            </motion.div>
-
-            <div className="lg:col-span-2">
-              <motion.aside
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.3 }}
-                whileHover={reduce ? undefined : { y: -4 }}
-                transition={{ duration: 0.3 }}
-                className="sticky top-28 overflow-hidden rounded-2xl border-t-4 border-[#F97316] bg-[#1E3A5F] p-8 shadow-2xl ring-1 ring-white/10"
+      <section className="bg-white py-12 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionIntro
+            eyebrow="A visit"
+            title="What actually happens in the room"
+          >
+            <p>
+              The first appointment is still a history and a physical exam.
+              Bring prior notes if another office has them. Dr. Levitt decides
+              whether light belongs in the plan after that, not because you
+              asked for cold laser therapy by name. X-rays are taken only
+              when they would change the plan.
+            </p>
+            <p>
+              If laser is used, you are positioned so the region is easy to
+              reach. The device rests on or just over the skin. You should
+              be able to say if anything feels sharp or too warm. Eye
+              protection and aim matter: the beam is not pointed at the eyes.
+              The visit can also include an adjustment or ice when those fit.
+              It is not a gadget tour.
+            </p>
+            <p>
+              Home care is usually the exercise or the ice instruction, not a
+              laser you take with you. This office does not sell a home laser,
+              and it does not quote a device price. Payment at
+              the desk is cash, check, or card, the same as the rest of the
+              practice. Call {siteConfig.phone} or use the{" "}
+              <Link
+                href="/contact/new-patient-appointment"
+                className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#F97316]/15 blur-2xl"
-                />
-                <div className="relative">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-300">
-                    Take the Next Step
-                  </p>
-                  <h3 className="mt-2 font-heading text-2xl font-bold text-white">
-                    Ready to feel better?
-                  </h3>
-                  <p className="mt-2 text-sm text-white/70">
-                    Schedule a cold laser therapy consultation.
-                  </p>
+                new-patient form
+              </Link>
+              . The office is at {siteConfig.address.full}.
+            </p>
+          </SectionIntro>
+        </div>
+      </section>
 
-                  <div className="mt-6 rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/55">
-                      Call Now
-                    </p>
-                    <a
-                      href={siteConfig.phoneHref}
-                      className="mt-1 block font-heading text-2xl font-black text-orange-400 transition-colors hover:text-orange-300"
-                    >
-                      {siteConfig.phone}
-                    </a>
-                  </div>
+      <section className="bg-[#F8FAFC] py-12 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionIntro
+            eyebrow="Limits"
+            title="What cold laser therapy will not do"
+          >
+            <p>
+              It will not close a fracture, drain an infection, or stand in
+              for a surgeon when a nerve is failing. It will not reverse a
+              herniated disc on an MRI. It is a poor substitute for the
+              emergency department after major trauma. People sometimes hope
+              a painless tool means a painless guarantee. The absence of a
+              burn does not mean the underlying problem has to improve on a
+              schedule.
+            </p>
+            <p>
+              We also do not describe a biochemical pathway, a cell-energy
+              number, or a success rate. Those figures are not
+              in the office’s own description of the device. What is in the
+              description is simple: light, short contact, little or no heat,
+              no drug, no incision, used as one option among others.
+            </p>
+            <p>
+              If you want the mechanical side of a joint problem, start with{" "}
+              <Link
+                href="/adjustments-and-manipulation"
+                className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
+              >
+                adjustments
+              </Link>
+              . If the area is hot and swollen in the first days,{" "}
+              <Link
+                href="/ice-pack-cryotherapy"
+                className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
+              >
+                ice
+              </Link>{" "}
+              is the tool written for that, not laser. Neck pain, back pain,
+              and disc problems have their own pages so this one can stay
+              about the light.
+            </p>
+          </SectionIntro>
+        </div>
+      </section>
 
-                  <motion.div
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    transition={{ type: "spring", stiffness: 320, damping: 20 }}
-                    className="mt-5"
-                  >
-                    <Link
-                      href={siteConfig.appointmentUrl}
-                      className="flex h-12 w-full items-center justify-center rounded-full bg-[#F97316] px-6 text-sm font-bold text-white shadow-md shadow-orange-500/30 transition-colors hover:bg-orange-600"
-                    >
-                      NEW Patient Appointment →
-                    </Link>
-                    <Link
-                      href={siteConfig.existingPatientAppointmentUrl}
-                      className="mt-3 flex h-12 w-full items-center justify-center rounded-full border border-white/25 px-6 text-sm font-bold text-white transition-colors hover:border-[#F97316] hover:text-orange-300"
-                    >
-                      Existing Patient Appointment →
-                    </Link>
-                  </motion.div>
-                </div>
-              </motion.aside>
-            </div>
+      <section className="bg-[#0F172A] py-20 text-white sm:py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-5">
+          <div className="lg:col-span-3">
+            <SectionIntro
+              dark
+              eyebrow="Expectations"
+              title="Stop the light if the exam is standing still"
+            >
+              <p>
+                Some people notice less guarding after a cluster of visits.
+                Some notice nothing, which is useful information. We compare
+                the same movements next time. A tendon that is unchanged
+                after a fair trial does not get an open-ended laser schedule.
+                Activity advice stays specific to the body part. There is no
+                recovery date printed in advance.
+              </p>
+            </SectionIntro>
+          </div>
+          <div className="lg:col-span-2">
+            <CtaCard
+              eyebrow="Cold laser"
+              title="Ask if the light fits"
+              body="The exam comes first. Laser is added only when it matches the finding."
+            />
           </div>
         </div>
       </section>
 
-      {/* SECTION 6 WHITE: LOCATION STRIP */}
+      <section className="bg-white py-12 sm:py-20">
+        <div className="mx-auto max-w-3xl px-6 space-y-4 text-base leading-relaxed text-slate-700">
+          <h2 className="font-heading text-3xl font-bold text-[#0F172A]">The same light, different body regions</h2>
+          <p>
+            An elbow that hurts when you grip a coffee mug is a small target.
+            The contact is short. The test next time is the grip, not a speech
+            about cellular healing. A low back is a larger target, so the
+            minutes run longer, and the test is sitting or bending, which
+            back-pain care already explains. Laser does not become more
+            “advanced” because the area is bigger.
+          </p>
+          <p>
+            Carpal tunnel symptoms need a neck and wrist screen before anyone
+            aims a light at the wrist and calls it done. The median nerve’s
+            story can start higher than the wrist. If the neck reproduces the
+            hand symptoms, neck care is the better focus and laser on the
+            wrist may be irrelevant. Tennis elbow that is actually a neck
+            problem fails the same way.
+          </p>
+          <p>
+            Fibromyalgia is on the published list and is the easiest condition
+            to overtreat with a device. Widespread pain does not mean
+            widespread laser. If we use it, it is on a region that is
+            disproportionately angry, and it stops when that region’s exam
+            does not change. Wound healing stays an adjunct. A wound that is
+            opening, draining, or was just closed in an operating room is
+            managed by the clinician who owns the wound.
+          </p>
+          <p>
+            You can read, or you can talk, during the minutes the device is
+            on. You should not be surprised by heat. If you are, we stop and
+            we check the unit. Sessions are in the treatment room at the
+            Saint Louis Park office, not a course you finish at home with a
+            gadget bought online.
+          </p>
+        </div>
+      </section>
+
+      <FaqBlock
+        id="ld-faq-cold-laser"
+        eyebrow="Questions"
+        title="Questions about cold laser therapy"
+        intro="The answers match the device this office actually uses."
+        faqs={faqs}
+      />
+
+      <RelatedCare
+        eyebrow="Often paired with"
+        title="Pages for the problem, not another copy of this one"
+        intro="Use those pages for the condition. Come back here when the question is the laser itself."
+        links={[
+          { href: "/back-pain-treatments", label: "Back pain", note: "Laser can be one part of a back plan." },
+          { href: "/neck-pain", label: "Neck pain", note: "Stiffness, arm symptoms, and desk-related neck ache." },
+          { href: "/ice-pack-cryotherapy", label: "Ice pack", note: "Cold for a hot, new injury. Different from light." },
+          { href: "/therapeutic-exercise", label: "Exercise", note: "What you do between visits so the session is not the whole plan." },
+          { href: "/adjustments-and-manipulation", label: "Adjustments", note: "The hands-on option laser does not replace." },
+          { href: "/contact/new-patient-appointment", label: "Book a visit", note: "New patients start with an exam, not a laser-only slot." },
+        ]}
+      />
       <LocationStrip />
     </>
   );

@@ -6,10 +6,11 @@ import InjuriesContent from "@/components/services/InjuriesContent";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 
 const fallbackMeta: Metadata = generateMeta({
-  title: "Injury Chiropractor in Saint Louis Park, MN",
+  title: "Sports and Work Injuries",
   description:
-    "Chiropractic injury care in Saint Louis Park, MN from Dr. Alan Levitt auto, work, sports, and personal injuries. Drug-free recovery. Call 952-920-7535.",
+    "Sports, work, and fall injuries in Saint Louis Park. Car crashes and whiplash are on the personal injury page.",
   slug: "injuries",
+  absoluteTitle: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {

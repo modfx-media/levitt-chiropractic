@@ -6,10 +6,11 @@ import TherapeuticExerciseContent from "@/components/services/TherapeuticExercis
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 
 const fallbackMeta: Metadata = generateMeta({
-  title: "Therapeutic Exercise in Saint Louis Park, MN",
+  title: "Therapeutic Exercise",
   description:
-    "Therapeutic exercise from Dr. Alan Levitt in Saint Louis Park, MN endurance, resistance, and flexibility training to restore mobility and strength.",
+    "Therapeutic exercise in Saint Louis Park: endurance, resistance, and flexibility for home. No gym membership required.",
   slug: "therapeutic-exercise",
+  absoluteTitle: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {
