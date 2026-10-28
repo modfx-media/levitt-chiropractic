@@ -236,7 +236,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
         <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-6 px-5 sm:gap-8 sm:px-6 sm:grid-cols-4">
           {[
             { value: 39, suffix: "", label: "Years of Experience" },
-            { value: 1999, prefix: "", suffix: "", label: "Serving Since" },
+            { value: 1999, prefix: "", suffix: "", grouped: false, label: "Serving Since" },
             { value: 6, suffix: "+", label: "Specialty Techniques" },
           ].map((s, i) => (
             <motion.div
@@ -252,6 +252,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                   to={s.value}
                   prefix={s.prefix}
                   suffix={s.suffix}
+                  grouped={s.grouped}
                   duration={1.6}
                 />
               </p>
