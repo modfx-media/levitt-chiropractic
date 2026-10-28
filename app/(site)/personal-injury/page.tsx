@@ -6,10 +6,11 @@ import PersonalInjuryContent from "@/components/services/PersonalInjuryContent";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 
 const fallbackMeta: Metadata = generateMeta({
-  title: "Personal Injury Chiropractor in Saint Louis Park, MN",
+  title: "Personal Injury Chiropractor",
   description:
-    "Personal injury chiropractic care in Saint Louis Park, MN from Dr. Alan Levitt for auto, bike, construction, OSHA and malpractice accident recovery.",
+    "Exam-first chiropractic care in Saint Louis Park after an auto accident, including whiplash. No injury letter without an exam.",
   slug: "personal-injury",
+  absoluteTitle: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -23,7 +24,7 @@ export default function PersonalInjuryPage() {
       <ServiceSchema
         name="Personal Injury Chiropractic Care"
         slug="personal-injury"
-        description="Personal injury chiropractic care in Saint Louis Park, MN. Evaluation and treatment for injuries from auto, bike, construction, OSHA and malpractice incidents."
+        description="Exam-first personal injury chiropractic care in Saint Louis Park after an auto accident, including whiplash and other crash injuries."
       />
       <PersonalInjuryContent />
     </>

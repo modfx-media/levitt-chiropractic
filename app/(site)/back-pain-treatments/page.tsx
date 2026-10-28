@@ -6,10 +6,11 @@ import BackPainTreatmentsContent from "@/components/services/BackPainTreatmentsC
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 
 const fallbackMeta: Metadata = generateMeta({
-  title: "Back Pain Treatments in Saint Louis Park, MN",
+  title: "Back Pain & Sciatica Care",
   description:
-    "Drug-free chiropractic back pain treatments in Saint Louis Park, MN spinal adjustments, cold laser, therapeutic exercise, and soft-tissue care.",
+    "Back pain and sciatica care in Saint Louis Park. Dr. Alan Levitt examines the cause, then uses adjustments, laser, ice, or exercise when they fit.",
   slug: "back-pain-treatments",
+  absoluteTitle: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -23,7 +24,7 @@ export default function BackPainTreatmentsPage() {
       <ServiceSchema
         name="Back Pain Treatments"
         slug="back-pain-treatments"
-        description="Personalized chiropractic back pain treatments in Saint Louis Park, MN spinal adjustments, cold laser therapy, therapeutic exercise and soft-tissue techniques."
+        description="Chiropractic back pain and sciatica care in Saint Louis Park. Exam first, then adjustments, cold laser, ice, or exercise when the findings support them."
       />
       <BackPainTreatmentsContent />
     </>

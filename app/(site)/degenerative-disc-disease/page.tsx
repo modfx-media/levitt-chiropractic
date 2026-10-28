@@ -6,10 +6,11 @@ import DegenerativeDiscDiseaseContent from "@/components/services/DegenerativeDi
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 
 const fallbackMeta: Metadata = generateMeta({
-  title: "Degenerative Disc Disease Treatment in Saint Louis Park, MN",
+  title: "Herniated Disc & Disc Disease",
   description:
-    "Chiropractic care for degenerative disc disease in Saint Louis Park, MN. Dr. Levitt explains symptoms, causes and options for discs and spinal stenosis.",
+    "Degenerative disc disease and herniated disc care in Saint Louis Park. Symptoms, red flags, and conservative options with Dr. Alan Levitt.",
   slug: "degenerative-disc-disease",
+  absoluteTitle: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -23,7 +24,7 @@ export default function DegenerativeDiscDiseasePage() {
       <ServiceSchema
         name="Degenerative Disc Disease Treatment"
         slug="degenerative-disc-disease"
-        description="Chiropractic care for degenerative disc disease in Saint Louis Park, MN evaluation and treatment for herniated discs, spinal stenosis and related conditions."
+        description="Chiropractic care for degenerative disc disease and herniated discs in Saint Louis Park, with red-flag screening and conservative options."
       />
       <DegenerativeDiscDiseaseContent />
     </>
