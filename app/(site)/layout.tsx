@@ -64,10 +64,9 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: [
-      "LoV0krtbUGNKX41xVZWN5M1ATO8zIlP_TtBco4Ty84Y",
-      "DLvWH-jh8pWWIs6rZ553tSyoMUNIMRrBMV5mS8uBK0o",
-    ],
+    // One tag only. A second google-site-verification meta was a duplicate
+    // on the homepage (the other token was DLvWH-jh8pWWIs6rZ553tSyoMUNIMRrBMV5mS8uBK0o).
+    google: "LoV0krtbUGNKX41xVZWN5M1ATO8zIlP_TtBco4Ty84Y",
   },
 };
 

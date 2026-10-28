@@ -91,7 +91,7 @@ export function Footer() {
               >
                 <Image
                   src="/images/fevicon.png"
-                  alt=""
+                  alt="Levitt Chiropractic Center logo"
                   width={48}
                   height={48}
                   className="h-9 w-9 flex-shrink-0 object-contain"

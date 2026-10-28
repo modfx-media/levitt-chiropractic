@@ -89,7 +89,7 @@ function renderBlock(block: BlogBlock, index: number) {
         <figure key={index} className="mt-8">
           <Image
             src={block.src}
-            alt={block.alt}
+            alt={block.alt?.trim() || "Illustration for this article"}
             width={block.width || 1600}
             height={block.height || 900}
             sizes="(min-width: 1024px) 48rem, 100vw"
@@ -304,7 +304,7 @@ export function BlogPostContent({ post, related }: BlogPostContentProps) {
           >
             <Image
               src={post.coverImage}
-              alt={post.coverAlt}
+              alt={post.coverAlt?.trim() || `${post.title} article image`}
               fill
               sizes="(min-width: 1024px) 64rem, 100vw"
               priority

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { LocalPracticeLinks } from "@/components/seo/LocalPracticeLinks";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
@@ -154,6 +155,7 @@ export default function PersonalInjuryContent() {
               auto crash through your own auto policy. We still examine you
               as a patient. Bring ER or urgent-care notes if you have them.
             </p>
+            <LocalPracticeLinks topic="personal-injury" />
           </motion.div>
         </div>
       </section>

@@ -86,7 +86,7 @@ function Logo() {
     >
       <Image
         src="/images/fevicon.png"
-        alt=""
+        alt="Levitt Chiropractic Center logo"
         width={48}
         height={48}
         priority

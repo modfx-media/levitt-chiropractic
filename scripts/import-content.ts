@@ -11,6 +11,7 @@ import { getPayload, type Payload } from "payload";
 import config from "../payload.config.ts";
 import { sitemapEntries } from "../lib/sitemapEntries";
 import { blogPosts } from "../lib/blogPosts";
+import { composeSeoTitle } from "../lib/seoTitle";
 import { siteConfig } from "../lib/siteConfig";
 import { servedCities } from "../lib/areasData";
 import { pseoServices } from "../lib/pseoServices";
@@ -357,7 +358,7 @@ async function main() {
     process.exit(0);
   }
 
-  let payload = await getPayload({ config });
+  const payload = await getPayload({ config });
   const imageFiles = walkImages(path.join(root, "public", "images"));
   const usedNames = new Set<string>();
   const mediaByPublicPath = new Map<string, string | number>();
@@ -398,6 +399,13 @@ async function main() {
             path: page.path,
             sourceUrl: page.path,
             excerpt: page.excerpt,
+            meta: {
+              title: composeSeoTitle(
+                page.title,
+                page.path === "/" ? "" : page.path.replace(/^\//, ""),
+              ),
+              description: page.excerpt || undefined,
+            },
             layout: [
               {
                 blockType: "content",
@@ -435,6 +443,10 @@ async function main() {
               path: `/blog/${post.slug}`,
               sourceUrl: `/blog/${post.slug}`,
               excerpt: post.excerpt || post.description,
+              meta: {
+                title: composeSeoTitle(post.title, `blog/${post.slug}`),
+                description: post.description,
+              },
               publishedAt: post.publishedAt,
               coverImage: cover ?? undefined,
               content: blocksToLexical(post.blocks),
