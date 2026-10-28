@@ -20,6 +20,7 @@ import {
 import { ServiceHero } from "@/components/services/ServiceHero";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { CtaCard } from "@/components/services/CtaCard";
+import PriorityCityHub, { isPriorityHubSlug } from "@/components/areas/PriorityCityHub";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -31,6 +32,10 @@ const fadeUp = {
 };
 
 export default function AreaCityPageContent({ city }: { city: ServedCity }) {
+  if (isPriorityHubSlug(city.slug)) {
+    return <PriorityCityHub city={city} />;
+  }
+
   const sameRegionCities = servedCities
     .filter((c) => c.region === city.region && c.slug !== city.slug)
     .slice(0, 8);

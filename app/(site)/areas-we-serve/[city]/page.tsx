@@ -7,6 +7,7 @@ import { withCMSMeta } from "@/lib/cms/generateMeta";
 import { servedCities, getCityBySlug } from "@/lib/areasData";
 import { breadcrumbJsonLd, cityServiceAreaJsonLd, faqPageJsonLd } from "@/lib/jsonLd";
 import { cityFaqs, cityMetaDescription } from "@/lib/areaPageCopy";
+import { getPriorityHub } from "@/lib/priorityCityHubs";
 import { JsonLd } from "@/components/seo/JsonLd";
 import AreaCityPageContent from "@/components/areas/AreaCityPageContent";
 
@@ -27,8 +28,9 @@ export async function generateMetadata({
   const city = getCityBySlug(citySlug);
   if (!city) return {};
 
+  const hub = getPriorityHub(city.slug);
   const title = `Chiropractor in ${city.name}, MN`;
-  const description = cityMetaDescription(city);
+  const description = hub?.description ?? cityMetaDescription(city);
   const path = `/areas-we-serve/${city.slug}`;
 
   return withCMSMeta(
@@ -73,7 +75,9 @@ export default async function Page({
       />
       <JsonLd
         id={`ld-city-faq-${city.slug}`}
-        data={faqPageJsonLd({ faqs: cityFaqs(city) })}
+        data={faqPageJsonLd({
+          faqs: getPriorityHub(city.slug)?.faqs ?? cityFaqs(city),
+        })}
       />
       <AreaCityPageContent city={city} />
     </>
