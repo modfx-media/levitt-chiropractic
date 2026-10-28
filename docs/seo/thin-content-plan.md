@@ -125,6 +125,22 @@ Volumes are **US-national** Google Ads figures from DataForSEO. Twin Cities dema
 
 Phase 3 is not in this pull request.
 
+## Phase 1 status
+
+Phase 1 on this branch enriches the core service and condition pages and adds one `/neck-pain` URL. It does not add redirects, `noindex` changes, or sitemap removals. Adding `/neck-pain` to the route list that builds `sitemap.xml` is the only sitemap edit.
+
+Left as they were, because they are not service pages and the word-count band would be padding:
+
+- `/` (already long; a quality edit, not a length edit)
+- `/about`, `/meet-the-doctor`, `/testimonials`
+- `/new-patient-center` and `/new-patient-center/what-to-expect`
+- `/resources`, `/resources/about-chiropractic`, `/resources/qa`, `/resources/wellness-tips`
+- Blog posts, both the long `keep` posts and the six short `keep+enrich` posts
+- `/contact`, `/contact/new-patient-appointment`, `/contact/existing-patient-appointment`
+- `/privacy-policy`, `/hipaa-policy`, `/terms-of-use`, `/good-faith-estimate`
+- `/site-map` (still noindex; removal from the XML sitemap waits for phase 3)
+- `/areas-we-serve` and every city URL (phases 2 and 3)
+
 ## Samples in this pull request
 
 Rendered from the existing service-page components (`ServiceHero`, section cards, `CtaCard`, `LocationStrip`), not from the production database:

@@ -112,7 +112,14 @@ export default function BackPainTreatmentsContent() {
             <p>
               This page owns both problems: local back pain, and sciatica when
               the exam supports that label. Neck pain is a different complaint
-              and does not have its own page yet. Pain that started in a car
+              and does not have its own page yet.               Neck pain that stays in the neck is on the{" "}
+              <Link
+                href="/neck-pain"
+                className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
+              >
+                neck pain
+              </Link>{" "}
+              page. Pain that started in a car
               crash is examined the same way, and the injury-specific notes
               live on the{" "}
               <Link
@@ -292,7 +299,7 @@ export default function BackPainTreatmentsContent() {
               </a>{" "}
               or use the{" "}
               <Link
-                href="/contact/appointment-request"
+                href="/contact/new-patient-appointment"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 appointment request
@@ -401,8 +408,7 @@ export default function BackPainTreatmentsContent() {
                 A recent strain often eases as the joint moves. A back that
                 has hurt for months usually needs the exercises and the
                 lifting habit changed, not only adjustments. We compare
-                today’s exam with the last one. There is no week count in
-                advance.
+                today’s exam with the last one.
               </p>
               <p>
                 Prolonged sitting flares both local back pain and sciatica.
@@ -463,9 +469,9 @@ export default function BackPainTreatmentsContent() {
             note: "A supporting post. The service page is this one.",
           },
           {
-            href: "/contact/appointment-request",
-            label: "Request an appointment",
-            note: "Or call 952-920-7535 during office hours.",
+            href: "/neck-pain",
+            label: "Neck pain",
+            note: "A separate page. This one stays with the low back and with sciatica.",
           },
         ]}
       />

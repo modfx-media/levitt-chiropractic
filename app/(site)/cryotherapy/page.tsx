@@ -6,10 +6,11 @@ import CryotherapyContent from "@/components/services/CryotherapyContent";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 
 const fallbackMeta: Metadata = generateMeta({
-  title: "Cryotherapy in Saint Louis Park, MN",
+  title: "Targeted Cryotherapy",
   description:
-    "Ice pack and whole-body cryotherapy services in Saint Louis Park, MN from Dr. Alan Levitt drug-free relief from pain, swelling, and inflammation.",
+    "Targeted cryotherapy in Saint Louis Park for hot, swollen tissue. Not a walk-in cold chamber. Dr. Alan Levitt.",
   slug: "cryotherapy",
+  absoluteTitle: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {

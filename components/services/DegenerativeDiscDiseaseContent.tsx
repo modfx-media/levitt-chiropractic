@@ -373,7 +373,7 @@ export default function DegenerativeDiscDiseaseContent() {
                 </a>{" "}
                 or{" "}
                 <Link
-                  href="/contact/appointment-request"
+                  href="/contact/new-patient-appointment"
                   className="font-semibold text-orange-300 underline-offset-4 hover:underline"
                 >
                   request a visit

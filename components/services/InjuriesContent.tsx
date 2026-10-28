@@ -1,242 +1,264 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
+import { FaqBlock, RelatedCare, SectionIntro } from "@/components/services/enrichment";
 
-const services = [
-  {
-    title: "Personal Injury",
-    href: "/personal-injury",
-    eyebrow: "Any Accident or Mishap",
-    body: "Uncover and treat the underlying issues that come from accidents bike, construction, OSHA, malpractice and more.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-7 w-7"
-        aria-hidden
-      >
-        <path d="M12 2L4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6l-8-4z" />
-        <path d="M9 12l2 2 4-4" />
-      </svg>
-    ),
-  },
+const kinds = [
+  { title: "A strain that outlasted the week", body: "You expected a muscle to calm down. It is still limiting work or a workout. Early care is more useful than waiting until the pattern is six months old." },
+  { title: "A fall or an awkward lift", body: "Snow, a missed step, a cooler, a child, a job-site load. The history is the mechanism. The exam is what still moves." },
+  { title: "Sport", body: "Practice and weekend play. We map the tissue and the joint. We do not clear you back to a game from a phone call." },
+  { title: "Work", body: "Sprains and overuse from the job, after anything dangerous has been medically checked. This is not an OSHA inspection and not a legal opinion." },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+const faqs = [
+  {
+    q: "Is this the auto-accident page?",
+    a: "No. Car crashes, whiplash, and the injury chart that goes with them are on the personal injury page. This page is for sport, work, falls, and strains that did not start in a vehicle. /auto-injury on the old site points at injuries; a crash history should still be told in full so we send you to the right exam.",
   },
-};
+  {
+    q: "When should I come in after a sprain?",
+    a: "After emergency problems are out of the way, sooner is more useful than letting a limp become normal. Open wounds, a suspected fracture, a joint you cannot use, and a fall that has not been medically screened belong in urgent or emergency care first.",
+  },
+  {
+    q: "What does the injury exam include?",
+    a: "What was hurt, what still moves, and whether imaging would change the plan. Treatment, if it is appropriate, is usually a mix of an adjustment, ice or laser, and a few home exercises. It is not a tour of every device in the office.",
+  },
+  {
+    q: "Can I get a work note without being examined?",
+    a: "No. We document what the exam finds. We do not write a letter for an injury we have not seen, and we do not invent restrictions. If a job needs paperwork, that paperwork follows the visit.",
+  },
+  {
+    q: "How fast will I be back to sport or work?",
+    a: "No date is promised. A simple strain and a joint that will not bear load are different. Return to play or to a heavy job depends on the exam changing, not on a motivational timeline. If it is not changing, we refer.",
+  },
+];
 
 export default function InjuriesContent() {
   return (
     <>
       <ServiceHero
-        title="Injuries"
-        subtitle="A variety of chiropractic services to evaluate and treat common injuries explore each type of care below."
+        title="Sports and Work Injuries"
+        subtitle="Sprains, strains, falls, and the lift that should have been fine. Crash injuries have their own page."
         crumbs={[
           { label: "Home", href: "/" },
-          { label: "Services" },
+          { label: "Services", href: "/services" },
           { label: "Injuries" },
         ]}
       />
 
-      {/* SECTION 2 WHITE: INTRO */}
-      <section className="relative bg-white py-12 sm:py-20 md:py-24">
+      <section className="bg-white py-12 sm:py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Welcome
+          <SectionIntro eyebrow="Which injury" title="This page is the non-crash injury visit">
+            <p>
+              A week-old strain, a fall, or a lift that “went” in the low
+              back is the work of this URL. We map what was hurt, what still
+              moves, and whether an emergency department already cleared the
+              dangerous part. Then the plan is usually an adjustment if the
+              joint is safe, ice or laser if the tissue is irritable, and a
+              few exercises you can do at home.
             </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Treatment built around the injury you have
-            </h2>
-            <span
-              aria-hidden
-              className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-            />
-            <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              A strain that should have been gone in a week, a fall on packed
-              snow, or a lift that “went” in the low back — that is the injury
-              work here. We map what was hurt, what still moves, and whether
-              an ER already cleared the danger. Then
-              adjustments, ice or laser, and a few exercises you can actually
-              do at home.
+            <p>
+              An auto accident, including whiplash, is not squeezed into this
+              page. Use{" "}
+              <Link href="/personal-injury" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
+                personal injury
+              </Link>
+              . Neck pain without a crash is{" "}
+              <Link href="/neck-pain" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">neck pain</Link>.
+              The back that hurts without a clear injury story is{" "}
+              <Link href="/back-pain-treatments" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">back pain</Link>.
             </p>
-          </motion.div>
+            <p>
+              Dr. Levitt sees these at {siteConfig.address.full}. Phone{" "}
+              {siteConfig.phone}. Practice since 1987, this office since 1999.
+            </p>
+          </SectionIntro>
         </div>
       </section>
 
-      {/* SECTION 3 DARK NAVY: SERVICE CARDS GRID */}
-      <section className="relative overflow-hidden bg-[#0F172A] py-20 text-white sm:py-24">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-32 top-20 -z-10 h-96 w-96 rounded-full bg-[#F97316]/10 blur-[140px]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 bottom-10 -z-10 h-96 w-96 rounded-full bg-[#1E3A5F]/60 blur-[140px]"
-        />
-
-        <div className="relative mx-auto max-w-7xl px-6">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mx-auto max-w-2xl text-center"
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              Our Injury Services
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              Choose the care that fits your injury
-            </h2>
-            <span
-              aria-hidden
-              className="mx-auto mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-            />
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={{
-              hidden: {},
-              show: { transition: { staggerChildren: 0.12 } },
-            }}
-            className="mt-8 sm:mt-14 grid gap-6 lg:grid-cols-1 lg:gap-8 max-w-xl mx-auto"
-          >
-            {services.map((s, i) => (
-              <motion.div
-                key={s.title}
-                variants={{
-                  hidden: { opacity: 0, y: 28 },
-                  show: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-                  },
-                }}
-                whileHover={{ y: -8 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Link
-                  href={s.href}
-                  className="group relative block h-full overflow-hidden rounded-2xl border-t-4 border-[#F97316] bg-[#1E3A5F]/60 p-8 ring-1 ring-white/10 backdrop-blur-sm transition-colors hover:bg-[#1E3A5F]"
-                >
-                  <span
-                    aria-hidden
-                    className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[#F97316]/10 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
-                  />
-                  <span
-                    aria-hidden
-                    className="absolute right-6 top-6 font-heading text-5xl font-black text-white/[0.06]"
-                  >
-                    0{i + 1}
-                  </span>
-                  <div className="relative flex h-full flex-col">
-                    <span className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[#F97316]/15 text-[#F97316] ring-1 ring-[#F97316]/30">
-                      {s.icon}
-                    </span>
-                    <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-orange-300">
-                      {s.eyebrow}
-                    </p>
-                    <h3 className="mt-2 font-heading text-2xl font-bold text-white">
-                      {s.title}
-                    </h3>
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-white/75">
-                      {s.body}
-                    </p>
-                    <span className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-orange-300 transition-transform duration-200 group-hover:translate-x-1">
-                      Learn more
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="h-3.5 w-3.5"
-                        aria-hidden
-                      >
-                        <path d="M5 12h14M13 5l7 7-7 7" />
-                      </svg>
-                    </span>
-                  </div>
-                </Link>
-              </motion.div>
+      <section className="bg-[#0F172A] py-20 text-white sm:py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionIntro dark center eyebrow="Stories we actually hear" title="Four injury shapes">
+            <p>The mechanism changes the history. It does not change the requirement for an exam.</p>
+          </SectionIntro>
+          <ul className="mt-10 grid gap-5 md:grid-cols-2">
+            {kinds.map((item) => (
+              <li key={item.title} className="rounded-2xl border-t-4 border-[#F97316] bg-[#1E3A5F]/60 p-6">
+                <h3 className="font-heading text-lg font-bold">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/75">{item.body}</p>
+              </li>
             ))}
-          </motion.div>
+          </ul>
         </div>
       </section>
 
-      {/* SECTION 4 WHITE: CONTACT PROMPT + CTA */}
-      <section className="relative bg-white py-12 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-12 lg:grid-cols-5 lg:items-start">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              className="lg:col-span-3"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Not Sure Where to Start?
-              </p>
-              <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Tell us what happened we&rsquo;ll guide you
-              </h2>
-              <span
-                aria-hidden
-                className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-              />
-              <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                If you have any questions about which service is right for
-                you, please contact us. We&rsquo;re always happy to hear from
-                you. Call{" "}
-                <a
-                  href={siteConfig.phoneHref}
-                  className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
-                >
-                  {siteConfig.phone}
-                </a>{" "}
-                or request a visit online and Dr. Levitt will help you choose
-                the right course of care.
-              </p>
-            </motion.div>
+      <section className="bg-white py-12 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionIntro eyebrow="Do not start here" title="Some injuries are medical before they are chiropractic">
+            <p>
+              Open wounds, a bone that might be broken, a limb you cannot
+              use, chest pain, trouble breathing, and a head strike with
+              confusion or vomiting go to emergency care. So does a fall from
+              a height or a job-site blow that has not been checked. If a
+              hospital has already said the dangerous part is clear, bring
+              those notes and we can look at the joint and the soft tissue.
+            </p>
+            <p>
+              Progressive weakness, groin numbness, or a change in bowel or
+              bladder control is an emergency even if it followed a “simple”
+              lift. Fever with spinal pain is not a strain. We would rather
+              lose the visit than ice a problem that needs a physician.
+            </p>
+            <p>
+              Early cold, when it is appropriate, is described on{" "}
+              <Link href="/cryotherapy" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">cryotherapy</Link>{" "}
+              and the hands-on steps on{" "}
+              <Link href="/ice-pack-cryotherapy" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">ice pack</Link>.
+              Laser is a later or parallel option on{" "}
+              <Link href="/cold-laser-therapy" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">cold laser</Link>,
+              not the thing you do instead of ruling out a fracture.
+            </p>
+          </SectionIntro>
+        </div>
+      </section>
 
-            <div className="lg:col-span-2">
-              <CtaCard
-                eyebrow="Get Evaluated"
-                title="Start the healing process"
-                body="Book an evaluation with Dr. Levitt today."
-              />
-            </div>
+      <section className="bg-[#F8FAFC] py-12 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionIntro eyebrow="The visit" title="Mechanism, motion, then the smallest set of tools">
+            <p>
+              Tell the story in order: what you were doing, what you felt,
+              what you could do that night, and what changed. Bring any
+              imaging. The exam checks the painful region and, if a leg or
+              arm is involved, strength and sensation. X-rays happen when
+              they would change the plan.
+            </p>
+            <p>
+              Treatment is not a protocol with your sport’s name on it. A
+              lifter and a skater do not get the same homework. What they
+              share is a short list from{" "}
+              <Link href="/therapeutic-exercise" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">therapeutic exercise</Link>{" "}
+              and a joint decision from{" "}
+              <Link href="/adjustments-and-manipulation" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">adjustments</Link>.
+              Return to play waits on the exam, not on a tournament date. We
+              will not write that you are cleared if you are not.
+            </p>
+            <p>
+              Work forms, if your job asks, come after findings exist. We do
+              not fabricate restrictions or the absence of them. Payment is
+              cash, check, or card. No fee is printed here. Book a{" "}
+              <Link href="/contact/new-patient-appointment" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
+                new-patient visit
+              </Link>{" "}
+              or call {siteConfig.phone}.
+            </p>
+          </SectionIntro>
+        </div>
+      </section>
+
+      <section className="bg-[#0F172A] py-20 text-white sm:py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-5">
+          <div className="lg:col-span-3">
+            <SectionIntro dark eyebrow="Recovery" title="Load returns when the exam says the tissue can take it">
+              <p>
+                Rest for a day can be sensible. Rest for a month usually
+                makes a simple strain stiffer. We will name what to pause
+                (the jump, the heavy lift, the long drive) and what to keep.
+                If pain, swelling, or strength is not moving in the direction
+                it should, the plan changes. A disc that declared itself
+                during a lift may need the{" "}
+                <Link href="/degenerative-disc-disease" className="font-semibold text-orange-300 underline-offset-4 hover:underline">disc page</Link>{" "}
+                and, sometimes, a surgeon. We will not argue with worsening
+                neurology.
+              </p>
+            </SectionIntro>
+          </div>
+          <div className="lg:col-span-2">
+            <CtaCard
+              eyebrow="Injuries"
+              title="Tell us the mechanism"
+              body="Sport, work, or a fall. If it was a car crash, say that so we use the injury exam."
+            />
           </div>
         </div>
       </section>
 
+      <section className="bg-white py-12 sm:py-20">
+        <div className="mx-auto max-w-3xl px-6 space-y-4 text-base leading-relaxed text-slate-700">
+          <h2 className="font-heading text-3xl font-bold text-[#0F172A]">Getting back to the job or the practice</h2>
+          <p>
+            A desk job and a job that lifts are not the same clearance. If
+            your work is sitting, the test is whether you can change position
+            and finish a day without the pain spreading. If your work is
+            loading trucks or a patient floor, the test includes a lift that
+            looks like the lift you actually do, stopped before it fails. We
+            do not sign a full-duty note because a calendar page turned.
+          </p>
+          <p>
+            Sport is similar and more tempting to rush. A practice that is
+            painless and a game that is not are different loads. Return is
+            graded: movement, then the skill, then contact or the heavy set,
+            if those are part of your sport. Skip a step and the strain
+            usually announces itself. We will not invent a protocol named
+            after your sport. The movements come from your exam.
+          </p>
+          <p>
+            Coaches, supervisors, and family members are not the patient. If
+            they want a date, the honest answer is that the date depends on
+            the retest. Paperwork for a workplace can list what we found and
+            what we recommend you avoid for now. It cannot list a restriction
+            we did not evaluate, and it cannot say you are fine because
+            someone needs the shift covered.
+          </p>
+          <p>
+            If the injury was a car crash and you landed on this page because
+            an old redirect said “injuries,” tell us that on the phone. The
+            personal-injury visit is the one that knows what to do with that
+            history.             Using the sports page for a crash makes the chart
+            worse, not faster.
+          </p>
+          <p>
+            Swelling that is still rising, a joint that locks, or a bruise
+            that is spreading are reasons to be seen rather than to “give it
+            the weekend” by default. A weekend is reasonable only when you
+            can walk, the pain is local, and nothing neurological is
+            changing. If you are coaching or supervising someone else, do not
+            use this page as their clearance.             They need their own exam. We
+            will not discuss their care with you without the right
+            permission, and we will not put their return date in your chart.
+            A bruise that looks worse the next morning can still be a simple
+            strain. A bruise with tightening skin, numbness beyond the
+            injury, or pain out of proportion to what you see is a reason for
+            urgent care, not a longer ice session.
+          </p>
+        </div>
+      </section>
+
+      <FaqBlock
+        id="ld-faq-injuries"
+        eyebrow="Questions"
+        title="Questions about sports and work injuries"
+        intro="Sorting crashes from everything else, and what we will not write down without an exam."
+        faqs={faqs}
+      />
+
+      <RelatedCare
+        eyebrow="Split the problem"
+        title="Use a more specific page when you have one"
+        intro="This URL is the front door for non-crash injuries."
+        links={[
+          { href: "/personal-injury", label: "Personal injury and whiplash", note: "Auto accidents and other crashes." },
+          { href: "/back-pain-treatments", label: "Back pain and sciatica", note: "If the lift became leg pain." },
+          { href: "/neck-pain", label: "Neck pain", note: "If the sport or the desk hit the neck without a crash." },
+          { href: "/ice-pack-cryotherapy", label: "Ice pack", note: "The first-days compress, with skin rules." },
+          { href: "/therapeutic-exercise", label: "Exercise", note: "How you reload without guessing." },
+          { href: "/contact/new-patient-appointment", label: "Book", note: "New patients. Existing patients use the other form." },
+        ]}
+      />
       <LocationStrip />
     </>
   );

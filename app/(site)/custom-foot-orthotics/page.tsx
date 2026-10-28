@@ -6,10 +6,11 @@ import CustomFootOrthoticsContent from "@/components/services/CustomFootOrthotic
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 
 const fallbackMeta: Metadata = generateMeta({
-  title: "Custom Foot Orthotics in Saint Louis Park, MN",
+  title: "Custom Foot Orthotics",
   description:
-    "Prescription custom foot orthotics from Dr. Alan Levitt for knee, foot, hip, and back pain in Saint Louis Park, MN. Precision-fit, lasts over a year.",
+    "Prescription custom foot orthotics in Saint Louis Park when stance is part of the pain. Not a drugstore insert, and not a spur removal.",
   slug: "custom-foot-orthotics",
+  absoluteTitle: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {

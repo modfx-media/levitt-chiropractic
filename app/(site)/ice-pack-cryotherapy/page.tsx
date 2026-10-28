@@ -6,10 +6,11 @@ import IcePackCryotherapyContent from "@/components/services/IcePackCryotherapyC
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 
 const fallbackMeta: Metadata = generateMeta({
-  title: "Ice Pack Cryotherapy in Saint Louis Park, MN",
+  title: "Ice Pack Cryotherapy",
   description:
-    "Ice pack cryotherapy at Levitt Chiropractic in Saint Louis Park, MN drug-free relief from pain, swelling, and inflammation used in sports rehab.",
+    "Ice pack cryotherapy in Saint Louis Park: a cloth barrier, a small area, and about 15 to 20 minutes. Skin rules included.",
   slug: "ice-pack-cryotherapy",
+  absoluteTitle: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {

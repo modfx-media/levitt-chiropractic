@@ -6,10 +6,11 @@ import AlternativeMedicineContent from "@/components/services/AlternativeMedicin
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 
 const fallbackMeta: Metadata = generateMeta({
-  title: "Alternative Medicine Doctor in Saint Louis Park, MN",
+  title: "Alternative Medicine",
   description:
-    "Natural, root-cause alternative medicine in Saint Louis Park, MN from Dr. Alan Levitt chiropractic and soft-tissue therapies for pain and headaches.",
+    "Alternative medicine at Levitt Chiropractic means a non-surgical start when the exam allows. It does not replace your physician.",
   slug: "alternative-medicine",
+  absoluteTitle: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {

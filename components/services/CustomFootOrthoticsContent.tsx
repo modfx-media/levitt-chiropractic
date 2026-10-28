@@ -1,470 +1,274 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
+import { ServiceHero } from "@/components/services/ServiceHero";
+import { FaqBlock, RelatedCare, SectionIntro } from "@/components/services/enrichment";
 
-const benefits = [
-  {
-    title: "Realigns the foot & ankle",
-    body: "Helps reset the foundation of your stance so each step lands the way it should.",
-  },
-  {
-    title: "Eases pressure upstream",
-    body: "Takes stress off your back, neck, shoulders, and hips by correcting how forces travel through the body.",
-  },
-  {
-    title: "Cushions every step",
-    body: "Provides comfort, supports your arches, and evenly distributes body weight across your feet.",
-  },
+const comparisons = [
+  { label: "Shape", custom: "Made to the contours of your feet and how you move.", otc: "A generic shell that may not match either foot." },
+  { label: "Who decides", custom: "Prescribed after a chiropractic look at stance and symptoms.", otc: "Chosen from a wall display, with no exam." },
+  { label: "Wear", custom: "The office says most prescription pairs last well over a year in regular use.", otc: "Foam inserts compress and stop supporting sooner." },
 ];
 
-const vsOtc = [
+const faqs = [
   {
-    label: "Built precisely for your feet",
-    custom: "Matches the contours of your feet and the way you move.",
-    otc: "“One-size-fits-all” inserts rarely match your feet well.",
+    q: "What are custom foot orthotics?",
+    a: "Devices made for your feet that fit inside most shoes. They are shaped to your contours and to the way you walk, not pulled from a bin. A chiropractor can prescribe them. They are not the same object as a drugstore insert.",
   },
   {
-    label: "Prescribed by your chiropractor",
-    custom: "Designed for your alignment, activity, and condition.",
-    otc: "Generic support with no clinical evaluation.",
+    q: "Will orthotics fix my back?",
+    a: "Only if the exam shows the feet are part of why the back, hip, knee, or neck keeps reloading. They ease pressure upstream when the stance is the lever. They do not fix a disc herniation, a hip that needs a surgeon, or a back problem that has nothing to do with gait.",
   },
   {
-    label: "Built to last over a year",
-    custom: "Most prescription orthotics last well over a year in regular use.",
-    otc: "Inserts wear down quickly and lose support.",
+    q: "Can orthotics help a heel spur?",
+    a: "The office’s position is narrow: we can often calm the tissue around a spur and the gait that keeps irritating it. We cannot sand a spur off the bone. A foot that is hot, red, or impossible to bear weight on needs a medical exam first.",
+  },
+  {
+    q: "Do they fit every shoe?",
+    a: "Most everyday and athletic shoes accept them. We look at the shoes you actually wear. A dress shoe with no depth may not. That conversation happens at fitting, not as a promise that every pair in the closet will work.",
+  },
+  {
+    q: "How long do they last, and what do they cost?",
+    a: "Most prescription orthotics on this site are described as lasting well over a year in regular use. This page does not list a price. Ask the office. Drugstore inserts are cheaper and often the wrong shape, which is a different problem from the sticker.",
   },
 ];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
 
 export default function CustomFootOrthoticsContent() {
-  const reduce = useReducedMotion();
-
   return (
     <>
-      {/* SECTION 1 NARROW DARK NAVY HERO (45vh) */}
-      <section
-        className="relative isolate flex items-center overflow-hidden bg-[#0F172A] text-white min-h-[38vh] sm:min-h-[45vh]"
-      >
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(249,115,22,0.6) 1px, transparent 1px), linear-gradient(to bottom, rgba(249,115,22,0.6) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
-        <motion.div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 top-0 -z-10 h-96 w-96 rounded-full bg-[#F97316]/15 blur-[140px]"
-          animate={reduce ? undefined : { y: [0, 22, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-32 bottom-0 -z-10 h-96 w-96 rounded-full bg-[#1E3A5F]/60 blur-[140px]"
-        />
+      <ServiceHero
+        title="Custom Foot Orthotics"
+        subtitle="Prescription devices for your feet, used when stance is part of the pain. Not a bin of inserts, and not a spur removal."
+        crumbs={[
+          { label: "Home", href: "/" },
+          { label: "Services", href: "/services" },
+          { label: "Custom Foot Orthotics" },
+        ]}
+      />
 
-        <div className="relative mx-auto w-full max-w-7xl px-5 pt-24 pb-10 sm:px-6 sm:pt-28 sm:pb-12 lg:pt-32">
-          <motion.nav
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            aria-label="Breadcrumb"
-            className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-400"
-          >
-            <Link href="/" className="transition-colors hover:text-orange-300">
-              Home
-            </Link>{" "}
-            <span className="text-white/30">/</span>{" "}
-            <span className="text-white/55">Services</span>{" "}
-            <span className="text-white/30">/</span>{" "}
-            <span className="text-orange-200">Custom Foot Orthotics</span>
-          </motion.nav>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-4 font-heading text-3xl font-black leading-[1.1] tracking-tight sm:mt-5 sm:text-4xl sm:leading-[1.05] md:text-5xl lg:text-[3.6rem]"
-          >
-            Custom Foot Orthotics
-          </motion.h1>
-
-          <motion.span
-            aria-hidden
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            style={{ transformOrigin: "left" }}
-            className="mt-4 block h-1 w-20 rounded-full bg-[#F97316]"
-          />
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.32 }}
-            className="mt-5 max-w-2xl text-base text-white/70 sm:text-lg"
-          >
-            Prescription orthotics built around your feet. Heel-spur and
-            plantar pain often calm down when the gait stops grinding the same
-            spot — we cannot sand a spur off the bone.
-          </motion.p>
+      <section className="bg-white py-12 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionIntro eyebrow="The device" title="Orthotics change the floor under the spine">
+            <p>
+              Custom foot orthotics are made to fit inside shoes. They match
+              the foot you have, including the arch and the way that foot
+              lands. The office lists three jobs: line the foot and ankle up
+              more usefully, take some load off the knees, hips, back, neck,
+              and shoulders when those are paying for the stance, and spread
+              pressure so each step is less of a poke.
+            </p>
+            <p>
+              They can be worn on ordinary days and during most activities,
+              which is the point. A device that only works in the treatment
+              room does not change the other fourteen hours. They are not
+              issued because they are on a menu. Dr. Levitt looks at stance,
+              shoes, and whether the spine is compensating. If the feet are
+              not the lever, you leave without a pair.
+            </p>
+            <p>
+              The clinic is at {siteConfig.address.full}. Dr. Levitt has
+              practiced since 1987 and at this address since 1999. Call{" "}
+              {siteConfig.phone}.
+            </p>
+          </SectionIntro>
         </div>
       </section>
 
-      {/* SECTION 2 WHITE: INTRO + BENEFIT CARDS */}
-      <section className="relative bg-white py-12 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mx-auto max-w-3xl"
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Start From the Ground Up
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Better alignment starts in your shoes
-            </h2>
-            <span
-              aria-hidden
-              className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-            />
-            <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              If the heel hurts first thing in the morning, or the knee tracks
-              badly after a long walk, the foot is often the missing
-              lever. Custom devices are molded to your foot, not pulled from a
-              wall rack. Over-the-counter inserts are cheaper and usually the
-              wrong shape. We will say so if the problem is a hip that is not
-              coming from the ground up — or if you need a surgeon first.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={{
-              hidden: {},
-              show: { transition: { staggerChildren: 0.12 } },
-            }}
-            className="mt-8 sm:mt-14 grid gap-6 lg:grid-cols-3 lg:gap-8"
-          >
-            {benefits.map((b, i) => (
-              <motion.article
-                key={b.title}
-                variants={{
-                  hidden: { opacity: 0, y: 22 },
-                  show: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-                  },
-                }}
-                whileHover={{ y: -6 }}
-                className="group relative overflow-hidden rounded-2xl border-t-4 border-[#F97316] bg-white p-7 shadow-md ring-1 ring-slate-200 transition-shadow hover:shadow-xl"
-              >
-                <span
-                  aria-hidden
-                  className="absolute right-5 top-5 font-heading text-4xl font-black text-[#F97316]/10"
-                >
-                  0{i + 1}
-                </span>
-                <h3 className="relative font-heading text-lg font-bold text-[#0F172A]">
-                  {b.title}
-                </h3>
-                <p className="relative mt-2 text-sm leading-relaxed text-slate-700">
-                  {b.body}
-                </p>
-              </motion.article>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SECTION 3 DARK NAVY: HOW DO ORTHOTICS WORK? */}
-      <section className="relative overflow-hidden bg-[#0F172A] py-20 text-white sm:py-24">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-32 top-20 -z-10 h-96 w-96 rounded-full bg-[#F97316]/10 blur-[140px]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 bottom-10 -z-10 h-96 w-96 rounded-full bg-[#1E3A5F]/60 blur-[140px]"
-        />
-
-        <div className="relative mx-auto max-w-3xl px-6">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              The Treatment
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              How Do Orthotics Work?
-            </h2>
-            <span
-              aria-hidden
-              className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-            />
-            <div className="mt-7 space-y-5 text-base leading-relaxed text-white/75 sm:text-lg">
-              <p>
-                Custom foot orthotics are specially-­made devices that fit
-                inside most shoes. They match the contours of your feet
-                precisely, and are designed for the way you move.
-              </p>
-              <p>
-                Orthotics can help anyone with discomfort relating to walking,
-                or imbalances in the body that are known to cause related pain.
-                A tremendous benefit of custom orthotics is that they can be
-                worn on a daily basis and utilized during most activities.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SECTION 4 WHITE: CUSTOM vs OTC COMPARISON */}
-      <section className="relative bg-white py-12 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mx-auto max-w-2xl text-center"
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Why Custom
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl lg:text-5xl">
-              Custom orthotics vs. drugstore inserts
-            </h2>
-            <span
-              aria-hidden
-              className="mx-auto mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-            />
-            <p className="mt-5 text-base leading-relaxed text-slate-600 sm:text-lg">
-              Custom orthotics can be prescribed by your chiropractor, and last
-              well over a year in most cases. While over­-the-­counter shoe
-              inserts are available at most drugstores, they lack the
-              custom­-built precision of a prescription orthotic.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={{
-              hidden: {},
-              show: { transition: { staggerChildren: 0.1 } },
-            }}
-            className="mt-14 overflow-hidden rounded-2xl border border-slate-200 shadow-lg"
-          >
-            {/* Header row */}
-            <div className="hidden grid-cols-12 bg-[#0F172A] text-white md:grid">
-              <div className="col-span-4 px-6 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
-                Compare
-              </div>
-              <div className="col-span-4 border-l border-white/10 px-6 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-orange-300">
-                Custom Orthotics
-              </div>
-              <div className="col-span-4 border-l border-white/10 px-6 py-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
-                OTC Inserts
-              </div>
-            </div>
-
-            {vsOtc.map((row) => (
-              <motion.div
-                key={row.label}
-                variants={{
-                  hidden: { opacity: 0, y: 16 },
-                  show: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-                  },
-                }}
-                className="grid grid-cols-1 border-t border-slate-200 bg-white text-sm md:grid-cols-12 md:text-base"
-              >
-                <div className="col-span-4 bg-slate-50 px-6 py-5 font-heading text-base font-bold text-[#0F172A] md:text-lg">
-                  {row.label}
-                </div>
-                <div className="col-span-4 border-t border-slate-200 px-6 py-5 text-slate-700 md:border-l md:border-t-0">
-                  <div className="flex items-start gap-3">
-                    <span
-                      aria-hidden
-                      className="mt-0.5 grid h-5 w-5 flex-shrink-0 place-items-center rounded-full bg-[#F97316] text-white"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="h-3 w-3"
-                        aria-hidden
-                      >
-                        <path d="M20 6L9 17l-5-5" />
-                      </svg>
-                    </span>
-                    <span>{row.custom}</span>
-                  </div>
-                </div>
-                <div className="col-span-4 border-t border-slate-200 px-6 py-5 text-slate-600 md:border-l md:border-t-0">
-                  <div className="flex items-start gap-3">
-                    <span
-                      aria-hidden
-                      className="mt-0.5 grid h-5 w-5 flex-shrink-0 place-items-center rounded-full bg-slate-300 text-white"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="h-3 w-3"
-                        aria-hidden
-                      >
-                        <path d="M18 6L6 18" />
-                        <path d="M6 6l12 12" />
-                      </svg>
-                    </span>
-                    <span>{row.otc}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SECTION 5 DARK NAVY: CLOSING + FLOATING CTA */}
-      <section className="relative overflow-hidden bg-[#0F172A] py-20 text-white sm:py-24">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 top-10 -z-10 h-96 w-96 rounded-full bg-[#F97316]/10 blur-[140px]"
-        />
-
-        <div className="relative mx-auto max-w-7xl px-6">
-          <div className="grid gap-12 lg:grid-cols-5 lg:items-start">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              className="lg:col-span-3"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-                Talk to Dr. Levitt
-              </p>
-              <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                Could orthotics fit your treatment plan?
-              </h2>
-              <span
-                aria-hidden
-                className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
-              />
-              <p className="mt-7 text-base leading-relaxed text-white/75 sm:text-lg">
-                Interested in incorporating orthotics into your treatment
-                plan? Contact your trusted chiropractor and schedule an
-                appointment to discuss how custom orthotics might ease your
-                discomfort. Call{" "}
-                <a
-                  href={siteConfig.phoneHref}
-                  className="font-semibold text-orange-300 transition-colors hover:text-orange-200"
-                >
-                  952-920-7535
-                </a>{" "}
-                or request a visit online.
-              </p>
-            </motion.div>
-
-            <div className="lg:col-span-2">
-              <motion.aside
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.3 }}
-                whileHover={reduce ? undefined : { y: -4 }}
-                transition={{ duration: 0.3 }}
-                className="sticky top-28 overflow-hidden rounded-2xl border-t-4 border-[#F97316] bg-[#1E3A5F] p-8 shadow-2xl ring-1 ring-white/10"
-              >
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#F97316]/15 blur-2xl"
-                />
-                <div className="relative">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-300">
-                    Take the Next Step
-                  </p>
-                  <h3 className="mt-2 font-heading text-2xl font-bold text-white">
-                    Schedule a fitting
-                  </h3>
-                  <p className="mt-2 text-sm text-white/70">
-                    Make an appointment with Dr. Levitt today.
-                  </p>
-
-                  <div className="mt-6 rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/55">
-                      Call Now
-                    </p>
-                    <a
-                      href={siteConfig.phoneHref}
-                      className="mt-1 block font-heading text-2xl font-black text-orange-400 transition-colors hover:text-orange-300"
-                    >
-                      {siteConfig.phone}
-                    </a>
-                  </div>
-
-                  <motion.div
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    transition={{ type: "spring", stiffness: 320, damping: 20 }}
-                    className="mt-5"
-                  >
-                    <Link
-                      href={siteConfig.appointmentUrl}
-                      className="flex h-12 w-full items-center justify-center rounded-full bg-[#F97316] px-6 text-sm font-bold text-white shadow-md shadow-orange-500/30 transition-colors hover:bg-orange-600"
-                    >
-                      NEW Patient Appointment →
-                    </Link>
-                    <Link
-                      href={siteConfig.existingPatientAppointmentUrl}
-                      className="mt-3 flex h-12 w-full items-center justify-center rounded-full border border-white/25 px-6 text-sm font-bold text-white transition-colors hover:border-[#F97316] hover:text-orange-300"
-                    >
-                      Existing Patient Appointment →
-                    </Link>
-                  </motion.div>
-                </div>
-              </motion.aside>
-            </div>
+      <section className="bg-[#0F172A] py-20 text-white sm:py-24">
+        <div className="mx-auto max-w-5xl px-6">
+          <SectionIntro dark center eyebrow="Versus the drugstore" title="Three differences that are actually on the site">
+            <p>Cheaper is not the same decision as “wrong shape.”</p>
+          </SectionIntro>
+          <div className="mt-10 overflow-x-auto">
+            <table className="w-full min-w-[36rem] text-left text-sm">
+              <thead>
+                <tr className="text-orange-300">
+                  <th className="py-2 pr-4 font-semibold"> </th>
+                  <th className="py-2 pr-4 font-semibold">Prescription pair</th>
+                  <th className="py-2 font-semibold">Store insert</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisons.map((row) => (
+                  <tr key={row.label} className="border-t border-white/10 align-top">
+                    <th className="py-4 pr-4 font-semibold text-white">{row.label}</th>
+                    <td className="py-4 pr-4 text-white/80">{row.custom}</td>
+                    <td className="py-4 text-white/70">{row.otc}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      {/* SECTION 6 WHITE: LOCATION STRIP */}
+      <section className="bg-white py-12 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionIntro eyebrow="Who might need them" title="Feet, knees, and the back that keeps choosing one side">
+            <p>
+              Heel pain and plantar fascia irritation are the foot-local
+              reasons. Knee pain that tracks with the way the foot collapses
+              is another. Low-back pain that returns in the same gait pattern
+              is the spinal reason, and it is easy to over-claim. Orthotics
+              are tried when the exam shows the ground is part of the load.
+              They are a poor idea for an isolated disc herniation that has
+              nothing to do with the feet. That problem is on the{" "}
+              <Link href="/degenerative-disc-disease" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
+                disc page
+              </Link>
+              . Recurring back pain in general is on the{" "}
+              <Link href="/back-pain-treatments" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
+                back pain page
+              </Link>.
+            </p>
+            <p>
+              A heel spur question comes up often enough to answer directly.
+              Calming the tissue and changing the irritating gait is
+              sometimes possible. Removing the spur is not something a
+              chiropractic office does with a device or a laser. If the heel
+              is newly hot and you cannot walk on it, start with a medical
+              exam, not a fitting.
+            </p>
+            <p>
+              Fractures, active infection, and a foot that needs a surgeon
+              are outside this service. So is a hip problem that is not
+              coming from the ground. We will say which one we think you
+              have.
+            </p>
+          </SectionIntro>
+        </div>
+      </section>
+
+      <section className="bg-[#F8FAFC] py-12 sm:py-20 md:py-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <SectionIntro eyebrow="Fitting" title="What the appointment is actually for">
+            <p>
+              Shoes come with you. The ones you work in matter more than the
+              ones you wish you wore. We look at wear patterns, arches, and
+              how the pelvis and spine sit on top of that. If a custom device
+              is the right lever, it is prescribed. You should know what
+              problem it is aimed at, and what it will not change.
+            </p>
+            <p>
+              Break-in is gradual. A new pair that hurts more after a full
+              day is a reason to call, not a test of toughness. Most people
+              use them in daily and athletic shoes. Bring the odd pair if you
+              are unsure it has room. There is no published fee on this page.
+              Ask when you{" "}
+              <Link href="/contact/new-patient-appointment" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
+                book
+              </Link>
+              .
+            </p>
+            <p>
+              Orthotics do not replace an adjustment when a joint above the
+              foot is stuck, and an adjustment does not replace them when the
+              foot keeps undoing the visit. The{" "}
+              <Link href="/adjustments-and-manipulation" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
+                adjustments
+              </Link>{" "}
+              page is the contact. This page is the ground.
+            </p>
+          </SectionIntro>
+        </div>
+      </section>
+
+      <section className="bg-[#0F172A] py-20 text-white sm:py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-5">
+          <div className="lg:col-span-3">
+            <SectionIntro dark eyebrow="After the pair arrives" title="Use them in real shoes, then recheck">
+              <p>
+                The test is whether the pain they were built for is less
+                provocative in the shoes you live in. If the back or heel is
+                unchanged after a fair wear-in, we do not tell you to “give
+                it a year” without looking again. Inserts also wear out. The
+                “well over a year” line is the office’s general description,
+                not a warranty printed here.
+              </p>
+            </SectionIntro>
+          </div>
+          <div className="lg:col-span-2">
+            <CtaCard
+              eyebrow="Orthotics"
+              title="Bring the shoes you actually wear"
+              body="We prescribe a pair only when the feet are part of the load."
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-12 sm:py-20">
+        <div className="mx-auto max-w-3xl px-6 space-y-4 text-base leading-relaxed text-slate-700">
+          <h2 className="font-heading text-3xl font-bold text-[#0F172A]">The first two weeks in the pair</h2>
+          <p>
+            Day one is not an eight-hour test. Wear them for a portion of the
+            day in the shoes that have enough depth, then come out of them if
+            a new hot spot shows up. A hot spot is information about the
+            shell or the shoe, not a character test. Call rather than
+            layering moleskin for a month and deciding orthotics “failed.”
+          </p>
+          <p>
+            Look at the old insoles you removed. The wear pattern, heavier on
+            one heel or one big toe, is part of why a custom shape was even
+            considered. If both shoes are worn evenly and the pain is a disc
+            with leg weakness, we should not have made the pair. That
+            mismatch is on us to catch at the exam, which is why the shoes
+            come to the visit before anything is ordered.
+          </p>
+          <p>
+            Running, a long shift on concrete, and dress shoes are three
+            different loads. A pair that is comfortable in a sneaker can be
+            miserable in a flat. We will say which shoes are realistic. We
+            will not promise the pair works in every shoe you own, including
+            the ones with no removable liner.
+          </p>
+          <p>
+            Recheck when the pain they were built for is either clearly
+            better in those shoes or clearly not. “Well over a year” is how
+            long the materials usually hold shape, not how long you should
+            wait to complain. If the heel is worse, stop wearing them and
+            come back.             Continuing to prove a point is how a helpful device
+            becomes an irritant.
+          </p>
+          <p>
+            Socks, volume, and a shoe that was already tight are the boring
+            reasons a good pair feels bad. If you add a thick sock on day
+            three, the fit changes. Tell us that before we reshape anything.
+            Children and people whose shoe size is still changing are a poor
+            time to lock in an expensive shape. Say so if that is you. We
+            would rather delay the pair than deliver something you outgrow
+            before the break-in ends. None of this is a price. Ask the office
+            what a pair costs for your case when you book. The number is not
+            on the website.
+          </p>
+        </div>
+      </section>
+
+      <FaqBlock
+        id="ld-faq-orthotics"
+        eyebrow="Questions"
+        title="Questions about custom orthotics"
+        intro="Fit, limits, and the heel-spur question. No price is listed because the office does not publish one here."
+        faqs={faqs}
+      />
+
+      <RelatedCare
+        eyebrow="Related"
+        title="Pain that might be coming from the ground"
+        intro="Read the condition page first if you are not sure the feet are involved."
+        links={[
+          { href: "/back-pain-treatments", label: "Back pain", note: "Orthotics are one possible lever, not the default." },
+          { href: "/neck-pain", label: "Neck pain", note: "Occasionally related to stance. Usually a neck problem of its own." },
+          { href: "/adjustments-and-manipulation", label: "Adjustments", note: "For the joints above the feet." },
+          { href: "/therapeutic-exercise", label: "Exercise", note: "Strength and mobility around the new stance." },
+          { href: "/cold-laser-therapy", label: "Cold laser", note: "Sometimes used on irritated soft tissue. It does not remove a spur." },
+          { href: "/contact/new-patient-appointment", label: "New patient visit", note: "Bring shoes. Call 952-920-7535 with questions." },
+        ]}
+      />
       <LocationStrip />
     </>
   );

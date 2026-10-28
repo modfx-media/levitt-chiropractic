@@ -107,8 +107,15 @@ export default function PersonalInjuryContent() {
             </p>
             <p>
               Whiplash is the neck injury from a sudden back-and-forth motion.
-              The same impact can irritate the mid back or low back. Sports
-              and work strains that did not start with a crash belong on the{" "}
+              Neck pain that did not start with a crash is on the{" "}
+              <Link
+                href="/neck-pain"
+                className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
+              >
+                neck pain
+              </Link>{" "}
+              page. The same impact can irritate the mid back or low back.
+              Sports and work strains that did not start with a crash belong on the{" "}
               <Link
                 href="/injuries"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
@@ -274,7 +281,7 @@ export default function PersonalInjuryContent() {
               </a>{" "}
               or{" "}
               <Link
-                href="/contact/appointment-request"
+                href="/contact/new-patient-appointment"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 request an appointment
@@ -374,11 +381,9 @@ export default function PersonalInjuryContent() {
               title="What recovery looks like, and what we will not promise"
             >
               <p>
-                One visit sometimes starts the process. More than one injured
-                region often needs a series. We will not quote a visit count
-                before the exam or promise that a series will finish the
-                problem. Age, an older neck injury, and the force of the crash
-                all change the pace.
+              One visit sometimes starts the process. More than one injured
+              region often needs a series. We will not quote a visit count
+              before the exam.
               </p>
               <p>
                 If motion, pain, or nerve symptoms are not changing, the plan
@@ -455,9 +460,9 @@ export default function PersonalInjuryContent() {
             note: "Short notes on whiplash and other problems, with links out to the longer pages.",
           },
           {
-            href: "/contact/appointment-request",
-            label: "Request an appointment",
-            note: "The form comes to the office. You can also call 952-920-7535.",
+            href: "/neck-pain",
+            label: "Neck pain",
+            note: "Stiffness, a pinched nerve, or a headache that starts in the neck, when it did not come from a crash.",
           },
           {
             href: "/new-patient-center/what-to-expect",

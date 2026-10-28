@@ -6,10 +6,11 @@ import FunctionalMedicineContent from "@/components/services/FunctionalMedicineC
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 
 const fallbackMeta: Metadata = generateMeta({
-  title: "Functional Medicine in Saint Louis Park, MN",
+  title: "Functional Medicine",
   description:
-    "Functional medicine in Saint Louis Park, MN. Dr. Alan Levitt uses a personalized, whole-person approach to address chronic pain and illness at the root.",
+    "Functional medicine in Saint Louis Park alongside chiropractic care. Sleep, food, and habits. Prescribed medications are not stopped.",
   slug: "functional-medicine",
+  absoluteTitle: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {
