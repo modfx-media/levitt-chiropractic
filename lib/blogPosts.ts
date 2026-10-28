@@ -1165,7 +1165,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Many jobs around Saint Louis Park involve long hours at a desk, and a lot of people spend extra time sitting in traffic on Highway 100 or I-394. All that sitting puts your body into a rounded, flexed position for long stretches. Hips stay bent, the low back often slumps, and the shoulders roll forward.",
+        text: "Many jobs around Saint Louis Park involve long hours at a desk, and a lot of people spend extra time sitting in traffic. All that sitting puts your body into a rounded, flexed position for long stretches. Hips stay bent, the low back often slumps, and the shoulders roll forward.",
       },
       {
         type: "p",

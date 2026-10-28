@@ -417,7 +417,7 @@ export default function ColdLaserTherapyContent() {
                   href={siteConfig.phoneHref}
                   className="font-semibold text-orange-300 transition-colors hover:text-orange-200"
                 >
-                  (952) 920-7535
+                  952-920-7535
                 </a>{" "}
                 to learn more.
               </p>

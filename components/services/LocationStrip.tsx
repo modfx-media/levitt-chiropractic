@@ -53,9 +53,10 @@ export function LocationStrip() {
               Address
             </p>
             <p className="mt-1 text-sm leading-relaxed text-[#0F172A]">
-              6200 Excelsior Blvd, Suite 201
+              {siteConfig.address.street}
               <br />
-              Saint Louis Park, MN 55416
+              {siteConfig.address.city}, {siteConfig.address.state}{" "}
+              {siteConfig.address.zip}
             </p>
           </div>
         </div>
