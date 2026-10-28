@@ -77,7 +77,7 @@ export default function InjuriesContent() {
               A strain that should have been gone in a week, a fall on packed
               snow, or a lift that “went” in the low back — that is the injury
               work here. We map what was hurt, what still moves, and whether
-              Methodist or another ER already cleared the danger. Then
+              an ER already cleared the danger. Then
               adjustments, ice or laser, and a few exercises you can actually
               do at home.
             </p>

@@ -21,7 +21,7 @@ const EXTRAS: Record<string, ServiceCopyExtra> = {
     visitFlow:
       "We map what was hurt, what still moves, and what imaging would actually change. Treatment is usually a mix of adjustments, ice or laser, and a few exercises you can do at home — not a gadget tour.",
     notFor:
-      "Open wounds, suspected fracture, or a patient who needs the ER. If Methodist or another hospital already cleared the acute danger, we pick up the soft-tissue and joint piece.",
+      "Open wounds, suspected fracture, or a patient who needs the ER. If an ER already cleared the acute danger, we pick up the soft-tissue and joint piece.",
   },
   "personal-injury": {
     whoItsFor:
@@ -73,7 +73,7 @@ const EXTRAS: Record<string, ServiceCopyExtra> = {
   },
   "back-pain-treatments": {
     whoItsFor:
-      "The desk-plus-commute lumbar pattern we see from Highway 100, 394, and 35W, plus the weekend-warrior disc that “went” lifting a cooler or a kid. Acute or chronic — the exam decides the mix.",
+      "The desk-plus-commute lumbar pattern we see in Twin Cities commuters, plus the weekend-warrior disc that “went” lifting a cooler or a kid. Acute or chronic — the exam decides the mix.",
     visitFlow:
       "Find the driver (joint, disc, hip, or deconditioning), treat what is safe to treat, and give you two or three things to do between visits. Imaging only when it would change the plan.",
     notFor:

@@ -13,7 +13,6 @@ import {
   driveLabel,
   visitFacts,
 } from "@/lib/areaPageCopy";
-import { localFact } from "@/lib/cityLocalFacts";
 import { serviceExtra } from "@/lib/serviceCopyExtras";
 import { ServiceHero } from "@/components/services/ServiceHero";
 import { LocationStrip } from "@/components/services/LocationStrip";
@@ -38,7 +37,6 @@ export default function AreaServicePageContent({ city, service }: Props) {
   const faqs = cityServiceFaqs(city, service);
   const facts = visitFacts(city);
   const extra = serviceExtra(service);
-  const fact = localFact(city);
   const relatedServices = pseoServices
     .filter((s) => s.slug !== service.slug)
     .slice(0, 6);
@@ -153,10 +151,6 @@ export default function AreaServicePageContent({ city, service }: Props) {
               </motion.div>
             ))}
           </div>
-          <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-relaxed text-slate-600">
-            From {city.name}, the usual route is {fact.corridor}. Nearby
-            medical context: {fact.hospital}.
-          </p>
         </div>
       </section>
 

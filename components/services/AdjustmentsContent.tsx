@@ -289,7 +289,7 @@ export default function AdjustmentsContent() {
             />
             <p className="mt-7 text-base leading-relaxed text-white/75 sm:text-lg">
               An adjustment is a specific contact on a joint that is not moving
-              the way it should — often the neck after Highway 100, or the low
+              the way it should — often the neck after a long commute, or the low
               back after a week at a desk. Dr. Levitt uses Diversified, Zone
               Therapy, or Torque Release depending on the exam, not a one-move
               routine. Some contacts are quick; some are gentle. You should
@@ -489,7 +489,7 @@ export default function AdjustmentsContent() {
                     href={siteConfig.phoneHref}
                     className="font-semibold text-orange-300 transition-colors hover:text-orange-200"
                   >
-                    (952) 920-7535
+                    952-920-7535
                   </a>
                 </p>
               </div>

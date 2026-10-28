@@ -105,9 +105,7 @@ export function Footer() {
                 />
               </Link>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-white/65">
-                Chiropractic care in Saint Louis Park since 1999 — Highway 100
-                and Excelsior Boulevard, near Methodist Hospital and the West
-                End.
+                Chiropractic care in Saint Louis Park since 1999.
               </p>
 
               {/* Contact row */}

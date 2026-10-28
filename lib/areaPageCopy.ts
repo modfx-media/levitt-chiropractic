@@ -40,7 +40,7 @@ export function cityIntro(city: ServedCity): {
 
   if (city.distanceMi === 0) {
     return {
-      lead: `Levitt Chiropractic Center is in ${city.name}, at ${siteConfig.address.street}, near ${city.landmark}. ZIP codes we see most days: ${zipPhrase(city)}.`,
+      lead: `Levitt Chiropractic Center is in ${city.name} at ${siteConfig.address.full}. ZIP codes we see most days: ${zipPhrase(city)}. Call ${siteConfig.phone}.`,
       support: `Dr. Alan Levitt has practiced here since 1999 (and as a chiropractor since 1987). Care is drug-free on purpose: spinal adjustments, cold laser, targeted ice, therapeutic exercise, and custom orthotics when the exam says they would change the load — not because they are on a menu.`,
       local: fact.note,
       typical: fact.typical,
@@ -48,8 +48,8 @@ export function cityIntro(city: ServedCity): {
   }
 
   return {
-    lead: `There is no second office in ${city.name}. If you live near ${city.landmark} or in ZIP ${zipPhrase(city)}, you are seen in Saint Louis Park — about ${city.distanceMi} miles, typically ${driveMinutes(city)} minutes when ${fact.corridor} is moving.`,
-    support: `That drive is why the first visit is unhurried. Dr. Levitt has treated ${city.region.toLowerCase()} families for decades, including people who also come from ${neighborsPhrase(city)}. You leave with a plan you can keep from ${city.name}, not a schedule that pretends you live on Excelsior Boulevard.`,
+    lead: `There is no second office in ${city.name}. If you live near ${city.landmark} or in ZIP ${zipPhrase(city)}, you are seen at ${siteConfig.address.full} — about ${city.distanceMi} miles, typically ${driveMinutes(city)} minutes. Call ${siteConfig.phone}.`,
+    support: `That drive is why the first visit is unhurried. Dr. Levitt has treated ${city.region.toLowerCase()} families for decades, including people who also come from ${neighborsPhrase(city)}. You leave with a plan you can keep from ${city.name}, not a schedule that pretends you live next door.`,
     local: fact.note,
     typical: fact.typical,
   };
@@ -59,8 +59,8 @@ export function cityWhyPoints(city: ServedCity): Array<{ title: string; body: st
   const fact = localFact(city);
   const drive =
     city.distanceMi === 0
-      ? `You are already in the neighborhood. Suite 201 has parking; Methodist Hospital is less than a mile east if you are coming from that campus.`
-      : `Most ${city.name} patients treat this as a dedicated appointment. We work around your calendar so the ${driveMinutes(city)}-minute drive via ${fact.corridor} is worth it.`;
+      ? `You are already in the neighborhood. The office is ${siteConfig.address.full}, and Suite 201 has parking. Call ${siteConfig.phone}.`
+      : `Most ${city.name} patients treat this as a dedicated appointment. We work around your calendar so the ${driveMinutes(city)}-minute drive is worth it. The office is ${siteConfig.address.full}. Call ${siteConfig.phone}.`;
 
   return [
     {
@@ -73,13 +73,12 @@ export function cityWhyPoints(city: ServedCity): Array<{ title: string; body: st
     },
     {
       title: "Root-cause, not a script",
-      body: `Dr. Levitt uses the exam — and imaging only when it would change the plan — then chooses among adjustments, laser, cryotherapy, exercise, and orthotics. Nearby medical context for ${city.name}: ${fact.hospital}.`,
+      body: `Dr. Levitt uses the exam — and imaging only when it would change the plan — then chooses among adjustments, laser, cryotherapy, exercise, and orthotics.`,
     },
   ];
 }
 
 export function firstVisitSteps(city: ServedCity): Array<{ title: string; body: string }> {
-  const fact = localFact(city);
   return [
     {
       title: "Tell the real story",
@@ -94,7 +93,7 @@ export function firstVisitSteps(city: ServedCity): Array<{ title: string; body: 
       body:
         city.distanceMi === 0
           ? `Because you live here, follow-ups can be tighter if the exam needs them. You still get homework so you are not living on the table.`
-          : `Because you are coming from ${city.name}, we do not write a fantasy of three visits a week. Home work has to survive ${fact.corridor}.`,
+          : `Because you are coming from ${city.name}, we do not write a fantasy of three visits a week. Home work has to fit the weeks you are not in the office.`,
     },
     {
       title: "Practical next step",
@@ -106,7 +105,7 @@ export function firstVisitSteps(city: ServedCity): Array<{ title: string; body: 
 export function insuranceNote(city: ServedCity): string {
   const crash =
     city.distanceMi === 0
-      ? `After a crash on Highway 100, Excelsior, or Highway 7, Minnesota no-fault (PIP) can cover chiropractic as a medical expense — you do not have to “win” a lawsuit first.`
+      ? `After a crash, Minnesota no-fault (PIP) can cover chiropractic as a medical expense — you do not have to “win” a lawsuit first.`
       : `If the problem started with a Twin Cities crash, Minnesota no-fault (PIP) can cover chiropractic medical expense through your own auto policy. That is a Minnesota rule, not a clinic slogan.`;
   return `${crash} Health insurance is a separate conversation; we will tell you what we can verify. No referral is required to book a first visit.`;
 }
@@ -117,11 +116,11 @@ export function cityFaqs(city: ServedCity): Array<{ q: string; a: string }> {
     city.distanceMi === 0
       ? {
           q: `Where is the chiropractor's office in ${city.name}?`,
-          a: `Levitt Chiropractic Center is at ${siteConfig.address.full}, near ${city.landmark}, along ${fact.corridor}. ${fact.hospital} is the medical campus most neighbors already know. Call ${siteConfig.phone} or request a visit online.`,
+          a: `Levitt Chiropractic Center is at ${siteConfig.address.full}. Call ${siteConfig.phone} or request a visit online.`,
         }
       : {
           q: `Do you have a chiropractic office in ${city.name}?`,
-          a: `No. There is one clinic, in Saint Louis Park at ${siteConfig.address.street}. From ${city.name} that is about ${city.distanceMi} miles (typically ${driveMinutes(city)} minutes) via ${fact.corridor}. We regularly see patients from ${city.name} and ${neighborsPhrase(city)}.`,
+          a: `No. There is one clinic, at ${siteConfig.address.full}. From ${city.name} that is about ${city.distanceMi} miles (typically ${driveMinutes(city)} minutes). We regularly see patients from ${city.name} and ${neighborsPhrase(city)}. Call ${siteConfig.phone}.`,
         };
 
   return [
@@ -136,7 +135,10 @@ export function cityFaqs(city: ServedCity): Array<{ q: string; a: string }> {
     },
     {
       q: `How do I park and find Suite 201?`,
-      a: `The office is Suite 201 at 6200 Excelsior Blvd. If you are coming from ${city.name}, give yourself extra minutes the first time so you are not rushed into the exam. Nearby context: ${fact.hospital}.`,
+      a:
+        city.distanceMi === 0
+          ? `The office is ${siteConfig.address.full}. Give yourself extra minutes the first time so you are not rushed into the exam. Call ${siteConfig.phone}.`
+          : `The office is ${siteConfig.address.full}. If you are coming from ${city.name}, give yourself extra minutes the first time so you are not rushed into the exam. Call ${siteConfig.phone}.`,
     },
     {
       q: `Does insurance cover chiropractic after a car accident in Minnesota?`,
@@ -159,14 +161,14 @@ export function cityServiceIntro(
 
   if (city.distanceMi === 0) {
     return {
-      lead: `${service.name} is available in our ${city.name} office near ${city.landmark}, along ${fact.corridor}.`,
+      lead: `${service.name} is available at our ${city.name} office, ${siteConfig.address.full}. Call ${siteConfig.phone}.`,
       support: extra.whoItsFor,
       local: `${fact.note} People in ZIP ${zipPhrase(city)} typically book this for ${conditions}.`,
     };
   }
 
   return {
-    lead: `${city.name} residents receive ${service.inlineNoun} in Saint Louis Park — about ${city.distanceMi} miles (${driveMinutes(city)} minutes) from ${city.landmark} via ${fact.corridor}.`,
+    lead: `${city.name} residents receive ${service.inlineNoun} at ${siteConfig.address.full} — about ${city.distanceMi} miles (${driveMinutes(city)} minutes) from ${city.landmark}. Call ${siteConfig.phone}.`,
     support: extra.whoItsFor,
       local: `This is not a second ${city.name} office. ${fact.note} Common reasons ${city.name} patients book ${service.inlineNoun}: ${conditions}.`,
   };
@@ -177,14 +179,13 @@ export function cityServiceFaqs(
   service: PseoService,
 ): Array<{ q: string; a: string }> {
   const extra = serviceExtra(service);
-  const fact = localFact(city);
 
   const travel = {
     q: `Can I get ${service.name.toLowerCase()} if I live in ${city.name}?`,
     a:
       city.distanceMi === 0
-        ? `Yes — you will be seen here in ${city.name} at ${siteConfig.address.street}.`
-        : `Yes. There is no ${city.name} branch. Appointments are at the Saint Louis Park office, typically a ${driveMinutes(city)}-minute drive via ${fact.corridor}. Call ${siteConfig.phone} if you want to confirm timing before you come.`,
+        ? `Yes — you will be seen at ${siteConfig.address.full}. Call ${siteConfig.phone}.`
+        : `Yes. There is no ${city.name} branch. Appointments are at ${siteConfig.address.full}, typically a ${driveMinutes(city)}-minute drive. Call ${siteConfig.phone} if you want to confirm timing before you come.`,
   };
 
   const fit = {
@@ -212,9 +213,9 @@ export function visitFacts(city: ServedCity): Array<{ label: string; value: stri
 export function cityMetaDescription(city: ServedCity): string {
   const fact = localFact(city);
   if (city.distanceMi === 0) {
-    return `Chiropractor in Saint Louis Park at 6200 Excelsior Blvd. Adjustments, laser, and orthotics near Methodist Hospital and the West End. Call ${siteConfig.phone}.`;
+    return `Chiropractor in Saint Louis Park at ${siteConfig.address.full}. Adjustments, laser, and orthotics with Dr. Alan Levitt since 1999. Call ${siteConfig.phone}.`;
   }
-  return `${city.name} chiropractic care in Saint Louis Park — about ${driveMinutes(city)} min via ${fact.corridor}. ${serviceClip(fact.typical)} Call ${siteConfig.phone}.`;
+  return `${city.name} chiropractic care at ${siteConfig.address.full} — about ${driveMinutes(city)} min. ${serviceClip(fact.typical)} Call ${siteConfig.phone}.`;
 }
 
 export function cityServiceMetaDescription(city: ServedCity, service: PseoService): string {

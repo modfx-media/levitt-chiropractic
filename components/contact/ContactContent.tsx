@@ -59,8 +59,9 @@ export default function ContactContent() {
               />
               <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
                 We encourage you to contact us via phone or email. Fill out
-                the form to send us a message. For directions to the office,
-                click the map below. If you have any questions or comments,
+                the form to send us a message. The map below shows the office
+                at 6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416.
+                If you have any questions or comments,
                 please feel free to get in touch we&rsquo;re always happy
                 to hear from you!
               </p>
