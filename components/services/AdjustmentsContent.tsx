@@ -291,7 +291,7 @@ export default function AdjustmentsContent() {
             />
             <p className="mt-7 text-base leading-relaxed text-white/75 sm:text-lg">
               An adjustment is a specific contact on a joint that is not moving
-              the way it should — often the neck after Highway 100, or the low
+              the way it should — often the neck after a long commute, or the low
               back after a week at a desk. Dr. Levitt uses Diversified, Zone
               Therapy, or Torque Release depending on the exam, not a one-move
               routine. Some contacts are quick; some are gentle. You should
@@ -491,7 +491,7 @@ export default function AdjustmentsContent() {
                     href={siteConfig.phoneHref}
                     className="font-semibold text-orange-300 transition-colors hover:text-orange-200"
                   >
-                    (952) 920-7535
+                    952-920-7535
                   </a>
                 </p>
               </div>
@@ -541,10 +541,16 @@ export default function AdjustmentsContent() {
                     className="mt-5"
                   >
                     <Link
-                      href="/appointment"
+                      href={siteConfig.appointmentUrl}
                       className="flex h-12 w-full items-center justify-center rounded-full bg-[#F97316] px-6 text-sm font-bold text-white shadow-md shadow-orange-500/30 transition-colors hover:bg-orange-600"
                     >
-                      Request Appointment →
+                      NEW Patient Appointment →
+                    </Link>
+                    <Link
+                      href={siteConfig.existingPatientAppointmentUrl}
+                      className="mt-3 flex h-12 w-full items-center justify-center rounded-full border border-white/25 px-6 text-sm font-bold text-white transition-colors hover:border-[#F97316] hover:text-orange-300"
+                    >
+                      Existing Patient Appointment →
                     </Link>
                   </motion.div>
                 </div>

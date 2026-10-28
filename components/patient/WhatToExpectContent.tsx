@@ -303,24 +303,32 @@ export default function WhatToExpectContent() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href="/contact/appointment-request"
-                  className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#F97316] transition-colors hover:text-orange-600"
-                >
-                  Request an appointment
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="h-3.5 w-3.5"
-                    aria-hidden
-                  >
-                    <path d="M5 12h14M13 5l7 7-7 7" />
-                  </svg>
-                </Link>
+                <div className="mt-6 flex flex-col items-start gap-3">
+                  {[
+                    { label: "NEW Patient Appointment", href: "/contact/new-patient-appointment" },
+                    { label: "Existing Patient Appointment", href: "/contact/existing-patient-appointment" },
+                  ].map((cta) => (
+                    <Link
+                      key={cta.href}
+                      href={cta.href}
+                      className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#F97316] transition-colors hover:text-orange-600"
+                    >
+                      {cta.label}
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="h-3.5 w-3.5"
+                        aria-hidden
+                      >
+                        <path d="M5 12h14M13 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </motion.aside>
           </div>
@@ -362,7 +370,7 @@ export default function WhatToExpectContent() {
                 </a>{" "}
                 or{" "}
                 <Link
-                  href="/contact/appointment-request"
+                  href="/contact/new-patient-appointment"
                   className="font-semibold text-orange-300 underline-offset-4 transition-colors hover:underline"
                 >
                   request a visit online

@@ -80,17 +80,27 @@ export function StickyBookNowBanner() {
                 <span className="hidden text-[10px] font-semibold uppercase tracking-[0.18em] text-white/60 sm:block">
                   Call Today
                 </span>
-                <span className="truncate">{siteConfig.phone}</span>
+                <span className="hidden truncate sm:inline">{siteConfig.phone}</span>
               </span>
             </a>
 
-            <Link
-              href={siteConfig.appointmentUrl}
-              className="inline-flex flex-shrink-0 items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold uppercase tracking-[0.1em] text-white shadow-lg shadow-orange-500/30 transition hover:bg-orange-600 sm:px-6 sm:py-3 sm:text-[13px] sm:tracking-[0.14em]"
-            >
-              <CalendarIcon className="h-4 w-4" />
-              Book Now
-            </Link>
+            <div className="flex flex-shrink-0 items-center gap-2 sm:gap-3">
+              <Link
+                href={siteConfig.appointmentUrl}
+                className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-primary px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-white shadow-lg shadow-orange-500/30 transition hover:bg-orange-600 sm:px-5 sm:py-3 sm:text-[12px] sm:tracking-[0.1em]"
+              >
+                <CalendarIcon className="hidden h-4 w-4 sm:block" />
+                NEW Patient
+                <span className="-ml-1 hidden sm:inline">Appointment</span>
+              </Link>
+              <Link
+                href={siteConfig.existingPatientAppointmentUrl}
+                className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-white/25 px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-white transition hover:border-primary hover:text-primary sm:px-5 sm:py-3 sm:text-[12px] sm:tracking-[0.1em]"
+              >
+                Existing Patient
+                <span className="-ml-1 hidden sm:inline">Appointment</span>
+              </Link>
+            </div>
           </div>
         </motion.div>
       )}

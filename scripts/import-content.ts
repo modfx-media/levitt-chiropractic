@@ -416,7 +416,7 @@ async function main() {
                 heading: "Request an appointment",
                 body: `Call ${siteConfig.phone} or request a visit online.`,
                 label: "Request Appointment",
-                href: "/contact/appointment-request",
+                href: "/contact/new-patient-appointment",
               },
             ],
           }),
@@ -475,8 +475,7 @@ async function main() {
     await payload.updateGlobal({
       slug: "footer",
       data: {
-        blurb:
-          "Chiropractic care in Saint Louis Park since 1999 — Highway 100 and Excelsior Boulevard, near Methodist Hospital and the West End.",
+        blurb: "Chiropractic care in Saint Louis Park since 1999.",
       },
       overrideAccess: true,
     });

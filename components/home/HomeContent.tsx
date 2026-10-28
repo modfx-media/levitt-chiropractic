@@ -36,11 +36,11 @@ const HERO_IMAGE_ALTS = [
 const homeFaqs = [
   {
     q: "Is Levitt Chiropractic accepting new patients in Saint Louis Park?",
-    a: "Yes. Dr. Alan Levitt is accepting new patients at 6200 Excelsior Blvd, Suite 201. Minnesota does not require a physician referral. Request a visit online or call 952-920-7535 — most people are seen the same week.",
+    a: "Yes. Dr. Alan Levitt is accepting new patients at 6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416. Minnesota does not require a physician referral. Request a visit online or call 952-920-7535 — most people are seen the same week.",
   },
   {
     q: "Where is the clinic, and how do I get there?",
-    a: "Suite 201 at 6200 Excelsior Blvd, Saint Louis Park, MN 55416. Highway 100 and Excelsior are the usual routes. Park Nicollet Methodist Hospital is less than a mile east on the same street. Patients also come from Minneapolis, Edina, Hopkins, Minnetonka, and Golden Valley.",
+    a: "6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416. Call 952-920-7535. Patients also come from Minneapolis, Edina, Hopkins, Minnetonka, and Golden Valley.",
   },
   {
     q: "What happens on a first visit?",
@@ -52,7 +52,7 @@ const homeFaqs = [
   },
   {
     q: "What is a red flag in chiropractic?",
-    a: "A red flag is a sign we should not just adjust: unexplained weight loss, night pain, fever, bowel or bladder changes, progressive weakness, or a significant recent trauma. Those need medical screening. A stiff neck after a week on Highway 100 is a different story.",
+    a: "A red flag is a sign we should not just adjust: unexplained weight loss, night pain, fever, bowel or bladder changes, progressive weakness, or a significant recent trauma. Those need medical screening. A stiff neck after a week of commuting is a different story.",
   },
   {
     q: "Can a chiropractor help heel spurs?",
@@ -206,8 +206,8 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
         title="Chiropractor in"
         titleAccent="Saint Louis Park"
         subtitle="Your spine health specialists. Drug-free, personalized care from Dr. Alan Levitt — adjustments, cold laser, cryotherapy, and custom orthotics."
-        ctaText="REQUEST APPOINTMENT"
-        ctaHref="/contact/appointment-request"
+        ctaText="NEW PATIENT APPOINTMENT"
+        ctaHref="/contact/new-patient-appointment"
         secondaryCtaText="Meet Dr. Levitt"
         secondaryCtaHref="/meet-the-doctor"
         backgroundImages={HERO_IMAGES}
@@ -319,25 +319,32 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
 
             <div className="mt-8 space-y-5 text-base leading-relaxed text-slate-700 sm:text-lg">
               <p>
-                If you live in Saint Louis Park, you already know Excelsior
-                Boulevard. The clinic is in Suite 201 at 6200 — west of Park
-                Nicollet Methodist Hospital, near the West End, not a downtown
-                skyway office. Dr. Alan Levitt has practiced here since 1999
-                (and as a chiropractor since 1987).
+                At Levitt Chiropractic Center, we believe effective care starts
+                with understanding the whole person, not just the symptoms. Led
+                by Dr. Alan Levitt, who has been practicing chiropractic care
+                since 1987, our clinic provides personalized, drug-free
+                treatment designed to improve mobility, relieve discomfort, and
+                support long-term wellness.
               </p>
               <p>
-                Most first visits are not dramatic injuries. They are Highway
-                100 necks, a disc that “went” lifting a cooler, or stiffness
-                that stretching only fixes for a day. Care is drug-free on
-                purpose: adjustments, cold laser, targeted ice, exercise, and
-                custom orthotics when the exam says they would actually change
-                the load.
+                Whether you&apos;re experiencing chronic neck or back pain,
+                recovering from an injury, or dealing with everyday stiffness
+                and discomfort, our approach focuses on identifying the
+                underlying factors contributing to your condition rather than
+                simply addressing the symptoms.
               </p>
               <p>
-                We look at the whole pattern — how you sit, how you walk, what
-                you eat, what the nervous system is doing — and we will send
-                you to a physician first if the story sounds like a red flag,
-                not a mechanical spine problem.
+                We combine chiropractic adjustments with complementary
+                therapies, including cold laser therapy, targeted exercises, and
+                custom orthotics when appropriate. Every treatment plan is
+                tailored to your individual needs, with an emphasis on restoring
+                function and helping you feel your best.
+              </p>
+              <p>
+                Our whole-body philosophy considers how your posture, movement,
+                lifestyle, and overall health influence your well-being. We take
+                the time to listen, evaluate, and develop a thoughtful care plan
+                that supports your health and quality of life.
               </p>
             </div>
 
@@ -742,8 +749,8 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
               Neighborhoods we see every week
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              One clinic in Saint Louis Park. Patients drive from the cities
-              below — usually via Highway 100, 394, or Excelsior Boulevard.
+              One clinic at 6200 Excelsior Blvd, Suite 201, Saint Louis Park,
+              MN 55416. Patients come from the cities below.
             </p>
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -966,10 +973,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
               className="mx-auto mt-4 block h-1 w-16 rounded-full bg-primary"
             />
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600">
-              6200 Excelsior Blvd, Suite 201. Highway 100 and Excelsior are
-              the usual routes. Methodist Hospital is less than a mile east
-              on the same street — useful if you are coming from that campus
-              or giving a rideshare the landmark.
+              6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416.
             </p>
           </motion.div>
 
@@ -1020,9 +1024,10 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                         Address
                       </p>
                       <p className="mt-1.5 leading-snug text-white/85">
-                        6200 Excelsior Blvd, Suite 201
+                        {siteConfig.address.street}
                         <br />
-                        Saint Louis Park, MN 55416
+                        {siteConfig.address.city}, {siteConfig.address.state}{" "}
+                        {siteConfig.address.zip}
                       </p>
                     </div>
                     <div>
@@ -1033,19 +1038,9 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                         href={siteConfig.phoneHref}
                         className="mt-1.5 block font-semibold text-white transition-colors hover:text-primary"
                       >
-                        952-920-7535
+                        {siteConfig.phone}
                       </a>
                     </div>
-                  </div>
-
-                  <div className="mt-6">
-                    <Button
-                      href="/contact/appointment-request"
-                      variant="primary"
-                      size="md"
-                    >
-                      Book an Appointment
-                    </Button>
                   </div>
                 </div>
               </div>
@@ -1143,11 +1138,18 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
             <Button
-              href="/contact/appointment-request"
+              href="/contact/new-patient-appointment"
               variant="primary"
               size="lg"
             >
-              Request Appointment
+              NEW Patient Appointment
+            </Button>
+            <Button
+              href={siteConfig.existingPatientAppointmentUrl}
+              variant="outline"
+              size="lg"
+            >
+              Existing Patient Appointment
             </Button>
             <Button href={siteConfig.phoneHref} variant="outline" size="lg">
               Call 952-920-7535

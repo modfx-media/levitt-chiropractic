@@ -148,7 +148,7 @@ export default function BackPainTreatmentsContent() {
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
                 Most back pain we see in Saint Louis Park is not a medical
-                mystery. It is a desk, a commute on Highway 100 or 394, and a
+                mystery. It is a desk, a commute, and a
                 weekend that asked the disc to lift something it was not warm
                 for. Medication can take the edge off. Surgery has a place.
                 Neither is the first conversation for a mechanical lumbar
@@ -304,8 +304,7 @@ export default function BackPainTreatmentsContent() {
                 >
                   schedule online
                 </Link>
-                . Methodist Hospital is less than a mile east if you need that
-                campus first.
+                .
               </p>
             </motion.div>
 

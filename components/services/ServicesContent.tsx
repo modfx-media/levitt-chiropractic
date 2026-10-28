@@ -532,7 +532,7 @@ export default function ServicesContent() {
                 </a>{" "}
                 or{" "}
                 <Link
-                  href="/contact/appointment-request"
+                  href="/contact/new-patient-appointment"
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
                   request a visit

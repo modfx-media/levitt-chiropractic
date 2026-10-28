@@ -17,7 +17,6 @@ import {
   visitFacts,
   zipPhrase,
 } from "@/lib/areaPageCopy";
-import { localFact } from "@/lib/cityLocalFacts";
 import { ServiceHero } from "@/components/services/ServiceHero";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { CtaCard } from "@/components/services/CtaCard";
@@ -40,7 +39,6 @@ export default function AreaCityPageContent({ city }: { city: ServedCity }) {
   const faqs = cityFaqs(city);
   const facts = visitFacts(city);
   const steps = firstVisitSteps(city);
-  const fact = localFact(city);
   const corePages = [
     { href: "/adjustments-and-manipulation", label: "Adjustments" },
     { href: "/back-pain-treatments", label: "Back pain" },
@@ -56,7 +54,7 @@ export default function AreaCityPageContent({ city }: { city: ServedCity }) {
         title={`Chiropractor in ${city.name}, MN`}
         subtitle={
           city.distanceMi === 0
-            ? `Drug-free chiropractic care in ${city.name} — adjustments, cold laser, cryotherapy, and custom orthotics at ${siteConfig.address.street}.`
+            ? `Drug-free chiropractic care in ${city.name} — adjustments, cold laser, cryotherapy, and custom orthotics at ${siteConfig.address.full}.`
             : `${city.name} patients are seen in Saint Louis Park — ${driveLabel(city).toLowerCase()} from ${city.landmark}.`
         }
         crumbs={[
@@ -97,10 +95,6 @@ export default function AreaCityPageContent({ city }: { city: ServedCity }) {
             </p>
             <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg">
               {copy.typical}
-            </p>
-            <p className="mt-4 text-sm leading-relaxed text-slate-600">
-              Usual route from {city.name}: {fact.corridor}. Nearby medical
-              context: {fact.hospital}.
             </p>
           </motion.div>
 

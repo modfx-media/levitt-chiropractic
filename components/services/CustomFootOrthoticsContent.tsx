@@ -147,7 +147,7 @@ export default function CustomFootOrthoticsContent() {
             />
             <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
               If the heel hurts first thing in the morning, or the knee tracks
-              badly after a West End walk, the foot is often the missing
+              badly after a long walk, the foot is often the missing
               lever. Custom devices are molded to your foot, not pulled from a
               wall rack. Over-the-counter inserts are cheaper and usually the
               wrong shape. We will say so if the problem is a hip that is not
@@ -395,7 +395,7 @@ export default function CustomFootOrthoticsContent() {
                   href={siteConfig.phoneHref}
                   className="font-semibold text-orange-300 transition-colors hover:text-orange-200"
                 >
-                  (952) 920-7535
+                  952-920-7535
                 </a>{" "}
                 or request a visit online.
               </p>
@@ -445,10 +445,16 @@ export default function CustomFootOrthoticsContent() {
                     className="mt-5"
                   >
                     <Link
-                      href="/appointment"
+                      href={siteConfig.appointmentUrl}
                       className="flex h-12 w-full items-center justify-center rounded-full bg-[#F97316] px-6 text-sm font-bold text-white shadow-md shadow-orange-500/30 transition-colors hover:bg-orange-600"
                     >
-                      Request Appointment →
+                      NEW Patient Appointment →
+                    </Link>
+                    <Link
+                      href={siteConfig.existingPatientAppointmentUrl}
+                      className="mt-3 flex h-12 w-full items-center justify-center rounded-full border border-white/25 px-6 text-sm font-bold text-white transition-colors hover:border-[#F97316] hover:text-orange-300"
+                    >
+                      Existing Patient Appointment →
                     </Link>
                   </motion.div>
                 </div>

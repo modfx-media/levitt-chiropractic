@@ -56,7 +56,8 @@ export const sitemapEntries: SitemapEntry[] = [
 
   // Contact
   { path: "/contact", priority: 0.9, changefreq: "monthly" },
-  { path: "/contact/appointment-request", priority: 0.9, changefreq: "monthly" },
+  { path: "/contact/new-patient-appointment", priority: 0.9, changefreq: "monthly" },
+  { path: "/contact/existing-patient-appointment", priority: 0.8, changefreq: "monthly" },
 
   // /site-map is noindex. It stays as a page and in the footer, but it is
   // not listed in sitemap.xml. See SITEMAP_EXCLUSIONS in the XML route.
@@ -147,7 +148,11 @@ export const sitemapSections: SitemapSection[] = [
     description: "Get in touch or book a visit.",
     links: [
       { label: "Contact Us", href: "/contact" },
-      { label: "Request an Appointment", href: "/contact/appointment-request" },
+      { label: "New Patient Appointment", href: "/contact/new-patient-appointment" },
+      {
+        label: "Existing Patient Appointment",
+        href: "/contact/existing-patient-appointment",
+      },
     ],
   },
   {

@@ -2,7 +2,7 @@
  *  Each entry powers a programmatic page at /areas-we-serve/[citySlug]
  *  and a service-specific page at /areas-we-serve/[citySlug]/[serviceSlug].
  *
- *  `distanceMi` is approximate driving distance from 6200 Excelsior Blvd #201,
+ *  `distanceMi` is approximate driving distance from 6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416,
  *  Saint Louis Park, MN. `neighbors` are 3-5 cities most commonly grouped with
  *  the entry for local-relevance copy.
  */
@@ -21,7 +21,7 @@ export type ServedCity = {
 
 export const servedCities: ServedCity[] = [
   // Home city
-  { slug: "saint-louis-park", name: "Saint Louis Park", county: "Hennepin", distanceMi: 0, population: 50000, zips: ["55416", "55426", "55436"], neighbors: ["Edina", "Hopkins", "Minneapolis"], landmark: "the West End District", region: "West Metro" },
+  { slug: "saint-louis-park", name: "Saint Louis Park", county: "Hennepin", distanceMi: 0, population: 50000, zips: ["55416", "55426", "55436"], neighbors: ["Edina", "Hopkins", "Minneapolis"], landmark: "central Saint Louis Park", region: "West Metro" },
 
   // Minneapolis core
   { slug: "minneapolis", name: "Minneapolis", county: "Hennepin", distanceMi: 5, population: 425000, zips: ["55401", "55402", "55403", "55404", "55405", "55408", "55409", "55410", "55411", "55416", "55418"], neighbors: ["Saint Louis Park", "Edina", "Saint Paul"], landmark: "the Chain of Lakes", region: "Minneapolis" },

@@ -66,8 +66,8 @@ export function HeroSection({
   titleAccent,
   subtitle,
   eyebrow,
-  ctaText = "Request Appointment",
-  ctaHref = "/contact/appointment-request",
+  ctaText = "NEW Patient Appointment",
+  ctaHref = "/contact/new-patient-appointment",
   secondaryCtaText,
   secondaryCtaHref,
   backgroundImage,
@@ -323,6 +323,15 @@ export function HeroSection({
                 {ctaText && (
                   <Button href={ctaHref} size="lg" variant="primary">
                     {ctaText}
+                  </Button>
+                )}
+                {ctaText && ctaHref === siteConfig.appointmentUrl && (
+                  <Button
+                    href={siteConfig.existingPatientAppointmentUrl}
+                    size="lg"
+                    variant="outline"
+                  >
+                    Existing Patient Appointment
                   </Button>
                 )}
                 {secondaryCtaText && secondaryCtaHref && (

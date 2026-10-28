@@ -157,17 +157,6 @@ function MobileEntry({
                   </Link>
                 );
               })}
-
-              {entry.href !== siteConfig.appointmentUrl && (
-                <Link
-                  href={siteConfig.appointmentUrl}
-                  onClick={onClose}
-                  className="mt-1.5 flex items-center justify-between gap-2 rounded-md bg-primary/15 px-3 py-2 text-sm font-semibold text-primary ring-1 ring-primary/30 hover:bg-primary hover:text-white"
-                >
-                  <span>Book Appointment</span>
-                  <span aria-hidden>→</span>
-                </Link>
-              )}
             </div>
           </motion.div>
         )}
@@ -193,7 +182,7 @@ export function MobileMenu({ open, onClose, pathname }: Props) {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-50 h-[100dvh] lg:hidden"
+          className="fixed inset-0 z-50 h-[100dvh] xl:hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -284,7 +273,14 @@ export function MobileMenu({ open, onClose, pathname }: Props) {
                 onClick={onClose}
                 className="mt-4 flex w-full items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white hover:bg-orange-600"
               >
-                Request Appointment
+                NEW Patient Appointment
+              </Link>
+              <Link
+                href={siteConfig.existingPatientAppointmentUrl}
+                onClick={onClose}
+                className="mt-3 flex w-full items-center justify-center rounded-full border border-white/25 px-5 py-3 text-sm font-semibold text-white hover:border-primary hover:text-primary"
+              >
+                Existing Patient Appointment
               </Link>
               <p className="mt-4 text-sm text-white/70">
                 {siteConfig.address.full}

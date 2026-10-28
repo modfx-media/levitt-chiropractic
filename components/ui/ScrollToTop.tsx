@@ -31,7 +31,7 @@ export function ScrollToTop() {
           transition={{ duration: 0.2, ease: "easeOut" }}
           whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.95 }}
-          className="fixed bottom-6 right-6 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-orange-500/30 ring-1 ring-black/10 hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          className="fixed bottom-20 right-4 z-40 sm:bottom-24 sm:right-6 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-orange-500/30 ring-1 ring-black/10 hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         >
           <svg
             width="20"

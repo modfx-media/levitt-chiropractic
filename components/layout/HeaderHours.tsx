@@ -279,7 +279,7 @@ export function HeaderHours({ variant = "topbar" }: { variant?: Variant }) {
                 );
               })}
             </ul>
-            <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/10 pt-4 text-xs">
+            <div className="mt-4 flex flex-col gap-2 border-t border-white/10 pt-4 text-xs">
               <a
                 href={siteConfig.phoneHref}
                 className="font-semibold text-orange-300 transition-colors hover:text-primary"
@@ -290,7 +290,13 @@ export function HeaderHours({ variant = "topbar" }: { variant?: Variant }) {
                 href={siteConfig.appointmentUrl}
                 className="font-semibold text-white/80 transition-colors hover:text-white"
               >
-                Request appointment →
+                NEW Patient Appointment →
+              </a>
+              <a
+                href={siteConfig.existingPatientAppointmentUrl}
+                className="font-semibold text-white/80 transition-colors hover:text-white"
+              >
+                Existing Patient Appointment →
               </a>
             </div>
           </motion.div>
