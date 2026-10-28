@@ -95,34 +95,35 @@ export default function PersonalInjuryContent() {
         <div className="mx-auto max-w-3xl px-6">
           <SectionIntro
             eyebrow="After a crash"
-            title="An auto accident is a personal injury, not a form letter"
+            title="When a car accident leads to neck or back pain"
           >
             <p>
-              People search for a car accident chiropractor when the neck or
-              back hurts after a collision and they are not sure whether to
-              wait. Personal injury here means the body after a crash, a fall,
-              a bike hit, or a workplace mishap. This page is the auto
-              accident visit, including the rear-end crash that leaves the
-              neck stiff the next morning.
+              After a collision, the neck or back may hurt right away or the
+              next morning. Personal injury care here is for the body after a crash, a fall,
+              a bike hit, or a workplace mishap. An auto accident visit
+              includes the rear-end crash that leaves the neck stiff the next
+              morning. A car accident chiropractor visit still starts with an
+              exam.
             </p>
             <p>
               Whiplash is the neck injury from a sudden back-and-forth motion.
-              Neck pain that did not start with a crash is on the{" "}
+              Neck pain that did not start with a crash is covered under{" "}
               <Link
                 href="/neck-pain"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 neck pain
-              </Link>{" "}
-              page. The same impact can irritate the mid back or low back.
-              Sports and work strains that did not start with a crash belong on the{" "}
+              </Link>
+              . The same impact can irritate the mid back or low back.
+              Sports and work strains that did not start with a crash are
+              covered under{" "}
               <Link
                 href="/injuries"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 injuries
-              </Link>{" "}
-              page.
+              </Link>
+              .
             </p>
             <p className="border-l-4 border-[#F97316] pl-6">
               Minnesota is a no-fault state. Personal injury protection on
@@ -185,8 +186,8 @@ export default function PersonalInjuryContent() {
                 auto accident. The head is thrown one way and then the other.
                 Muscles and ligaments can be strained. Joints between the
                 neck vertebrae can be irritated. In some crashes the same
-                force bothers a disc or a nerve. Our conditions page describes
-                the same split: soft-tissue strain, and sometimes a structural
+                force bothers a disc or a nerve. The same split shows up in
+                other spinal problems: soft-tissue strain, and sometimes a structural
                 problem such as a joint that is not moving well.
               </p>
               <p>
@@ -321,7 +322,7 @@ export default function PersonalInjuryContent() {
                 href="/adjustments-and-manipulation"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
-                adjustments page
+                adjustments
               </Link>{" "}
               describes those three. An adjustment is not the opening move
               when the history is a red flag or the joint is not safe to move.
@@ -359,7 +360,7 @@ export default function PersonalInjuryContent() {
                 href="/therapeutic-exercise"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
-                exercise page
+                exercise
               </Link>{" "}
               lists those categories.
             </p>
@@ -399,12 +400,12 @@ export default function PersonalInjuryContent() {
                 >
                   back pain
                 </Link>{" "}
-                page, and disc injuries on the{" "}
+                , and disc injuries under{" "}
                 <Link
                   href="/degenerative-disc-disease"
                   className="font-semibold text-orange-300 underline-offset-4 hover:underline"
                 >
-                  disc page
+                  disc care
                 </Link>
                 .
               </p>
@@ -436,8 +437,8 @@ export default function PersonalInjuryContent() {
 
       <RelatedCare
         eyebrow="Related care"
-        title="Pages that belong with an injury visit"
-        intro="Use these when the crash problem overlaps another service on this site."
+        title="Care that often follows a crash"
+        intro="Use these when the crash also involves the low back, a disc, or neck pain that is not from the collision."
         links={[
           {
             href: "/injuries",
@@ -457,7 +458,7 @@ export default function PersonalInjuryContent() {
           {
             href: "/common-chiropractic-conditions",
             label: "Condition overview",
-            note: "Short notes on whiplash and other problems, with links out to the longer pages.",
+            note: "Short notes on whiplash and other problems, with links to the matching care.",
           },
           {
             href: "/neck-pain",

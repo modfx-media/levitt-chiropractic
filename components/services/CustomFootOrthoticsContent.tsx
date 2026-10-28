@@ -33,7 +33,7 @@ const faqs = [
   },
   {
     q: "How long do they last, and what do they cost?",
-    a: "Most prescription orthotics on this site are described as lasting well over a year in regular use. This page does not list a price. Ask the office. Drugstore inserts are cheaper and often the wrong shape, which is a different problem from the sticker.",
+    a: "Most prescription orthotics last well over a year in regular use. We do not list a price here. Ask the office. Drugstore inserts are cheaper and often the wrong shape, which is a different problem from the sticker.",
   },
 ];
 
@@ -118,11 +118,11 @@ export default function CustomFootOrthoticsContent() {
               They are a poor idea for an isolated disc herniation that has
               nothing to do with the feet. That problem is on the{" "}
               <Link href="/degenerative-disc-disease" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
-                disc page
+                disc care
               </Link>
               . Recurring back pain in general is on the{" "}
               <Link href="/back-pain-treatments" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
-                back pain page
+                back pain care
               </Link>.
             </p>
             <p>
@@ -157,7 +157,7 @@ export default function CustomFootOrthoticsContent() {
               Break-in is gradual. A new pair that hurts more after a full
               day is a reason to call, not a test of toughness. Most people
               use them in daily and athletic shoes. Bring the odd pair if you
-              are unsure it has room. There is no published fee on this page.
+              are unsure it has room. There is no published fee in advance.
               Ask when you{" "}
               <Link href="/contact/new-patient-appointment" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 book
@@ -171,7 +171,7 @@ export default function CustomFootOrthoticsContent() {
               <Link href="/adjustments-and-manipulation" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 adjustments
               </Link>{" "}
-              page is the contact. This page is the ground.
+              is the contact. Orthotics are the ground.
             </p>
           </SectionIntro>
         </div>
@@ -259,7 +259,7 @@ export default function CustomFootOrthoticsContent() {
       <RelatedCare
         eyebrow="Related"
         title="Pain that might be coming from the ground"
-        intro="Read the condition page first if you are not sure the feet are involved."
+        intro="Read about the painful condition first if you are not sure the feet are involved."
         links={[
           { href: "/back-pain-treatments", label: "Back pain", note: "Orthotics are one possible lever, not the default." },
           { href: "/neck-pain", label: "Neck pain", note: "Occasionally related to stance. Usually a neck problem of its own." },

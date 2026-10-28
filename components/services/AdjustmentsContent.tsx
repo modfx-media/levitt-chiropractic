@@ -15,7 +15,7 @@ const techniques = [
   },
   {
     title: "Zone Therapy",
-    body: "Aimed at a region rather than a single celebrity joint. The description on this site pairs the adjustment with spinal massage so the area is treated as a connected set of parts, not an isolated click.",
+    body: "Aimed at a region rather than one joint in isolation. The adjustment is paired with spinal massage so the area is treated as a connected set of parts, not an isolated click.",
   },
   {
     title: "Torque Release",
@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     q: "Will I be adjusted on the first visit?",
-    a: "Only if the exam says it is safe and useful that day. Some people leave the first visit with a plan and no thrust. X-rays are taken when they would change the plan, not as a routine. The first-visit steps are on the what-to-expect page.",
+    a: "Only if the exam says it is safe and useful that day. Some people leave the first visit with a plan and no thrust. X-rays are taken when they would change the plan, not as a routine. The first-visit steps are explained under what to expect.",
   },
   {
     q: "How many adjustments will I need?",
@@ -42,7 +42,7 @@ const faqs = [
   },
   {
     q: "Do you only adjust the spine?",
-    a: "The techniques above are spinal and regional. The problems this page already lists include low-back pain, neck pain, headaches, other musculoskeletal pain, subluxations, and auto, sports, and personal injuries. Feet are a separate service when orthotics are the lever. Laser and ice are separate tools.",
+    a: "The techniques above are spinal and regional. They are used for low-back pain, neck pain, headaches, other musculoskeletal pain, subluxations, and auto, sports, and personal injuries. Feet are a separate service when orthotics are the lever. Laser and ice are separate tools.",
   },
 ];
 
@@ -107,25 +107,25 @@ export default function AdjustmentsContent() {
 
       <section className="bg-white py-12 sm:py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
-          <SectionIntro eyebrow="Who it is for" title="The problems this page already claims">
+          <SectionIntro eyebrow="Who it is for" title="Problems an adjustment may address">
             <p>
               Lower back pain, neck pain, headaches, other musculoskeletal
               pain, subluxations, and injuries from auto crashes, sport, and
-              personal mishaps. Each of those has more room on its own URL.
-              Neck pain is{" "}
+              personal mishaps. Each of those is explained with the condition
+              it belongs to. Neck pain is{" "}
               <Link href="/neck-pain" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">neck pain</Link>.
               Back pain and sciatica are{" "}
               <Link href="/back-pain-treatments" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">back pain</Link>.
               A crash is{" "}
               <Link href="/personal-injury" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">personal injury</Link>.
-              This page stays with the contact itself.
+              The focus here is the contact itself.
             </p>
             <p>
               Headaches are included only when the exam ties them to the neck
               or the upper back. A sudden severe headache, a headache after a
               head strike, or a headache with confusion is not an adjustment
               slot. Disc herniation is not “just adjusted.” If a nerve is
-              weakening, the disc page explains when we refer.
+              weakening, disc care explains when we refer.
             </p>
             <p>
               Benefits the office lists, and that we will not inflate, are
@@ -162,7 +162,7 @@ export default function AdjustmentsContent() {
                 new-patient visit
               </Link>{" "}
               or, if you already have a chart, the existing-patient form.
-              There is no package price on this page.
+              There is no package price listed in advance.
             </p>
           </SectionIntro>
         </div>
@@ -259,7 +259,7 @@ export default function AdjustmentsContent() {
           { href: "/ice-pack-cryotherapy", label: "Ice", note: "For tissue that is hot and new." },
           { href: "/therapeutic-exercise", label: "Exercise", note: "So the joint does not only move on our table." },
           { href: "/custom-foot-orthotics", label: "Orthotics", note: "When the feet are reloading the spine." },
-          { href: "/neck-pain", label: "Neck pain", note: "The condition page for the neck." },
+          { href: "/neck-pain", label: "Neck pain", note: "Stiffness, arm symptoms, and headaches that start in the neck." },
           { href: "/new-patient-center/what-to-expect", label: "What to expect", note: "Paperwork, exam, and selective x-rays." },
         ]}
       />

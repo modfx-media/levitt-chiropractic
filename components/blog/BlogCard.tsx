@@ -45,7 +45,7 @@ export function BlogCard({ post, index = 0, feature = false }: BlogCardProps) {
       >
         <Image
           src={post.coverImage}
-          alt={post.coverAlt}
+          alt={post.coverAlt?.trim() || `${post.title} article image`}
           fill
           sizes={feature ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 33vw, 100vw"}
           className="object-cover transition-transform duration-700 group-hover:scale-105"

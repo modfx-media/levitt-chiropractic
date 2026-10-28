@@ -18,11 +18,11 @@ const moments = [
 const faqs = [
   {
     q: "Is cryotherapy here a walk-in cold chamber?",
-    a: "No. People search “cryotherapy” and picture a spa chamber. This office uses targeted cold on the area that needs it. The practical page for the pack itself is ice pack cryotherapy. We do not describe a whole-body chamber, a temperature, or a session length for one, because that service is not spelled out anywhere else on the site.",
+    a: "No. Cryotherapy is often pictured as a spa chamber. This office uses targeted cold on the area that needs it. How to use the pack is covered with ice pack cryotherapy. We do not offer a whole-body chamber, and we do not quote a chamber temperature or a chamber session length.",
   },
   {
-    q: "How is this different from an ice pack page?",
-    a: "This page is the decision: when cold belongs in a chiropractic plan, and when it does not. The ice pack page is the how: placement, time, and home use. Read both if you want the full picture. They are not two products.",
+    q: "How is this different from ice pack care?",
+    a: "This visit decides when cold belongs in a chiropractic plan, and when it does not. Ice pack care covers placement, time, and home use. Read both if you want the full picture. They are not two products.",
   },
   {
     q: "How long is cold left on?",
@@ -55,16 +55,15 @@ export default function CryotherapyContent() {
         <div className="mx-auto max-w-3xl px-6">
           <SectionIntro eyebrow="The word" title="Cryotherapy at this office means cold where it hurts">
             <p>
-              Search results for cryotherapy are full of chambers, robes, and
-              short exposures of the whole body. That is a different business.
+              Cryotherapy is often advertised as chambers, robes, and short
+              exposures of the whole body. That is a different service.
               Levitt Chiropractic Center uses cold on the region that is hot,
               swollen, or freshly strained. The tool is an ice pack or a
               similar local application, applied in the visit and explained
-              for home. If you wanted a spa chamber, this URL will not become
-              one.
+              for home. A spa chamber is not what we offer.
             </p>
             <p>
-              The reasons the site gives are practical: swelling and
+              The practical reasons are straightforward: swelling and
               inflammation come down, acute pain is easier to tolerate, and
               the area can settle enough that other care is possible. It is
               drug-free. It is not a recovery promise. A numb patch of skin
@@ -118,13 +117,13 @@ export default function CryotherapyContent() {
               <Link href="/cold-laser-therapy" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 cold laser
               </Link>{" "}
-              page. Booking “cryotherapy” when you meant laser wastes the
+              . Booking cryotherapy when you meant laser wastes the
               first visit on vocabulary.
             </p>
             <p>
               Back pain, neck pain, and a fresh sports strain can all be
-              reasons to ice a region. The condition pages explain the
-              problem. This page only explains the cold. A fever with back
+              reasons to ice a region. The condition itself explains the
+              problem. The explanation here is the cold itself. A fever with back
               pain, a joint that is red and you cannot bear weight, or pain
               after a major crash that has not been screened are not ice
               problems. Get medical care first.
@@ -149,13 +148,13 @@ export default function CryotherapyContent() {
               <Link href="/ice-pack-cryotherapy" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 ice pack cryotherapy
               </Link>
-              . Use that page for technique. Use this one to decide whether
+              . Use that explanation for technique. Use the visit to decide whether
               cold belongs at all. Book through the{" "}
               <Link href="/contact/new-patient-appointment" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 new-patient form
               </Link>{" "}
               if you have not been seen. There is no chamber fee and no pack
-              price on this page.
+              price listed in advance.
             </p>
           </SectionIntro>
         </div>
@@ -221,8 +220,8 @@ export default function CryotherapyContent() {
             After the hot window closes, people still ask for cold because it
             is familiar. Familiar is not an indication. If the area is no
             longer swollen and the limit is stiffness, the next tool is
-            usually movement, written on the exercise page, or a joint
-            contact, written on the adjustments page. Keeping cold in the
+            usually movement, which is therapeutic exercise, or a joint
+            contact, which is an adjustment. Keeping cold in the
             plan “just in case” fills time. We would rather end it.             You can
             always restart a pack for a new flare without making cold the
             identity of your care. If you are comparing this visit with a spa
@@ -244,7 +243,7 @@ export default function CryotherapyContent() {
 
       <RelatedCare
         eyebrow="Read next"
-        title="Cold is a means. These pages are the problems."
+        title="Cold is a tool. These are the problems."
         intro="Pick the condition if you are unsure which tool you need."
         links={[
           { href: "/ice-pack-cryotherapy", label: "Ice pack how-to", note: "Placement, time, and skin safety." },

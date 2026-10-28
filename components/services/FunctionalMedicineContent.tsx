@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     q: "Will I have lab work or genetic testing?",
-    a: "This page does not offer a lab menu or a genetic test. The existing description says the history can run from what you already know about your health to daily habits. If a test would help, that order belongs with the physician who runs it. We will not invent a panel to justify the visit.",
+    a: "We do not offer a lab menu or a genetic test. The history can run from what you already know about your health to daily habits. If a test would help, that order belongs with the physician who runs it. We will not invent a panel to justify the visit.",
   },
   {
     q: "Do I stop my medication?",
@@ -42,7 +42,7 @@ const faqs = [
   },
   {
     q: "Which problems does the office connect to this visit?",
-    a: "The page already names fibromyalgia, sciatica, joint pain, and degenerative disc disease as examples where a wider plan is sometimes useful. Each of those still needs its own exam. Sciatica and disc problems have dedicated pages. This visit does not replace them.",
+    a: "We already connect fibromyalgia, sciatica, joint pain, and degenerative disc disease as examples where a wider plan is sometimes useful. Each of those still needs its own exam. Sciatica and disc findings are examined for what they are. This visit does not replace that exam.",
   },
   {
     q: "Is this a cure for chronic illness?",
@@ -84,13 +84,13 @@ export default function FunctionalMedicineContent() {
               >
                 meet the doctor
               </Link>{" "}
-              page are the frame: nutrition and supplements as a conversation,
+              are the frame: nutrition and supplements as a conversation,
               and adjustments plus soft-tissue work for the structure. This
-              page does not add a dispensary price list. Supplements, if they
+              visit does not add a dispensary price list. Supplements, if they
               are discussed, are recommendations, not a required purchase.
             </p>
             <p>
-              “Root cause” on the old page is easy to overread. Here it means
+              “Root cause” is easy to overread. Here it means
               we try not to chase a single symptom with a single trick. It
               does not mean we have found a hidden diagnosis the rest of
               medicine missed. If the history sounds medical, you keep your
@@ -125,7 +125,7 @@ export default function FunctionalMedicineContent() {
               <Link href="/back-pain-treatments" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 back pain
               </Link>{" "}
-              page owns the mechanical sort. This visit adds the week around
+              visit owns the mechanical sort. This visit adds the week around
               it when the mechanical sort is not the whole story.
             </p>
             <p>
@@ -135,8 +135,8 @@ export default function FunctionalMedicineContent() {
               emergency. Neck pain itself is on the{" "}
               <Link href="/neck-pain" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 neck pain
-              </Link>{" "}
-              page.
+              </Link>
+              .
             </p>
             <p>
               Fibromyalgia, as the conditions notes say, has no single known
@@ -162,7 +162,7 @@ export default function FunctionalMedicineContent() {
         <div className="mx-auto max-w-3xl px-6">
           <SectionIntro eyebrow="Boundaries" title="What this visit refuses to be">
             <p>
-              It is not anti-medicine. The alternative-medicine page uses
+              It is not anti-medicine. Alternative medicine uses
               that same line: non-surgical and non-opioid first, not opposed
               to physicians. Read{" "}
               <Link href="/alternative-medicine" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
@@ -173,7 +173,7 @@ export default function FunctionalMedicineContent() {
             </p>
             <p>
               It is not a guarantee of lasting results. Older marketing on
-              this URL talked about benefits for years or decades. That is a
+              Some descriptions promise benefits for years or decades. That is a
               hope, not a finding we can promise. Chronic problems often
               change slowly, and some do not change with this kind of care.
             </p>
@@ -236,7 +236,7 @@ export default function FunctionalMedicineContent() {
           </p>
           <p>
             Movement notes belong here too, but the exercises themselves are
-            written on the exercise page so this one does not become a
+            written with the exercises so this visit does not become a
             workout sheet. “I sit nine hours and walk to the printer” is a
             functional finding. The response might be a walking break. It
             might be a chair change. It might be irrelevant if the exam shows
@@ -273,7 +273,7 @@ export default function FunctionalMedicineContent() {
       <RelatedCare
         eyebrow="Goes with"
         title="Structural pages this visit does not replace"
-        intro="Use the condition page for the pain. Use this page for the wider questions."
+        intro="The painful condition is explained with that condition. Sleep, food, and daily habits are explained here."
         links={[
           { href: "/adjustments-and-manipulation", label: "Adjustments", note: "Still the structural tool when a joint is restricted." },
           { href: "/back-pain-treatments", label: "Back pain and sciatica", note: "The mechanical sort for the low back and the leg." },

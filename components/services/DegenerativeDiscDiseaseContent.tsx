@@ -107,7 +107,7 @@ export default function DegenerativeDiscDiseaseContent() {
               us which of those you are living with.
             </p>
             <p>
-              This page is the place for that disc story, including herniated
+              Disc care here includes herniated
               disc care. Pain that stays in the low back or runs down the leg
               as sciatica is also covered, from the nerve-pattern side, on
               the{" "}
@@ -115,7 +115,7 @@ export default function DegenerativeDiscDiseaseContent() {
                 href="/back-pain-treatments"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
-                back pain page
+                back pain care
               </Link>
               . A crash that herniated a disc still starts with the injury
               history on the{" "}
@@ -123,7 +123,7 @@ export default function DegenerativeDiscDiseaseContent() {
                 href="/personal-injury"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
-                personal injury page
+                personal injury care
               </Link>
               .
             </p>
@@ -303,7 +303,7 @@ export default function DegenerativeDiscDiseaseContent() {
               >
                 adjustments
               </Link>{" "}
-              page for the three techniques.
+              for the three techniques.
             </p>
             <p>
               Cold laser is a non-heat light held on the painful region for
@@ -405,7 +405,7 @@ export default function DegenerativeDiscDiseaseContent() {
       <RelatedCare
         eyebrow="Related pages"
         title="Where a disc problem meets the rest of the practice"
-        intro="Use the back-pain page for sciatica as a leg pattern. Use this page when the question is the disc itself."
+        intro="Sciatica as a leg pattern is covered with back pain. Disc findings are explained here."
         links={[
           {
             href: "/back-pain-treatments",

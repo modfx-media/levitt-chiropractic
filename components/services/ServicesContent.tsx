@@ -237,7 +237,7 @@ const services: Service[] = [
   {
     title: "Neck Pain",
     description:
-      "Stiffness, arm symptoms, and headaches that start in the neck. One page, no city versions. Crashes are under personal injury.",
+      "Stiffness, arm symptoms, and headaches that start in the neck. A crash is evaluated as a personal injury.",
     href: "/neck-pain",
     group: "Conditions",
     icon: (
@@ -324,15 +324,15 @@ const stats = [
 
 const serviceFaqs = [
   {
-    q: "Which page should I open first?",
-    a: "Match the body part. Neck pain, back pain, disc problems, and car crashes each have an owner page linked from the conditions hub. If you only know the tool you heard about, cold laser, ice, adjustments, exercise, and orthotics are separate cards below. If you are unsure, book the exam and describe the symptom.",
+    q: "Where should I start?",
+    a: "Match the body part. Neck pain, back pain, disc problems, and car crashes are each explained with that kind of care. If you only know the tool you heard about, cold laser, ice, adjustments, exercise, and orthotics are listed below. If you are unsure, book the exam and describe the symptom.",
   },
   {
     q: "Do I need to pick a service before I call?",
     a: "No. New patients start with a history and an exam. The service is chosen after that. Calling 952-920-7535 or using the new-patient form is enough. Existing patients use the other appointment form.",
   },
   {
-    q: "Are there prices on this page?",
+    q: "Do you list prices?",
     a: "No. The office does not publish a fee schedule here. Payment accepted at the visit is cash, check, or major credit card, and a payment plan can be discussed. Health insurance and auto-policy benefits are separate questions the office will not guess.",
   },
   {
@@ -380,7 +380,7 @@ export default function ServicesContent() {
               />
               <div className="mt-6 space-y-4 text-base leading-relaxed text-slate-700 sm:text-lg">
                 <p>
-                  This is the index, not a second copy of every service. Dr.
+                  These are the kinds of care we provide, not a second explanation of each one. Dr.
                   Alan G. Levitt, DC, has been in practice since 1987 and at{" "}
                   {siteConfig.address.full} since 1999. The phone is{" "}
                   <a href={siteConfig.phoneHref} className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
@@ -393,13 +393,13 @@ export default function ServicesContent() {
                   Start with the body part if you know it. Neck stiffness,
                   arm symptoms, and headaches that begin at the skull base go
                   to neck pain. Low-back pain and leg pain go to back pain.
-                  A scan that says herniated disc goes to the disc page. A
-                  crash, including whiplash, goes to personal injury. Sport,
-                  work, and falls that were not a crash go to injuries. The{" "}
+                  A scan that says herniated disc belongs with disc care. A
+                  crash, including whiplash, belongs with personal injury. Sport,
+                  work, and falls that were not a crash belong with injuries.{" "}
                   <Link href="/common-chiropractic-conditions" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
-                    conditions hub
+                    Common conditions
                   </Link>{" "}
-                  is the map if two of those might be true.
+                  help if two of those might be true.
                 </p>
                 <p>
                   Start with the tool only if you already know you are asking
@@ -407,7 +407,7 @@ export default function ServicesContent() {
                   from Diversified, Zone Therapy, or Torque Release after an
                   exam. Cold laser therapy is a handheld light, not heat.
                   Cryotherapy here is targeted cold, not a walk-in chamber,
-                  and the pack instructions live on the ice page. Exercise is
+                  and the pack instructions are part of ice pack care. Exercise is
                   a short home list. Orthotics are prescription devices when
                   the feet are part of the load. Functional medicine adds
                   sleep and food questions. Alternative medicine is the
@@ -593,7 +593,7 @@ export default function ServicesContent() {
               joint. Orthotics do not fix a disc that has nothing to do with
               the feet. Functional questions do not cancel a structural
               finding. If someone offers you a package that uses every card
-              on this page, that offer did not come from this index.
+              in one visit, that offer did not come from this office.
             </p>
             <p>
               What this office does not provide: surgery, injections, and
@@ -609,7 +609,7 @@ export default function ServicesContent() {
               <Link href="/new-patient-center/what-to-expect" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 what to expect
               </Link>{" "}
-              page: a photo ID, 10 to 15 minutes for paperwork, clothes you
+              : a photo ID, 10 to 15 minutes for paperwork, clothes you
               can move in. New patients use{" "}
               <Link href="/contact/new-patient-appointment" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 this form
@@ -617,13 +617,13 @@ export default function ServicesContent() {
               . People who already have a chart use the existing-patient
               form. Cancel with at least 24 hours’ notice. A fee may be
               charged for a no-show or a late cancellation. That policy is
-              on the about page. It is not a service.
+              described under about the practice. It is not a treatment.
             </p>
             <p>
-              Recovery language stays the same across the index. Some
+              Recovery is described the same way for every service. Some
               mechanical problems become more comfortable as motion returns
               and the daily load changes. Some do not. There is no visit
-              count and no date on this page. If the same tests are not
+              count and no date promised in advance. If the same tests are not
               changing, the plan changes or you are referred. Feeling better
               is the hope. It is not a guarantee, and “drug-free” describes
               the tools, not a rule that medicine is never appropriate.
@@ -635,7 +635,7 @@ export default function ServicesContent() {
                 meet the doctor
               </Link>
               . Read that if you want the biography. Stay here if you want
-              to know which URL matches the problem you have today.
+              to know which kind of care matches the problem you have today.
             </p>
           </div>
         </div>
@@ -646,23 +646,23 @@ export default function ServicesContent() {
           <h2 className="font-heading text-3xl font-bold text-[#0F172A]">Reading the cards without booking all of them</h2>
           <p>
             If your sentence is about a body part, ignore the therapy cards
-            until the condition page tells you a tool is relevant. Neck pain
+            until the condition itself shows a tool is relevant. Neck pain
             does not require you to understand laser. Back pain does not
             require orthotics. A crash does not require functional medicine.
-            Opening four URLs and trying to merge them yourself is how the
-            thin pages on the old site felt. The exam merges them, or it
-            refuses to.
+            Trying to combine every option yourself is unnecessary. The
+            exam combines what belongs together, or it says a combination
+            does not.
           </p>
           <p>
-            If your sentence is about a device you saw online, open that
-            device’s page and read the limit before you request it by name.
-            Cold laser therapy has a limit. Targeted cold has a limit.
-            Orthotics have a limit. Asking for the device and skipping the
-            limit is how visits start in the wrong room. Say you read the
-            page and you still want the exam. That is the correct request.
+            If you are asking about a device you saw online, learn its
+            limit before you request it by name. Cold laser therapy has a
+            limit. Targeted cold has a limit. Orthotics have a limit.
+            Asking for the device and skipping the limit is how visits start
+            in the wrong room. Ask for the exam and name the device. That is
+            the useful request.
           </p>
           <p>
-            Hours are on every service page in the strip at the bottom, and
+            Hours are listed at the bottom of each service, and
             they are the real hours: mornings most weekdays, longer days
             Monday and Thursday, Wednesday late morning, Saturday by
             appointment, Sunday closed. Do not invent a walk-in window. If
@@ -674,9 +674,9 @@ export default function ServicesContent() {
           <p>
             The Saint Louis Park address does not change by service. You are
             not traveling to a laser clinic and then an orthotics clinic.
-            Suite 201 is the same door. If a page ever reads like a second
-            business, that page is wrong. Tell us. The index is supposed to
-            prevent that confusion, not add to it.
+            Suite 201 is the same door. You should not feel as if laser
+            and orthotics are different businesses. They are not. Tell us
+            if a description made them sound that way.
           </p>
         </div>
       </section>
@@ -685,7 +685,7 @@ export default function ServicesContent() {
         id="ld-faq-services"
         eyebrow="Questions"
         title="Questions about choosing a service"
-        intro="The index is for navigation. The exam is for the decision."
+        intro="The cards help you describe the problem. The exam decides the care."
         faqs={serviceFaqs}
       />
 

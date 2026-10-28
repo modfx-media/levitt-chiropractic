@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: "Does cold laser therapy hurt or burn?",
-    a: "The office describes it as non-invasive, with no incision and no drug in the device. Published notes on this site say the intensity raises tissue temperature only minimally, on the order of 0.1 to 0.5 degrees Celsius if it rises at all. Most people feel little or nothing while it is on. Tell us if the skin is uncomfortable.",
+    a: "It is non-invasive, with no incision and no drug in the device. The intensity raises tissue temperature only minimally, on the order of 0.1 to 0.5 degrees Celsius if the skin warms at all. Most people feel little or nothing while it is on. Tell us if the skin is uncomfortable.",
   },
   {
     q: "Can I book cold laser therapy by itself?",
@@ -43,7 +43,7 @@ const faqs = [
   },
   {
     q: "Who should not start with laser?",
-    a: "Do not use this page as clearance if you have a red-flag illness: unexplained weight loss, night pain that never changes, fever, a known cancer in the area being treated, or an eye problem under the beam. Those need a physician. We also do not aim the device at the eyes.",
+    a: "Laser is not a clearance for a red-flag illness: unexplained weight loss, night pain that never changes, fever, a known cancer in the area being treated, or an eye problem under the beam. Those need a physician. We also do not aim the device at the eyes.",
   },
 ];
 
@@ -76,7 +76,7 @@ export default function ColdLaserTherapyContent() {
             </p>
             <p>
               “Cold” means the beam is not trying to cut or to cook tissue.
-              The advantage listed on this site is minimal temperature change:
+              The practical difference is minimal temperature change:
               about 0.1 to 0.5 degrees Celsius if the skin warms at all. If
               you came in expecting a hot lamp or a surgical laser, this is
               a different tool. Cold laser therapy also does not put a
@@ -100,7 +100,7 @@ export default function ColdLaserTherapyContent() {
             dark
             center
             eyebrow="Where it is used"
-            title="Problems this page already names"
+            title="Problems cold laser therapy may be considered for"
           >
             <p>
               The list is the one this office publishes. It is not a claim
@@ -118,7 +118,7 @@ export default function ColdLaserTherapyContent() {
             ))}
           </ul>
           <p className="mx-auto mt-8 max-w-3xl text-base leading-relaxed text-white/75">
-            Back pain has its own page, because laser is only one piece of
+            Back pain is a larger problem, because laser is only one piece of
             that plan. Carpal tunnel, tennis elbow, bursitis, and tendonitis
             are local tendon and joint problems the exam has to confirm.
             Arthritis here means the joint wear people already know they
@@ -141,8 +141,8 @@ export default function ColdLaserTherapyContent() {
             <p>
               The first appointment is still a history and a physical exam.
               Bring prior notes if another office has them. Dr. Levitt decides
-              whether light belongs in the plan after that, not from the
-              phrase “cold laser therapy” on a search. X-rays are taken only
+              whether light belongs in the plan after that, not because you
+              asked for cold laser therapy by name. X-rays are taken only
               when they would change the plan.
             </p>
             <p>
@@ -155,8 +155,8 @@ export default function ColdLaserTherapyContent() {
             </p>
             <p>
               Home care is usually the exercise or the ice instruction, not a
-              laser you take with you. This office does not sell a home laser
-              on this page, and it does not quote a device price. Payment at
+              laser you take with you. This office does not sell a home laser,
+              and it does not quote a device price. Payment at
               the desk is cash, check, or card, the same as the rest of the
               practice. Call {siteConfig.phone} or use the{" "}
               <Link
@@ -188,7 +188,7 @@ export default function ColdLaserTherapyContent() {
             </p>
             <p>
               We also do not describe a biochemical pathway, a cell-energy
-              number, or a success rate on this page. Those figures are not
+              number, or a success rate. Those figures are not
               in the office’s own description of the device. What is in the
               description is simple: light, short contact, little or no heat,
               no drug, no incision, used as one option among others.
@@ -251,15 +251,15 @@ export default function ColdLaserTherapyContent() {
             An elbow that hurts when you grip a coffee mug is a small target.
             The contact is short. The test next time is the grip, not a speech
             about cellular healing. A low back is a larger target, so the
-            minutes run longer, and the test is sitting or bending, which the
-            back-pain page already explains. Laser does not become more
+            minutes run longer, and the test is sitting or bending, which
+            back-pain care already explains. Laser does not become more
             “advanced” because the area is bigger.
           </p>
           <p>
             Carpal tunnel symptoms need a neck and wrist screen before anyone
             aims a light at the wrist and calls it done. The median nerve’s
             story can start higher than the wrist. If the neck reproduces the
-            hand symptoms, the neck page is the better owner and laser on the
+            hand symptoms, neck care is the better focus and laser on the
             wrist may be irrelevant. Tennis elbow that is actually a neck
             problem fails the same way.
           </p>

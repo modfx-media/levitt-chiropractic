@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     q: "Is an ice pack the same visit as cryotherapy?",
-    a: "Same cold, two pages. Cryotherapy explains when this office uses cold instead of a spa chamber. This page is the pack: where it sits, how long, and what your skin should do. You do not book them as two different products.",
+    a: "Same cold, two explanations. Cryotherapy explains when this office uses cold instead of a spa chamber. Ice pack care is where the pack sits, how long, and what your skin should do. You do not book them as two different products.",
   },
   {
     q: "Can I ice a neck or back before I have been examined?",
@@ -58,7 +58,7 @@ export default function IcePackCryotherapyContent() {
           <SectionIntro eyebrow="The pack" title="Ice is a local compress with rules">
             <p>
               An ice pack in this office is a cold compress on a fresh or
-              flared spot. The effects the site already lists are narrower
+              flared spot. The effects we rely on are narrower
               than advertising: muscle spasm can ease, sensation in the
               irritated spot drops while the cold is on, soft tissue cools,
               and inflammatory soreness is often quieter. Those are
@@ -123,9 +123,9 @@ export default function IcePackCryotherapyContent() {
             <p>
               Athletes sometimes want ice as a ritual. A ritual is fine if
               the skin rules hold. It does not shorten a ligament’s calendar.
-              Work injuries and sports strains are grouped on the{" "}
-              <Link href="/injuries" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">injuries</Link>{" "}
-              page. Come back here for the compress.
+              Work injuries and sports strains are grouped with{" "}
+              <Link href="/injuries" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">injuries</Link>
+              . Come back here for the compress.
             </p>
           </SectionIntro>
         </div>
@@ -145,9 +145,9 @@ export default function IcePackCryotherapyContent() {
               Heat-versus-ice arguments online are louder than the decision
               deserves. Irritable and swollen leans cold, especially in the
               first 48 to 72 hours. Stiff and calm can lean toward gentle
-              movement, which is the{" "}
-              <Link href="/therapeutic-exercise" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">exercise</Link>{" "}
-              page, not a heating pad marathon. When you are unsure, call
+              movement, which is{" "}
+              <Link href="/therapeutic-exercise" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">exercise</Link>
+              , not a heating pad marathon. When you are unsure, call
               before you invent a routine.
             </p>
             <p>
@@ -155,8 +155,8 @@ export default function IcePackCryotherapyContent() {
               <Link href="/contact/new-patient-appointment" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 new-patient appointment
               </Link>{" "}
-              if no one has looked at the injury. The why-cold page, if you
-              landed here from a spa search, is{" "}
+              if no one has looked at the injury. Why we choose cold, rather
+              than a spa chamber, is explained with{" "}
               <Link href="/cryotherapy" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">cryotherapy</Link>.
             </p>
           </SectionIntro>
@@ -201,14 +201,14 @@ export default function IcePackCryotherapyContent() {
             A neck is awkward. The pack has to stay put without a strap that
             chokes, and you should not lie on it. If you cannot arrange that
             safely, do not improvise with a scarf pulled tight. Come in and
-            we will show you, or skip home ice until you can. The neck page
-            still owns the diagnosis. The pack is only the compress.
+            we will show you, or skip home ice until you can. Neck pain care
+            still covers the cause. The pack is only the compress.
           </p>
           <p>
             After an adjustment, some people want ice out of habit. Use it if
             the area feels hot or guarded. Skip it if you feel ordinary.
             Soreness that is just muscle effort often prefers a short walk
-            over another twenty minutes of cold. The exercise page is where
+            over another twenty minutes of cold. Therapeutic exercise is where
             that walk gets specific.
           </p>
           <p>
@@ -248,7 +248,7 @@ export default function IcePackCryotherapyContent() {
           { href: "/injuries", label: "Work and sports strains", note: "The injuries that most often need early cold." },
           { href: "/therapeutic-exercise", label: "Exercise after the hot window", note: "Movement once ice is no longer the main tool." },
           { href: "/adjustments-and-manipulation", label: "Adjustments", note: "Ice does not restore joint motion by itself." },
-          { href: "/neck-pain", label: "Neck pain", note: "If the pack is for the neck, read the neck page too." },
+          { href: "/neck-pain", label: "Neck pain", note: "If the pack is for the neck, neck pain care explains the cause." },
           { href: "/contact/new-patient-appointment", label: "Book", note: "952-920-7535 if you would rather call." },
         ]}
       />

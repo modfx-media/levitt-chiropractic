@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { siteConfig } from "@/lib/siteConfig";
 import { sitemapEntries, type SitemapEntry } from "@/lib/sitemapEntries";
+
+/** Paths that must never appear in sitemap.xml (page itself can stay live). */
+const SITEMAP_EXCLUSIONS = new Set(["/site-map"]);
 import { servedCities, citySitemapPriority } from "@/lib/areasData";
 import { pseoServices } from "@/lib/pseoServices";
 import { getAllPosts } from "@/lib/blog";
@@ -52,7 +55,7 @@ export async function GET() {
     ...sitemapEntries,
     ...pseoEntries,
     ...blogEntries,
-  ].filter((e) => !overlay.skip.has(e.path));
+  ].filter((e) => !overlay.skip.has(e.path) && !SITEMAP_EXCLUSIONS.has(e.path));
 
   const existing = new Set(allEntries.map((e) => e.path));
   const lastmodByPath = new Map(
@@ -61,7 +64,12 @@ export async function GET() {
       .map((e) => [e.path, e.lastmod as string]),
   );
   for (const extra of overlay.extra) {
-    if (existing.has(extra.path) || overlay.skip.has(extra.path)) continue;
+    if (
+      existing.has(extra.path) ||
+      overlay.skip.has(extra.path) ||
+      SITEMAP_EXCLUSIONS.has(extra.path)
+    )
+      continue;
     allEntries.push({
       path: extra.path,
       priority: extra.path.startsWith("/blog/") ? 0.7 : 0.6,

@@ -4,6 +4,7 @@ import { searchPlugin } from "@payloadcms/plugin-search";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import type { Plugin } from "payload";
 
+import { composeSeoTitle } from "../../lib/seoTitle";
 import { siteConfig } from "../../lib/siteConfig";
 
 const siteUrl = () =>
@@ -18,8 +19,11 @@ export function cmsPlugins(): Plugin[] {
       collections: ["pages", "posts"],
       uploadsCollection: "media",
       tabbedUI: true,
-      generateTitle: ({ doc }) =>
-        typeof doc?.title === "string" ? doc.title : siteConfig.name,
+      generateTitle: ({ doc }) => {
+        const raw = typeof doc?.title === "string" ? doc.title : siteConfig.name;
+        const path = typeof doc?.path === "string" ? doc.path : "";
+        return composeSeoTitle(raw, path);
+      },
       generateDescription: ({ doc }) =>
         typeof doc?.excerpt === "string" ? doc.excerpt : siteConfig.description,
       generateURL: ({ doc }) => {

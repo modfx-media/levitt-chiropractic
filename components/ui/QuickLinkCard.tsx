@@ -8,6 +8,7 @@ type Props = {
   title: string;
   href: string;
   image: string;
+  imageAlt?: string;
   index?: number;
 };
 
@@ -24,7 +25,7 @@ const cardVariants = {
   }),
 };
 
-export function QuickLinkCard({ title, href, image, index = 0 }: Props) {
+export function QuickLinkCard({ title, href, image, imageAlt, index = 0 }: Props) {
   return (
     <motion.div
       custom={index}
@@ -49,7 +50,7 @@ export function QuickLinkCard({ title, href, image, index = 0 }: Props) {
           >
             <Image
               src={image}
-              alt={title}
+              alt={imageAlt?.trim() || title}
               fill
               sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
               className="object-cover transition-transform duration-700 group-hover:scale-110"

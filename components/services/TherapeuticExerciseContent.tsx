@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     q: "Will exercise replace the adjustment?",
-    a: "Not when a joint is stuck and needs a contact. Exercise is how the gain survives until the next visit, and sometimes how you need fewer visits. The adjustment page is the contact. This page is the homework.",
+    a: "Not when a joint is stuck and needs a contact. Exercise is how the gain survives until the next visit, and sometimes how you need fewer visits. The adjustment is the contact. The homework is what you repeat at home.",
   },
   {
     q: "What if the exercise increases pain?",
@@ -118,7 +118,7 @@ export default function TherapeuticExerciseContent() {
               Neck exercises are not low-back exercises. A disc that prefers
               one direction does not get the opposite stretch because it was
               on a poster. The{" "}
-              <Link href="/degenerative-disc-disease" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">disc page</Link>{" "}
+              <Link href="/degenerative-disc-disease" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">disc care</Link>{" "}
               says that directly. Neck ownership is{" "}
               <Link href="/neck-pain" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">neck pain</Link>.
               Low-back ownership is{" "}
@@ -141,9 +141,9 @@ export default function TherapeuticExerciseContent() {
             <p>
               Soreness the next day can be ordinary effort. Pain that changes
               where it travels is not. Ice after a session is optional and
-              lives on the{" "}
-              <Link href="/ice-pack-cryotherapy" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">ice pack</Link>{" "}
-              page, for flares, not as a required chaser. An adjustment can
+              is optional, as with an{" "}
+              <Link href="/ice-pack-cryotherapy" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">ice pack</Link>
+              , for flares, not as a required chaser. An adjustment can
               still be the visit when the joint, not the muscle, is the limit.
               See{" "}
               <Link href="/adjustments-and-manipulation" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">adjustments</Link>.
@@ -204,9 +204,8 @@ export default function TherapeuticExerciseContent() {
           <p>
             An ankle sprain, once a clinician has said it is not a fracture,
             might later get balance on one foot beside a counter. Early on,
-            the homework may only be protected range, not balance. The injury
-            page owns that timing. This page only insists the homework match
-            the stage.
+            the homework may only be protected range, not balance. Injury
+            care sets that timing. The homework still has to match the stage.
           </p>
           <p>
             People ask for “core” work. If the abdomen is bracing so hard the

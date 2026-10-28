@@ -36,7 +36,7 @@ const patterns = [
 const faqs = [
   {
     q: "Is neck pain the same problem as whiplash?",
-    a: "No. Whiplash is a neck injury from a sudden force, usually a crash. That visit is on the personal injury page. This page is for neck pain that shows up with desk work, sleep, a lift, or no clear accident.",
+    a: "No. Whiplash is a neck injury from a sudden force, usually a crash, and it is evaluated as a personal injury. Neck pain from desk work, sleep, a lift, or no clear accident is what this visit covers.",
   },
   {
     q: "What is a pinched nerve in the neck?",
@@ -77,42 +77,42 @@ export default function NeckPainContent() {
         <div className="mx-auto max-w-3xl px-6">
           <SectionIntro
             eyebrow="The neck"
-            title="One page for neck pain. Crashes live somewhere else."
+            title="Understanding neck pain"
           >
             <p>
-              This is the core page for neck pain at Levitt Chiropractic
-              Center. There is no city version of it. Dr. Alan Levitt has
-              been in practice since 1987 and at {siteConfig.address.full}{" "}
-              since 1999. The phone number is {siteConfig.phone}.
+              Neck pain at Levitt Chiropractic Center may stay in the neck,
+              travel into the arm, or begin as a headache at the base of the
+              skull. Dr. Alan Levitt has been in practice since 1987 and at{" "}
+              {siteConfig.address.full} since 1999. The phone number is{" "}
+              {siteConfig.phone}.
             </p>
             <p>
               People arrive with a neck that locked after sleeping, a shoulder
               that burns by the end of a screen day, or an arm that tingles
               when they turn. Those are different stories. A neck that was
-              thrown in a car crash is whiplash, and that exam, including the
-              paperwork around an auto accident, is on the{" "}
+              thrown in a car crash is whiplash. That evaluation, including
+              records after an auto accident, is part of{" "}
               <Link
                 href="/personal-injury"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 personal injury
               </Link>{" "}
-              page. Low-back pain and sciatica stay on the{" "}
+              care. Low-back pain and sciatica are treated as{" "}
               <Link
                 href="/back-pain-treatments"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 back pain
-              </Link>{" "}
-              page.
+              </Link>
+              .
             </p>
             <p>
-              A pinched nerve is not a personality of the neck. It means
-              something is irritating a nerve: a joint that will not move, a
-              disc that has changed shape, or a muscle in spasm. Pressure can
-              bring inflammation, pain, and sometimes weakness. Finding which
-              of those is true is the visit. Naming it from a search result
-              is not.
+              A pinched nerve means something is irritating a nerve: a joint
+              that will not move, a disc that has changed shape, or a muscle
+              in spasm. Pressure can bring inflammation, pain, and sometimes
+              weakness. The visit is for finding which of those fits. The
+              name alone does not identify the structure.
             </p>
           </SectionIntro>
         </div>
@@ -124,7 +124,7 @@ export default function NeckPainContent() {
             dark
             center
             eyebrow="How it shows up"
-            title="Four neck patterns worth separating"
+            title="How neck pain can feel"
           >
             <p>
               Use these as history, not as a diagnosis you give yourself.
@@ -151,7 +151,7 @@ export default function NeckPainContent() {
           <div className="lg:col-span-7">
             <SectionIntro
               eyebrow="Desk and sleep"
-              title="Looking down all day is a load, not a diagnosis"
+              title="Neck pain from desk work and sleep"
             >
               <p>
                 The head is heavy when it sits forward of the shoulders. A
@@ -227,14 +227,14 @@ export default function NeckPainContent() {
               Zone Therapy, or Torque Release. Diversified is a quicker
               contact. Torque Release is gentler. Zone Therapy includes
               spinal massage for the region. You hear which one before it
-              happens. Details are on the{" "}
+              happens. More on technique is under{" "}
               <Link
                 href="/adjustments-and-manipulation"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 adjustments
-              </Link>{" "}
-              page. A fast thrust is not the opening move after unexplained
+              </Link>
+              . A fast thrust is not the opening move after unexplained
               trauma or when arm strength is falling off.
             </p>
           </SectionIntro>
@@ -245,46 +245,46 @@ export default function NeckPainContent() {
         <div className="mx-auto max-w-3xl px-6">
           <SectionIntro
             eyebrow="What can be added"
-            title="Laser, ice, and exercise are tools, not a neck package"
+            title="Other care that may be included"
           >
             <p>
               Cold laser therapy is a handheld light, about the size of a
               flashlight, held on the sore area for 30 seconds to several
               minutes. It does not heat the skin in any meaningful way. It is
               optional and it is dropped if the neck exam is not changing.
-              Read the{" "}
+              Learn how{" "}
               <Link
                 href="/cold-laser-therapy"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 cold laser
               </Link>{" "}
-              page before you book laser by itself.
+              is used before you ask for laser alone.
             </p>
             <p>
               Targeted ice is for a neck that is hot and newly irritated. It
               is not a whole-body cold chamber. A few exercises for endurance,
               strength, or mobility are how a neck stays looser between
-              visits. The{" "}
+              visits.{" "}
               <Link
                 href="/therapeutic-exercise"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
-                exercise
+                Exercise
               </Link>{" "}
-              page describes those categories. A long stretch sheet you will
+              covers endurance, strength, and mobility. A long stretch sheet you will
               not do is not the plan.
             </p>
             <p>
-              A disc in the neck is the same family of problem described on
-              the{" "}
+              A disc in the neck may be degeneration, a bulge, or a
+              herniation.{" "}
               <Link
                 href="/degenerative-disc-disease"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
-                disc
+                Disc care
               </Link>{" "}
-              page: degeneration, bulge, or herniation, read against the arm
+              explains those findings against the arm
               exam. An adjustment is not a promise to put disc material back.
               If hand clumsiness or walking is getting worse, that is a
               physician visit.
@@ -308,14 +308,14 @@ export default function NeckPainContent() {
       <section className="relative overflow-hidden bg-[#0F172A] py-20 text-white sm:py-24">
         <div className="relative mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-5">
           <div className="lg:col-span-3">
-            <SectionIntro dark eyebrow="Pace" title="A stiff neck can change before any film does">
+            <SectionIntro dark eyebrow="Recovery" title="What improvement can look like">
               <p>
                 The scoreboard is turning your head, sleeping, and whether
                 the arm symptoms are shrinking. Some recent necks feel more
                 movable after care starts. A neck that has guarded for a long
                 time needs the daily position changed as well. If strength is
                 dropping, we stop and refer. Feeling better is the hope. It
-                is not a guarantee, and there is no fee quoted on this page.
+                is not a guarantee, and we do not quote a fee before the exam.
               </p>
             </SectionIntro>
           </div>
@@ -338,9 +338,9 @@ export default function NeckPainContent() {
       />
 
       <RelatedCare
-        eyebrow="Related pages"
-        title="Where neck pain meets the rest of the practice"
-        intro="Stay here for a neck that did not start in a crash. Use the other pages when the history points there."
+        eyebrow="Related care"
+        title="Care that often goes with neck pain"
+        intro="Neck pain that did not start with a crash is the focus here. These links cover crashes, the low back, and the treatments we may add."
         links={[
           {
             href: "/personal-injury",
@@ -350,12 +350,12 @@ export default function NeckPainContent() {
           {
             href: "/back-pain-treatments",
             label: "Back pain and sciatica",
-            note: "Low back and leg pain, which this page does not try to cover.",
+            note: "Low-back pain and leg pain are evaluated separately from the neck.",
           },
           {
             href: "/common-chiropractic-conditions",
-            label: "Conditions hub",
-            note: "A map of problems, with this page as the neck owner.",
+            label: "Other conditions",
+            note: "Headaches, joint pain, and other problems, with links to the matching care.",
           },
           {
             href: "/adjustments-and-manipulation",

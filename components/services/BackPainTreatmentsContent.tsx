@@ -49,7 +49,7 @@ const faqs = [
   },
   {
     q: "Can a disc problem cause sciatica?",
-    a: "Yes. A bulging or herniated disc can irritate a nerve root, and so can a stiff joint or a muscle spasm. Which one you have is an exam question. Disc anatomy is on the degenerative disc disease page.",
+    a: "Yes. A bulging or herniated disc can irritate a nerve root, and so can a stiff joint or a muscle spasm. Which one you have is an exam question. Disc anatomy is part of degenerative disc disease care.",
   },
   {
     q: "Do I need an MRI before the first visit?",
@@ -110,25 +110,25 @@ export default function BackPainTreatmentsContent() {
               those is involved does not help.
             </p>
             <p>
-              This page owns both problems: local back pain, and sciatica when
-              the exam supports that label. Neck pain is a different complaint
-              and does not have its own page yet.               Neck pain that stays in the neck is on the{" "}
+              Both local back pain and sciatica, when the exam supports that
+              label, are treated here. Neck pain is a different complaint.
+              Neck pain that stays in the neck is covered under{" "}
               <Link
                 href="/neck-pain"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 neck pain
-              </Link>{" "}
-              page. Pain that started in a car
+              </Link>
+              . Pain that started in a car
               crash is examined the same way, and the injury-specific notes
-              live on the{" "}
+              are part of{" "}
               <Link
                 href="/personal-injury"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 personal injury
               </Link>{" "}
-              page.
+              care.
             </p>
           </SectionIntro>
         </div>
@@ -191,7 +191,7 @@ export default function BackPainTreatmentsContent() {
                 often a line rather than a bruise. Coughing, sitting, or
                 bending can make it louder. The ankle or big toe can feel
                 weak. Those details tell the exam where to look. They do not
-                diagnose you from this page.
+                diagnose you.
               </p>
               <p>
                 A common mix-up is the sacroiliac joint, where the base of the
@@ -210,7 +210,7 @@ export default function BackPainTreatmentsContent() {
                   href="/custom-foot-orthotics"
                   className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
                 >
-                  orthotics page
+                  orthotics
                 </Link>
                 . If the leg is getting weaker, use the red-flag list the same
                 day.
@@ -289,8 +289,8 @@ export default function BackPainTreatmentsContent() {
               >
                 what to expect
               </Link>
-              . Hours and the Saint Louis Park address are at the bottom of
-              this page. Call{" "}
+              . Hours and the Saint Louis Park address are listed below.
+              Call{" "}
               <a
                 href={siteConfig.phoneHref}
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
@@ -329,8 +329,8 @@ export default function BackPainTreatmentsContent() {
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 adjustments
-              </Link>{" "}
-              page. You should know which one and why before it happens. A
+              </Link>
+              . You should know which one and why before it happens. A
               high-velocity adjustment is skipped when the red flags above are
               present.
             </p>
@@ -370,8 +370,8 @@ export default function BackPainTreatmentsContent() {
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 exercise
-              </Link>{" "}
-              page.
+              </Link>
+              .
             </p>
             <p>
               If a disc is the center of the story, the anatomy and the
@@ -381,8 +381,8 @@ export default function BackPainTreatmentsContent() {
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 degenerative disc disease
-              </Link>{" "}
-              page. A supporting article on sciatica care in the Twin Cities
+              </Link>
+              . A supporting article on sciatica care in the Twin Cities
               is{" "}
               <Link
                 href="/blog/sciatica-treatment-minneapolis"
@@ -390,7 +390,7 @@ export default function BackPainTreatmentsContent() {
               >
                 here
               </Link>
-              . It does not replace this page.
+              . It does not replace an exam.
             </p>
           </SectionIntro>
         </div>
@@ -441,12 +441,12 @@ export default function BackPainTreatmentsContent() {
       <RelatedCare
         eyebrow="Keep reading"
         title="When the back pain overlaps something else"
-        intro="Stay on this page for the back and for sciatica. Use the links when the history points somewhere more specific."
+        intro="Back pain and sciatica are covered here. Use the links when the history points somewhere more specific."
         links={[
           {
             href: "/degenerative-disc-disease",
             label: "Herniated discs and disc degeneration",
-            note: "The disc page, including when a disc is the reason a leg hurts.",
+            note: "Herniated and worn discs, including when a disc is why a leg hurts.",
           },
           {
             href: "/personal-injury",
@@ -466,12 +466,12 @@ export default function BackPainTreatmentsContent() {
           {
             href: "/blog/chiropractic-care-for-chronic-lower-back-pain",
             label: "Chronic low-back pain article",
-            note: "A supporting post. The service page is this one.",
+            note: "A supporting article. The exam for sciatica is still here.",
           },
           {
             href: "/neck-pain",
             label: "Neck pain",
-            note: "A separate page. This one stays with the low back and with sciatica.",
+            note: "Neck stiffness and arm symptoms. Low-back pain and sciatica stay here.",
           },
         ]}
       />

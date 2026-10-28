@@ -17,8 +17,8 @@ const kinds = [
 
 const faqs = [
   {
-    q: "Is this the auto-accident page?",
-    a: "No. Car crashes, whiplash, and the injury chart that goes with them are on the personal injury page. This page is for sport, work, falls, and strains that did not start in a vehicle. /auto-injury on the old site points at injuries; a crash history should still be told in full so we send you to the right exam.",
+    q: "Is this the visit for an auto accident?",
+    a: "No. Car crashes, whiplash, and the injury chart that goes with them are personal injury care. Sport, work, falls, and strains that did not start in a vehicle are what we cover here. If the problem started in a crash, say so when you book so the exam matches that history.",
   },
   {
     q: "When should I come in after a sprain?",
@@ -43,7 +43,7 @@ export default function InjuriesContent() {
     <>
       <ServiceHero
         title="Sports and Work Injuries"
-        subtitle="Sprains, strains, falls, and the lift that should have been fine. Crash injuries have their own page."
+        subtitle="Sprains, strains, falls, and the lift that should have been fine. Crash injuries are evaluated as personal injuries."
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Services", href: "/services" },
@@ -53,18 +53,17 @@ export default function InjuriesContent() {
 
       <section className="bg-white py-12 sm:py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
-          <SectionIntro eyebrow="Which injury" title="This page is the non-crash injury visit">
+          <SectionIntro eyebrow="Which injury" title="Care for sprains that did not start in a crash">
             <p>
               A week-old strain, a fall, or a lift that “went” in the low
-              back is the work of this URL. We map what was hurt, what still
+              back is the work of this visit. We map what was hurt, what still
               moves, and whether an emergency department already cleared the
               dangerous part. Then the plan is usually an adjustment if the
               joint is safe, ice or laser if the tissue is irritable, and a
               few exercises you can do at home.
             </p>
             <p>
-              An auto accident, including whiplash, is not squeezed into this
-              page. Use{" "}
+              An auto accident, including whiplash, is a different visit. Use{" "}
               <Link href="/personal-injury" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 personal injury
               </Link>
@@ -171,7 +170,7 @@ export default function InjuriesContent() {
                 If pain, swelling, or strength is not moving in the direction
                 it should, the plan changes. A disc that declared itself
                 during a lift may need the{" "}
-                <Link href="/degenerative-disc-disease" className="font-semibold text-orange-300 underline-offset-4 hover:underline">disc page</Link>{" "}
+                <Link href="/degenerative-disc-disease" className="font-semibold text-orange-300 underline-offset-4 hover:underline">disc care</Link>{" "}
                 and, sometimes, a surgeon. We will not argue with worsening
                 neurology.
               </p>
@@ -215,11 +214,10 @@ export default function InjuriesContent() {
             someone needs the shift covered.
           </p>
           <p>
-            If the injury was a car crash and you landed on this page because
-            an old redirect said “injuries,” tell us that on the phone. The
-            personal-injury visit is the one that knows what to do with that
-            history.             Using the sports page for a crash makes the chart
-            worse, not faster.
+            If the injury was a car crash, say that when you call. The
+            personal-injury visit is the one that fits that history. Treating
+            a crash as a sports strain makes the chart less accurate, not
+            faster.
           </p>
           <p>
             Swelling that is still rising, a joint that locks, or a bruise
@@ -227,7 +225,7 @@ export default function InjuriesContent() {
             the weekend” by default. A weekend is reasonable only when you
             can walk, the pain is local, and nothing neurological is
             changing. If you are coaching or supervising someone else, do not
-            use this page as their clearance.             They need their own exam. We
+            use these notes as their clearance. They need their own exam. We
             will not discuss their care with you without the right
             permission, and we will not put their return date in your chart.
             A bruise that looks worse the next morning can still be a simple
@@ -248,8 +246,8 @@ export default function InjuriesContent() {
 
       <RelatedCare
         eyebrow="Split the problem"
-        title="Use a more specific page when you have one"
-        intro="This URL is the front door for non-crash injuries."
+        title="More specific care when you need it"
+        intro="Start here for sprains, falls, and work or sports injuries that were not a car crash."
         links={[
           { href: "/personal-injury", label: "Personal injury and whiplash", note: "Auto accidents and other crashes." },
           { href: "/back-pain-treatments", label: "Back pain and sciatica", note: "If the lift became leg pain." },

@@ -12,30 +12,30 @@ const owned = [
   { href: "/neck-pain", label: "Neck pain", note: "Local stiffness, arm symptoms, desk or “tech” neck, and headaches that start at the base of the skull. Not whiplash." },
   { href: "/back-pain-treatments", label: "Back pain and sciatica", note: "Low-back pain and nerve pain down the leg, including the sacroiliac mix-up." },
   { href: "/degenerative-disc-disease", label: "Discs", note: "Degeneration, bulge, and herniation, including when a scan is already in hand." },
-  { href: "/personal-injury", label: "Whiplash and crashes", note: "Auto accidents and other sudden-force injuries. Do not start that story on this hub." },
+  { href: "/personal-injury", label: "Whiplash and crashes", note: "Auto accidents and other sudden-force injuries. Tell us it was a crash when you book." },
 ];
 
 const shorter = [
-  { title: "Headaches", body: "A headache that begins where the neck meets the skull can be mechanical, and the neck page is where that exam lives. Noise, fatigue, and stress can aggravate headaches without causing them. A sudden severe headache, a headache after a head strike, or a headache with confusion is an emergency. We do not quote a percentage of headaches that “come from the neck.”" },
-  { title: "Pinched nerve", body: "The phrase means a nerve is irritated or compressed. In the neck that can show up in the arm. In the low back it can show up as sciatica. The hub does not treat the phrase. The neck page and the back page do the sorting. Weakness that is increasing is not a pinched-nerve wait." },
+  { title: "Headaches", body: "A headache that begins where the neck meets the skull can be mechanical, and that exam is part of neck care. Noise, fatigue, and stress can aggravate headaches without causing them. A sudden severe headache, a headache after a head strike, or a headache with confusion is an emergency. We do not quote a percentage of headaches that come from the neck." },
+  { title: "Pinched nerve", body: "The phrase means a nerve is irritated or compressed. In the neck that can show up in the arm. In the low back it can show up as sciatica. Neck care and back care sort those patterns. Weakness that is increasing is not a pinched-nerve wait." },
   { title: "Joint and sacroiliac pain", body: "A stiff joint can hurt locally and can make the next joint work too hard. Sacroiliac pain, where the spine meets the pelvis, often imitates sciatica or a disc. It is tested in the back-pain exam, not diagnosed from a list. The adjustment, if one is used, is aimed at the joint the exam found." },
-  { title: "Carpal tunnel and repetitive hand pain", body: "The site notes numbness, weakness, or burning with repetitive hand use, and that the nerves travel through the arm into the neck. Wrist pain still needs a screen for fracture and for a problem that belongs to a hand surgeon. An adjustment is not a carpal-tunnel cure. Laser is sometimes discussed for the soft tissue. The laser page has that limit in writing." },
+  { title: "Carpal tunnel and repetitive hand pain", body: "Numbness, weakness, or burning with repetitive hand use can involve nerves that travel through the arm into the neck. Wrist pain still needs a screen for fracture and for a problem that belongs to a hand surgeon. An adjustment is not a carpal-tunnel cure. Laser is sometimes discussed for the soft tissue, and it has limits." },
   { title: "Osteoarthritis", body: "Worn cartilage in a knee, hip, spine, or hand can hurt and can change how you move. Chiropractic care here can look at the motion you still have and at the compensation. It does not regrow cartilage. A hot, swollen joint with fever is medical, not a mobilization visit." },
-  { title: "Fibromyalgia", body: "Widespread pain without a single known cause, sometimes with poor sleep. The office does not offer a cure. A visit can look for mechanical contributors and for sleep and load problems. It should not be marketed as the treatment of the syndrome. Functional questions, if they help, are on that page." },
+  { title: "Fibromyalgia", body: "Widespread pain without a single known cause, sometimes with poor sleep. We do not offer a cure. A visit can look for mechanical contributors and for sleep and load problems. It should not be presented as the treatment of the syndrome. Sleep and daily-habit questions, if they help, belong with functional medicine." },
 ];
 
 const faqs = [
   {
-    q: "Is this the page that treats every condition?",
-    a: "No. It is the map. Neck pain, back pain and sciatica, disc problems, and crash injuries each have an owner page. This hub tells you which door to use and keeps shorter notes for problems that do not have their own URL.",
+    q: "Do you treat every condition listed in one visit?",
+    a: "No. Neck pain, back pain and sciatica, disc problems, and crash injuries each have their own explanation below or in the links. Shorter notes here cover problems that are less often the whole story. The exam decides what is actually going on.",
   },
   {
     q: "Do you still list allergies and similar conditions?",
-    a: "Older copy on this URL talked about allergies, immune function, and a wide set of medical problems. We are not repeating those claims. Allergy emergencies and medical diseases belong with a physician. If you also have a mechanical spine problem, that part can be examined on its own.",
+    a: "Allergy emergencies and immune disease belong with a physician. We do not claim spinal care treats the immune system. If you also have a mechanical spine problem, that part can be examined on its own.",
   },
   {
     q: "Where do headaches go?",
-    a: "If they start in the neck, start on the neck pain page. If they started with a crash, start on personal injury. If the headache is sudden and severe, or follows a head injury, use emergency care and do not wait for a chiropractic slot.",
+    a: "If they start in the neck, neck care is the right place to start. If they started with a crash, personal injury care is the right place. If the headache is sudden and severe, or follows a head injury, use emergency care and do not wait for a chiropractic slot.",
   },
   {
     q: "Can one person have two of these at once?",
@@ -52,7 +52,7 @@ export default function CommonChiropracticConditionsContent() {
     <>
       <ServiceHero
         title="Common Chiropractic Conditions"
-        subtitle="A map of problems, not a second copy of every service page. Neck, back, discs, and crashes each have an owner."
+        subtitle="Neck pain, back pain, disc problems, and injuries from a crash, plus shorter notes on headaches, joints, and nerve pain."
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Services", href: "/services" },
@@ -62,13 +62,13 @@ export default function CommonChiropracticConditionsContent() {
 
       <section className="bg-white py-12 sm:py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
-          <SectionIntro eyebrow="How to use this page" title="Pick the owner page before you read a definition">
+          <SectionIntro eyebrow="Where to start" title="Match the pain before you read a definition">
             <p>
-              This URL used to hold a long accordion that repeated neck, back,
-              disc, sciatica, and whiplash in one place. Those topics are now
-              written where they can be specific. Use the four links below
-              first. The shorter notes further down are for problems that
-              still do not have a standalone page.
+              Neck pain, back pain, sciatica, disc problems, and whiplash are
+              common enough to explain on their own. Use the four links below
+              first if one of those is your main complaint. The shorter notes
+              further down cover headaches, a pinched nerve, joint pain, and
+              a few other problems that often travel with the spine.
             </p>
             <p>
               Dr. Alan Levitt examines at {siteConfig.address.full}. Phone{" "}
@@ -83,8 +83,8 @@ export default function CommonChiropracticConditionsContent() {
 
       <section className="bg-[#0F172A] py-20 text-white sm:py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <SectionIntro dark center eyebrow="Owner pages" title="Start here if your problem has a name">
-            <p>One owner each. City copies of these topics are not what this hub is for.</p>
+          <SectionIntro dark center eyebrow="Common problems" title="Start here if your problem has a name">
+            <p>Each link is the fuller explanation. Describe the symptom if you are not sure which name fits.</p>
           </SectionIntro>
           <ul className="mt-10 grid gap-5 md:grid-cols-2">
             {owned.map((item) => (
@@ -101,7 +101,7 @@ export default function CommonChiropracticConditionsContent() {
 
       <section className="bg-white py-12 sm:py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
-          <SectionIntro eyebrow="Still on this hub" title="Problems without their own URL">
+          <SectionIntro eyebrow="Also seen here" title="Other problems we are often asked about">
             <div className="space-y-6">
               {shorter.map((item) => (
                 <article key={item.title}>
@@ -123,7 +123,7 @@ export default function CommonChiropracticConditionsContent() {
               progressive weakness, groin numbness, and a change in bowel or
               bladder control are not chiropractic conditions to browse. Use
               emergency care. Cancer treatment, infection, and a psychiatric
-              crisis are not entries we kept from the old accordion.
+              crisis are not conditions we treat in this office.
             </p>
             <p>
               Maintenance visits are sometimes useful once a mechanical
@@ -137,13 +137,13 @@ export default function CommonChiropracticConditionsContent() {
               . Existing patients use the other form.
             </p>
             <p>
-              Tools, once a condition is real and safe to treat, are the
-              service pages:{" "}
+              Once a condition is real and safe to treat, the tools are{" "}
               <Link href="/adjustments-and-manipulation" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">adjustments</Link>,{" "}
               <Link href="/cold-laser-therapy" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">cold laser</Link>,{" "}
               <Link href="/therapeutic-exercise" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">exercise</Link>,{" "}
+              and{" "}
               <Link href="/custom-foot-orthotics" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">orthotics</Link>.
-              The hub does not re-explain each tool.
+              Each of those is chosen after the exam, not from a list.
             </p>
           </SectionIntro>
         </div>
@@ -156,7 +156,7 @@ export default function CommonChiropracticConditionsContent() {
               <p>
                 “It burns down the left leg when I sit” is more useful than
                 the word sciatica. “I cannot turn my head after a rear-end
-                crash” belongs on personal injury even if the neck page also
+                crash” is a personal injury even if neck care would also
                 exists. Bring imaging you have. Do not wait to learn the
                 vocabulary. Call {siteConfig.phone} if the form feels like
                 the wrong door.
@@ -166,7 +166,7 @@ export default function CommonChiropracticConditionsContent() {
           <div className="lg:col-span-2">
             <CtaCard
               eyebrow="Conditions"
-              title="Not sure which page?"
+              title="Not sure which problem?"
               body="Book the exam and describe the symptom. We will sort the label."
             />
           </div>
@@ -179,11 +179,11 @@ export default function CommonChiropracticConditionsContent() {
           <p>
             Lead with place and behavior. “Left calf buzzes after twenty
             minutes of sitting, and the foot feels weak on stairs” is a
-            back-page problem until proven otherwise. “I cannot check a blind
-            spot since Tuesday, no crash, no arm symptoms” is a neck-page
+            back-pain problem until proven otherwise. “I cannot check a blind
+            spot since Tuesday, no crash, no arm symptoms” is a neck-pain
             problem. “Rear-ended on the way to work, neck stiff the next
-            day” is personal injury even if the neck page would recognize
-            the stiffness.
+            day” is a personal injury even if the stiffness feels like an
+            ordinary neck problem.
           </p>
           <p>
             Mention what you have already tried only if it changed something.
@@ -194,29 +194,25 @@ export default function CommonChiropracticConditionsContent() {
           </p>
           <p>
             If you have two problems, say both, and say which one limits the
-            day. We will not make you pick a URL before you are allowed to
-            be examined. The URLs exist so the writing stays specific. Your
-            appointment can cover more than one finding. It should not cover
-            a medical emergency that you hoped would fit a chiropractic
-            heading.
+            day. You do not need the correct medical name before you are
+            examined. Your appointment can cover more than one finding. It
+            should not cover a medical emergency that you hoped would fit a
+            chiropractic label.
           </p>
           <p>
-            The old accordion on this page tried to be every condition at
-            once, including claims about allergies and immunity we are not
-            willing to repeat. If you came looking for that version, you will
-            not find a promise that spinal care treats the immune system.
-            You will find a route to the page that matches the pain, and a
-            refusal when the pain is not ours to treat.
+            We do not claim that spinal care treats allergies or the immune
+            system. If that is what you were hoping to hear, you will not
+            find that promise here. You will find an explanation that matches
+            the pain, and a referral when the pain is not ours to treat.
           </p>
           <p>
             Hand pain, jaw tightness, and rib pain sometimes get asked about
             in the same breath as the spine. A hand that is numb may still be
-            a neck finding, which is why the neck page exists. Jaw pain and
-            rib pain are not given their own URLs because we do not want a
-            thin page for each noun. Mention them. If they are outside what
-            an exam here can responsibly handle, you will be told before a
-            plan is written. The hub’s job is routing, including the route
-            out of the office.
+            a neck finding. Jaw pain and rib pain are worth mentioning even
+            though they are not the main focus of care here. If they are
+            outside what an exam can responsibly handle, you will be told
+            before a plan is written, including when the next step is another
+            clinician.
           </p>
         </div>
       </section>
@@ -224,8 +220,8 @@ export default function CommonChiropracticConditionsContent() {
       <FaqBlock
         id="ld-faq-conditions"
         eyebrow="Questions"
-        title="Questions about this conditions hub"
-        intro="How the pages are split, and which old claims we are not carrying forward."
+        title="Questions about these conditions"
+        intro="How we sort common problems, and which claims we do not make."
         faqs={faqs}
       />
 
@@ -234,8 +230,8 @@ export default function CommonChiropracticConditionsContent() {
         title="Once you know the problem, these are the tools"
         intro="Condition first, then the service. Not the other way around."
         links={[
-          { href: "/services", label: "All services", note: "The index of what the office actually offers." },
-          { href: "/neck-pain", label: "Neck pain", note: "The new core page. There is no city version." },
+          { href: "/services", label: "All services", note: "Adjustments, laser, exercise, orthotics, and the other care we provide." },
+          { href: "/neck-pain", label: "Neck pain", note: "Stiffness, arm symptoms, and headaches that start in the neck." },
           { href: "/back-pain-treatments", label: "Back pain and sciatica", note: "Leg pain and local lumbar pain." },
           { href: "/degenerative-disc-disease", label: "Herniated discs", note: "Scan language, matched to the exam." },
           { href: "/personal-injury", label: "Whiplash", note: "Crashes, not desk necks." },

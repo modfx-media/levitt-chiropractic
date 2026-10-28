@@ -9,9 +9,8 @@ import { getDisplayedGoogleReviews } from "@/lib/google-reviews";
 const fallbackMeta: Metadata = generateMeta({
   title: "Chiropractor in Saint Louis Park, MN",
   description:
-    "Chiropractor in Saint Louis Park at 6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416. Back pain, injuries, cold laser, and custom orthotics with Dr. Alan Levitt.",
+    "Chiropractor in Saint Louis Park at 6200 Excelsior Blvd, Suite 201. Back pain, injuries, cold laser, and custom orthotics with Dr. Alan Levitt.",
   slug: "",
-  absoluteTitle: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {

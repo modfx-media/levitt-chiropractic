@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "How is this different from functional medicine?",
-    a: "Functional medicine is the page for the wider history: sleep, food, and what you already take. This page is the stance: try the non-operative, non-opioid options first when the exam supports them. Many visits use both ideas. The writeups are separate so they are not the same article twice.",
+    a: "Functional medicine is the wider history: sleep, food, and what you already take. Alternative medicine is the stance: try the non-operative, non-opioid options first when the exam supports them. Many visits use both ideas. They are not the same conversation twice.",
   },
   {
     q: "Can this replace my medical treatment?",
@@ -71,7 +71,7 @@ export default function AlternativeMedicineContent() {
               <Link href="/functional-medicine" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 functional medicine
               </Link>
-              . Stay on this page if your question is whether a non-operative
+              . Ask here if you want to know whether a non-operative
               start is even appropriate.
             </p>
           </SectionIntro>
@@ -100,7 +100,7 @@ export default function AlternativeMedicineContent() {
             <p>
               Neck pain, back pain, joint pain, and headaches that start in
               the neck are the complaints that belong in a conversation about
-              starting here. Each has a fuller page:{" "}
+              starting here. More detail is under{" "}
               <Link href="/neck-pain" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">neck</Link>,{" "}
               <Link href="/back-pain-treatments" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">back</Link>,{" "}
               <Link href="/adjustments-and-manipulation" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">adjustments</Link>.
@@ -109,9 +109,9 @@ export default function AlternativeMedicineContent() {
               with their own explanations, not synonyms for “alternative.”
             </p>
             <p>
-              Older copy on this URL listed a wide set of symptoms, including
-              digestive issues, and spoke as if adjustments plus nutrition
-              plus habits were a single method for all of them. That is
+              Digestion, allergies, and a long list of other symptoms are
+              sometimes grouped with “natural” care as if adjustments,
+              nutrition, and habits were one method for all of them. That is
               broader than we will claim. Digestion, allergies, and similar
               medical problems need the clinician who manages them. We can
               still look at the spine if you also have mechanical pain. We
@@ -144,13 +144,15 @@ export default function AlternativeMedicineContent() {
               <Link href="/contact/new-patient-appointment" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 request a new-patient visit
               </Link>
-              . There is no package and no price on this page.
+              . There is no package and no price listed in advance.
             </p>
             <p>
               Expectations stay modest. Some mechanical problems become more
               comfortable. Some do not, and the useful response is to change
               the plan or the clinician. “Natural” is a description of the
-              tools. It is not evidence, and it is not a timeline.
+              tools. It is not evidence, and it is not a timeline. The first
+              visit is still an exam, and the plan is only the care that exam
+              supports.
             </p>
           </SectionIntro>
         </div>
@@ -205,14 +207,14 @@ export default function AlternativeMedicineContent() {
             talk, not a reason for you to pick the advice you prefer.
           </p>
           <p>
-            People sometimes want this page because they are tired of being
+            People sometimes ask for this kind of care because they are tired of being
             told to take something. Tired is understandable. It is not a
             diagnosis. If the exam is mechanical, we proceed. If the exam is
             not, we will disappoint you on purpose rather than invent a
             natural explanation for a medical problem.
           </p>
           <p>
-            Friends will offer remedies with more confidence than this page
+            Friends will offer remedies with more confidence than we
             will. A tea, a magnet, a cleanse, or a spine “reset” you saw in a
             video is not automatically part of care here because it is
             natural. If we do not use it, we will say we do not use it. You
@@ -252,7 +254,7 @@ export default function AlternativeMedicineContent() {
           { href: "/adjustments-and-manipulation", label: "Adjustments", note: "The hands-on structural visit." },
           { href: "/therapeutic-exercise", label: "Exercise", note: "The habit that is specific enough to repeat." },
           { href: "/cold-laser-therapy", label: "Cold laser", note: "A non-drug option for some soft-tissue pain." },
-          { href: "/common-chiropractic-conditions", label: "Conditions hub", note: "A map if you are not sure which pain you have." },
+          { href: "/common-chiropractic-conditions", label: "Other conditions", note: "A guide if you are not sure which pain you have." },
           { href: "/meet-the-doctor", label: "Meet Dr. Levitt", note: "Training and how he frames chemical, nutritional, and structural care." },
         ]}
       />
