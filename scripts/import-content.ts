@@ -408,7 +408,7 @@ async function main() {
                 heading: "Request an appointment",
                 body: `Call ${siteConfig.phone} or request a visit online.`,
                 label: "Request Appointment",
-                href: "/contact/appointment-request",
+                href: "/contact/new-patient-appointment",
               },
             ],
           }),

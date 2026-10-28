@@ -6,20 +6,20 @@ import { withCMSMeta } from "@/lib/cms/generateMeta";
 import AppointmentRequestContent from "@/components/contact/AppointmentRequestContent";
 
 const fallbackMeta: Metadata = generateMeta({
-  title: "Request an Appointment",
+  title: "Existing Patient Appointment",
   description:
-    "Request a chiropractic appointment at Levitt Chiropractic in Saint Louis Park, MN. We typically reply within one business day to schedule your visit.",
-  slug: "contact/appointment-request",
+    "Existing patients of Levitt Chiropractic in Saint Louis Park, MN can request their next appointment online. Our staff will be in touch shortly to confirm your visit.",
+  slug: "contact/existing-patient-appointment",
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  return withCMSMeta("/contact/appointment-request", fallbackMeta);
+  return withCMSMeta("/contact/existing-patient-appointment", fallbackMeta);
 }
 
 export default function Page() {
   return (
-    <CMSRoute path="/contact/appointment-request">
-      <AppointmentRequestContent />
+    <CMSRoute path="/contact/existing-patient-appointment">
+      <AppointmentRequestContent variant="existing" />
     </CMSRoute>
   );
 }

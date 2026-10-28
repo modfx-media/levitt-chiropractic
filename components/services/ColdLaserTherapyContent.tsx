@@ -467,10 +467,16 @@ export default function ColdLaserTherapyContent() {
                     className="mt-5"
                   >
                     <Link
-                      href="/appointment"
+                      href={siteConfig.appointmentUrl}
                       className="flex h-12 w-full items-center justify-center rounded-full bg-[#F97316] px-6 text-sm font-bold text-white shadow-md shadow-orange-500/30 transition-colors hover:bg-orange-600"
                     >
-                      Request Appointment →
+                      NEW Patient Appointment →
+                    </Link>
+                    <Link
+                      href={siteConfig.existingPatientAppointmentUrl}
+                      className="mt-3 flex h-12 w-full items-center justify-center rounded-full border border-white/25 px-6 text-sm font-bold text-white transition-colors hover:border-[#F97316] hover:text-orange-300"
+                    >
+                      Existing Patient Appointment →
                     </Link>
                   </motion.div>
                 </div>

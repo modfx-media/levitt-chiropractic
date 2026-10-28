@@ -200,8 +200,8 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
         title="Chiropractor in"
         titleAccent="Saint Louis Park"
         subtitle="Your spine health specialists. Drug-free, personalized care from Dr. Alan Levitt — adjustments, cold laser, cryotherapy, and custom orthotics."
-        ctaText="REQUEST APPOINTMENT"
-        ctaHref="/contact/appointment-request"
+        ctaText="NEW PATIENT APPOINTMENT"
+        ctaHref="/contact/new-patient-appointment"
         secondaryCtaText="Meet Dr. Levitt"
         secondaryCtaHref="/meet-the-doctor"
         backgroundImages={HERO_IMAGES}
@@ -329,16 +329,16 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
               </p>
               <p>
                 We combine chiropractic adjustments with complementary
-                therapies, including cold laser therapy, targeted exercises,
-                and custom orthotics when appropriate. Every treatment plan is
+                therapies, including cold laser therapy, targeted exercises, and
+                custom orthotics when appropriate. Every treatment plan is
                 tailored to your individual needs, with an emphasis on restoring
                 function and helping you feel your best.
               </p>
               <p>
                 Our whole-body philosophy considers how your posture, movement,
-                lifestyle, and overall health influence your well-being. We
-                take the time to listen, evaluate, and develop a thoughtful
-                care plan that supports your health and quality of life.
+                lifestyle, and overall health influence your well-being. We take
+                the time to listen, evaluate, and develop a thoughtful care plan
+                that supports your health and quality of life.
               </p>
             </div>
 
@@ -1029,16 +1029,6 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                       </a>
                     </div>
                   </div>
-
-                  <div className="mt-6">
-                    <Button
-                      href="/contact/appointment-request"
-                      variant="primary"
-                      size="md"
-                    >
-                      Book an Appointment
-                    </Button>
-                  </div>
                 </div>
               </div>
 
@@ -1135,11 +1125,18 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
             <Button
-              href="/contact/appointment-request"
+              href="/contact/new-patient-appointment"
               variant="primary"
               size="lg"
             >
-              Request Appointment
+              NEW Patient Appointment
+            </Button>
+            <Button
+              href={siteConfig.existingPatientAppointmentUrl}
+              variant="outline"
+              size="lg"
+            >
+              Existing Patient Appointment
             </Button>
             <Button href={siteConfig.phoneHref} variant="outline" size="lg">
               Call 952-920-7535

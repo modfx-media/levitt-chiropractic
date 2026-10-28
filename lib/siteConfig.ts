@@ -46,7 +46,8 @@ export const siteConfig = {
     { day: "Saturday", hours: "By Appointment" },
     { day: "Sunday", hours: "Closed" },
   ],
-  appointmentUrl: "/contact/appointment-request",
+  appointmentUrl: "/contact/new-patient-appointment",
+  existingPatientAppointmentUrl: "/contact/existing-patient-appointment",
   socialLinks: {} as Record<string, string>,
   colors: {
     primary: "#F97316",

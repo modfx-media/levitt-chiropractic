@@ -94,7 +94,11 @@ export const primaryNav: NavEntry[] = [
     label: "Contact",
     href: "/contact",
     groups: [
-      { label: "Appointment Request", href: "/contact/appointment-request" },
+      { label: "New Patient Appointment", href: "/contact/new-patient-appointment" },
+      {
+        label: "Existing Patient Appointment",
+        href: "/contact/existing-patient-appointment",
+      },
     ],
   },
 ];

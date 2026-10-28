@@ -17,31 +17,86 @@ const fadeUp = {
   },
 };
 
-const reasons = [
-  {
-    title: "We&rsquo;ll reach out fast",
-    body: "Our staff will be in touch shortly to confirm your visit and answer any questions.",
+const variants = {
+  new: {
+    title: "New Patient Appointment",
+    subtitle:
+      "Fill out the form and our staff will be in touch shortly let&rsquo;s get you on the schedule.",
+    eyebrow: "Request a Visit",
+    intro:
+      "Fill out the appointment request form and our staff will be in touch shortly. Send us a message!",
+    reasons: [
+      {
+        title: "We&rsquo;ll reach out fast",
+        body: "Our staff will be in touch shortly to confirm your visit and answer any questions.",
+      },
+      {
+        title: "Flexible scheduling",
+        body: "Tell us your preferred days and times we&rsquo;ll do our best to match.",
+      },
+      {
+        title: "First-visit friendly",
+        body: "New to the practice? We&rsquo;ll walk you through paperwork and what to expect.",
+      },
+    ],
+    form: {
+      id: "JKf5DJnpikVe68RzfV0T",
+      name: "\uD83D\uDD35 Website Form (REQUEST APPMT) ",
+      height: "534",
+      title: "Website Appointment Request Form",
+      extraAttrs: {},
+    },
   },
-  {
-    title: "Flexible scheduling",
-    body: "Tell us your preferred days and times we&rsquo;ll do our best to match.",
+  existing: {
+    title: "Existing Patient Appointment",
+    subtitle:
+      "Already a patient? Fill out the form and our staff will be in touch shortly to get your next visit on the schedule.",
+    eyebrow: "Book Your Next Visit",
+    intro:
+      "Fill out the existing patient appointment form and our staff will be in touch shortly to confirm your visit.",
+    reasons: [
+      {
+        title: "We&rsquo;ll reach out fast",
+        body: "Our staff will be in touch shortly to confirm your visit and answer any questions.",
+      },
+      {
+        title: "Flexible scheduling",
+        body: "Tell us your preferred days and times we&rsquo;ll do our best to match.",
+      },
+      {
+        title: "Pick up where you left off",
+        body: "We&rsquo;ll review your history and continue your care plan from your last visit.",
+      },
+    ],
+    form: {
+      id: "URmegmIswpVqCJnFftaL",
+      name: "\uD83D\uDD35 Website Form (Existing Patient APPMT) ",
+      height: "562",
+      title: "Website Existing Patient Appointment Form",
+      extraAttrs: {
+        "data-cookie-consent": "true",
+        "data-cookie-consent-provider": "auto",
+      },
+    },
   },
-  {
-    title: "First-visit friendly",
-    body: "New to the practice? We&rsquo;ll walk you through paperwork and what to expect.",
-  },
-];
+};
 
-export default function AppointmentRequestContent() {
+export default function AppointmentRequestContent({
+  variant = "new",
+}: {
+  variant?: keyof typeof variants;
+}) {
+  const { title, subtitle, eyebrow, intro, reasons, form } = variants[variant];
+
   return (
     <>
       <ServiceHero
-        title="Appointment Request"
-        subtitle="Fill out the form and our staff will be in touch shortly let&rsquo;s get you on the schedule."
+        title={title}
+        subtitle={subtitle}
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Contact", href: "/contact" },
-          { label: "Appointment Request" },
+          { label: title },
         ]}
       />
 
@@ -57,7 +112,7 @@ export default function AppointmentRequestContent() {
               className="lg:col-span-5"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Request a Visit
+                {eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
                 Send us a message
@@ -67,8 +122,7 @@ export default function AppointmentRequestContent() {
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Fill out the appointment request form and our staff will be
-                in touch shortly. Send us a message!
+                {intro}
               </p>
 
               <ul className="mt-8 space-y-4">
@@ -137,14 +191,14 @@ export default function AppointmentRequestContent() {
 
                 <div className="mt-6 h-[720px] w-full">
                   <iframe
-                    src="https://api.leadconnectorhq.com/widget/form/JKf5DJnpikVe68RzfV0T"
+                    src={`https://api.leadconnectorhq.com/widget/form/${form.id}`}
                     style={{
                       width: "100%",
                       height: "100%",
                       border: "none",
                       borderRadius: "8px",
                     }}
-                    id="inline-JKf5DJnpikVe68RzfV0T"
+                    id={`inline-${form.id}`}
                     data-layout="{'id':'INLINE'}"
                     data-trigger-type="alwaysShow"
                     data-trigger-value=""
@@ -152,11 +206,12 @@ export default function AppointmentRequestContent() {
                     data-activation-value=""
                     data-deactivation-type="neverDeactivate"
                     data-deactivation-value=""
-                    data-form-name="\uD83D\uDD35 Website Form (REQUEST APPMT) "
-                    data-height="534"
-                    data-layout-iframe-id="inline-JKf5DJnpikVe68RzfV0T"
-                    data-form-id="JKf5DJnpikVe68RzfV0T"
-                    title="Website Appointment Request Form"
+                    data-form-name={form.name}
+                    data-height={form.height}
+                    data-layout-iframe-id={`inline-${form.id}`}
+                    data-form-id={form.id}
+                    {...form.extraAttrs}
+                    title={form.title}
                   />
                 </div>
                 <Script

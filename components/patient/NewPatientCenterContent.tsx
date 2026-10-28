@@ -43,7 +43,7 @@ const cards: Card[] = [
     title: "Request an Appointment",
     description:
       "Reach out and our team will follow up to confirm a time. New patients are welcome call us with any questions.",
-    href: "/contact/appointment-request",
+    href: "/contact/new-patient-appointment",
     cta: "Request a Visit",
     icon: (
       <svg
@@ -311,7 +311,7 @@ export default function NewPatientCenterContent() {
                 </a>{" "}
                 or{" "}
                 <Link
-                  href="/contact/appointment-request"
+                  href="/contact/new-patient-appointment"
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
                   request an appointment online

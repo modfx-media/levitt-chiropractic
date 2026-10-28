@@ -2498,7 +2498,7 @@ export const blogPosts: BlogPost[] = [
           {
             text: "You do not need to wait for a major injury before paying attention to what your body is telling you. If you are noticing any of these everyday clues, we can help you find out what is behind them. ",
           },
-          { text: "Request an appointment", href: "/contact/appointment-request" },
+          { text: "Request an appointment", href: "/contact/new-patient-appointment" },
           { text: " or " },
           { text: "contact us", href: "/contact" },
           { text: " to get started." },
@@ -2640,7 +2640,7 @@ export const blogPosts: BlogPost[] = [
           {
             text: " supports whole-body wellness, or ",
           },
-          { text: "request an appointment", href: "/contact/appointment-request" },
+          { text: "request an appointment", href: "/contact/new-patient-appointment" },
           { text: " to get started." },
         ],
       },
@@ -2767,7 +2767,7 @@ export const blogPosts: BlogPost[] = [
           {
             text: "If you are not sure whether your pain is muscular or spine-related, we can help you find out. ",
           },
-          { text: "Request an appointment", href: "/contact/appointment-request" },
+          { text: "Request an appointment", href: "/contact/new-patient-appointment" },
           { text: " and we will walk through what your exam shows and what to do next." },
         ],
       },
@@ -2907,7 +2907,7 @@ export const blogPosts: BlogPost[] = [
           {
             text: "If you are ready for care that goes beyond quick relief, we would love to help. ",
           },
-          { text: "Request an appointment", href: "/contact/appointment-request" },
+          { text: "Request an appointment", href: "/contact/new-patient-appointment" },
           { text: " with Dr. Levitt and we will build a plan around your whole body." },
         ],
       },
@@ -3143,7 +3143,7 @@ export const blogPosts: BlogPost[] = [
           },
           {
             text: "Schedule an appointment",
-            href: "/contact/appointment-request",
+            href: "/contact/new-patient-appointment",
           },
           {
             text: " with our experienced chiropractor in Saint Louis Park so we can evaluate your concerns and create a personalized care plan. We take time to listen, explain your options, and answer your questions at every step. To request your visit or ask about availability, simply ",

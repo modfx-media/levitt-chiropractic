@@ -123,12 +123,20 @@ export function Footer() {
                 </p>
               </div>
 
-              <Link
-                href={siteConfig.appointmentUrl}
-                className="mt-5 inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-orange-600"
-              >
-                Request Appointment
-              </Link>
+              <div className="mt-5 flex flex-wrap gap-2">
+                <Link
+                  href={siteConfig.appointmentUrl}
+                  className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-orange-600"
+                >
+                  NEW Patient Appointment
+                </Link>
+                <Link
+                  href={siteConfig.existingPatientAppointmentUrl}
+                  className="inline-flex items-center justify-center rounded-full border border-white/25 px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:border-primary hover:text-primary"
+                >
+                  Existing Patient Appointment
+                </Link>
+              </div>
             </div>
 
             {/* Explore */}
