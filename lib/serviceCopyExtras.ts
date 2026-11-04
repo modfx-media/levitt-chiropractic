@@ -73,7 +73,7 @@ const EXTRAS: Record<string, ServiceCopyExtra> = {
   },
   "therapeutic-exercise": {
     whoItsFor:
-      "Anyone whose pain eases after an adjustment and then returns because the supporting muscles were never asked to work. Also post-injury rehab that should happen at home, not only on our table.",
+      "Anyone whose pain eases after an adjustment and then returns because the supporting muscles were never asked to work. Also strain rehab that should happen at home, not only on our table.",
     visitFlow:
       "A few movements done well beat a 12-page packet. We match endurance, resistance, and mobility to your actual week — including the weeks you do not come in.",
     notFor:

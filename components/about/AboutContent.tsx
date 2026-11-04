@@ -69,7 +69,7 @@ const policies = [
 ];
 
 const services = [
-  "Personal Injuries",
+  "Back and Neck Pain",
   "Subluxations",
   "Headaches",
 ];

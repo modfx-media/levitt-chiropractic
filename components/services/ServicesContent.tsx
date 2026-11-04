@@ -85,7 +85,7 @@ const services: Service[] = [
   {
     title: "Degenerative Disc Disease",
     description:
-      "Chiropractic evaluation and care for spinal disc changes that come with age, injury, or wear.",
+      "Chiropractic evaluation and care for spinal disc changes that come with age, strain, or wear.",
     href: "/degenerative-disc-disease",
     group: "Conditions",
     icon: (
@@ -216,7 +216,7 @@ const services: Service[] = [
   {
     title: "Neck Pain",
     description:
-      "Stiffness, arm symptoms, and headaches that start in the neck. A crash is evaluated as a personal injury.",
+      "Stiffness, arm symptoms, and headaches that start in the neck.",
     href: "/neck-pain",
     group: "Conditions",
     icon: (
@@ -232,27 +232,6 @@ const services: Service[] = [
       >
         <circle cx="12" cy="5" r="2" />
         <path d="M12 7v4M9 20l3-6 3 6" />
-      </svg>
-    ),
-  },
-  {
-    title: "Personal Injury",
-    description:
-      "Exam after an auto accident or other crash, including whiplash. Not a letter without a visit.",
-    href: "/personal-injury",
-    group: "Conditions",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" />
       </svg>
     ),
   },
@@ -304,7 +283,7 @@ const stats = [
 const serviceFaqs = [
   {
     q: "Where should I start?",
-    a: "Match the body part. Neck pain, back pain, disc problems, and car crashes are each explained with that kind of care. If you only know the tool you heard about, cold laser, ice, adjustments, exercise, and orthotics are listed below. If you are unsure, book the exam and describe the symptom.",
+    a: "Match the body part. Neck pain, back pain, and disc problems are each explained with that kind of care. If you only know the tool you heard about, cold laser, ice, adjustments, exercise, and orthotics are listed below. If you are unsure, book the exam and describe the symptom.",
   },
   {
     q: "Do I need to pick a service before I call?",
@@ -320,7 +299,7 @@ const serviceFaqs = [
   },
   {
     q: "What will you not do from this list?",
-    a: "Surgery, injections, and prescription medication. We also do not write injury letters without an exam, and we do not promise a recovery date. Red-flag symptoms belong in emergency care before any of these services.",
+    a: "Surgery, injections, and prescription medication. We also do not promise a recovery date. Red-flag symptoms belong in emergency care before any of these services.",
   },
 ];
 
@@ -329,7 +308,7 @@ export default function ServicesContent() {
     <>
       <ServiceHero
         title="Our Services"
-        subtitle="Comprehensive chiropractic and integrative care from routine adjustments to complex injury recovery and whole-body wellness."
+        subtitle="Comprehensive chiropractic and integrative care from routine adjustments to whole-body wellness."
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Services" },
@@ -372,9 +351,7 @@ export default function ServicesContent() {
                   Start with the body part if you know it. Neck stiffness,
                   arm symptoms, and headaches that begin at the skull base go
                   to neck pain. Low-back pain and leg pain go to back pain.
-                  A scan that says herniated disc belongs with disc care. A
-                  crash, including whiplash, belongs with personal injury. Sport,
-                  work, and falls that were not a crash belong with injuries.{" "}
+                  A scan that says herniated disc belongs with disc care.{" "}
                   <Link href="/common-chiropractic-conditions" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                     Common conditions
                   </Link>{" "}
@@ -398,8 +375,8 @@ export default function ServicesContent() {
                   they would change the plan. The service is what the exam
                   supports, and it is withheld when the story is a red flag:
                   progressive weakness, groin numbness, bowel or bladder
-                  change, fever with spinal pain, or a major injury that has
-                  not been medically screened. Those go to emergency care.
+                  change, fever with spinal pain, or a hard fall or impact that
+                  has not been medically screened. Those go to emergency care.
                 </p>
               </div>
             </motion.div>
@@ -578,10 +555,8 @@ export default function ServicesContent() {
               What this office does not provide: surgery, injections, and
               prescription medication. It also does not publish prices here.
               Payment at the desk is cash, check, or major credit card, and
-              a payment plan can be discussed. Auto-injury coverage and
-              health insurance are separate conversations. We will not guess
-              what a policy pays, and we will not write an injury letter for
-              a person who has not been examined.
+              a payment plan can be discussed. We will not guess what a
+              health insurance policy pays.
             </p>
             <p>
               First-visit logistics match the{" "}
@@ -627,7 +602,7 @@ export default function ServicesContent() {
             If your sentence is about a body part, ignore the therapy cards
             until the condition itself shows a tool is relevant. Neck pain
             does not require you to understand laser. Back pain does not
-            require orthotics. A crash does not require functional medicine.
+            require orthotics.
             Trying to combine every option yourself is unnecessary. The
             exam combines what belongs together, or it says a combination
             does not.

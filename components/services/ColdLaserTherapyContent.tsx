@@ -15,7 +15,7 @@ import {
 const uses = [
   "Acute and chronic pain",
   "Ligament sprains and muscle strain",
-  "Soft-tissue injuries",
+  "Soft-tissue strains",
   "Tendonitis and tennis elbow",
   "Arthritis and bursitis",
   "Back pain",
@@ -297,7 +297,7 @@ export default function ColdLaserTherapyContent() {
         links={[
           { href: "/back-pain-treatments", label: "Back pain", note: "Laser can be one part of a back plan." },
           { href: "/neck-pain", label: "Neck pain", note: "Stiffness, arm symptoms, and desk-related neck ache." },
-          { href: "/ice-pack-cryotherapy", label: "Ice pack", note: "Cold for a hot, new injury. Different from light." },
+          { href: "/ice-pack-cryotherapy", label: "Ice pack", note: "Cold for a hot, new strain. Different from light." },
           { href: "/therapeutic-exercise", label: "Exercise", note: "What you do between visits so the session is not the whole plan." },
           { href: "/adjustments-and-manipulation", label: "Adjustments", note: "The hands-on option laser does not replace." },
           { href: "/contact/new-patient-appointment", label: "Book a visit", note: "New patients start with an exam, not a laser-only slot." },

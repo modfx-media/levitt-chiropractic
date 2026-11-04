@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
 import { siteConfig } from "@/lib/siteConfig";
 import { sitemapEntries, type SitemapEntry } from "@/lib/sitemapEntries";
+import { HIDDEN_CMS_POST_SLUGS } from "@/lib/cms/posts";
 
 /** Paths that must never appear in sitemap.xml (page itself can stay live). */
-const SITEMAP_EXCLUSIONS = new Set(["/site-map"]);
+const SITEMAP_EXCLUSIONS = new Set([
+  "/site-map",
+  ...[...HIDDEN_CMS_POST_SLUGS].map((slug) => `/blog/${slug}`),
+]);
 import { servedCities, citySitemapPriority } from "@/lib/areasData";
 import { pseoServices } from "@/lib/pseoServices";
 import { getAllPosts } from "@/lib/blog";

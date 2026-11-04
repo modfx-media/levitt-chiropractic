@@ -90,11 +90,6 @@ const quickLinks = [
     href: "/contact",
     image: "/images/contact-us.jpg",
   },
-  {
-    title: "Personal Injury",
-    href: "/personal-injury",
-    image: "/images/auto-injury.jpg",
-  },
 ];
 
 const techniques = [
@@ -324,7 +319,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
               </p>
               <p>
                 Whether you&apos;re experiencing chronic neck or back pain,
-                recovering from an injury, or dealing with everyday stiffness
+                recovering from a strain, or dealing with everyday stiffness
                 and discomfort, our approach focuses on identifying the
                 underlying factors contributing to your condition rather than
                 simply addressing the symptoms.
@@ -638,11 +633,6 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                 title={q.title}
                 href={q.href}
                 image={q.image}
-                imageAlt={
-                  q.href === "/personal-injury"
-                    ? "Chiropractic care for someone recovering from a personal injury"
-                    : undefined
-                }
                 index={i}
               />
             ))}

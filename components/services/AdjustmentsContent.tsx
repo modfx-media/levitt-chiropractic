@@ -42,7 +42,7 @@ const faqs = [
   },
   {
     q: "Do you only adjust the spine?",
-    a: "The techniques above are spinal and regional. They are used for low-back pain, neck pain, headaches, other musculoskeletal pain, subluxations, and auto, sports, and personal injuries. Feet are a separate service when orthotics are the lever. Laser and ice are separate tools.",
+    a: "The techniques above are spinal and regional. They are used for low-back pain, neck pain, headaches, other musculoskeletal pain, and subluxations. Feet are a separate service when orthotics are the lever. Laser and ice are separate tools.",
   },
 ];
 
@@ -110,14 +110,11 @@ export default function AdjustmentsContent() {
           <SectionIntro eyebrow="Who it is for" title="Problems an adjustment may address">
             <p>
               Lower back pain, neck pain, headaches, other musculoskeletal
-              pain, subluxations, and injuries from auto crashes, sport, and
-              personal mishaps. Each of those is explained with the condition
+              pain, and subluxations. Each of those is explained with the condition
               it belongs to. Neck pain is{" "}
               <Link href="/neck-pain" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">neck pain</Link>.
               Back pain and sciatica are{" "}
               <Link href="/back-pain-treatments" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">back pain</Link>.
-              A crash is{" "}
-              <Link href="/personal-injury" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">personal injury</Link>.
               The focus here is the contact itself.
             </p>
             <p>

@@ -22,6 +22,11 @@ const HIDDEN_RANKED_CONTENT_IDS = new Set([
   'a64e93df-02c6-4c61-95ee-d898cf9a4ea9',
 ])
 
+/** Ranked copies hidden by title slug (the local rewrite lives at a different slug). */
+const HIDDEN_RANKED_TITLE_SLUGS = new Set([
+  'why-athletes-choose-a-sports-injury-chiropractor-in-minneapolis',
+])
+
 function rankedPublishDate(item: RankedContentListItem): string {
   return (
     canonicalPublishDate(item.title) ??
@@ -106,6 +111,7 @@ export async function getLiveRankedBlogPosts(
           isBlogContentType(item.content_type) &&
           isRankedPostLive(item.status, rankedPublishDate(item)) &&
           !HIDDEN_RANKED_CONTENT_IDS.has(item.id) &&
+          !HIDDEN_RANKED_TITLE_SLUGS.has(slugFromTitle(item.title)) &&
           !isDuplicateOfExisting(item.title, local) &&
           !isDuplicateOfExisting(item.title, cms),
       )

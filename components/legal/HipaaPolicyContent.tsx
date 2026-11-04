@@ -31,7 +31,7 @@ const useDisclosureItems: Item[] = [
         share this information with a pharmacist who needs it to dispense a
         prescription to you, or a laboratory that performs a test. We may also
         disclose medical information to members of your family or others who
-        can help you when you are sick or injured, or after you die.
+        can help you when you are sick or hurt, or after you die.
       </>
     ),
   },
@@ -153,7 +153,7 @@ const useDisclosureItems: Item[] = [
       <>
         We may, and are sometimes required by law, to disclose your health
         information to public health authorities for purposes related to:
-        preventing or controlling disease, injury, or disability; reporting
+        preventing or controlling disease, physical harm, or disability; reporting
         child, elder, or dependent-adult abuse or neglect; reporting domestic
         violence; reporting to the FDA problems with products and reactions
         to medications; and reporting disease or infection exposure.
@@ -251,7 +251,7 @@ const useDisclosureItems: Item[] = [
       <>
         We may disclose your health information as necessary to comply with
         workers&rsquo; compensation laws. We are also required by law to
-        report cases of occupational injury or occupational illness to the
+        report cases of occupational harm or occupational illness to the
         employer or workers&rsquo; compensation insurer.
       </>
     ),

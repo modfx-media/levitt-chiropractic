@@ -118,7 +118,7 @@ export default function AreasWeServeContent() {
             <p className="mt-4 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
               Find your city below for a complete view of the chiropractic
               services available locally adjustments, cold laser, cryotherapy,
-              custom orthotics, injury care, and more.
+              custom orthotics, therapeutic exercise, and more.
             </p>
           </motion.div>
         </div>

@@ -30,7 +30,7 @@ const faqs = [
   },
   {
     q: "Should I use heat instead?",
-    a: "Ice is generally the better first choice in the first 48 to 72 hours after a new injury, when the area is still irritable. After that, the choice depends on the exam. Heat on a hot, swollen joint is often the wrong experiment.",
+    a: "Ice is generally the better first choice in the first 48 to 72 hours after a new strain or sprain, when the area is still irritable. After that, the choice depends on the exam. Heat on a hot, swollen joint is often the wrong experiment.",
   },
   {
     q: "Will cold replace an adjustment or a doctor visit?",
@@ -67,7 +67,7 @@ export default function CryotherapyContent() {
               inflammation come down, acute pain is easier to tolerate, and
               the area can settle enough that other care is possible. It is
               drug-free. It is not a recovery promise. A numb patch of skin
-              is a sensation, not proof that the injury is gone.
+              is a sensation, not proof that the problem is gone.
             </p>
             <p>
               Dr. Levitt works at {siteConfig.address.full}. The phone is{" "}
@@ -125,7 +125,7 @@ export default function CryotherapyContent() {
               reasons to ice a region. The condition itself explains the
               problem. The explanation here is the cold itself. A fever with back
               pain, a joint that is red and you cannot bear weight, or pain
-              after a major crash that has not been screened are not ice
+              after major trauma that has not been screened are not ice
               problems. Get medical care first.
             </p>
           </SectionIntro>
@@ -139,7 +139,7 @@ export default function CryotherapyContent() {
               You will be told where it goes, how long, and what to put
               between the cold and the skin. The in-office range we use as a
               starting point is 15 to 20 minutes on the region. Longer is not
-              braver. Sleeping on a pack is a common way to injure skin. If
+              braver. Sleeping on a pack is a common way to damage skin. If
               you cannot feel the area, do not ice it until someone who can
               see the skin has signed off.
             </p>
@@ -163,7 +163,7 @@ export default function CryotherapyContent() {
       <section className="bg-[#0F172A] py-20 text-white sm:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-5">
           <div className="lg:col-span-3">
-            <SectionIntro dark eyebrow="A limit" title="Cold buys calm. It does not finish the injury.">
+            <SectionIntro dark eyebrow="A limit" title="Cold buys calm. It does not finish the job.">
               <p>
                 Swelling that is down tomorrow can be back if the load
                 returns. That is not a failure of the pack. It is a sign the
@@ -201,7 +201,7 @@ export default function CryotherapyContent() {
             changes, a wound, and numbness from neuropathy are reasons we
             decline. You do not have to know the diagnosis. Describe the
             color and the feeling. We would rather skip cold than explain a
-            skin injury later.
+            skin damage later.
           </p>
           <p>
             Same-day pairing is common and still selective. Ice after a
@@ -248,10 +248,8 @@ export default function CryotherapyContent() {
         links={[
           { href: "/ice-pack-cryotherapy", label: "Ice pack how-to", note: "Placement, time, and skin safety." },
           { href: "/cold-laser-therapy", label: "Cold laser", note: "Light, not temperature." },
-          { href: "/injuries", label: "Sports and work injuries", note: "Strains where early cold is often relevant." },
           { href: "/back-pain-treatments", label: "Back pain", note: "A flare can be iced. The back still needs its own exam." },
           { href: "/neck-pain", label: "Neck pain", note: "Same idea for a newly angry neck." },
-          { href: "/personal-injury", label: "After a crash", note: "Cold may be part of it. The injury exam is the main event." },
         ]}
       />
       <LocationStrip />

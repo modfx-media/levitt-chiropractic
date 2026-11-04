@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/lib/blog";
+import { scrubBlogPost } from "@/lib/blogTextFilter";
 
 import { lexicalToBlocks } from "./lexicalToBlocks";
 import { mediaPublicUrl } from "./mediaUrl";
@@ -76,7 +77,7 @@ export function cmsDocToBlogPost(doc: unknown): BlogPost | null {
   const updatedAt = dateOnly(doc.updatedAt);
   const words = wordCount({ blocks });
 
-  return {
+  return scrubBlogPost({
     slug,
     title,
     description,
@@ -90,5 +91,5 @@ export function cmsDocToBlogPost(doc: unknown): BlogPost | null {
     coverAlt: cover?.alt || title,
     readingMinutes: Math.max(1, Math.round(words / 230) || 1),
     blocks,
-  };
+  });
 }

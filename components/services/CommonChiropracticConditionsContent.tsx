@@ -9,10 +9,9 @@ import { ServiceHero } from "@/components/services/ServiceHero";
 import { FaqBlock, RelatedCare, SectionIntro } from "@/components/services/enrichment";
 
 const owned = [
-  { href: "/neck-pain", label: "Neck pain", note: "Local stiffness, arm symptoms, desk or “tech” neck, and headaches that start at the base of the skull. Not whiplash." },
+  { href: "/neck-pain", label: "Neck pain", note: "Local stiffness, arm symptoms, desk or “tech” neck, and headaches that start at the base of the skull." },
   { href: "/back-pain-treatments", label: "Back pain and sciatica", note: "Low-back pain and nerve pain down the leg, including the sacroiliac mix-up." },
   { href: "/degenerative-disc-disease", label: "Discs", note: "Degeneration, bulge, and herniation, including when a scan is already in hand." },
-  { href: "/personal-injury", label: "Whiplash and crashes", note: "Auto accidents and other sudden-force injuries. Tell us it was a crash when you book." },
 ];
 
 const shorter = [
@@ -27,7 +26,7 @@ const shorter = [
 const faqs = [
   {
     q: "Do you treat every condition listed in one visit?",
-    a: "No. Neck pain, back pain and sciatica, disc problems, and crash injuries each have their own explanation below or in the links. Shorter notes here cover problems that are less often the whole story. The exam decides what is actually going on.",
+    a: "No. Neck pain, back pain and sciatica, and disc problems each have their own explanation below or in the links. Shorter notes here cover problems that are less often the whole story. The exam decides what is actually going on.",
   },
   {
     q: "Do you still list allergies and similar conditions?",
@@ -35,7 +34,7 @@ const faqs = [
   },
   {
     q: "Where do headaches go?",
-    a: "If they start in the neck, neck care is the right place to start. If they started with a crash, personal injury care is the right place. If the headache is sudden and severe, or follows a head injury, use emergency care and do not wait for a chiropractic slot.",
+    a: "If they start in the neck, neck care is the right place to start. If the headache is sudden and severe, or follows a blow to the head, use emergency care and do not wait for a chiropractic slot.",
   },
   {
     q: "Can one person have two of these at once?",
@@ -52,7 +51,7 @@ export default function CommonChiropracticConditionsContent() {
     <>
       <ServiceHero
         title="Common Chiropractic Conditions"
-        subtitle="Neck pain, back pain, disc problems, and injuries from a crash, plus shorter notes on headaches, joints, and nerve pain."
+        subtitle="Neck pain, back pain, and disc problems, plus shorter notes on headaches, joints, and nerve pain."
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Services", href: "/services" },
@@ -64,8 +63,8 @@ export default function CommonChiropracticConditionsContent() {
         <div className="mx-auto max-w-3xl px-6">
           <SectionIntro eyebrow="Where to start" title="Match the pain before you read a definition">
             <p>
-              Neck pain, back pain, sciatica, disc problems, and whiplash are
-              common enough to explain on their own. Use the four links below
+              Neck pain, back pain, sciatica, and disc problems are
+              common enough to explain on their own. Use the three links below
               first if one of those is your main complaint. The shorter notes
               further down cover headaches, a pinched nerve, joint pain, and
               a few other problems that often travel with the spine.
@@ -118,8 +117,8 @@ export default function CommonChiropracticConditionsContent() {
         <div className="mx-auto max-w-3xl px-6">
           <SectionIntro eyebrow="Safety" title="Labels that should leave this list entirely">
             <p>
-              Chest pain, trouble breathing, a sudden severe headache, a head
-              injury with vomiting or confusion, fever with spinal pain,
+              Chest pain, trouble breathing, a sudden severe headache, a blow
+              to the head with vomiting or confusion, fever with spinal pain,
               progressive weakness, groin numbness, and a change in bowel or
               bladder control are not chiropractic conditions to browse. Use
               emergency care. Cancer treatment, infection, and a psychiatric
@@ -129,7 +128,7 @@ export default function CommonChiropracticConditionsContent() {
               Maintenance visits are sometimes useful once a mechanical
               problem is understood. They are not a shield against those red
               flags, and they are not sold here as immune boosting or as
-              injury prevention you can count on. If you want a visit after
+              guaranteed prevention you can count on. If you want a visit after
               the acute problem has settled, say that when you{" "}
               <Link href="/contact/new-patient-appointment" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 book
@@ -155,9 +154,8 @@ export default function CommonChiropracticConditionsContent() {
             <SectionIntro dark eyebrow="If you are between labels" title="Describe the body part and what it does">
               <p>
                 “It burns down the left leg when I sit” is more useful than
-                the word sciatica. “I cannot turn my head after a rear-end
-                crash” is a personal injury even if neck care would also
-                exists. Bring imaging you have. Do not wait to learn the
+                the word sciatica. “I cannot turn my head to check a blind
+                spot” points to the neck. Bring imaging you have. Do not wait to learn the
                 vocabulary. Call {siteConfig.phone} if the form feels like
                 the wrong door.
               </p>
@@ -180,10 +178,8 @@ export default function CommonChiropracticConditionsContent() {
             Lead with place and behavior. “Left calf buzzes after twenty
             minutes of sitting, and the foot feels weak on stairs” is a
             back-pain problem until proven otherwise. “I cannot check a blind
-            spot since Tuesday, no crash, no arm symptoms” is a neck-pain
-            problem. “Rear-ended on the way to work, neck stiff the next
-            day” is a personal injury even if the stiffness feels like an
-            ordinary neck problem.
+            spot since Tuesday, no arm symptoms” is a neck-pain
+            problem.
           </p>
           <p>
             Mention what you have already tried only if it changed something.
@@ -234,8 +230,6 @@ export default function CommonChiropracticConditionsContent() {
           { href: "/neck-pain", label: "Neck pain", note: "Stiffness, arm symptoms, and headaches that start in the neck." },
           { href: "/back-pain-treatments", label: "Back pain and sciatica", note: "Leg pain and local lumbar pain." },
           { href: "/degenerative-disc-disease", label: "Herniated discs", note: "Scan language, matched to the exam." },
-          { href: "/personal-injury", label: "Whiplash", note: "Crashes, not desk necks." },
-          { href: "/injuries", label: "Sports and work injuries", note: "Strains that were not a car crash." },
         ]}
       />
       <LocationStrip />

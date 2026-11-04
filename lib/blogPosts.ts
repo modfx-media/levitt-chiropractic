@@ -70,7 +70,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: "ol",
         items: [
-          "Take a detailed history when the pain started, what makes it better or worse, prior injuries, work demands, and goals.",
+          "Take a detailed history when the pain started, what makes it better or worse, past problems, work demands, and goals.",
           "Perform a physical exam that includes posture, range of motion, orthopedic tests, neurological screening, and palpation of the spine and pelvis.",
           "Identify segmental restrictions and the soft-tissue patterns around them.",
           "Discuss findings in plain language and outline a plan including how many visits to reassess and what we expect to change.",
@@ -252,7 +252,7 @@ export const blogPosts: BlogPost[] = [
           "How long the issue has been going on (acute vs. chronic)",
           "Daily demands desk work, manual labor, training load",
           "Sleep, stress, and recovery capacity",
-          "Whether you're rehabbing an injury or maintaining a healthy spine",
+          "Whether you're recovering from a strain or maintaining a healthy spine",
           "How the body is actually responding at each reassessment",
         ],
       },
@@ -411,7 +411,7 @@ export const blogPosts: BlogPost[] = [
         items: [
           "Your health history",
           "Your main concerns right now",
-          "Medications or past injuries",
+          "Medications or past health problems",
           "Your daily routine at work and home",
           "Your goals, such as less pain, better sleep, or comfort with summer activities",
         ],
@@ -946,7 +946,7 @@ export const blogPosts: BlogPost[] = [
         items: [
           "Working on a laptop that sits too low on a desk or table",
           "Slouching on couches, patio chairs, or beds while using phones or tablets",
-          "Sports or exercise with poor form or old injuries that never fully healed",
+          "Sports or exercise with poor form or old strains that never fully healed",
           "Sleeping on unfamiliar mattresses or pillows that twist the neck",
         ],
       },
@@ -1033,7 +1033,7 @@ export const blogPosts: BlogPost[] = [
           "Headaches that start after long hours at a desk or on a laptop",
           "A heavy, \u201chelmet-like\u201d feeling or pressure at the base of the skull",
           "Pain that begins in your neck or shoulders and then rises into your head",
-          "New or worse headaches after a car accident, sports fall, or whiplash-type injury",
+          "New or worse headaches after a fall or a hard hit to the head",
         ],
       },
       {
@@ -1088,7 +1088,7 @@ export const blogPosts: BlogPost[] = [
     description:
       "Learn how common routines strain your spine and how posture correction in Saint Louis Park can restore alignment, ease pain, and boost comfort.",
     excerpt:
-      "Posture rarely disappears from one big injury. Here's how screen time, desk work, summer activities, and home habits quietly pull your spine out of alignment and what to do about it.",
+      "Posture rarely disappears from one big event. Here's how screen time, desk work, summer activities, and home habits quietly pull your spine out of alignment and what to do about it.",
     publishedAt: "2026-07-16",
     author: {
       name: "Dr. Alan Levitt, D.C.",
@@ -1117,7 +1117,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Around Saint Louis Park, many people do not lose good posture because of one big injury. It usually slips away little by little from small daily habits at work, at home, on the road, and during favorite summer activities. At Levitt Chiropractic Center, P.A., we see that posture correction in Saint Louis Park is not about perfection. It is about smart, targeted care plus simple, realistic habits you can keep up day after day.",
+        text: "Around Saint Louis Park, many people do not lose good posture because of one big event. It usually slips away little by little from small daily habits at work, at home, on the road, and during favorite summer activities. At Levitt Chiropractic Center, P.A., we see that posture correction in Saint Louis Park is not about perfection. It is about smart, targeted care plus simple, realistic habits you can keep up day after day.",
       },
       {
         type: "h2",
@@ -1307,7 +1307,7 @@ export const blogPosts: BlogPost[] = [
     ],
     faqs: [
       {
-        q: "What causes poor posture if I have not had an injury?",
+        q: "What causes poor posture if nothing specific happened?",
         a: "Posture usually slips away gradually from small daily habits: leaning over phones and laptops, long hours sitting at a desk or in traffic, lifting or twisting during yard work, and slouching on couches or in bed. These small stresses add up over weeks and months.",
       },
       {
@@ -1330,10 +1330,10 @@ export const blogPosts: BlogPost[] = [
   },
 
   {
-    slug: "sports-injury-chiropractor-minneapolis",
-    title: "Why Athletes Choose a Sports Injury Chiropractor in Minneapolis",
+    slug: "sports-chiropractor-minneapolis",
+    title: "Why Athletes Choose a Sports Chiropractor in Minneapolis",
     description:
-      "Learn how a sports injury chiropractor in Minneapolis helps athletes recover faster with holistic, personalized care and advanced therapies like cold laser.",
+      "Learn how a sports chiropractor in Minneapolis helps athletes recover faster with holistic, personalized care and advanced therapies like cold laser.",
     excerpt:
       "Sports chiropractic care looks at how an athlete moves, not just where it hurts. Here's how personalized evaluation, hands-on care, and advanced therapies support faster recovery and better performance.",
     publishedAt: "2026-07-23",
@@ -1344,13 +1344,13 @@ export const blogPosts: BlogPost[] = [
     },
     category: "Sports & Performance",
     tags: [
-      "sports injury",
+      "sports chiropractic",
       "athletes",
       "cold laser therapy",
       "performance",
       "Minneapolis",
     ],
-    coverImage: "/images/blog/minneapolis-sports-injury-chiropractic-for-athletes.jpg",
+    coverImage: "/images/blog/minneapolis-sports-chiropractic-for-athletes.jpg",
     coverAlt:
       "Athlete receiving chiropractic care to support recovery and performance in Minneapolis.",
     readingMinutes: 9,
@@ -1361,7 +1361,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "A sports injury chiropractor focuses on how an athlete moves, not only how much they hurt. The goal is to help you stay on the field, in the pool, or on the trail with better performance and fewer setbacks. This kind of care can be especially helpful when training and competitions pick up and your body has less time to recover between sessions.",
+        text: "A sports chiropractor focuses on how an athlete moves, not only how much they hurt. The goal is to help you stay on the field, in the pool, or on the trail with better performance and fewer setbacks. This kind of care can be especially helpful when training and competitions pick up and your body has less time to recover between sessions.",
       },
       {
         type: "p",
@@ -1369,12 +1369,12 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "h2",
-        id: "common-summer-sports-injuries",
-        text: "Common Summer Sports Injuries Minneapolis Athletes Face",
+        id: "common-summer-sports-strains",
+        text: "Common Summer Sports Strains Minneapolis Athletes Face",
       },
       {
         type: "p",
-        text: "When the weather is warm, many athletes around Minneapolis increase their mileage, add extra practices, or join more leagues. With that jump in activity, some injuries tend to show up more often. These problems can affect runners, swimmers, cyclists, team sport players, and anyone who likes to push a little harder.",
+        text: "When the weather is warm, many athletes around Minneapolis increase their mileage, add extra practices, or join more leagues. With that jump in activity, some aches and strains tend to show up more often. These problems can affect runners, swimmers, cyclists, team sport players, and anyone who likes to push a little harder.",
       },
       {
         type: "p",
@@ -1396,16 +1396,16 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "When those small warning signs are left alone, they can turn into bigger problems that are harder to calm down. A minor ankle tweak can change how you run and then stress your knee or hip. A tight shoulder can change your swing or stroke and stress your neck and upper back. Seeing a sports injury chiropractor in Minneapolis early can help catch these issues before they grow and affect your late summer and fall seasons.",
+        text: "When those small warning signs are left alone, they can turn into bigger problems that are harder to calm down. A minor ankle tweak can change how you run and then stress your knee or hip. A tight shoulder can change your swing or stroke and stress your neck and upper back. Seeing a sports chiropractor in Minneapolis early can help catch these issues before they grow and affect your late summer and fall seasons.",
       },
       {
         type: "h2",
         id: "how-a-sports-chiropractor-supports-recovery",
-        text: "How a Sports Injury Chiropractor in Minneapolis Supports Recovery",
+        text: "How a Sports Chiropractor in Minneapolis Supports Recovery",
       },
       {
         type: "p",
-        text: "When an athlete comes in with pain or a recent injury, we start by trying to understand the whole picture. We want to know what is happening in your body and what your sport asks you to do every day.",
+        text: "When an athlete comes in with pain or a recent strain, we start by trying to understand the whole picture. We want to know what is happening in your body and what your sport asks you to do every day.",
       },
       {
         type: "p",
@@ -1414,7 +1414,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: "ul",
         items: [
-          "A detailed history of your sport, training plans, and past injuries",
+          "A detailed history of your sport, training plans, and past problem areas",
           "Posture and gait analysis to see how you stand, walk, and run",
           "Movement tests to check strength, balance, and range of motion",
           "Hands-on checks for joint motion and soft-tissue tension",
@@ -1430,8 +1430,8 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "h2",
-        id: "performance-benefits-beyond-injury-relief",
-        text: "Performance Benefits Beyond Injury Relief",
+        id: "performance-benefits-beyond-pain-relief",
+        text: "Performance Benefits Beyond Pain Relief",
       },
       {
         type: "p",
@@ -1455,7 +1455,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Regular visits with a sports injury chiropractor in Minneapolis can act like maintenance for your body. Just like you would not skip oil changes for your car during a busy driving season, many athletes choose not to skip body care during heavy training blocks. This steady attention can help reduce the risk of new injuries and keep your training more consistent across the year.",
+        text: "Regular visits with a sports chiropractor in Minneapolis can act like maintenance for your body. Just like you would not skip oil changes for your car during a busy driving season, many athletes choose not to skip body care during heavy training blocks. This steady attention can help reduce the risk of new setbacks and keep your training more consistent across the year.",
       },
       {
         type: "h2",
@@ -1476,12 +1476,12 @@ export const blogPosts: BlogPost[] = [
           "Your sport and typical movements",
           "Your position or role on the team",
           "Your current training schedule and goals",
-          "Your history of injuries and past care",
+          "Your history of strains, flare-ups, and past care",
         ],
       },
       {
         type: "p",
-        text: "A high school soccer player ramping up for preseason might need work on ankle stability, hip strength, and core control to handle more practices. A marathon runner preparing for a fall race may focus on stride mechanics, hip and foot alignment, and support for recovery between long runs. An adult league softball player with an older shoulder injury might need shoulder and upper back care, plus guidance on throwing mechanics and recovery routines.",
+        text: "A high school soccer player ramping up for preseason might need work on ankle stability, hip strength, and core control to handle more practices. A marathon runner preparing for a fall race may focus on stride mechanics, hip and foot alignment, and support for recovery between long runs. An adult league softball player with an old shoulder problem might need shoulder and upper back care, plus guidance on throwing mechanics and recovery routines.",
       },
       {
         type: "p",
@@ -1494,7 +1494,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "As practices, races, and games stack up, paying attention to what your body is telling you matters. Soreness that does not fade, tightness that keeps coming back, or changes in your performance are all signs that something needs attention. Working with a sports injury chiropractor in Minneapolis can give you clear answers and a plan that fits your sport and your goals.",
+        text: "As practices, races, and games stack up, paying attention to what your body is telling you matters. Soreness that does not fade, tightness that keeps coming back, or changes in your performance are all signs that something needs attention. Working with a sports chiropractor in Minneapolis can give you clear answers and a plan that fits your sport and your goals.",
       },
       {
         type: "p",
@@ -1506,10 +1506,10 @@ export const blogPosts: BlogPost[] = [
         segments: [
           { text: "If pain or limited mobility is keeping you sidelined, our team at Levitt Chiropractic Center, P.A. is ready to help you move with confidence again. As an experienced " },
           {
-            text: "sports injury chiropractor in Minneapolis",
+            text: "sports chiropractor in Minneapolis",
             href: "https://www.levittchiropracticcenter.com/areas-we-serve",
           },
-          { text: ", we focus on targeted, evidence-based care tailored to your specific injury and goals. Reach out so we can answer your questions, review your options, and outline a clear plan for your recovery. To schedule an appointment or request more information, simply " },
+          { text: ", we focus on targeted, evidence-based care tailored to your body and goals. Reach out so we can answer your questions, review your options, and outline a clear plan for your recovery. To schedule an appointment or request more information, simply " },
           {
             text: "contact us",
             href: "https://www.levittchiropracticcenter.com/contact",
@@ -1520,20 +1520,20 @@ export const blogPosts: BlogPost[] = [
     ],
     faqs: [
       {
-        q: "What does a sports injury chiropractor actually do?",
-        a: "A sports injury chiropractor evaluates how an athlete moves, not just where it hurts, using posture and gait analysis, movement testing, and hands-on checks of joint motion and soft tissue. Care may include spinal and extremity adjustments, soft-tissue work, and therapies like cold laser to support healing.",
+        q: "What does a sports chiropractor actually do?",
+        a: "A sports chiropractor evaluates how an athlete moves, not just where it hurts, using posture and gait analysis, movement testing, and hands-on checks of joint motion and soft tissue. Care may include spinal and extremity adjustments, soft-tissue work, and therapies like cold laser to support healing.",
       },
       {
-        q: "Which sports injuries are most common in warmer months?",
+        q: "Which sports problems are most common in warmer months?",
         a: "Runner's knee, shin and calf pain from increased training, shoulder strains from swimming or racquet sports, ankle sprains from field sports, and low back tightness from golf or cycling are common as training volume increases.",
       },
       {
-        q: "Can sports chiropractic care help even without an injury?",
-        a: "Yes. Many athletes use ongoing care to support joint mobility, muscle balance, and spinal alignment, which can improve coordination and technique and help reduce the risk of new injuries during heavy training blocks.",
+        q: "Can sports chiropractic care help even when nothing hurts?",
+        a: "Yes. Many athletes use ongoing care to support joint mobility, muscle balance, and spinal alignment, which can improve coordination and technique and help reduce the risk of new strains during heavy training blocks.",
       },
       {
         q: "How is care different for different athletes?",
-        a: "Plans are built around your sport, position, training schedule, and injury history. A soccer player, a marathon runner, and a softball player each have different needs, so care and home exercises are tailored rather than one-size-fits-all.",
+        a: "Plans are built around your sport, position, training schedule, and health history. A soccer player, a marathon runner, and a softball player each have different needs, so care and home exercises are tailored rather than one-size-fits-all.",
       },
     ],
     relatedSlugs: [
@@ -2131,7 +2131,7 @@ export const blogPosts: BlogPost[] = [
     blocks: [
       {
         type: "p",
-        text: "Chiropractic care is not just for sudden injuries or severe back pain. Many people walk around every day with small but important clues that their body is not working as well as it could. Those signals can show up as stiffness, nagging aches, low energy, or trouble thinking clearly.",
+        text: "Chiropractic care is not just for sudden flare-ups or severe back pain. Many people walk around every day with small but important clues that their body is not working as well as it could. Those signals can show up as stiffness, nagging aches, low energy, or trouble thinking clearly.",
       },
       {
         type: "p",
@@ -2191,7 +2191,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "These patterns often point to joint misalignment or muscle imbalance, not just simple overuse. When one area is not moving well, other joints and muscles try to pick up the slack. This compensation can raise your risk of strains, sprains, and other injuries, especially as fall sports and activities start back up.",
+        text: "These patterns often point to joint misalignment or muscle imbalance, not just simple overuse. When one area is not moving well, other joints and muscles try to pick up the slack. This compensation can raise your risk of strains and sprains, especially as fall sports and activities start back up.",
       },
       {
         type: "p",
@@ -2294,7 +2294,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "You do not need to wait for a major injury or sharp pain before you pay attention to your body's signals. Those small, everyday clues are often kinder messages that something needs support. As your schedule shifts from summer into a more structured fall routine, it is a smart time to listen.",
+        text: "You do not need to wait for a major flare-up or sharp pain before you pay attention to your body's signals. Those small, everyday clues are often kinder messages that something needs support. As your schedule shifts from summer into a more structured fall routine, it is a smart time to listen.",
       },
       {
         type: "p",
@@ -2337,7 +2337,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         q: "When should I schedule a chiropractic visit in Saint Louis Park?",
-        a: "You do not need to wait for a major injury or sharp pain. If you notice recurring stiffness, low energy, or aches that keep coming back, it is a good time to have your spine and nervous system evaluated.",
+        a: "You do not need to wait for a major flare-up or sharp pain. If you notice recurring stiffness, low energy, or aches that keep coming back, it is a good time to have your spine and nervous system evaluated.",
       },
     ],
     relatedSlugs: [
@@ -2353,7 +2353,7 @@ export const blogPosts: BlogPost[] = [
     description:
       "Morning stiffness, recurring headaches, and low energy can all be everyday clues your spine needs attention. Here's how chiropractic care in Saint Louis Park can help.",
     excerpt:
-      "Chiropractic care is not just for sudden injuries or severe back pain. Many people walk around every day with small but important clues that their body is not working as well as it could. Those signals can show up as stiffness, nagging aches, low energy, or trouble thinking clearly.",
+      "Chiropractic care is not just for sudden flare-ups or severe back pain. Many people walk around every day with small but important clues that their body is not working as well as it could. Those signals can show up as stiffness, nagging aches, low energy, or trouble thinking clearly.",
     publishedAt: "2026-08-20",
     author: {
       name: "Dr. Alan Levitt, D.C.",
@@ -2375,7 +2375,7 @@ export const blogPosts: BlogPost[] = [
     blocks: [
       {
         type: "p",
-        text: "Chiropractic care is not just for sudden injuries or severe back pain. Many people walk around every day with small but important clues that their body is not working as well as it could. Those signals can show up as stiffness, nagging aches, low energy, or trouble thinking clearly and it is easy to write them off as just part of getting older or being busy.",
+        text: "Chiropractic care is not just for sudden flare-ups or severe back pain. Many people walk around every day with small but important clues that their body is not working as well as it could. Those signals can show up as stiffness, nagging aches, low energy, or trouble thinking clearly and it is easy to write them off as just part of getting older or being busy.",
       },
       {
         type: "p",
@@ -2423,7 +2423,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "These patterns often point to joint restriction or muscle imbalance rather than simple overuse. When one area is not carrying its share of the load, nearby joints and muscles compensate, which raises the risk of strains and other injuries. Chiropractic adjustments can help restore normal motion, and we often add soft-tissue work and ergonomic tips so the plan matches your body and your daily routine.",
+        text: "These patterns often point to joint restriction or muscle imbalance rather than simple overuse. When one area is not carrying its share of the load, nearby joints and muscles compensate, which raises the risk of strains and sprains. Chiropractic adjustments can help restore normal motion, and we often add soft-tissue work and ergonomic tips so the plan matches your body and your daily routine.",
       },
       {
         type: "h2",
@@ -2496,7 +2496,7 @@ export const blogPosts: BlogPost[] = [
         title: "Listen to the Small Clues Before They Become Big Ones",
         segments: [
           {
-            text: "You do not need to wait for a major injury before paying attention to what your body is telling you. If you are noticing any of these everyday clues, we can help you find out what is behind them. ",
+            text: "You do not need to wait for a major flare-up before paying attention to what your body is telling you. If you are noticing any of these everyday clues, we can help you find out what is behind them. ",
           },
           { text: "Request an appointment", href: "/contact/new-patient-appointment" },
           { text: " or " },
@@ -2614,7 +2614,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Our area also has a strong active community runners, cyclists, gym-goers, and weekend warriors who place a lot of demand on their joints and muscles. When even one joint is a little off, the body starts to compensate, which is when nagging issues like recurring knee pain, hip tightness, or shoulder pinches during overhead movements tend to show up. Adjustments that help joints move more freely support better muscle balance, easier recovery, and fewer minor injuries turning into chronic ones.",
+        text: "Our area also has a strong active community runners, cyclists, gym-goers, and weekend warriors who place a lot of demand on their joints and muscles. When even one joint is a little off, the body starts to compensate, which is when nagging issues like recurring knee pain, hip tightness, or shoulder pinches during overhead movements tend to show up. Adjustments that help joints move more freely support better muscle balance, easier recovery, and fewer minor strains turning into chronic ones.",
       },
       {
         type: "h2",
@@ -2741,7 +2741,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "The first step is listening carefully to your story. At Levitt Chiropractic Center, we ask about when the pain began and what you were doing, past injuries or flare-ups, and what makes it better or worse, like sitting, walking, or lying down. We also ask functional medicine-type questions about stress, sleep, and inflammation, since these can explain why tissue is slow to heal or why the same problem keeps returning.",
+        text: "The first step is listening carefully to your story. At Levitt Chiropractic Center, we ask about when the pain began and what you were doing, past strains or flare-ups, and what makes it better or worse, like sitting, walking, or lying down. We also ask functional medicine-type questions about stress, sleep, and inflammation, since these can explain why tissue is slow to heal or why the same problem keeps returning.",
       },
       {
         type: "p",
@@ -2850,7 +2850,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Traditional pain-only care often focuses on a quick adjustment to calm a sore area, which can feel good but may not last if we never ask why the pain keeps returning. A holistic chiropractor spends time asking questions and watching how you move posture checks, simple movement tests, a review of your work setup and hobbies, and a look at stress, sleep, and past injuries.",
+        text: "Traditional pain-only care often focuses on a quick adjustment to calm a sore area, which can feel good but may not last if we never ask why the pain keeps returning. A holistic chiropractor spends time asking questions and watching how you move posture checks, simple movement tests, a review of your work setup and hobbies, and a look at stress, sleep, and past problem areas.",
       },
       {
         type: "p",
@@ -3215,7 +3215,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: "ul",
         items: [
-          "Sudden, severe spine pain after a fall, car accident, or sports injury",
+          "Sudden, severe spine pain after a fall or hard impact",
           "Loss of bladder or bowel control or sudden trouble starting or stopping urine",
           "Numbness in the groin, inner thighs, or the area you would sit on a saddle",
           "Progressive weakness in an arm or leg, dragging a foot, or new trouble walking",

@@ -137,8 +137,8 @@ export function cityFaqs(city: ServedCity): Array<{ q: string; a: string }> {
           : `The office is ${siteConfig.address.full}. If you are coming from ${city.name}, give yourself extra minutes the first time so you are not rushed into the exam. Call ${siteConfig.phone}.`,
     },
     {
-      q: `Does insurance cover chiropractic after a car accident in Minnesota?`,
-      a: insuranceNote(city),
+      q: `Does insurance cover chiropractic in Minnesota?`,
+      a: insuranceNote(),
     },
     {
       q: `What is a red flag that means I should not just “get adjusted”?`,

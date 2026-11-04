@@ -8,7 +8,7 @@ import { getDisplayedGoogleReviews } from "@/lib/google-reviews";
 const fallbackMeta: Metadata = generateMeta({
   title: "Patient Testimonials in Saint Louis Park, MN",
   description:
-    "Real reviews of Dr. Alan Levitt back, neck, headache, and post-accident chiropractic patients have trusted since 1987 in Saint Louis Park, MN.",
+    "Real reviews of Dr. Alan Levitt back, neck, and headache patients have trusted since 1987 in Saint Louis Park, MN.",
   slug: "testimonials",
 });
 

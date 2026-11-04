@@ -38,7 +38,7 @@ const redFlags = [
   "Saddle anesthesia: numbness in the groin or the area that would sit on a bicycle seat",
   "New loss of bowel or bladder control, or trouble starting urination",
   "Fever with back pain, or pain plus unexplained weight loss",
-  "Back pain after a major fall or crash that has not been medically screened",
+  "Back pain after a major fall or trauma that has not been medically screened",
   "Pain that wakes you and does not change no matter how you sit, stand, or lie",
 ];
 
@@ -119,16 +119,7 @@ export default function BackPainTreatmentsContent() {
               >
                 neck pain
               </Link>
-              . Pain that started in a car
-              crash is examined the same way, and the injury-specific notes
-              are part of{" "}
-              <Link
-                href="/personal-injury"
-                className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
-              >
-                personal injury
-              </Link>{" "}
-              care.
+              .
             </p>
           </SectionIntro>
         </div>
@@ -447,11 +438,6 @@ export default function BackPainTreatmentsContent() {
             href: "/degenerative-disc-disease",
             label: "Herniated discs and disc degeneration",
             note: "Herniated and worn discs, including when a disc is why a leg hurts.",
-          },
-          {
-            href: "/personal-injury",
-            label: "Back pain after an auto accident",
-            note: "Whiplash and crash injuries, including the low back.",
           },
           {
             href: "/adjustments-and-manipulation",

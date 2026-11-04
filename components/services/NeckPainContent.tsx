@@ -35,10 +35,6 @@ const patterns = [
 
 const faqs = [
   {
-    q: "Is neck pain the same problem as whiplash?",
-    a: "No. Whiplash is a neck injury from a sudden force, usually a crash, and it is evaluated as a personal injury. Neck pain from desk work, sleep, a lift, or no clear accident is what this visit covers.",
-  },
-  {
     q: "What is a pinched nerve in the neck?",
     a: "It means a nerve is irritated or compressed. A stiff joint, a disc bulge, or muscle spasm can do that. The result can be pain, tingling, or weakness in the arm. The name does not tell us which structure is involved until the exam.",
   },
@@ -89,16 +85,7 @@ export default function NeckPainContent() {
             <p>
               People arrive with a neck that locked after sleeping, a shoulder
               that burns by the end of a screen day, or an arm that tingles
-              when they turn. Those are different stories. A neck that was
-              thrown in a car crash is whiplash. That evaluation, including
-              records after an auto accident, is part of{" "}
-              <Link
-                href="/personal-injury"
-                className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
-              >
-                personal injury
-              </Link>{" "}
-              care. Low-back pain and sciatica are treated as{" "}
+              when they turn. Those are different stories. Low-back pain and sciatica are treated as{" "}
               <Link
                 href="/back-pain-treatments"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
@@ -188,7 +175,7 @@ export default function NeckPainContent() {
                 See a physician or the ER before an adjustment
               </h2>
               <ul className="mt-5 space-y-3 text-sm leading-relaxed text-white/80">
-                <li>Neck pain after a crash, fall, or hit to the head that has not been medically screened</li>
+                <li>Neck pain after a fall, trauma, or hit to the head that has not been medically screened</li>
                 <li>Progressive arm or hand weakness, or new trouble walking or using the hands</li>
                 <li>A sudden severe headache, confusion, fainting, or repeated vomiting</li>
                 <li>Fever with severe neck pain, or pain that never changes with position</li>
@@ -340,13 +327,8 @@ export default function NeckPainContent() {
       <RelatedCare
         eyebrow="Related care"
         title="Care that often goes with neck pain"
-        intro="Neck pain that did not start with a crash is the focus here. These links cover crashes, the low back, and the treatments we may add."
+        intro="Neck pain is the focus here. These links cover the low back and the treatments we may add."
         links={[
-          {
-            href: "/personal-injury",
-            label: "Whiplash and auto accidents",
-            note: "Neck injury from a sudden crash, including the injury exam.",
-          },
           {
             href: "/back-pain-treatments",
             label: "Back pain and sciatica",

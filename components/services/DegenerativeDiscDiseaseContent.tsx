@@ -35,7 +35,7 @@ const discTypes = [
 
 const contributors = [
   "Aging, including outer-layer tears and loss of disc fluid",
-  "A specific injury, including a lift or a crash",
+  "A specific event, such as a heavy lift or a fall",
   "Repeated physical work",
   "Smoking",
   "Body weight that keeps a high load on the discs",
@@ -117,14 +117,6 @@ export default function DegenerativeDiscDiseaseContent() {
               >
                 back pain care
               </Link>
-              . A crash that herniated a disc still starts with the injury
-              history on the{" "}
-              <Link
-                href="/personal-injury"
-                className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
-              >
-                personal injury care
-              </Link>
               .
             </p>
           </SectionIntro>
@@ -195,7 +187,7 @@ export default function DegenerativeDiscDiseaseContent() {
                 ))}
               </ul>
               <p>
-                A herniated disc after one lift or a collision is a different
+                A herniated disc after one lift or a fall is a different
                 story from a disc that has dried out for years. Both can hurt,
                 and both can be painless. Smoking and higher body weight are
                 on the list because the office already names them as
@@ -229,7 +221,7 @@ export default function DegenerativeDiscDiseaseContent() {
                 </li>
                 <li>Fever, or pain that does not change with position</li>
                 <li>
-                  A recent major injury that has not been cleared by a
+                  A recent hard fall or impact that has not been cleared by a
                   physician
                 </li>
                 <li>
@@ -411,11 +403,6 @@ export default function DegenerativeDiscDiseaseContent() {
             href: "/back-pain-treatments",
             label: "Back pain and sciatica",
             note: "Leg pain, local lumbar pain, and how those patterns are sorted.",
-          },
-          {
-            href: "/personal-injury",
-            label: "Disc injury after a crash",
-            note: "Auto-accident evaluation, including whiplash and lumbar strain.",
           },
           {
             href: "/common-chiropractic-conditions",

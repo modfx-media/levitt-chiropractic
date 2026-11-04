@@ -198,7 +198,7 @@ export default function AreaCityPageContent({ city }: { city: ServedCity }) {
             ))}
           </div>
           <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-relaxed text-slate-600">
-            {insuranceNote(city)}
+            {insuranceNote()}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             {corePages.map((p) => (

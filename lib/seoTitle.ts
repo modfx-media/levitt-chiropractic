@@ -30,12 +30,6 @@ const SERVICE_LABELS: Record<string, string[]> = {
     "Adjustments & Manipulation",
     "Spinal Adjustments",
   ],
-  injuries: ["Injury Chiropractic Care", "Injury Care"],
-  "personal-injury": [
-    "Personal Injury Chiropractic Care",
-    "Personal Injury Care",
-    "Personal Injury",
-  ],
   cryotherapy: ["Cryotherapy"],
   "ice-pack-cryotherapy": ["Ice Pack Cryotherapy", "Ice Pack Therapy"],
   "cold-laser-therapy": ["Cold Laser Therapy"],

@@ -24,13 +24,13 @@ const COVER_POOL: CoverAsset[] = [
     keywords: ['exercise', 'rehab', 'therapy', 'mobility', 'senior', 'aging', 'strength'],
   },
   {
-    src: '/images/sports-injuries.jpg',
-    alt: 'Soccer player on the field holding a painful knee after a sports injury.',
+    src: '/images/sports-knee.jpg',
+    alt: 'Soccer player on the field holding a painful knee.',
     keywords: ['sport', 'athlete', 'knee', 'soccer', 'performance', 'game'],
   },
   {
-    src: '/images/auto-injury.jpg',
-    alt: 'Driver holding their neck after a car accident, suggesting whiplash.',
+    src: '/images/auto-neck-strain.jpg',
+    alt: 'Person holding a stiff, sore neck.',
     keywords: ['auto', 'accident', 'car', 'whiplash', 'collision', 'crash', 'injury'],
   },
   {

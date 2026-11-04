@@ -209,7 +209,7 @@ function Dropdown({ entry, pathname }: DropdownProps) {
   );
 }
 
-/** Side-flyout submenu for grouped nav items (e.g. Injuries → Auto / Personal / Sports) */
+/** Side-flyout submenu for grouped nav items */
 function SubMenu({
   group,
   pathname,

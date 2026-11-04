@@ -3,6 +3,7 @@
  * Ranked sections become h2 + p blocks. Body is plain text (not dangerouslySetInnerHTML).
  */
 import type { BlogBlock, BlogPost } from '@/lib/blog'
+import { scrubBlogPost } from '@/lib/blogTextFilter'
 import type { BlogPostData } from './types'
 
 const BULLET_MARK = /(?:\u2022|\u00b7|\u25cf|\u25aa|\u2023|&bull;)/
@@ -74,7 +75,7 @@ export function rankedToBlogPost(r: BlogPostData): BlogPost {
     return sum
   }, 0)
 
-  return {
+  return scrubBlogPost({
     slug: r.slug,
     title: r.title,
     description: r.metaDescription,
@@ -91,5 +92,5 @@ export function rankedToBlogPost(r: BlogPostData): BlogPost {
     coverAlt: r.coverAlt,
     readingMinutes: Math.max(1, Math.round(wordCount / 230)),
     blocks,
-  }
+  })
 }

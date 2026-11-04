@@ -25,6 +25,9 @@ function normalizePostTitle(title: string): string {
     .trim();
 }
 
+/** Published CMS posts kept off the site (personal/auto injury topics are no longer offered). */
+export const HIDDEN_CMS_POST_SLUGS = new Set(["managing-spine-pain-after-a-minor-crash"]);
+
 export type PublishedPostSummary = {
   slug: string;
   title: string;
@@ -72,7 +75,7 @@ export async function mergePublishedCmsPosts(hardcoded: BlogPost[]): Promise<Blo
     const cmsPosts: BlogPost[] = [];
     for (const doc of result.docs) {
       const mapped = cmsDocToBlogPost(doc);
-      if (mapped) cmsPosts.push(mapped);
+      if (mapped && !HIDDEN_CMS_POST_SLUGS.has(mapped.slug)) cmsPosts.push(mapped);
     }
     const cmsTitles = new Set(cmsPosts.map((post) => normalizePostTitle(post.title)));
 
@@ -100,6 +103,8 @@ export async function queryPublishedPostSlugs(): Promise<string[]> {
     });
     return result.docs
       .map((doc) => (typeof doc.slug === "string" ? doc.slug.replace(/^\/+|\/+$/g, "") : ""))
-      .filter((slug) => slug.length > 0 && !slug.includes("/"));
+      .filter(
+        (slug) => slug.length > 0 && !slug.includes("/") && !HIDDEN_CMS_POST_SLUGS.has(slug),
+      );
   }, []);
 }

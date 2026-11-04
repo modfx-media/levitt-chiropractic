@@ -57,13 +57,6 @@ export const googleReviews: GoogleReview[] = [
   },
   {
     quote:
-      "I've seen Dr. Levitt multiple times since I was in a serious car accident. He is able to perceive and treat my issues with a variety of methods in a short amount of time each visit. I am much more rested and relieved of discomfort than prior to beginning treatment.\n\nDr. Levitt and his staff have been very flexible with accommodating my schedule, and I appreciate their professionalism very much.",
-    name: "Barb Weinstock",
-    rating: 5,
-    relativeTime: "10 years ago",
-  },
-  {
-    quote:
       "I have been seeing Dr. Levitt weekly for several years because he is amazing! He listens carefully to what your issues are and has done an excellent job of helping me stay pain free so I can be active . Janelle and Jodi at the desk are super nice and always so helpful with appointments. I look forward to going there every week!",
     name: "cindy k",
     rating: 5,

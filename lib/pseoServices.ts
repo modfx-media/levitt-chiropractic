@@ -52,7 +52,7 @@ export const pseoServices: PseoService[] = [
       "Supports faster recovery between sessions",
       "Drug-free pain management",
     ],
-    conditions: ["acute back and neck pain", "post-injury swelling", "joint inflammation"],
+    conditions: ["acute back and neck pain", "swelling after a strain", "joint inflammation"],
     faqs: [
       { q: "How long is a cryotherapy session?", a: "Targeted ice-pack cryotherapy sessions typically run 15-20 minutes per region treated." },
       { q: "Is cryotherapy uncomfortable?", a: "There is a brief cold sensation, then numbness. Most patients describe it as relieving rather than uncomfortable." },
@@ -70,10 +70,10 @@ export const pseoServices: PseoService[] = [
       "Easy to combine with adjustments and soft-tissue work",
       "Used widely in rehabilitation and recovery",
     ],
-    conditions: ["acute injury swelling", "joint sprains", "post-treatment soreness"],
+    conditions: ["acute swelling", "joint sprains", "post-treatment soreness"],
     faqs: [
       { q: "How often can I use ice pack cryotherapy?", a: "Typically 15-20 minutes at a time, several times a day during the acute phase. Dr. Levitt will give you a personalized protocol." },
-      { q: "Should I use heat or ice?", a: "Ice is generally best in the first 48-72 hours after an injury. After that, the right choice depends on the condition we'll guide you." },
+      { q: "Should I use heat or ice?", a: "Ice is generally best in the first 48-72 hours after a strain or sprain. After that, the right choice depends on the condition we'll guide you." },
     ],
   },
   {
@@ -173,12 +173,12 @@ export const pseoServices: PseoService[] = [
     tagline:
       "Endurance, resistance and flexibility training to restore mobility, strength and quality of life.",
     benefits: [
-      "Restores stability and mobility after injury",
+      "Restores stability and mobility after a strain",
       "Strengthens spine and joint support muscles",
       "Endurance, resistance and flexibility components",
       "Tailored to your daily life and goals",
     ],
-    conditions: ["post-injury rehab", "chronic low-back pain", "deconditioning after surgery"],
+    conditions: ["rehab after a strain", "chronic low-back pain", "deconditioning after surgery"],
     faqs: [
       { q: "Do I need a gym membership?", a: "No. Most prescribed exercises can be done at home with minimal equipment." },
       { q: "How often should I do them?", a: "Typically 3-5 times per week. We design programs that actually fit your schedule." },

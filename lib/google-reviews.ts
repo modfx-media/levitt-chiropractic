@@ -9,6 +9,8 @@ import {
 
 const REVIEWS_REVALIDATE_SECONDS = 60 * 60 * 24;
 const PLACES_FIELD_MASK = "id,rating,userRatingCount,googleMapsUri,reviews";
+const EXCLUDED_REVIEW_TOPICS =
+  /\b(car|auto|motor vehicle|vehicle|traffic) (accident|crash|collision)|\bwhiplash\b|\bpersonal injur|\bno-fault\b|\bfender[- ]bender|\brear-ended\b/i;
 
 export type GoogleReviewsPayload = {
   reviews: GoogleReview[];
@@ -45,6 +47,8 @@ function mapPlaceReview(review: PlacesReview): GoogleReview | null {
 
   // Exact 5 only. Drop 4, 4.5, empty text, and nameless authors here.
   if (rating !== 5 || !quote || !name) return null;
+  // The practice no longer markets personal/auto injury care.
+  if (EXCLUDED_REVIEW_TOPICS.test(quote)) return null;
 
   return {
     quote,

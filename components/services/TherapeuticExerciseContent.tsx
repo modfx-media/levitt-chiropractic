@@ -19,7 +19,7 @@ const aims = [
   "Less unnecessary tension in muscle and the tissue around it",
   "Joints that move instead of hitching",
   "Circulation during the movement, not as a slogan",
-  "Balance and coordination when those were part of the injury",
+  "Balance and coordination when those were part of the problem",
   "Less rigidity in a back or neck that has been braced for weeks",
 ];
 
@@ -204,8 +204,8 @@ export default function TherapeuticExerciseContent() {
           <p>
             An ankle sprain, once a clinician has said it is not a fracture,
             might later get balance on one foot beside a counter. Early on,
-            the homework may only be protected range, not balance. Injury
-            care sets that timing. The homework still has to match the stage.
+            the homework may only be protected range, not balance. Healing
+            sets that timing. The homework still has to match the stage.
           </p>
           <p>
             People ask for “core” work. If the abdomen is bracing so hard the
@@ -260,7 +260,6 @@ export default function TherapeuticExerciseContent() {
           { href: "/adjustments-and-manipulation", label: "Adjustments", note: "When the joint, not the muscle, is the limit." },
           { href: "/back-pain-treatments", label: "Back pain", note: "The most common reason a short home list exists." },
           { href: "/neck-pain", label: "Neck pain", note: "Desk stiffness needs different moves than a lumbar strain." },
-          { href: "/injuries", label: "Injuries", note: "After a sprain, once it is safe to load." },
           { href: "/functional-medicine", label: "Habits around the exercise", note: "Sleep and the week, when the movements are not the whole story." },
           { href: "/contact/new-patient-appointment", label: "Book", note: "New patients start with an exam." },
         ]}

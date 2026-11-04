@@ -111,7 +111,7 @@ const tips: Tip[] = [
   },
   {
     title: "Stay hydrated",
-    body: "Your spinal discs are roughly 80% water. Chronic dehydration shrinks discs and makes them more prone to injury. Aim for half your body weight (in ounces) of water per day.",
+    body: "Your spinal discs are roughly 80% water. Chronic dehydration shrinks discs and makes them more prone to damage. Aim for half your body weight (in ounces) of water per day.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -148,7 +148,7 @@ const tips: Tip[] = [
   },
   {
     title: "Listen to your body",
-    body: "Pain is information, not a nuisance. Small aches that linger, recurring stiffness, or pinching sensations are early warnings. Address them before they become an injury.",
+    body: "Pain is information, not a nuisance. Small aches that linger, recurring stiffness, or pinching sensations are early warnings. Address them before they become a bigger problem.",
     icon: (
       <svg
         viewBox="0 0 24 24"

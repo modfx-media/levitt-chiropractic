@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: "Ice or heat after the first few days?",
-    a: "The first 48 to 72 hours after a new injury usually favor ice if the area is still puffy and irritable. Later, the exam decides. Heat can feel good on a stiff, non-swollen muscle and can annoy a joint that is still hot. Do not switch because a forum said to.",
+    a: "The first 48 to 72 hours after a new strain or sprain usually favor ice if the area is still puffy and irritable. Later, the exam decides. Heat can feel good on a stiff, non-swollen muscle and can annoy a joint that is still hot. Do not switch because a forum said to.",
   },
   {
     q: "Is an ice pack the same visit as cryotherapy?",
@@ -35,7 +35,7 @@ const faqs = [
   },
   {
     q: "Can I ice a neck or back before I have been examined?",
-    a: "A brief, protected pack on a simple strain is a reasonable home step while you arrange a visit. Do not ice through a red flag: fever, pain after a major crash that has not been checked, progressive weakness, or a change in bowel or bladder control. Those are not pack problems.",
+    a: "A brief, protected pack on a simple strain is a reasonable home step while you arrange a visit. Do not ice through a red flag: fever, pain after major trauma that has not been checked, progressive weakness, or a change in bowel or bladder control. Those are not pack problems.",
   },
 ];
 
@@ -44,7 +44,7 @@ export default function IcePackCryotherapyContent() {
     <>
       <ServiceHero
         title="Ice Pack Cryotherapy"
-        subtitle="How a cold pack is used on a fresh injury: a barrier, a small area, and a timer. Not a full-body freeze."
+        subtitle="How a cold pack is used on a fresh strain or sprain: a barrier, a small area, and a timer. Not a full-body freeze."
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Services", href: "/services" },
@@ -116,16 +116,10 @@ export default function IcePackCryotherapyContent() {
               <Link href="/neck-pain" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">neck pain</Link>.
               The back is on{" "}
               <Link href="/back-pain-treatments" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">back pain</Link>.
-              A crash still starts on{" "}
-              <Link href="/personal-injury" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">personal injury</Link>,
-              even if ice is later part of that plan.
             </p>
             <p>
               Athletes sometimes want ice as a ritual. A ritual is fine if
               the skin rules hold. It does not shorten a ligament’s calendar.
-              Work injuries and sports strains are grouped with{" "}
-              <Link href="/injuries" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">injuries</Link>
-              . Come back here for the compress.
             </p>
           </SectionIntro>
         </div>
@@ -155,7 +149,7 @@ export default function IcePackCryotherapyContent() {
               <Link href="/contact/new-patient-appointment" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">
                 new-patient appointment
               </Link>{" "}
-              if no one has looked at the injury. Why we choose cold, rather
+              if no one has looked at the problem. Why we choose cold, rather
               than a spa chamber, is explained with{" "}
               <Link href="/cryotherapy" className="font-semibold text-[#F97316] underline-offset-4 hover:underline">cryotherapy</Link>.
             </p>
@@ -170,8 +164,8 @@ export default function IcePackCryotherapyContent() {
               <p>
                 A useful pack makes the next few hours more tolerable and
                 keeps the swelling from running the day. It does not have to
-                erase the injury. If you need the pack more, not less, after
-                several days, the injury needs another look. That look might
+                erase the problem. If you need the pack more, not less, after
+                several days, the area needs another look. That look might
                 be here. It might be urgent care. The trend tells us which.
               </p>
             </SectionIntro>
@@ -224,7 +218,7 @@ export default function IcePackCryotherapyContent() {
             is done. Throw it out. Do not rinse and reuse a leaking chemical
             pack. If you share a household freezer, label the pack so nobody
             treats it as food. That is the entire hygiene talk. The clinical
-            talk is still whether the injury needs a person to look at it.
+            talk is still whether the problem needs a person to look at it.
             Ice you already did at home does not replace that look, and it
             does not count as having “tried chiropractic.”
           </p>
@@ -241,11 +235,10 @@ export default function IcePackCryotherapyContent() {
 
       <RelatedCare
         eyebrow="Context"
-        title="The pack is small. The injury might not be."
+        title="The pack is small. The problem might not be."
         intro="Use these when the compress is only one piece."
         links={[
           { href: "/cryotherapy", label: "Cryotherapy decision", note: "Why this office does not mean a cold chamber." },
-          { href: "/injuries", label: "Work and sports strains", note: "The injuries that most often need early cold." },
           { href: "/therapeutic-exercise", label: "Exercise after the hot window", note: "Movement once ice is no longer the main tool." },
           { href: "/adjustments-and-manipulation", label: "Adjustments", note: "Ice does not restore joint motion by itself." },
           { href: "/neck-pain", label: "Neck pain", note: "If the pack is for the neck, neck pain care explains the cause." },

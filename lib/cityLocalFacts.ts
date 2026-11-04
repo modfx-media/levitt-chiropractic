@@ -11,12 +11,12 @@ const FACTS: Record<string, CityLocalFact> = {
   "saint-louis-park": {
     note: "The office is at 6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416. Most first visits are people who already live or work in 55416 and 55426, not a long-haul appointment.",
     typical:
-      "Commute-related neck strain, weekend walking, and follow-up after a fender-bender. Desk days plus winter sidewalks show up as low-back and hip tightness more than dramatic injuries.",
+      "Commute-related neck strain and weekend walking. Desk days plus winter sidewalks show up as low-back and hip tightness more than dramatic one-time events.",
   },
   minneapolis: {
     note: "Uptown, Linden Hills, and the lakes loop are a short trip in light traffic. People usually come after a week of sitting downtown or after a Midtown Greenway ride that left the neck and mid-back locked up. The visit is a dedicated appointment, not a downtown office.",
     typical:
-      "Bike-commute tightness, desk posture from downtown towers, and winter slip-and-falls on packed snow. Cervical strain after a rear-end is common once the ER at Hennepin Healthcare has cleared the acute work.",
+      "Bike-commute tightness, desk posture from downtown towers, and stiffness from winters on packed snow.",
   },
   "saint-paul": {
     note: "Saint Paul is a real drive — typically around 25 minutes if I-94 is behaving. Patients who make it usually want one thorough evaluation, not a five-minute pop-and-go. Summit, Mac-Groveland, and Highland folks often pair the visit with something else on the west side of the metro.",
@@ -154,7 +154,7 @@ const FACTS: Record<string, CityLocalFact> = {
       "Lake-town walking, hospital and clinic shift work at Ridgeview, and the Highway 5 sit after a full day on your feet.",
   },
   bloomington: {
-    note: "Mall of America standing plus long freeway sits is a specific spine. Bloomington patients often come after a holiday-season shift or after a rear-end the ER called “soft tissue.” We are not in the mall orbit, and parking is simpler.",
+    note: "Mall of America standing plus long freeway sits is a specific spine. Bloomington patients often come after a long holiday-season shift. We are not in the mall orbit, and parking is simpler.",
     typical:
       "Retail standing, airport-adjacent shift work, and lumbar strain after the MOA concrete. Hip tightness from the commute is the usual story.",
   },
@@ -344,7 +344,7 @@ const FACTS: Record<string, CityLocalFact> = {
       "Mall standing, freeway stiffness, and desk necks from the office parks along Snelling.",
   },
   "falcon-heights": {
-    note: "State Fair season is its own injury pattern: miles of walking, then a week of sitting. The rest of the year is campus and Snelling traffic. We are a west shot from the Fairgrounds, not a fair-week pop-up.",
+    note: "State Fair season is its own strain pattern: miles of walking, then a week of sitting. The rest of the year is campus and Snelling traffic. We are a west shot from the Fairgrounds, not a fair-week pop-up.",
     typical:
       "Fairgrounds walking, Snelling sits, and necks from looking down at campus laptops.",
   },
