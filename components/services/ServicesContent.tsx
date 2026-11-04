@@ -106,27 +106,6 @@ const services: Service[] = [
     ),
   },
   {
-    title: "Injuries",
-    description:
-      "Recovery from personal injuries getting you back to full function as quickly as possible.",
-    href: "/injuries",
-    group: "Conditions",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <path d="M9 2l4 4-4 4M15 22l-4-4 4-4M22 9l-4 4 4 4M2 15l4-4-4-4" />
-      </svg>
-    ),
-  },
-  {
     title: "Cold Laser Therapy",
     description:
       "Low-level laser stimulates cellular healing for arthritis, tendonitis, fibromyalgia, carpal tunnel, and more.",

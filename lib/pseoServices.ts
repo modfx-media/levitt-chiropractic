@@ -1,4 +1,4 @@
-/** 15 services that power the per-city programmatic pages.
+/** 11 services that power the per-city programmatic pages.
  *  Each entry is consumed by app/areas-we-serve/[city]/[service]/page.tsx
  *  to produce a unique, content-rich landing page when paired with a city.
  */
@@ -6,7 +6,7 @@
 export type PseoService = {
   slug: string;
   name: string;
-  /** Short noun phrase used inline (e.g. "injury chiropractic care"). */
+  /** Short noun phrase used inline (e.g. "spinal adjustments and manipulation"). */
   inlineNoun: string;
   /** Quick visitor-facing tagline for hero subtitle. */
   tagline: string;
@@ -38,42 +38,6 @@ export const pseoServices: PseoService[] = [
     faqs: [
       { q: "Are chiropractic adjustments safe?", a: "When performed by a licensed Doctor of Chiropractic, adjustments are very safe. Dr. Levitt evaluates each patient before any technique is used and selects the gentlest approach that will restore motion." },
       { q: "How many adjustments will I need?", a: "It depends on the issue. Acute pain often resolves in a handful of visits; long-standing problems may need a structured plan over several weeks. We always discuss this up front." },
-    ],
-  },
-  {
-    slug: "injuries",
-    name: "Injury Chiropractic Care",
-    inlineNoun: "injury chiropractic care",
-    tagline:
-      "Comprehensive care for personal injuries diagnosis, hands-on treatment and rehab in one place.",
-    benefits: [
-      "Targeted evaluation of soft- and hard-tissue injuries",
-      "Coordinated care across adjustments, soft tissue and exercise",
-      "Detailed clinical documentation and progress notes",
-      "Decades of experience with personal injury cases",
-    ],
-    conditions: ["muscle strains and tears", "post-incident neck and back pain", "joint and soft-tissue injuries"],
-    faqs: [
-      { q: "When should I see a chiropractor after an injury?", a: "As soon as possible. Early intervention prevents minor sprains and strains from becoming chronic pain patterns and supports faster, fuller recovery." },
-      { q: "What does an initial injury evaluation involve?", a: "Dr. Levitt reviews your history, performs a hands-on exam, and orders imaging only when it would change your plan. You'll leave the first visit with a clear next step." },
-    ],
-  },
-  {
-    slug: "personal-injury",
-    name: "Personal Injury Chiropractic Care",
-    inlineNoun: "personal injury chiropractic care",
-    tagline:
-      "Injury recovery from bike, construction, OSHA and workplace incidents with documentation.",
-    benefits: [
-      "Thorough evaluation and diagnosis of injury-related conditions",
-      "Hands-on treatment plus rehabilitative exercise",
-      "Detailed clinical records and progress reports",
-      "Long history of working with personal-injury attorneys",
-    ],
-    conditions: ["slip-and-fall back pain", "construction and workplace injuries", "bike crash trauma"],
-    faqs: [
-      { q: "Can you work with my attorney?", a: "Yes. Dr. Levitt regularly provides records and progress reports to attorneys handling personal-injury claims." },
-      { q: "What should I bring to my first visit?", a: "Any imaging or records from the ER, urgent care or your primary doctor and a brief written description of how the injury happened." },
     ],
   },
   {

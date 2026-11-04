@@ -102,12 +102,8 @@ export function firstVisitSteps(city: ServedCity): Array<{ title: string; body: 
   ];
 }
 
-export function insuranceNote(city: ServedCity): string {
-  const crash =
-    city.distanceMi === 0
-      ? `After a crash, Minnesota no-fault (PIP) can cover chiropractic as a medical expense — you do not have to “win” a lawsuit first.`
-      : `If the problem started with a Twin Cities crash, Minnesota no-fault (PIP) can cover chiropractic medical expense through your own auto policy. That is a Minnesota rule, not a clinic slogan.`;
-  return `${crash} Health insurance is a separate conversation; we will tell you what we can verify. No referral is required to book a first visit.`;
+export function insuranceNote(): string {
+  return `Chiropractic coverage depends on your health plan; call ahead and we will tell you what we can verify. No referral is required to book a first visit.`;
 }
 
 export function cityFaqs(city: ServedCity): Array<{ q: string; a: string }> {

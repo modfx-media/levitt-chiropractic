@@ -28,8 +28,6 @@ export const sitemapEntries: SitemapEntry[] = [
   // Services
   { path: "/services", priority: 0.9, changefreq: "monthly" },
   { path: "/adjustments-and-manipulation", priority: 0.8, changefreq: "monthly" },
-  { path: "/injuries", priority: 0.8, changefreq: "monthly" },
-  { path: "/personal-injury", priority: 0.7, changefreq: "monthly" },
   { path: "/cryotherapy", priority: 0.7, changefreq: "monthly" },
   { path: "/ice-pack-cryotherapy", priority: 0.6, changefreq: "monthly" },
   { path: "/cold-laser-therapy", priority: 0.7, changefreq: "monthly" },
@@ -105,8 +103,6 @@ export const sitemapSections: SitemapSection[] = [
     links: [
       { label: "Services Overview", href: "/services" },
       { label: "Adjustments & Manipulation", href: "/adjustments-and-manipulation" },
-      { label: "Injuries", href: "/injuries" },
-      { label: "Personal Injury", href: "/personal-injury" },
       { label: "Cryotherapy", href: "/cryotherapy" },
       { label: "Ice Pack Cryotherapy", href: "/ice-pack-cryotherapy" },
       { label: "Cold Laser Therapy", href: "/cold-laser-therapy" },

@@ -15,22 +15,6 @@ const EXTRAS: Record<string, ServiceCopyExtra> = {
     notFor:
       "A high-velocity adjustment is not the opening move after unexplained weight loss, night pain, bowel or bladder changes, or recent major trauma. Those are medical red flags. We screen first and refer out when the story is not a mechanical spine problem.",
   },
-  injuries: {
-    whoItsFor:
-      "Sprains, strains, and “I thought it would be gone in a week” injuries from work, sport, or a fall. Early care matters more than waiting until the pattern is six months old.",
-    visitFlow:
-      "We map what was hurt, what still moves, and what imaging would actually change. Treatment is usually a mix of adjustments, ice or laser, and a few exercises you can do at home — not a gadget tour.",
-    notFor:
-      "Open wounds, suspected fracture, or a patient who needs the ER. If an ER already cleared the acute danger, we pick up the soft-tissue and joint piece.",
-  },
-  "personal-injury": {
-    whoItsFor:
-      "Minnesota crash, slip, bike, or workplace cases where you need both care and a chart that makes sense later. Minnesota no-fault (PIP) can cover chiropractic medical expense after an auto crash; we still examine you as a patient, not as a claim.",
-    visitFlow:
-      "Bring ER or urgent-care notes if you have them, plus a plain-language timeline of the incident. We document findings, treat what is mechanical, and provide records when an attorney asks — without turning the visit into a legal seminar.",
-    notFor:
-      "We do not fabricate injury, “guarantee” a settlement, or treat someone who has not been medically screened after high-energy trauma. If you only need a letter and no exam, that is not this office.",
-  },
   cryotherapy: {
     whoItsFor:
       "Hot, swollen, or angry tissue in the first days after a strain — or a flare on top of a longer back problem. Targeted ice-pack work, not a social-media freeze chamber.",

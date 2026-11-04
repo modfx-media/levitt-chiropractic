@@ -42,7 +42,6 @@ export default function AreaCityPageContent({ city }: { city: ServedCity }) {
   const corePages = [
     { href: "/adjustments-and-manipulation", label: "Adjustments" },
     { href: "/back-pain-treatments", label: "Back pain" },
-    { href: "/personal-injury", label: "Personal injury" },
     { href: "/cold-laser-therapy", label: "Cold laser" },
     { href: "/custom-foot-orthotics", label: "Custom orthotics" },
     { href: "/new-patient-center/what-to-expect", label: "What to expect" },

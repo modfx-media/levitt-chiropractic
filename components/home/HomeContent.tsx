@@ -44,7 +44,7 @@ const homeFaqs = [
   },
   {
     q: "What happens on a first visit?",
-    a: "You tell the real story — commute, desk, weekend miles, the crash if there was one. Then a hands-on exam. You leave knowing the next step. Imaging only when it would change care. No generic protocol.",
+    a: "You tell the real story — commute, desk, weekend miles, when it started. Then a hands-on exam. You leave knowing the next step. Imaging only when it would change care. No generic protocol.",
   },
   {
     q: "Do you treat back pain without drugs or surgery?",
@@ -61,10 +61,6 @@ const homeFaqs = [
   {
     q: "Can a chiropractor fix a wrist?",
     a: "Many wrists, yes: joint restriction, repetitive strain, some carpal-tunnel patterns. Fractures, major ligament tears, and advanced arthritis need an orthopedic look first. We will say so if the exam is not a chiropractic case.",
-  },
-  {
-    q: "Does Minnesota no-fault cover chiropractic after a car accident?",
-    a: "Minnesota is a no-fault state. PIP medical benefits can include chiropractic care after an auto crash, through your own auto policy, without first proving who was at fault. Health insurance is a separate question. Bring ER notes if you have them.",
   },
 ];
 
