@@ -52,8 +52,6 @@ const nextConfig: NextConfig = {
       { source: "/personal-injury", destination: "/services", permanent: true },
       { source: "/auto-injury", destination: "/services", permanent: true },
       { source: "/sports-injury", destination: "/services", permanent: true },
-      { source: "/areas-we-serve/:city/injuries", destination: "/areas-we-serve/:city", permanent: true },
-      { source: "/areas-we-serve/:city/personal-injury", destination: "/areas-we-serve/:city", permanent: true },
       { source: "/links", destination: "/resources", permanent: true },
       { source: "/resources/links", destination: "/resources", permanent: true },
       { source: "/resources/health-resources", destination: "/resources", permanent: true },

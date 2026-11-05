@@ -3,7 +3,10 @@ import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
+import { getServedCities } from "@/lib/areasData";
 import SiteMapContent from "@/components/legal/SiteMapContent";
+
+export const revalidate = 3600;
 
 const fallbackMeta: Metadata = generateMeta({
   title: "Site Map",
@@ -20,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Page() {
   return (
     <CMSRoute path="/site-map">
-      <SiteMapContent />
+      <SiteMapContent cities={getServedCities()} />
     </CMSRoute>
   );
 }

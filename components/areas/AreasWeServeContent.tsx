@@ -10,7 +10,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 
-import { servedCities, type ServedCity } from "@/lib/areasData";
+import type { ServedCity } from "@/lib/areasData";
 import { pseoServices } from "@/lib/pseoServices";
 import { siteConfig } from "@/lib/siteConfig";
 import { ServiceHero } from "@/components/services/ServiceHero";
@@ -35,7 +35,16 @@ const REGION_ORDER: ServedCity["region"][] = [
   "East Metro",
 ];
 
-export default function AreasWeServeContent() {
+const COUNTY_ORDER = ["Hennepin", "Ramsey", "Anoka", "Carver", "Dakota", "Scott", "Washington"];
+
+function countiesPhrase(cities: ServedCity[]): string {
+  const present = new Set(cities.map((c) => c.county));
+  const names = COUNTY_ORDER.filter((county) => present.has(county));
+  if (names.length <= 1) return names.join("");
+  return `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+}
+
+export default function AreasWeServeContent({ cities: servedCities }: { cities: ServedCity[] }) {
   const reduce = useReducedMotion();
   const [region, setRegion] = useState<"All" | ServedCity["region"]>("All");
   const [query, setQuery] = useState("");
@@ -54,7 +63,7 @@ export default function AreasWeServeContent() {
         c.zips.some((z) => z.includes(q));
       return regionOk && queryOk;
     });
-  }, [region, query]);
+  }, [servedCities, region, query]);
 
   const totalServices = pseoServices.length;
   const totalPages = servedCities.length * pseoServices.length;
@@ -108,12 +117,10 @@ export default function AreasWeServeContent() {
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Levitt Chiropractic Center has cared for patients across Hennepin,
-              Ramsey, Anoka, Carver, Dakota, Scott, Washington and surrounding
-              counties since 1987. From our office in
-              {" "}
-              {siteConfig.address.city}, we welcome patients from every corner
-              of the Twin Cities metro.
+              Levitt Chiropractic Center has cared for patients across{" "}
+              {countiesPhrase(servedCities)} counties since 1987. From our
+              office in {siteConfig.address.city}, we welcome patients from
+              communities within about 15 miles of the clinic.
             </p>
             <p className="mt-4 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
               Find your city below for a complete view of the chiropractic

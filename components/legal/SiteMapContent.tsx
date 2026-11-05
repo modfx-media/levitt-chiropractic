@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
 import { sitemapSections } from "@/lib/sitemapEntries";
-import { servedCities } from "@/lib/areasData";
+import type { ServedCity } from "@/lib/areasData";
 import { pseoServices } from "@/lib/pseoServices";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
@@ -20,7 +20,7 @@ const fadeUp = {
   },
 };
 
-export default function SiteMapContent() {
+export default function SiteMapContent({ cities: servedCities }: { cities: ServedCity[] }) {
   const totalLinks = sitemapSections.reduce(
     (sum, s) => sum + s.links.length,
     0,

@@ -284,7 +284,7 @@ const FACTS: Record<string, CityLocalFact> = {
       "Lake-town walking, 35E commuting, and mid-back tightness from hybrid work.",
   },
   "spring-lake-park": {
-    note: "Springbrook Nature Center walks are the local pattern. Spring Lake Park is closer than Blaine; patients still treat it as a dedicated visit. We keep the exam full.",
+    note: "Springbrook Nature Center walks are the local pattern. Spring Lake Park sits at the edge of our north-metro reach; patients treat it as a dedicated visit. We keep the exam full.",
     typical:
       "Nature-center miles, corridor sits, and standing retail along the 65 strip.",
   },
@@ -404,7 +404,7 @@ const FACTS: Record<string, CityLocalFact> = {
       "Plant and shift-work backs, river-town walking, and necks from looking down at production screens.",
   },
   "north-saint-paul": {
-    note: "Silver Lake and the 36 corridor. North St. Paul is closer than Woodbury; patients still treat it as a dedicated visit. We keep the exam full and the homework practical.",
+    note: "Silver Lake and the 36 corridor. North St. Paul is a real east-metro drive; patients treat it as a dedicated visit. We keep the exam full and the homework practical.",
     typical:
       "Lake walking, 36 sits, and standing retail along the Margaret / 36 mix.",
   },

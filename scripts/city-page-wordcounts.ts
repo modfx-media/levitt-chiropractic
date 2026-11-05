@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 
-import { servedCities } from "../lib/areasData";
+import { getServedCities } from "../lib/areasData";
 import { pseoServices } from "../lib/pseoServices";
 import {
   cityFaqs,
@@ -13,6 +13,8 @@ import {
 } from "../lib/areaPageCopy";
 import { localFact } from "../lib/cityLocalFacts";
 import { serviceExtra } from "../lib/serviceCopyExtras";
+
+const servedCities = getServedCities();
 
 function words(parts: string[]): number {
   return parts.join(" ").split(/\s+/).filter(Boolean).length;

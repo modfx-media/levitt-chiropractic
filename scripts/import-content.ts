@@ -13,7 +13,7 @@ import { sitemapEntries } from "../lib/sitemapEntries";
 import { blogPosts } from "../lib/blogPosts";
 import { composeSeoTitle } from "../lib/seoTitle";
 import { siteConfig } from "../lib/siteConfig";
-import { servedCities } from "../lib/areasData";
+import { getServedCities } from "../lib/areasData";
 import { pseoServices } from "../lib/pseoServices";
 import {
   cityMetaDescription,
@@ -217,7 +217,7 @@ function pageRecords() {
   };
   walk(sitePages);
 
-  const areaPages = servedCities.flatMap((city) => {
+  const areaPages = getServedCities().flatMap((city) => {
     const cityPath = `/areas-we-serve/${city.slug}`;
     const cityRow = {
       path: cityPath,

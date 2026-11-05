@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
-import { servedCities, getCityBySlug } from "@/lib/areasData";
+import { allServedCities, getCityBySlug, withLiveNeighbors } from "@/lib/areasData";
+import { retiredCityTarget } from "@/lib/areaRetirement";
 import { pseoServices, getServiceBySlug } from "@/lib/pseoServices";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -15,10 +16,11 @@ import AreaServicePageContent from "@/components/areas/AreaServicePageContent";
 type Params = { city: string; service: string };
 
 export const dynamicParams = false;
+export const revalidate = 3600;
 
 export function generateStaticParams(): Params[] {
   const out: Params[] = [];
-  for (const c of servedCities) {
+  for (const c of allServedCities) {
     for (const s of pseoServices) {
       out.push({ city: c.slug, service: s.slug });
     }
@@ -32,9 +34,10 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { city: citySlug, service: serviceSlug } = await params;
-  const city = getCityBySlug(citySlug);
+  const found = getCityBySlug(citySlug);
   const service = getServiceBySlug(serviceSlug);
-  if (!city || !service) return {};
+  if (!found || !service) return {};
+  const city = withLiveNeighbors(found);
 
   const title = `${service.name} in ${city.name}, MN`;
   const description = cityServiceMetaDescription(city, service);
@@ -56,9 +59,12 @@ export default async function Page({
   params: Promise<Params>;
 }) {
   const { city: citySlug, service: serviceSlug } = await params;
-  const city = getCityBySlug(citySlug);
+  const found = getCityBySlug(citySlug);
   const service = getServiceBySlug(serviceSlug);
-  if (!city || !service) return notFound();
+  if (!found || !service) return notFound();
+  const target = retiredCityTarget(found.slug);
+  if (target) permanentRedirect(`/areas-we-serve/${target}/${service.slug}`);
+  const city = withLiveNeighbors(found);
 
   return (
     <CMSRoute path={`/areas-we-serve/${city.slug}/${service.slug}`}>

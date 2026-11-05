@@ -8,7 +8,8 @@ const SITEMAP_EXCLUSIONS = new Set([
   "/site-map",
   ...[...HIDDEN_CMS_POST_SLUGS].map((slug) => `/blog/${slug}`),
 ]);
-import { servedCities, citySitemapPriority } from "@/lib/areasData";
+import { getServedCities, citySitemapPriority } from "@/lib/areasData";
+import { isRetiredAreaPath } from "@/lib/areaRetirement";
 import { pseoServices } from "@/lib/pseoServices";
 import { getAllPosts } from "@/lib/blog";
 import { getLiveRankedBlogPosts } from "@/lib/ranked/posts";
@@ -19,6 +20,7 @@ export const revalidate = 300;
 
 export async function GET() {
   const lastmod = new Date().toISOString();
+  const servedCities = getServedCities();
 
   // Programmatic /areas-we-serve URLs (hub + city + city/service)
   const pseoEntries: SitemapEntry[] = [
@@ -59,7 +61,10 @@ export async function GET() {
     ...sitemapEntries,
     ...pseoEntries,
     ...blogEntries,
-  ].filter((e) => !overlay.skip.has(e.path) && !SITEMAP_EXCLUSIONS.has(e.path));
+  ].filter(
+    (e) =>
+      !overlay.skip.has(e.path) && !SITEMAP_EXCLUSIONS.has(e.path) && !isRetiredAreaPath(e.path),
+  );
 
   const existing = new Set(allEntries.map((e) => e.path));
   const lastmodByPath = new Map(
@@ -71,7 +76,8 @@ export async function GET() {
     if (
       existing.has(extra.path) ||
       overlay.skip.has(extra.path) ||
-      SITEMAP_EXCLUSIONS.has(extra.path)
+      SITEMAP_EXCLUSIONS.has(extra.path) ||
+      isRetiredAreaPath(extra.path)
     )
       continue;
     allEntries.push({

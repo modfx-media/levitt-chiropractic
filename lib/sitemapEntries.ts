@@ -1,8 +1,6 @@
 /** All public URL slugs (relative paths) with sitemap metadata.
  *  Single source of truth for /sitemap.xml and the user-facing /site-map page.
  */
-import { servedCities } from "./areasData";
-
 export type SitemapEntry = {
   path: string;
   priority: number;
@@ -155,7 +153,7 @@ export const sitemapSections: SitemapSection[] = [
   },
   {
     title: "Areas We Serve",
-    description: `Drug-free chiropractic care for ${servedCities.length}+ Twin Cities communities see the full directory below.`,
+    description: "Drug-free chiropractic care for Twin Cities communities near Saint Louis Park. See the full directory below.",
     links: [
       { label: "All Areas We Serve", href: "/areas-we-serve" },
     ],

@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
 import type { ServedCity } from "@/lib/areasData";
-import { servedCities } from "@/lib/areasData";
 import { pseoServices } from "@/lib/pseoServices";
 import {
   cityFaqs,
@@ -30,10 +29,13 @@ const fadeUp = {
   },
 };
 
-export default function AreaCityPageContent({ city }: { city: ServedCity }) {
-  const sameRegionCities = servedCities
-    .filter((c) => c.region === city.region && c.slug !== city.slug)
-    .slice(0, 8);
+export default function AreaCityPageContent({
+  city,
+  sameRegionCities,
+}: {
+  city: ServedCity;
+  sameRegionCities: ServedCity[];
+}) {
   const copy = cityIntro(city);
   const why = cityWhyPoints(city);
   const faqs = cityFaqs(city);

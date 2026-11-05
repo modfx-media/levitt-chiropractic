@@ -7,6 +7,8 @@
  *  the entry for local-relevance copy.
  */
 
+import { isCityRetired } from "./areaRetirement";
+
 export type ServedCity = {
   slug: string;
   name: string;
@@ -19,7 +21,8 @@ export type ServedCity = {
   region: "West Metro" | "Minneapolis" | "South Metro" | "North Metro" | "East Metro" | "Saint Paul";
 };
 
-export const servedCities: ServedCity[] = [
+/** Every city ever published, including ones retired by `areaRetirement.ts`. */
+export const allServedCities: ServedCity[] = [
   // Home city
   { slug: "saint-louis-park", name: "Saint Louis Park", county: "Hennepin", distanceMi: 0, population: 50000, zips: ["55416", "55426", "55436"], neighbors: ["Edina", "Hopkins", "Minneapolis"], landmark: "central Saint Louis Park", region: "West Metro" },
 
@@ -126,7 +129,20 @@ export function citySitemapPriority(city: Pick<ServedCity, "slug" | "distanceMi"
   return 0.5;
 }
 
-/** Reverse-lookup helper. */
+/** Cities that are live right now. Call per request; the list shrinks as batches retire. */
+export function getServedCities(now: Date = new Date()): ServedCity[] {
+  return allServedCities.filter((c) => !isCityRetired(c.slug, now));
+}
+
+/** Same city with retired cities removed from `neighbors`, so page copy never names them. */
+export function withLiveNeighbors(city: ServedCity, now: Date = new Date()): ServedCity {
+  const retiredNames = new Set(
+    allServedCities.filter((c) => isCityRetired(c.slug, now)).map((c) => c.name),
+  );
+  return { ...city, neighbors: city.neighbors.filter((name) => !retiredNames.has(name)) };
+}
+
+/** Reverse-lookup helper. Includes retired cities so their pages can redirect. */
 export function getCityBySlug(slug: string): ServedCity | undefined {
-  return servedCities.find((c) => c.slug === slug);
+  return allServedCities.find((c) => c.slug === slug);
 }
