@@ -5,6 +5,7 @@ import { RichText } from "@payloadcms/richtext-lexical/react";
 import { BlogPostContent } from "@/components/blog/BlogPostContent";
 import { Button } from "@/components/ui/Button";
 import { getRelatedPosts } from "@/lib/blog";
+import { pageLayoutHasContent } from "@/lib/cms/mergeDesigned";
 import { cmsDocToBlogPost } from "@/lib/cms/postToBlog";
 import type { RoutedDoc } from "@/lib/cms/queries";
 
@@ -28,6 +29,8 @@ export function RenderRoutedContent({ doc }: { doc: RoutedDoc }) {
     if (!post) return null;
     return <BlogPostContent post={post} related={getRelatedPosts(post, 3)} />;
   }
+
+  if (!pageLayoutHasContent(doc.doc)) return null;
 
   const title = typeof doc.doc.title === "string" ? doc.doc.title : "";
   const layout = Array.isArray(doc.doc.layout)
