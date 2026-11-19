@@ -74,6 +74,14 @@ export const Footer: GlobalConfig = {
   },
   fields: [
     { name: "blurb", type: "textarea" },
+    {
+      name: "designedBlurb",
+      type: "textarea",
+      admin: {
+        description:
+          "Footer sentence on the public site. Leave blank to keep the designed default. The legacy blurb field is not shown.",
+      },
+    },
     { name: "exploreTitle", type: "text" },
     { name: "legalTitle", type: "text" },
     { name: "explore", type: "array", fields: linkFields },

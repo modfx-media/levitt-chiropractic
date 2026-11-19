@@ -44,7 +44,6 @@ const document = {
   pages,
   globals: {
     header: {
-      tagline: defaultShell.tagline,
       placeLabel: defaultShell.placeLabel,
       phone: defaultShell.phone,
       phoneHref: defaultShell.phoneHref,
@@ -65,7 +64,7 @@ const document = {
       nav: defaultShell.nav,
     },
     footer: {
-      blurb: defaultShell.footer.blurb,
+      designedBlurb: defaultShell.footer.blurb,
       exploreTitle: defaultShell.footer.exploreTitle,
       legalTitle: defaultShell.footer.legalTitle,
       explore: defaultShell.footer.explore,
@@ -80,7 +79,6 @@ const document = {
       shortName: defaultShell.shortName,
       tagline: defaultShell.tagline,
       description: defaultShell.description,
-      defaultMetaDescription: defaultShell.description,
       phone: defaultShell.phone,
       phoneHref: defaultShell.phoneHref,
       phoneE164: defaultShell.phoneE164,

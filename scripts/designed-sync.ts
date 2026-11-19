@@ -2,16 +2,28 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Payload } from "payload";
 
+export type GlobalChange = { fill: string[]; keep: string[] };
+
 export type DesignedSyncReport = {
-  pages: { created: number; updated: number; skipped: number };
-  globals: string[];
-  cities: { created: number; updated: number };
-  services: { created: number; updated: number };
+  pages: { created: number; updated: number; skipped: number; published: number };
+  legacyPages: { skipped: number; published: number };
+  globals: Record<"header" | "footer" | "site-settings", GlobalChange>;
+  cities: { created: number; updated: number; skipped: number };
+  services: { created: number; updated: number; skipped: number };
   testimonials: { created: number; skipped: number };
   team: { created: number; skipped: number };
   faqs: { created: number; skipped: number };
   errors: string[];
 };
+
+/** Fields imported before this branch. They must never drive or be overwritten. */
+export const LEGACY_GLOBAL_FIELDS: Record<string, ReadonlySet<string>> = {
+  header: new Set(["tagline", "navNote"]),
+  footer: new Set(["blurb"]),
+  "site-settings": new Set(["defaultMetaTitle", "defaultMetaDescription"]),
+};
+
+const GLOBAL_META_KEYS = new Set(["id", "updatedAt", "createdAt", "globalType", "_status"]);
 
 type DesignedFile = {
   pages: { path: string; legacyId: string; designed: Record<string, unknown> }[];
@@ -25,15 +37,6 @@ type DesignedFile = {
   testimonials: Array<Record<string, unknown>>;
 };
 
-const SEO_KEYS = [
-  "title",
-  "description",
-  "canonicalUrl",
-  "image",
-  "schemaType",
-  "breadcrumbLabel",
-] as const;
-
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
@@ -43,8 +46,13 @@ function hasValue(value: unknown): boolean {
   if (typeof value === "string") return value.trim().length > 0;
   if (typeof value === "boolean") return value;
   if (typeof value === "number") return Number.isFinite(value);
-  if (Array.isArray(value)) return value.length > 0;
-  return typeof value === "object";
+  if (Array.isArray(value)) return value.some((item) => hasValue(item));
+  if (typeof value === "object") {
+    return Object.entries(value as Record<string, unknown>).some(
+      ([key, child]) => key !== "id" && hasValue(child),
+    );
+  }
+  return false;
 }
 
 export function loadDesignedFile(root: string): DesignedFile | null {
@@ -88,81 +96,130 @@ function collectFaqs(node: unknown, found: { q: string; a: string }[][]): void {
   for (const value of Object.values(node)) collectFaqs(value, found);
 }
 
-async function findPage(payload: Payload, pagePath: string, legacyId: string) {
-  return payload.find({
-    collection: "pages",
-    depth: 0,
-    draft: true,
-    limit: 1,
-    overrideAccess: true,
-    where: {
-      or: [{ path: { equals: pagePath } }, { legacyId: { equals: legacyId } }],
-    },
-  });
+function sameJson(left: unknown, right: unknown): boolean {
+  return JSON.stringify(left ?? null) === JSON.stringify(right ?? null);
+}
+
+function planGlobalFields(
+  slug: string,
+  current: Record<string, unknown>,
+  incoming: Record<string, unknown>,
+): { fill: Record<string, unknown>; change: GlobalChange } {
+  const legacy = LEGACY_GLOBAL_FIELDS[slug] ?? new Set<string>();
+  const fill: Record<string, unknown> = {};
+  const change: GlobalChange = { fill: [], keep: [] };
+  for (const [key, value] of Object.entries(incoming)) {
+    if (GLOBAL_META_KEYS.has(key)) continue;
+    if (legacy.has(key)) {
+      change.keep.push(key);
+      continue;
+    }
+    if (hasValue(current[key])) {
+      change.keep.push(key);
+      continue;
+    }
+    if (!hasValue(value)) continue;
+    fill[key] = value;
+    change.fill.push(key);
+  }
+  for (const key of legacy) {
+    if (!change.keep.includes(key) && key in current) change.keep.push(key);
+  }
+  change.fill.sort();
+  change.keep.sort();
+  return { fill, change };
 }
 
 export async function syncDesignedContent(
   payload: Payload,
   file: DesignedFile,
-  publish: boolean,
+  options: { publish: boolean; apply: boolean },
 ): Promise<DesignedSyncReport> {
+  const { publish, apply } = options;
   const report: DesignedSyncReport = {
-    pages: { created: 0, updated: 0, skipped: 0 },
-    globals: [],
-    cities: { created: 0, updated: 0 },
-    services: { created: 0, updated: 0 },
+    pages: { created: 0, updated: 0, skipped: 0, published: 0 },
+    legacyPages: { skipped: 0, published: 0 },
+    globals: {
+      header: { fill: [], keep: [] },
+      footer: { fill: [], keep: [] },
+      "site-settings": { fill: [], keep: [] },
+    },
+    cities: { created: 0, updated: 0, skipped: 0 },
+    services: { created: 0, updated: 0, skipped: 0 },
     testimonials: { created: 0, skipped: 0 },
     team: { created: 0, skipped: 0 },
     faqs: { created: 0, skipped: 0 },
     errors: [],
   };
   const status = publish ? "published" : "draft";
+  const known = await payload.find({
+    collection: "pages",
+    depth: 0,
+    draft: true,
+    limit: 5000,
+    pagination: false,
+    overrideAccess: true,
+  });
+  const byPath = new Map<string, (typeof known.docs)[number]>();
+  const byLegacy = new Map<string, (typeof known.docs)[number]>();
+  const designedPaths = new Set(file.pages.map((page) => page.path));
+  const designedLegacy = new Set(file.pages.map((page) => page.legacyId));
+  for (const doc of known.docs) {
+    if (typeof doc.path === "string") byPath.set(doc.path, doc);
+    if (typeof doc.legacyId === "string") byLegacy.set(doc.legacyId, doc);
+    const inDesigned =
+      (typeof doc.path === "string" && designedPaths.has(doc.path)) ||
+      (typeof doc.legacyId === "string" && designedLegacy.has(doc.legacyId));
+    if (!inDesigned) report.legacyPages.skipped += 1;
+  }
 
   for (const page of file.pages) {
     if ((report.pages.created + report.pages.updated) % 50 === 0 && report.pages.created + report.pages.updated > 0) {
       console.log(`designed pages ${report.pages.created + report.pages.updated}/${file.pages.length}`);
     }
     try {
-      const existing = await findPage(payload, page.path, page.legacyId);
-      const current = existing.docs[0];
+      const current = byPath.get(page.path) ?? byLegacy.get(page.legacyId);
       if (current) {
-        const meta = isRecord(current.meta) ? current.meta : {};
-        const preserved: Record<string, unknown> = {};
-        for (const key of SEO_KEYS) {
-          if (hasValue(meta[key])) preserved[key] = meta[key];
+        const designedChanged = !sameJson(current.designed, page.designed);
+        const statusChanged = publish && current._status !== "published";
+        if (!designedChanged && !statusChanged) {
+          report.pages.skipped += 1;
+        } else {
+          if (apply) {
+            await payload.update({
+              collection: "pages",
+              id: current.id,
+              depth: 0,
+              draft: !publish,
+              overrideAccess: true,
+              data: {
+                designed: page.designed,
+                ...(publish ? { _status: status } : {}),
+              },
+            });
+          }
+          report.pages.updated += 1;
+          if (publish) report.pages.published += 1;
         }
-        if (meta.noIndex === true) preserved.noIndex = true;
-        if (meta.noFollow === true) preserved.noFollow = true;
-        if (meta.excludeFromSitemap === true) preserved.excludeFromSitemap = true;
-        await payload.update({
-          collection: "pages",
-          id: current.id,
-          depth: 0,
-          draft: !publish,
-          overrideAccess: true,
-          data: {
-            designed: page.designed,
-            _status: status,
-            ...(Object.keys(preserved).length ? { meta: preserved } : {}),
-          },
-        });
-        report.pages.updated += 1;
       } else {
-        await payload.create({
-          collection: "pages",
-          depth: 0,
-          draft: !publish,
-          overrideAccess: true,
-          data: {
-            title: titleFromPath(page.path),
-            path: page.path,
-            slug: page.path === "/" ? "home" : page.path.replace(/^\//, ""),
-            legacyId: page.legacyId,
-            designed: page.designed,
-            _status: status,
-          },
-        });
+        if (apply) {
+          await payload.create({
+            collection: "pages",
+            depth: 0,
+            draft: !publish,
+            overrideAccess: true,
+            data: {
+              title: titleFromPath(page.path),
+              path: page.path,
+              slug: page.path === "/" ? "home" : page.path.replace(/^\//, ""),
+              legacyId: page.legacyId,
+              designed: page.designed,
+              _status: status,
+            },
+          });
+        }
         report.pages.created += 1;
+        if (publish) report.pages.published += 1;
       }
       const faqs: { q: string; a: string }[][] = [];
       collectFaqs(page.designed, faqs);
@@ -175,6 +232,7 @@ export async function syncDesignedContent(
           where: { path: { equals: page.path } },
         });
         if (found.docs[0]) report.faqs.skipped += 1;
+        else if (!apply) report.faqs.created += 1;
         else {
           await payload.create({
             collection: "faqs",
@@ -191,19 +249,20 @@ export async function syncDesignedContent(
 
   for (const [slug, data] of Object.entries(file.globals)) {
     try {
-      const current = await payload.findGlobal({ slug: slug as "header", depth: 0, overrideAccess: true });
-      const next: Record<string, unknown> = {};
-      for (const [key, value] of Object.entries(data)) {
-        if (!hasValue(current?.[key as keyof typeof current])) next[key] = value;
-      }
-      if (Object.keys(next).length) {
+      const current = (await payload.findGlobal({
+        slug: slug as "header",
+        depth: 0,
+        overrideAccess: true,
+      })) as unknown as Record<string, unknown>;
+      const planned = planGlobalFields(slug, current, data);
+      report.globals[slug as "header"] = planned.change;
+      if (apply && Object.keys(planned.fill).length) {
         await payload.updateGlobal({
           slug: slug as "header",
           overrideAccess: true,
-          data: next,
+          data: planned.fill,
         });
       }
-      report.globals.push(slug);
     } catch (error) {
       report.errors.push(`global ${slug}: ${String(error)}`);
     }
@@ -232,10 +291,12 @@ export async function syncDesignedContent(
         neighbors: textArray(city.neighbors, "name"),
       };
       if (found.docs[0]) {
-        await payload.update({ collection: "cities", id: found.docs[0].id, overrideAccess: true, data });
+        if (apply) {
+          await payload.update({ collection: "cities", id: found.docs[0].id, overrideAccess: true, data });
+        }
         report.cities.updated += 1;
       } else {
-        await payload.create({ collection: "cities", overrideAccess: true, data });
+        if (apply) await payload.create({ collection: "cities", overrideAccess: true, data });
         report.cities.created += 1;
       }
     } catch (error) {
@@ -265,15 +326,19 @@ export async function syncDesignedContent(
         faqs: faqArray(service.faqs),
       };
       if (found.docs[0]) {
-        await payload.update({
-          collection: "practice-services",
-          id: found.docs[0].id,
-          overrideAccess: true,
-          data,
-        });
+        if (apply) {
+          await payload.update({
+            collection: "practice-services",
+            id: found.docs[0].id,
+            overrideAccess: true,
+            data,
+          });
+        }
         report.services.updated += 1;
       } else {
-        await payload.create({ collection: "practice-services", overrideAccess: true, data });
+        if (apply) {
+          await payload.create({ collection: "practice-services", overrideAccess: true, data });
+        }
         report.services.created += 1;
       }
     } catch (error) {
@@ -297,7 +362,8 @@ export async function syncDesignedContent(
         report.testimonials.skipped += 1;
         continue;
       }
-      await payload.create({
+      if (apply) {
+        await payload.create({
         collection: "testimonials",
         overrideAccess: true,
         data: {
@@ -307,6 +373,7 @@ export async function syncDesignedContent(
           relativeTime: review.relativeTime,
         },
       });
+      }
       report.testimonials.created += 1;
     } catch (error) {
       report.errors.push(`testimonial ${name}: ${String(error)}`);
@@ -327,7 +394,8 @@ export async function syncDesignedContent(
       });
       if (found.docs[0]) report.team.skipped += 1;
       else {
-        await payload.create({
+        if (apply) {
+          await payload.create({
           collection: "team",
           overrideAccess: true,
           data: {
@@ -337,6 +405,7 @@ export async function syncDesignedContent(
             image: physician.image,
           },
         });
+        }
         report.team.created += 1;
       }
     }

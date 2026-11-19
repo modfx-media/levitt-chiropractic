@@ -187,7 +187,6 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
-  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -733,7 +732,6 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
-  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1102,6 +1100,10 @@ export interface Header {
 export interface Footer {
   id: number;
   blurb?: string | null;
+  /**
+   * Footer sentence on the public site. Leave blank to keep the designed default. The legacy blurb field is not shown.
+   */
+  designedBlurb?: string | null;
   exploreTitle?: string | null;
   legalTitle?: string | null;
   explore?:
@@ -1225,6 +1227,7 @@ export interface HeaderSelect<T extends boolean = true> {
  */
 export interface FooterSelect<T extends boolean = true> {
   blurb?: T;
+  designedBlurb?: T;
   exploreTitle?: T;
   legalTitle?: T;
   explore?:

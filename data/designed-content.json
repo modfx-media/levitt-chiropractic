@@ -24831,7 +24831,6 @@
   ],
   "globals": {
     "header": {
-      "tagline": "Your Spine Health Specialists",
       "placeLabel": "Saint Louis Park, MN",
       "phone": "952-920-7535",
       "phoneHref": "tel:9529207535",
@@ -25055,7 +25054,7 @@
       ]
     },
     "footer": {
-      "blurb": "Chiropractic care in Saint Louis Park since 1999.",
+      "designedBlurb": "Chiropractic care in Saint Louis Park since 1999.",
       "exploreTitle": "Explore",
       "legalTitle": "Legal",
       "explore": [
@@ -25124,7 +25123,6 @@
       "shortName": "Levitt Chiropractic",
       "tagline": "Your Spine Health Specialists",
       "description": "Chiropractor in Saint Louis Park at 6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416. Adjustments, cold laser, and orthotics with Dr. Alan Levitt since 1999.",
-      "defaultMetaDescription": "Chiropractor in Saint Louis Park at 6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416. Adjustments, cold laser, and orthotics with Dr. Alan Levitt since 1999.",
       "phone": "952-920-7535",
       "phoneHref": "tel:9529207535",
       "phoneE164": "+19529207535",

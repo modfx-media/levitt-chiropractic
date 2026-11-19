@@ -24,6 +24,7 @@ import { siteConfig } from "./lib/siteConfig";
 
 import { scheduledPublishPlugin } from "./scheduled-publish";
 import * as designedContentMigration from "./src/migrations/20261119_120000_designed_content";
+import * as footerBlurbMigration from "./src/migrations/20261119_190000_footer_designed_blurb";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
@@ -124,6 +125,11 @@ export default buildConfig({
           name: designedContentMigration.name,
           up: designedContentMigration.up,
           down: designedContentMigration.down,
+        },
+        {
+          name: footerBlurbMigration.name,
+          up: footerBlurbMigration.up,
+          down: footerBlurbMigration.down,
         },
       ],
     });
