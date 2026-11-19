@@ -14,7 +14,7 @@ import { pseoServices } from "@/lib/pseoServices";
 import { getAllPosts } from "@/lib/blog";
 import { getLiveRankedBlogPosts } from "@/lib/ranked/posts";
 import { querySitemapOverlay } from "@/lib/cms/queries";
-import { isLivePublicPath } from "@/lib/liveRoutes";
+import { acceptSitemapExtra } from "@/lib/sitemapOverlay";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 300;
@@ -75,11 +75,12 @@ export async function GET() {
   );
   for (const extra of overlay.extra) {
     if (
-      existing.has(extra.path) ||
-      overlay.skip.has(extra.path) ||
-      SITEMAP_EXCLUSIONS.has(extra.path) ||
-      isRetiredAreaPath(extra.path) ||
-      !isLivePublicPath(extra.path)
+      !acceptSitemapExtra(extra.path, {
+        existing,
+        skip: overlay.skip,
+        exclusions: SITEMAP_EXCLUSIONS,
+        retired: isRetiredAreaPath(extra.path),
+      })
     )
       continue;
     allEntries.push({

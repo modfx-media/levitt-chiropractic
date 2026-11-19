@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 
+import { revalidateCatalog, revalidateCatalogDeleted } from "../hooks";
 import { authenticated } from "../fields";
 
 const publicRead = {
@@ -16,6 +17,7 @@ export const Cities: CollectionConfig = {
     defaultColumns: ["name", "slug", "region", "distanceMi"],
   },
   access: publicRead,
+  hooks: { afterChange: [revalidateCatalog], afterDelete: [revalidateCatalogDeleted] },
   fields: [
     { name: "slug", type: "text", required: true, unique: true, index: true },
     { name: "name", type: "text", required: true },
@@ -44,6 +46,7 @@ export const PracticeServices: CollectionConfig = {
   slug: "practice-services",
   admin: { useAsTitle: "name", defaultColumns: ["name", "slug"] },
   access: publicRead,
+  hooks: { afterChange: [revalidateCatalog], afterDelete: [revalidateCatalogDeleted] },
   fields: [
     { name: "slug", type: "text", required: true, unique: true, index: true },
     { name: "name", type: "text", required: true },
@@ -67,6 +70,7 @@ export const Conditions: CollectionConfig = {
   slug: "conditions",
   admin: { useAsTitle: "name", defaultColumns: ["name", "slug"] },
   access: publicRead,
+  hooks: { afterChange: [revalidateCatalog], afterDelete: [revalidateCatalogDeleted] },
   fields: [
     { name: "slug", type: "text", required: true, unique: true, index: true },
     { name: "name", type: "text", required: true },
@@ -79,6 +83,7 @@ export const Faqs: CollectionConfig = {
   slug: "faqs",
   admin: { useAsTitle: "path", defaultColumns: ["path", "updatedAt"] },
   access: publicRead,
+  hooks: { afterChange: [revalidateCatalog], afterDelete: [revalidateCatalogDeleted] },
   fields: [
     { name: "path", type: "text", required: true, unique: true, index: true },
     { name: "eyebrow", type: "text" },
@@ -99,6 +104,7 @@ export const Testimonials: CollectionConfig = {
   slug: "testimonials",
   admin: { useAsTitle: "name", defaultColumns: ["name", "rating"] },
   access: publicRead,
+  hooks: { afterChange: [revalidateCatalog], afterDelete: [revalidateCatalogDeleted] },
   fields: [
     { name: "name", type: "text", required: true },
     { name: "quote", type: "textarea", required: true },
@@ -112,6 +118,7 @@ export const TeamMembers: CollectionConfig = {
   labels: { singular: "Team member", plural: "Team" },
   admin: { useAsTitle: "name", defaultColumns: ["name", "jobTitle"] },
   access: publicRead,
+  hooks: { afterChange: [revalidateCatalog], afterDelete: [revalidateCatalogDeleted] },
   fields: [
     { name: "name", type: "text", required: true },
     { name: "shortName", type: "text" },

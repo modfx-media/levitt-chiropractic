@@ -6,11 +6,37 @@ async function safeRevalidate(path: string | null | undefined) {
     const { revalidatePath, revalidateTag } = await import("next/cache");
     revalidatePath(path);
     if (path === "/blog" || path.startsWith("/blog/")) revalidatePath("/blog");
+    revalidatePath("/sitemap.xml");
     revalidateTag("cms", { expire: 0 });
   } catch (error) {
     console.error("[cms] revalidate failed", error);
   }
 }
+
+/** Header, footer, site settings, and catalog edits change the shell on every designed page. */
+export async function revalidateDesignedShell(): Promise<void> {
+  try {
+    const { revalidatePath, revalidateTag } = await import("next/cache");
+    revalidatePath("/", "layout");
+    revalidatePath("/sitemap.xml");
+    revalidatePath("/blog");
+    revalidateTag("cms", { expire: 0 });
+  } catch (error) {
+    console.error("[cms] revalidate failed", error);
+  }
+}
+
+async function revalidateCatalogDoc(doc: { path?: unknown } | null | undefined) {
+  await revalidateDesignedShell();
+  await safeRevalidate(typeof doc?.path === "string" ? doc.path : undefined);
+  return doc;
+}
+
+export const revalidateCatalog: CollectionAfterChangeHook = async ({ doc }) => revalidateCatalogDoc(doc);
+
+export const revalidateCatalogDeleted: CollectionAfterDeleteHook = async ({ doc }) => {
+  await revalidateCatalogDoc(doc);
+};
 
 type StatusDoc = {
   path?: unknown;
@@ -44,5 +70,6 @@ export const revalidatePublished: CollectionAfterChangeHook = async ({
 export const revalidateDeleted: CollectionAfterDeleteHook = async ({ doc }) => {
   const path = typeof doc?.path === "string" ? doc.path : undefined;
   if (doc?._status === "published" || path) await safeRevalidate(path);
+  await revalidateDesignedShell();
   return doc;
 };

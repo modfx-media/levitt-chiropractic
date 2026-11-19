@@ -1,6 +1,12 @@
-import type { GlobalConfig } from "payload";
+import type { GlobalAfterChangeHook, GlobalConfig } from "payload";
 
 import { authenticated } from "./fields";
+import { revalidateDesignedShell } from "./hooks";
+
+const revalidateGlobal: GlobalAfterChangeHook = async ({ doc }) => {
+  await revalidateDesignedShell();
+  return doc;
+};
 
 const linkFields = [
   { name: "label", type: "text" as const, required: true },
@@ -18,6 +24,7 @@ export const Header: GlobalConfig = {
     read: () => true,
     update: authenticated,
   },
+  hooks: { afterChange: [revalidateGlobal] },
   fields: [
     { name: "tagline", type: "text" },
     {
@@ -72,6 +79,7 @@ export const Footer: GlobalConfig = {
     read: () => true,
     update: authenticated,
   },
+  hooks: { afterChange: [revalidateGlobal] },
   fields: [
     { name: "blurb", type: "textarea" },
     {
@@ -100,6 +108,7 @@ export const SiteSettings: GlobalConfig = {
     read: () => true,
     update: authenticated,
   },
+  hooks: { afterChange: [revalidateGlobal] },
   fields: [
     { name: "defaultMetaTitle", type: "text" },
     { name: "defaultMetaDescription", type: "textarea" },
