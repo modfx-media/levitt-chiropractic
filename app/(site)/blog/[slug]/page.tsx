@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
+import { cmsOnlyDocIsRenderable } from "@/lib/cms/mergeDesigned";
 import { queryRoutedContentByPath } from "@/lib/cms/queries";
 import {
   getAllSlugs,
@@ -76,7 +77,7 @@ export default async function Page(
   const post = await resolvePost(slug);
   if (!post) {
     const routed = await queryRoutedContentByPath(path);
-    if (!routed) notFound();
+    if (!cmsOnlyDocIsRenderable(routed)) notFound();
     return <CMSRoute path={path}>{null}</CMSRoute>;
   }
 
