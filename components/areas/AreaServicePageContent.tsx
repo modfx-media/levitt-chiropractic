@@ -13,6 +13,8 @@ import {
   driveLabel,
   visitFacts,
 } from "@/lib/areaPageCopy";
+import { areaServiceDefaults } from "@/lib/designed/defaults/areaService";
+import { mergeContent } from "@/lib/designed/merge";
 import { serviceExtra } from "@/lib/serviceCopyExtras";
 import { ServiceHero } from "@/components/services/ServiceHero";
 import { LocationStrip } from "@/components/services/LocationStrip";
@@ -30,10 +32,12 @@ const fadeUp = {
 type Props = {
   city: ServedCity;
   service: PseoService;
+  content?: unknown;
 };
 
-export default function AreaServicePageContent({ city, service }: Props) {
-  const copy = cityServiceIntro(city, service);
+export default function AreaServicePageContent({ city, service, content }: Props) {
+  const copy = mergeContent(areaServiceDefaults, content);
+  const intro = cityServiceIntro(city, service);
   const faqs = cityServiceFaqs(city, service);
   const facts = visitFacts(city);
   const extra = serviceExtra(service);
@@ -44,15 +48,16 @@ export default function AreaServicePageContent({ city, service }: Props) {
   return (
     <>
       <ServiceHero
-        title={`${service.name} in ${city.name}, MN`}
+        title={copy.heroTitle || `${service.name} in ${city.name}, MN`}
         subtitle={
-          city.distanceMi === 0
+          copy.heroSubtitle ||
+          (city.distanceMi === 0
             ? `${service.tagline} Available at our ${city.name} office.`
-            : `${service.tagline} ${city.name} patients drive ${driveLabel(city).toLowerCase()} to Saint Louis Park.`
+            : `${service.tagline} ${city.name} patients drive ${driveLabel(city).toLowerCase()} to Saint Louis Park.`)
         }
         crumbs={[
-          { label: "Home", href: "/" },
-          { label: "Areas We Serve", href: "/areas-we-serve" },
+          { label: copy.crumbHome, href: "/" },
+          { label: copy.crumbAreas, href: "/areas-we-serve" },
           { label: city.name, href: `/areas-we-serve/${city.slug}` },
           { label: service.name },
         ]}
@@ -67,37 +72,37 @@ export default function AreaServicePageContent({ city, service }: Props) {
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              {city.region} · {city.county} County
+              {copy.introEyebrow || `${city.region} · ${city.county} County`}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              {service.name} for {city.name} residents
+              {copy.introTitle || `${service.name} for ${city.name} residents`}
             </h2>
             <span
               aria-hidden
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              {copy.lead}
+              {copy.introLead || intro.lead}
             </p>
             <p className="mt-4 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              {copy.support}
+              {copy.introSupport || intro.support}
             </p>
             <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg">
-              {copy.local}
+              {copy.introLocal || intro.local}
             </p>
             <p className="mt-6 text-sm">
               <Link
                 href={`/${service.slug}`}
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
-                Full {service.name.toLowerCase()} page
+                {copy.fullServiceLink || `Full ${service.name.toLowerCase()} page`}
               </Link>
               {" · "}
               <Link
                 href={`/areas-we-serve/${city.slug}`}
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
-                All care for {city.name}
+                {copy.allCareLink || `All care for ${city.name}`}
               </Link>
             </p>
           </motion.div>
@@ -130,9 +135,9 @@ export default function AreaServicePageContent({ city, service }: Props) {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-5 md:grid-cols-3">
             {[
-              { title: "Who this is for", body: extra.whoItsFor },
-              { title: "How a visit runs", body: extra.visitFlow },
-              { title: "When this is the wrong first step", body: extra.notFor },
+              { title: copy.whoTitle, body: copy.whoBody || extra.whoItsFor },
+              { title: copy.visitRunTitle, body: copy.visitRunBody || extra.visitFlow },
+              { title: copy.notForTitle, body: copy.notForBody || extra.notFor },
             ].map((item) => (
               <motion.div
                 key={item.title}
@@ -168,11 +173,11 @@ export default function AreaServicePageContent({ city, service }: Props) {
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              What we deliver
+              {copy.deliverEyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-              {service.name}{" "}
-              <span className="text-[#F97316]">built around your case</span>
+              {copy.deliverHeadingLead || service.name}{" "}
+              <span className="text-[#F97316]">{copy.deliverHeadingAccent}</span>
             </h2>
           </motion.div>
 
@@ -187,7 +192,7 @@ export default function AreaServicePageContent({ city, service }: Props) {
                 className="rounded-2xl border-t-4 border-[#F97316] bg-[#1E3A5F]/60 p-6 ring-1 ring-white/10"
               >
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-orange-300">
-                  Benefit {String(idx + 1).padStart(2, "0")}
+                  {copy.benefitLabel} {String(idx + 1).padStart(2, "0")}
                 </p>
                 <p className="mt-3 text-base leading-relaxed text-white/90">
                   {b}
@@ -207,10 +212,10 @@ export default function AreaServicePageContent({ city, service }: Props) {
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              {city.name} patient questions
+              {copy.faqEyebrow || `${city.name} patient questions`}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Frequently asked
+              {copy.faqTitle}
             </h2>
           </motion.div>
 
@@ -236,10 +241,10 @@ export default function AreaServicePageContent({ city, service }: Props) {
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Other services in {city.name}
+              {copy.relatedEyebrow || `Other services in ${city.name}`}
             </p>
             <h2 className="mt-3 font-heading text-2xl font-bold tracking-tight text-[#0F172A] sm:text-3xl">
-              Browse related care
+              {copy.relatedTitle}
             </h2>
           </div>
 
@@ -266,7 +271,7 @@ export default function AreaServicePageContent({ city, service }: Props) {
               href={`/areas-we-serve/${city.slug}`}
               className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#F97316] hover:text-orange-700"
             >
-              See all services in {city.name}
+              {copy.allServicesLink || `See all services in ${city.name}`}
               <span aria-hidden>→</span>
             </Link>
           </div>
@@ -276,9 +281,12 @@ export default function AreaServicePageContent({ city, service }: Props) {
       <section className="bg-white py-12 sm:py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
           <CtaCard
-            eyebrow={`Serving ${city.name}, MN`}
-            title={`Book your ${service.name.toLowerCase()} visit`}
-            body={`Call ${siteConfig.phone} or request an appointment online. Most ${city.name} patients are seen within the same week.`}
+            eyebrow={copy.ctaEyebrow || `Serving ${city.name}, MN`}
+            title={copy.ctaTitle || `Book your ${service.name.toLowerCase()} visit`}
+            body={
+              copy.ctaBody ||
+              `Call ${siteConfig.phone} or request an appointment online. Most ${city.name} patients are seen within the same week.`
+            }
           />
         </div>
       </section>
