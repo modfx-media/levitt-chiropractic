@@ -23,6 +23,7 @@ import { cmsPlugins } from "./src/cms/plugins";
 import { siteConfig } from "./lib/siteConfig";
 
 import { scheduledPublishPlugin } from "./scheduled-publish";
+import * as designedContentMigration from "./src/migrations/20261119_120000_designed_content";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
@@ -117,6 +118,13 @@ export default buildConfig({
     pool: { connectionString: databaseUrl },
     forceUseVercelPostgres: !isLocalhost,
     push: !disablePush,
+    prodMigrations: [
+      {
+        name: designedContentMigration.name,
+        up: designedContentMigration.up,
+        down: designedContentMigration.down,
+      },
+    ],
   }),
   plugins: [scheduledPublishPlugin(), ...cmsPlugins()],
   cors: allowedOrigins(),

@@ -1,7 +1,11 @@
 /**
- * Draft-first CMS import. Does not publish.
+ * Import site content. Dry-run unless --apply. --publish marks written docs published.
+ * Designed content from data/designed-content.json never overwrites a non-empty SEO field.
  *
- *   CMS_IMPORT_APPLY=1 bun --env-file=.env.local scripts/import-content.ts --apply
+ *   pnpm exec tsx scripts/export-designed-content.ts
+ *   pnpm exec tsx scripts/import-content.ts
+ *   pnpm exec tsx scripts/import-content.ts --apply
+ *   pnpm exec tsx scripts/import-content.ts --apply --publish
  */
 import fs from "fs";
 import path from "path";
@@ -20,6 +24,7 @@ import {
   cityServiceMetaDescription,
 } from "../lib/areaPageCopy";
 import type { BlogBlock } from "../lib/blog";
+import { loadDesignedFile, syncDesignedContent } from "./designed-sync.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -42,6 +47,7 @@ type Report = {
   pages: { created: number; updated: number };
   posts: { created: number; updated: number };
   globals: string[];
+  designed?: Awaited<ReturnType<typeof syncDesignedContent>>;
   errors: string[];
 };
 
@@ -320,12 +326,25 @@ async function upsertByLegacy(
   const status = publish ? "published" : "draft";
   const body = { ...data, legacyId, _status: status };
   if (existing.docs[0]) {
+    const current = existing.docs[0] as { meta?: Record<string, unknown> };
+    if (body.meta && current.meta && typeof body.meta === "object") {
+      const meta = { ...(body.meta as Record<string, unknown>) };
+      for (const [key, value] of Object.entries(current.meta)) {
+        const filled =
+          (typeof value === "string" && value.trim().length > 0) ||
+          value === true ||
+          (typeof value === "number" && Number.isFinite(value)) ||
+          (value && typeof value === "object");
+        if (filled) meta[key] = value;
+      }
+      body.meta = meta;
+    }
     await payload.update({
       collection,
       id: existing.docs[0].id,
       data: body,
       overrideAccess: true,
-      draft: true,
+      draft: !publish,
     });
     report[collection].updated += 1;
     return existing.docs[0].id;
@@ -334,31 +353,36 @@ async function upsertByLegacy(
     collection,
     data: body,
     overrideAccess: true,
-    draft: true,
+    draft: !publish,
   });
   report[collection].created += 1;
   return created.id;
 }
 
 async function main() {
-  if (publish) {
-    console.error("Refusing --publish. Import stays draft unless you review in /admin first.");
-    process.exit(1);
-  }
-
+  const designedFile = loadDesignedFile(root);
   const records = pageRecords();
   console.log(
-    `Cities ${servedCities.length} × services ${pseoServices.length} → area URLs ${servedCities.length * (1 + pseoServices.length)}`,
+    `Cities ${getServedCities().length} × services ${pseoServices.length} → area URLs ${getServedCities().length * (1 + pseoServices.length)}`,
   );
   console.log(`Images found: ${walkImages(path.join(root, "public", "images")).length}`);
   console.log(`Pages to upsert: ${records.length}`);
   console.log(`Posts: ${blogPosts.length}`);
+  console.log(
+    designedFile
+      ? `Designed pages: ${designedFile.pages.length} publish=${publish}`
+      : "Designed file: missing (run scripts/export-designed-content.ts)",
+  );
   if (!apply) {
-    console.log("Dry run. Re-run with --apply to write to Neon.");
+    console.log("Dry run. Re-run with --apply to write. Add --publish to mark docs published.");
     process.exit(0);
   }
 
   const payload = await getPayload({ config });
+  if (designedFile) {
+    report.designed = await syncDesignedContent(payload, designedFile, publish);
+    report.errors.push(...report.designed.errors);
+  }
   const imageFiles = walkImages(path.join(root, "public", "images"));
   const usedNames = new Set<string>();
   const mediaByPublicPath = new Map<string, string | number>();
@@ -387,9 +411,11 @@ async function main() {
     }
   }
 
+  const designedPaths = new Set(designedFile?.pages.map((page) => page.path) ?? []);
   let i = 0;
   for (const page of records) {
     i += 1;
+    if (designedPaths.has(page.path)) continue;
     try {
       await withRetry(
         () =>
