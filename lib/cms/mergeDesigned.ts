@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Fragment, isValidElement, type ReactNode } from "react";
 
-import { generateMeta } from "@/lib/metadata";
+import { composeSeoTitle } from "@/lib/seoTitle";
 import { mediaPublicUrl } from "./mediaUrl";
 import { absoluteURL, normalizePath } from "./url";
 
@@ -240,17 +240,71 @@ export function mergeCmsJsonLd<T extends Record<string, unknown>>(
 type MetaShape = {
   title?: string | null;
   description?: string | null;
-  image?: { url?: string } | string | null;
+  image?: { url?: string; alt?: string | null } | string | null;
   canonicalUrl?: string | null;
   noIndex?: boolean | null;
   noFollow?: boolean | null;
 };
 
+function setText(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
+function patchOpenGraph(
+  current: Metadata["openGraph"],
+  patch: Record<string, unknown>,
+): Metadata["openGraph"] {
+  if (current && typeof current === "object" && !Array.isArray(current)) {
+    return { ...current, ...patch };
+  }
+  return { type: "website", ...patch };
+}
+
+function patchTwitter(
+  current: Metadata["twitter"],
+  patch: Record<string, unknown>,
+): Metadata["twitter"] {
+  if (current && typeof current === "object") return { ...current, ...patch };
+  return { card: "summary_large_image", ...patch };
+}
+
+function patchOgImage(
+  current: Metadata["openGraph"],
+  url: string,
+  alt?: string,
+): Metadata["openGraph"] {
+  const base = current && typeof current === "object" && !Array.isArray(current) ? current : undefined;
+  const images = base && Array.isArray(base.images) ? base.images : [];
+  const first = images[0];
+  const previous =
+    first && typeof first === "object" && !(first instanceof URL) ? first : {};
+  const nextImage = { ...previous, url, ...(alt ? { alt } : {}) };
+  return patchOpenGraph(current, { images: [nextImage] });
+}
+
+function patchRobots(
+  current: Metadata["robots"],
+  noIndex: boolean,
+  noFollow: boolean,
+): Metadata["robots"] {
+  const base =
+    current && typeof current === "object" ? { ...current } : { index: true, follow: true };
+  if (noIndex) base.index = false;
+  if (noFollow) base.follow = false;
+  if (base.googleBot && typeof base.googleBot === "object") {
+    base.googleBot = {
+      ...base.googleBot,
+      ...(noIndex ? { index: false as const } : {}),
+      ...(noFollow ? { follow: false as const } : {}),
+    };
+  }
+  return base;
+}
+
 /**
- * Same head merge as production commit 04314cf.
- * A stored meta title is composed with the production suffix, images keep
- * width, height, and alt, and noIndex/noFollow false means index/follow.
- * A document with no title leaves the fallback untouched.
+ * Overlay only meta fields an editor actually set. Document title, excerpt,
+ * and cover image are not SEO fields. Unchecked robots flags leave the
+ * hardcoded robots and googleBot tags unchanged.
  */
 export function mergeCmsMetadata(
   fallback: Metadata,
@@ -259,48 +313,65 @@ export function mergeCmsMetadata(
 ): Metadata {
   if (!doc) return fallback;
   const meta = (doc.meta ?? {}) as MetaShape;
-  const title =
-    (typeof meta.title === "string" && meta.title.trim()) ||
-    (typeof doc.title === "string" && doc.title.trim()) ||
-    "";
-  if (!title) return fallback;
-
-  const description =
-    (typeof meta.description === "string" && meta.description.trim()) ||
-    (typeof doc.excerpt === "string" && doc.excerpt.trim()) ||
-    (typeof fallback.description === "string" ? fallback.description : "");
-  const metaImage =
+  const title = setText(meta.title);
+  const description = setText(meta.description);
+  const canonical = setText(meta.canonicalUrl);
+  const imageSource =
     typeof meta.image === "string"
       ? meta.image
-      : meta.image && typeof meta.image === "object" && meta.image.url
-        ? meta.image.url
+      : meta.image && typeof meta.image === "object"
+        ? meta.image
         : undefined;
-  const cover = mediaPublicUrl(doc.coverImage);
-  const image =
-    (metaImage && !metaImage.startsWith("/media/") ? metaImage : undefined) ||
-    cover?.url;
-  const canonical = (typeof meta.canonicalUrl === "string" && meta.canonicalUrl.trim()) ||
-    absoluteURL(normalizePath(path));
-  const noindex = meta.noIndex === true;
-  const follow = meta.noFollow !== true;
+  const imageUrl = mediaPublicUrl(
+    typeof imageSource === "string" ? { url: imageSource } : imageSource,
+  )?.url;
+  const imageAlt =
+    imageSource && typeof imageSource === "object" ? setText(imageSource.alt) : undefined;
+  const noIndex = meta.noIndex === true;
+  const noFollow = meta.noFollow === true;
+  if (!title && !description && !canonical && !imageUrl && !noIndex && !noFollow) {
+    return fallback;
+  }
 
-  const generated = generateMeta({
-    title,
-    description,
-    slug: path === "/" ? "" : path.replace(/^\//, ""),
-    image,
-    noindex,
-  });
+  const slug = path === "/" ? "" : path.replace(/^\//, "");
+  let next: Metadata = { ...fallback };
 
-  return {
-    ...fallback,
-    ...generated,
-    alternates: { canonical },
-    robots: {
-      index: !noindex,
-      follow,
-    },
-  };
+  if (title) {
+    const fullTitle = composeSeoTitle(title, slug);
+    next = {
+      ...next,
+      title: { absolute: fullTitle },
+      openGraph: patchOpenGraph(next.openGraph, { title: fullTitle }),
+      twitter: patchTwitter(next.twitter, { title: fullTitle }),
+    };
+  }
+  if (description) {
+    next = {
+      ...next,
+      description,
+      openGraph: patchOpenGraph(next.openGraph, { description }),
+      twitter: patchTwitter(next.twitter, { description }),
+    };
+  }
+  if (canonical) {
+    const href = canonical.startsWith("/") ? absoluteURL(normalizePath(canonical)) : canonical;
+    next = {
+      ...next,
+      alternates: { ...next.alternates, canonical: href },
+      openGraph: patchOpenGraph(next.openGraph, { url: href }),
+    };
+  }
+  if (imageUrl) {
+    next = {
+      ...next,
+      openGraph: patchOgImage(next.openGraph, imageUrl, imageAlt),
+      twitter: patchTwitter(next.twitter, { images: [imageUrl] }),
+    };
+  }
+  if (noIndex || noFollow) {
+    next = { ...next, robots: patchRobots(next.robots, noIndex, noFollow) };
+  }
+  return next;
 }
 
 /** Page-level JSON-LD from CMS SEO/schema fields. Null when those fields are empty. */

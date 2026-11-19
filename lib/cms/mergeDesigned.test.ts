@@ -7,6 +7,7 @@ import { createElement, Fragment } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import { blogHeadMetadata, blogPostingFromPost, blogSchemaPost } from "./blogHead";
+import { pathsToRevalidate } from "../../src/cms/hooks";
 import { generateMeta } from "../metadata";
 import {
   childrenAreDesigned,
@@ -125,7 +126,7 @@ test("published page with an empty layout still renders the designed component",
   const image = ogImage(meta);
   assert.equal(image?.width, 1200);
   assert.equal(image?.height, 630);
-  assert.equal(image?.alt, "About Our Practice | Levitt Chiropractic");
+  assert.equal(image?.alt, "About Our Practice in Saint Louis Park, MN");
 });
 
 test("draft and published SEO-only edits keep the designed UI and change only the edited tags", () => {
@@ -179,24 +180,22 @@ test("draft and published SEO-only edits keep the designed UI and change only th
   assert.deepEqual(publishedMeta.title, ABOUT_FALLBACK.title);
   assert.equal(ogTitle(publishedMeta), ogTitle(ABOUT_FALLBACK));
   assert.equal(ogDescription(publishedMeta), "Published meta description");
-  assert.deepEqual(publishedMeta.robots, { index: true, follow: true });
+  assert.deepEqual(publishedMeta.robots, ABOUT_FALLBACK.robots);
+  assert.deepEqual(ogImage(publishedMeta), ogImage(ABOUT_FALLBACK));
 });
 
-test("blank meta title uses the document title and noIndex false stays indexable", () => {
+test("publishing a doc with empty meta leaves the hardcoded head unchanged", () => {
   const doc = aboutDoc({
     status: "published",
     meta: { title: "  ", description: "", noIndex: false, noFollow: false },
     layout: [],
   });
-  const meta = mergeCmsMetadata(ABOUT_FALLBACK, doc!.doc, "/about");
-  assert.deepEqual(meta.title, ABOUT_FALLBACK.title);
-  assert.deepEqual(meta.robots, { index: true, follow: true });
+  doc!.doc.excerpt = "Imported excerpt that must not become the meta description.";
+  doc!.doc.title = "Chiropractic Services in Saint Louis Park, MN";
+  assert.equal(mergeCmsMetadata(ABOUT_FALLBACK, doc!.doc, "/"), ABOUT_FALLBACK);
+  assert.equal(mergeCmsMetadata(ABOUT_FALLBACK, doc!.doc, "/services"), ABOUT_FALLBACK);
   assert.equal(mergeCmsMetadata(ABOUT_FALLBACK, null, "/about"), ABOUT_FALLBACK);
-  assert.equal(
-    mergeCmsMetadata(ABOUT_FALLBACK, { meta: {}, title: "  " }, "/about"),
-    ABOUT_FALLBACK,
-  );
-  assert.equal(cmsOverlayJsonLd("/about", doc!.doc), null);
+  assert.equal(ogImage(mergeCmsMetadata(ABOUT_FALLBACK, doc!.doc, "/services"))?.alt, ogImage(ABOUT_FALLBACK)?.alt);
 });
 
 test("robots, canonical, and OG image override only the fields that are set", () => {
@@ -213,16 +212,28 @@ test("robots, canonical, and OG image override only the fields that are set", ()
     meta.alternates && "canonical" in meta.alternates
       ? meta.alternates.canonical
       : undefined,
-    "/about",
+    "https://www.levittchiropracticcenter.com/about",
   );
   assert.deepEqual(meta.title, ABOUT_FALLBACK.title);
   assert.equal(meta.description, ABOUT_FALLBACK.description);
-  assert.deepEqual(meta.robots, { index: false, follow: true });
+  const robots = meta.robots;
+  assert.ok(robots && typeof robots === "object");
+  if (robots && typeof robots === "object") {
+    assert.equal(robots.index, false);
+    assert.equal(robots.follow, true);
+    assert.ok(robots.googleBot && typeof robots.googleBot === "object");
+    if (robots.googleBot && typeof robots.googleBot === "object") {
+      assert.equal(robots.googleBot.index, false);
+      assert.equal(robots.googleBot["max-image-preview"], "large");
+      assert.equal(robots.googleBot["max-snippet"], -1);
+      assert.equal(robots.googleBot["max-video-preview"], -1);
+    }
+  }
   assert.deepEqual(ogImage(meta), {
     url: "https://cdn.example.com/about-og.jpg",
     width: 1200,
     height: 630,
-    alt: "About Our Practice in Saint Louis Park, MN",
+    alt: "Clinic",
   });
   const blocked = mergeCmsMetadata(
     ABOUT_FALLBACK,
@@ -405,7 +416,9 @@ test("CMS-only post head matches production and is not Post Not Found", () => {
     head.description,
     "How a holistic chiropractor in Saint Louis Park looks past the sore spot.",
   );
-  assert.deepEqual(head.robots, { index: true, follow: true });
+  assert.equal(head.robots && typeof head.robots === "object" && head.robots.index, true);
+  assert.equal(head.robots && typeof head.robots === "object" && head.robots.follow, true);
+  assert.ok(head.robots && typeof head.robots === "object" && head.robots.googleBot);
   assert.notDeepEqual(head.robots, missing.robots);
   assert.deepEqual(ogImage(head), {
     url: "https://cdn.example.com/holistic.jpg",
@@ -477,13 +490,12 @@ test("local post head keeps the production suffix, image shape, and CMS BlogPost
     : "";
   assert.match(title, / \| Levitt$/);
   assert.equal(head.description, "CMS description of applied kinesiology.");
-  assert.deepEqual(head.robots, { index: true, follow: true });
-  assert.equal("googleBot" in (head.robots as object), false);
+  assert.ok(head.robots && typeof head.robots === "object" && head.robots.googleBot);
   assert.deepEqual(ogImage(head), {
-    url: "https://cdn.example.com/kinesiology.jpg",
+    url: "/images/local-cover.jpg",
     width: 1200,
     height: 630,
-    alt: "Applied kinesiology and chiropractic care in Minneapolis",
+    alt: "Applied kinesiology at the Saint Louis Park office",
   });
   const twitter = head.twitter;
   assert.ok(twitter && typeof twitter === "object");
@@ -496,4 +508,32 @@ test("local post head keeps the production suffix, image shape, and CMS BlogPost
   assert.equal(published.description, "CMS description of applied kinesiology.");
   assert.notEqual(published.headline, visible.headline);
   assert.notEqual(published.description, visible.description);
+});
+
+test("unpublishing or deleting a page revalidates the previously published path", () => {
+  assert.deepEqual(
+    pathsToRevalidate(
+      { path: "/about", _status: "draft" },
+      { path: "/about", _status: "published" },
+    ),
+    ["/about"],
+  );
+  assert.deepEqual(
+    pathsToRevalidate(
+      { path: "/services", _status: "published" },
+      { path: "/about", _status: "published" },
+    ),
+    ["/services", "/about"],
+  );
+  assert.deepEqual(
+    pathsToRevalidate(
+      { path: "/blog/post", _status: "published" },
+      { path: "/blog/post", _status: "published" },
+    ),
+    ["/blog/post"],
+  );
+  assert.deepEqual(
+    pathsToRevalidate({ path: "/about", _status: "draft" }, { path: "/about", _status: "draft" }),
+    [],
+  );
 });
