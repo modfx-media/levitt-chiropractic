@@ -416,9 +416,7 @@ test("CMS-only post head matches production and is not Post Not Found", () => {
     head.description,
     "How a holistic chiropractor in Saint Louis Park looks past the sore spot.",
   );
-  assert.equal(head.robots && typeof head.robots === "object" && head.robots.index, true);
-  assert.equal(head.robots && typeof head.robots === "object" && head.robots.follow, true);
-  assert.ok(head.robots && typeof head.robots === "object" && head.robots.googleBot);
+  assert.deepEqual(head.robots, { index: true, follow: true });
   assert.notDeepEqual(head.robots, missing.robots);
   assert.deepEqual(ogImage(head), {
     url: "https://cdn.example.com/holistic.jpg",
@@ -490,12 +488,12 @@ test("local post head keeps the production suffix, image shape, and CMS BlogPost
     : "";
   assert.match(title, / \| Levitt$/);
   assert.equal(head.description, "CMS description of applied kinesiology.");
-  assert.ok(head.robots && typeof head.robots === "object" && head.robots.googleBot);
+  assert.deepEqual(head.robots, { index: true, follow: true });
   assert.deepEqual(ogImage(head), {
-    url: "/images/local-cover.jpg",
+    url: "https://cdn.example.com/kinesiology.jpg",
     width: 1200,
     height: 630,
-    alt: "Applied kinesiology at the Saint Louis Park office",
+    alt: "Applied kinesiology and chiropractic care in Minneapolis",
   });
   const twitter = head.twitter;
   assert.ok(twitter && typeof twitter === "object");
@@ -508,6 +506,57 @@ test("local post head keeps the production suffix, image shape, and CMS BlogPost
   assert.equal(published.description, "CMS description of applied kinesiology.");
   assert.notEqual(published.headline, visible.headline);
   assert.notEqual(published.description, visible.description);
+});
+
+test("CMS-only blog head matches main 04314cf, not the media alt or googleBot tag", () => {
+  const slug = "headache-treatment-saint-louis-park";
+  const doc = {
+    title: "When Headaches Signal Need for Chiropractic Care",
+    slug,
+    path: `/blog/${slug}`,
+    excerpt: "Imported excerpt",
+    coverImage: { url: "https://cdn.example.com/headache.jpg", alt: "headache chiropractor" },
+    meta: {
+      description: "Headache care at the Saint Louis Park office.",
+      image: { url: "https://cdn.example.com/headache.jpg", alt: "headache chiropractor" },
+      noIndex: false,
+      noFollow: false,
+    },
+  };
+  const head = blogHeadMetadata({ slug, local: null, doc });
+  assert.deepEqual(head.robots, { index: true, follow: true });
+  assert.equal(ogImage(head)?.alt, "When Headaches Signal Need for Chiropractic Care");
+  assert.notEqual(ogImage(head)?.alt, "headache chiropractor");
+  assert.equal(ogImage(head)?.url, "https://cdn.example.com/headache.jpg");
+  assert.equal(ogImage(head)?.width, 1200);
+  assert.equal(ogImage(head)?.height, 630);
+  assert.equal(head.description, "Headache care at the Saint Louis Park office.");
+
+  const imaging = blogHeadMetadata({
+    slug: "a-minneapolis-chiropractor-explains-imaging",
+    local: null,
+    doc: {
+      title: "Spine Pain or Muscle Strain? Signs and Next Steps",
+      slug: "a-minneapolis-chiropractor-explains-imaging",
+      coverImage: { url: "https://cdn.example.com/imaging.jpg", alt: "chiropractor" },
+      meta: { noIndex: false, noFollow: false },
+    },
+  });
+  assert.equal(ogImage(imaging)?.alt, "Spine Pain or Muscle Strain? Signs and Next Steps");
+  assert.deepEqual(imaging.robots, { index: true, follow: true });
+
+  const localOnly = blogHeadMetadata({
+    slug: "local-only-note",
+    local: {
+      slug: "local-only-note",
+      title: "A local article",
+      description: "Written in the site repo.",
+      coverImage: "/images/local-cover.jpg",
+    },
+    doc: null,
+  });
+  assert.ok(localOnly.robots && typeof localOnly.robots === "object" && localOnly.robots.googleBot);
+  assert.equal(ogImage(localOnly)?.alt, "A local article");
 });
 
 test("unpublishing or deleting a page revalidates the previously published path", () => {
