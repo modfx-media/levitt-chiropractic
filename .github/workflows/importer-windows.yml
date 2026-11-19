@@ -1,0 +1,54 @@
+name: importer-windows
+
+on:
+  pull_request:
+  push:
+    branches:
+      - cms/full-content-editable
+
+jobs:
+  dry-run:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Dry run must not exit 0 without a database diff
+        shell: bash
+        env:
+          PAYLOAD_SECRET: windows-ci-only
+          PAYLOAD_DISABLE_PUSH: "1"
+          CMS_IMPORT_TIMEOUT_MS: "45000"
+        run: |
+          set -uo pipefail
+          fail=0
+          for i in 1 2 3 4 5 6 7; do
+            set +e
+            npx tsx scripts/import-content.ts > "out-$i.txt" 2> "err-$i.txt"
+            code=$?
+            set -e
+            echo "run $i exit $code"
+            if [ "$code" -eq 0 ]; then
+              if ! grep -q '"legacyPages"' "out-$i.txt"; then
+                echo "run $i exited 0 without a database diff"
+                echo '--- stdout ---'
+                cat "out-$i.txt"
+                echo '--- stderr ---'
+                cat "err-$i.txt"
+                fail=1
+              fi
+            else
+              if ! grep -qiE 'error|timed out|ECONNREFUSED|database|payload|connect|Postgres' "out-$i.txt" "err-$i.txt"; then
+                echo "run $i failed without an error"
+                echo '--- stdout ---'
+                cat "out-$i.txt"
+                echo '--- stderr ---'
+                cat "err-$i.txt"
+                fail=1
+              fi
+            fi
+          done
+          exit "$fail"

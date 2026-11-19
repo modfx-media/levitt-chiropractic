@@ -2,6 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Payload } from "payload";
 
+import { contentEqual } from "../lib/designed/contentEqual";
+
 export type GlobalChange = { fill: string[]; keep: string[] };
 
 export type DesignedSyncReport = {
@@ -96,10 +98,6 @@ function collectFaqs(node: unknown, found: { q: string; a: string }[][]): void {
   for (const value of Object.values(node)) collectFaqs(value, found);
 }
 
-function sameJson(left: unknown, right: unknown): boolean {
-  return JSON.stringify(left ?? null) === JSON.stringify(right ?? null);
-}
-
 function planGlobalFields(
   slug: string,
   current: Record<string, unknown>,
@@ -180,7 +178,7 @@ export async function syncDesignedContent(
     try {
       const current = byPath.get(page.path) ?? byLegacy.get(page.legacyId);
       if (current) {
-        const designedChanged = !sameJson(current.designed, page.designed);
+        const designedChanged = !contentEqual(current.designed, page.designed);
         const statusChanged = publish && current._status !== "published";
         if (!designedChanged && !statusChanged) {
           report.pages.skipped += 1;
@@ -291,10 +289,14 @@ export async function syncDesignedContent(
         neighbors: textArray(city.neighbors, "name"),
       };
       if (found.docs[0]) {
-        if (apply) {
-          await payload.update({ collection: "cities", id: found.docs[0].id, overrideAccess: true, data });
+        if (contentEqual(found.docs[0], data)) {
+          report.cities.skipped += 1;
+        } else {
+          if (apply) {
+            await payload.update({ collection: "cities", id: found.docs[0].id, overrideAccess: true, data });
+          }
+          report.cities.updated += 1;
         }
-        report.cities.updated += 1;
       } else {
         if (apply) await payload.create({ collection: "cities", overrideAccess: true, data });
         report.cities.created += 1;
@@ -326,15 +328,19 @@ export async function syncDesignedContent(
         faqs: faqArray(service.faqs),
       };
       if (found.docs[0]) {
-        if (apply) {
-          await payload.update({
-            collection: "practice-services",
-            id: found.docs[0].id,
-            overrideAccess: true,
-            data,
-          });
+        if (contentEqual(found.docs[0], data)) {
+          report.services.skipped += 1;
+        } else {
+          if (apply) {
+            await payload.update({
+              collection: "practice-services",
+              id: found.docs[0].id,
+              overrideAccess: true,
+              data,
+            });
+          }
+          report.services.updated += 1;
         }
-        report.services.updated += 1;
       } else {
         if (apply) {
           await payload.create({ collection: "practice-services", overrideAccess: true, data });
