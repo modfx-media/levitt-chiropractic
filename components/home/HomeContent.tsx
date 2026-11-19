@@ -16,169 +16,48 @@ import { LocalPracticeLinks } from "@/components/seo/LocalPracticeLinks";
 import { faqPageJsonLd } from "@/lib/jsonLd";
 import type { GoogleReview, GoogleReviewsMeta } from "@/lib/reviews";
 import { siteConfig } from "@/lib/siteConfig";
+import { homeDefaults as defaults } from "@/lib/designed/defaults/homeDefaults";
+import { mergeContent } from "@/lib/designed/merge";
 
-const HERO_IMAGES = [
-  "/images/adjustment-1.jpg",
-  "/images/pain-relief.jpg",
-  "/images/therapeutic-exercise.jpg",
-  "/images/chronic-lower-back-pain.jpg",
-  "/images/3d-spine-simulator.jpg",
-];
-
-const HERO_IMAGE_ALTS = [
-  "Dr. Alan Levitt performing a chiropractic adjustment in Saint Louis Park, MN",
-  "Patient receiving care for back and neck pain at Levitt Chiropractic Center",
-  "Therapeutic exercise and rehab at Levitt Chiropractic in Saint Louis Park",
-  "Chiropractic treatment for chronic lower back pain",
-  "Spine education and assessment at Levitt Chiropractic Center",
-];
-
-const homeFaqs = [
-  {
-    q: "Is Levitt Chiropractic accepting new patients in Saint Louis Park?",
-    a: "Yes. Dr. Alan Levitt is accepting new patients at 6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416. Minnesota does not require a physician referral. Request a visit online or call 952-920-7535 — most people are seen the same week.",
-  },
-  {
-    q: "Where is the clinic, and how do I get there?",
-    a: "6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416. Call 952-920-7535. Patients also come from Minneapolis, Edina, Hopkins, Minnetonka, and Golden Valley.",
-  },
-  {
-    q: "What happens on a first visit?",
-    a: "You tell the real story — commute, desk, weekend miles, when it started. Then a hands-on exam. You leave knowing the next step. Imaging only when it would change care. No generic protocol.",
-  },
-  {
-    q: "Do you treat back pain without drugs or surgery?",
-    a: "Yes. Adjustments, cold laser, targeted ice, therapeutic exercise, and custom orthotics when the exam says they would change the load. The goal is the cause, not a pill that lasts until Thursday.",
-  },
-  {
-    q: "What is a red flag in chiropractic?",
-    a: "A red flag is a sign we should not just adjust: unexplained weight loss, night pain, fever, bowel or bladder changes, progressive weakness, or a significant recent trauma. Those need medical screening. A stiff neck after a week of commuting is a different story.",
-  },
-  {
-    q: "Can a chiropractor help heel spurs?",
-    a: "Often, yes — by calming the tissue around the spur and fixing the gait that keeps irritating it. Custom orthotics are sometimes part of that. We cannot sand a spur off the bone. If the pain is new, hot, and you cannot bear weight, we start with an exam, not a promise.",
-  },
-  {
-    q: "Can a chiropractor fix a wrist?",
-    a: "Many wrists, yes: joint restriction, repetitive strain, some carpal-tunnel patterns. Fractures, major ligament tears, and advanced arthritis need an orthopedic look first. We will say so if the exam is not a chiropractic case.",
-  },
-];
-
-const quickLinks = [
-  {
-    title: "Pain Relief",
-    href: "/common-chiropractic-conditions",
-    image: "/images/pain-relief.jpg",
-  },
-  {
-    title: "Adjustments & Manipulation",
-    href: "/adjustments-and-manipulation",
-    image: "/images/adjustment-1.jpg",
-  },
-  {
-    title: "Therapeutic Exercise",
-    href: "/therapeutic-exercise",
-    image: "/images/therapeutic-exercise.jpg",
-  },
-  {
-    title: "Saint Louis Park office",
-    href: "/areas-we-serve/saint-louis-park",
-    image: "/images/og-default.jpg",
-  },
-  {
-    title: "Contact Us",
-    href: "/contact",
-    image: "/images/contact-us.jpg",
-  },
-];
-
-const techniques = [
-  "Applied Kinesiology",
-  "Koren-specific technique",
-  "Zone therapy",
-  "Talsky tonal therapy",
-  "Torque release technique",
-  "Polarity and muscle testing",
-];
-
-const valueProps = [
-  {
-    title: "Holistic Approach",
-    description:
-      "We address the underlying cause, combining chemical, nutritional, and structural care.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M12 21s-7-4.35-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.65-7 10-7 10z" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "39 Years Experience",
-    description:
-      "Decades of training as a chiropractor for cases simple to complex.",
-    icon: (
+function ValueIcon({ name }: { name: string }) {
+  if (name === "experience") {
+    return (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <circle cx="12" cy="12" r="9" />
         <path d="M12 7v5l3 3" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
-    ),
-  },
-  {
-    title: "Personalized Plans",
-    description:
-      "No generic protocols. Every patient receives a treatment plan built around their actual week — including the commute.",
-    icon: (
+    );
+  }
+  if (name === "plans") {
+    return (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M4 4h16v16H4z" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M8 10h8M8 14h5" strokeLinecap="round" />
       </svg>
-    ),
-  },
-  {
-    title: "Nervous System Focus",
-    description:
-      "Specialized techniques to identify and resolve dysfunction in the nervous system.",
-    icon: (
+    );
+  }
+  if (name === "nervousSystem") {
+    return (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M12 2v20M5 6c2 0 3 2 7 2s5-2 7-2M5 12c2 0 3 2 7 2s5-2 7-2M5 18c2 0 3 2 7 2s5-2 7-2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
-    ),
-  },
-];
-
-const steps = [
-  {
-    n: "01",
-    title: "Consult",
-    body:
-      "We listen first. Dr. Levitt evaluates your history, posture, and nervous system to map the real cause.",
-  },
-  {
-    n: "02",
-    title: "Customize",
-    body:
-      "Your plan blends chiropractic, nutrition, and structural care calibrated to your body and lifestyle.",
-  },
-  {
-    n: "03",
-    title: "Care",
-    body:
-      "Gentle adjustments and modern modalities: cold laser, cryotherapy, therapeutic exercise.",
-  },
-  {
-    n: "04",
-    title: "Thrive",
-    body:
-      "Ongoing wellness so you stay moving, feeling, and performing at your best for years to come.",
-  },
-];
+    );
+  }
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="M12 21s-7-4.35-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.65-7 10-7 10z" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 type HomeContentProps = {
   reviews: GoogleReview[];
   meta: GoogleReviewsMeta;
+  content?: unknown;
 };
 
-export default function HomeContent({ reviews, meta }: HomeContentProps) {
+export default function HomeContent({ reviews, meta, content }: HomeContentProps) {
+  const copy = mergeContent(defaults, content);
   const welcomeRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: welcomeProgress } = useScroll({
     target: welcomeRef,
@@ -189,36 +68,27 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
 
   return (
     <>
-      <JsonLd id="ld-home-faq" data={faqPageJsonLd({ faqs: homeFaqs })} />
+      <JsonLd id="ld-home-faq" data={faqPageJsonLd({ faqs: copy.homeFaqs.items })} />
 
       {/* SECTION 1 HERO */}
       <HeroSection
-        eyebrow="Saint Louis Park, MN"
-        title="Chiropractor in"
-        titleAccent="Saint Louis Park"
-        subtitle="Your spine health specialists. Drug-free, personalized care from Dr. Alan Levitt — adjustments, cold laser, cryotherapy, and custom orthotics."
-        ctaText="NEW PATIENT APPOINTMENT"
-        ctaHref="/contact/new-patient-appointment"
-        secondaryCtaText="Meet Dr. Levitt"
-        secondaryCtaHref="/meet-the-doctor"
-        backgroundImages={HERO_IMAGES}
-        backgroundImageAlts={HERO_IMAGE_ALTS}
+        eyebrow={copy.homeHero.eyebrow}
+        title={copy.homeHero.title}
+        titleAccent={copy.homeHero.titleAccent}
+        subtitle={copy.homeHero.subtitle}
+        ctaText={copy.homeHero.ctaText}
+        ctaHref={copy.homeHero.ctaHref}
+        secondaryCtaText={copy.homeHero.secondaryCtaText}
+        secondaryCtaHref={copy.homeHero.secondaryCtaHref}
+        backgroundImages={copy.homeHero.backgroundImages}
+        backgroundImageAlts={copy.homeHero.backgroundImageAlts}
         googleRating={meta.rating}
         googleReviewCount={meta.reviewCount}
         reviewsUrl={meta.reviewsUrl}
       />
 
       {/* SECTION 2 TICKER */}
-      <ScrollTicker
-        items={[
-          "✓ Personalized Chiropractic Care",
-          "✓ Accepting New Patients",
-          "✓ Serving Saint Louis Park Since 1999",
-          "✓ Cold Laser Therapy",
-          "✓ Functional Medicine",
-          "✓ 39 Years Experience",
-        ]}
-      />
+      <ScrollTicker items={copy.homeTicker.items} />
 
       {/* SECTION 3 STATS STRIP */}
       <section className="relative overflow-hidden bg-dark py-10 text-white sm:py-16">
@@ -231,11 +101,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
           className="pointer-events-none absolute -top-20 left-1/2 h-72 w-[80%] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl"
         />
         <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-6 px-5 sm:gap-8 sm:px-6 sm:grid-cols-4">
-          {[
-            { value: 39, suffix: "", label: "Years of Experience" },
-            { value: 1999, prefix: "", suffix: "", grouped: false, label: "Serving Since" },
-            { value: 6, suffix: "+", label: "Specialty Techniques" },
-          ].map((s, i) => (
+          {copy.homeStats.items.map((s, i) => (
             <motion.div
               key={s.label}
               initial={{ opacity: 0, y: 20 }}
@@ -275,7 +141,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                 <StatCounter to={meta.reviewCount} duration={1.6} />
               </p>
               <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
-                Google reviews
+                {copy.homeStats.reviewsLabel}
               </p>
             </a>
           </motion.div>
@@ -301,51 +167,27 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
           >
             <p className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
               <span className="h-px w-8 bg-primary" />
-              Welcome
+              {copy.homeWelcome.eyebrow}
             </p>
             <h2 className="mt-4 font-heading text-4xl font-bold leading-[1.05] tracking-tight text-dark sm:text-5xl lg:text-6xl">
-              Compassionate care.{" "}
-              <span className="text-primary">Whole-body</span> results.
+              {copy.homeWelcome.headingBefore}
+              <span className="text-primary">{copy.homeWelcome.headingAccent}</span>
+              {copy.homeWelcome.headingAfter}
             </h2>
 
             <div className="mt-8 space-y-5 text-base leading-relaxed text-slate-700 sm:text-lg">
-              <p>
-                At Levitt Chiropractic Center, we believe effective care starts
-                with understanding the whole person, not just the symptoms. Led
-                by Dr. Alan Levitt, who has been practicing chiropractic care
-                since 1987, our clinic provides personalized, drug-free
-                treatment designed to improve mobility, relieve discomfort, and
-                support long-term wellness.
-              </p>
-              <p>
-                Whether you&apos;re experiencing chronic neck or back pain,
-                recovering from a strain, or dealing with everyday stiffness
-                and discomfort, our approach focuses on identifying the
-                underlying factors contributing to your condition rather than
-                simply addressing the symptoms.
-              </p>
-              <p>
-                We combine chiropractic adjustments with complementary
-                therapies, including cold laser therapy, targeted exercises, and
-                custom orthotics when appropriate. Every treatment plan is
-                tailored to your individual needs, with an emphasis on restoring
-                function and helping you feel your best.
-              </p>
-              <p>
-                Our whole-body philosophy considers how your posture, movement,
-                lifestyle, and overall health influence your well-being. We take
-                the time to listen, evaluate, and develop a thoughtful care plan
-                that supports your health and quality of life.
-              </p>
+              {copy.homeWelcome.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
 
             {/* Techniques chips */}
             <div className="mt-8">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                Specialty techniques
+                {copy.homeWelcome.techniquesLabel}
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {techniques.map((t, i) => (
+                {copy.homeWelcome.techniques.map((t, i) => (
                   <motion.span
                     key={t}
                     initial={{ opacity: 0, y: 10 }}
@@ -362,15 +204,15 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
             </div>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Button href="/contact" variant="primary" size="lg">
-                Contact Us
+              <Button href={copy.homeWelcome.primaryCtaHref} variant="primary" size="lg">
+                {copy.homeWelcome.primaryCtaLabel}
               </Button>
               <Button
-                href="/meet-the-doctor"
+                href={copy.homeWelcome.secondaryCtaHref}
                 variant="outline"
                 size="lg"
               >
-                Meet Dr. Levitt
+                {copy.homeWelcome.secondaryCtaLabel}
               </Button>
             </div>
           </motion.div>
@@ -388,8 +230,8 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
               className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] shadow-2xl shadow-black/20"
             >
               <Image
-                src="/images/dr-leviit.png"
-                alt="Dr. Alan G. Levitt, DC"
+                src={copy.homeWelcome.imageSrc}
+                alt={copy.homeWelcome.imageAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover"
@@ -411,9 +253,9 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
               }}
               className="absolute -left-6 top-12 hidden rounded-2xl bg-white p-5 shadow-2xl shadow-black/15 ring-1 ring-slate-200/50 sm:block"
             >
-              <p className="font-heading text-3xl font-bold text-dark">39</p>
+              <p className="font-heading text-3xl font-bold text-dark">{copy.homeWelcome.yearsValue}</p>
               <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-                Years of care
+                {copy.homeWelcome.yearsLabel}
               </p>
             </motion.div>
 
@@ -437,7 +279,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                   {meta.rating.toFixed(1)}
                 </p>
                 <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/90">
-                  {meta.reviewCount} Google reviews
+                  {meta.reviewCount} {copy.homeWelcome.reviewsBadgeLabel}
                 </p>
               </a>
             </motion.div>
@@ -471,16 +313,16 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
         <div className="relative mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-              Why Levitt Chiropractic
+              {copy.homeWhy.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-dark sm:text-5xl">
-              A practice built around{" "}
-              <span className="text-primary">your wellness</span>
+              {copy.homeWhy.headingBefore}
+              <span className="text-primary">{copy.homeWhy.headingAccent}</span>
             </h2>
           </div>
 
           <div className="mt-10 sm:mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {valueProps.map((v, i) => (
+            {copy.homeWhy.cards.map((v, i) => (
               <motion.div
                 key={v.title}
                 initial={{ opacity: 0, y: 30 }}
@@ -504,7 +346,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                     transition={{ type: "spring", stiffness: 280, damping: 18 }}
                     className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary ring-1 ring-primary/20"
                   >
-                    <span className="h-7 w-7">{v.icon}</span>
+                    <span className="h-7 w-7"><ValueIcon name={v.icon} /></span>
                   </motion.div>
                   <h3 className="mt-6 font-heading text-xl font-bold text-dark">
                     {v.title}
@@ -528,11 +370,11 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
         <div className="relative mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-              Our Process
+              {copy.homeProcess.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-5xl">
-              Four steps to{" "}
-              <span className="text-primary">feeling your best</span>
+              {copy.homeProcess.headingBefore}
+              <span className="text-primary">{copy.homeProcess.headingAccent}</span>
             </h2>
           </div>
 
@@ -548,7 +390,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
             />
 
             <div className="grid gap-10 lg:grid-cols-4 lg:gap-8">
-              {steps.map((s, i) => (
+              {copy.homeProcess.steps.map((s, i) => (
                 <motion.div
                   key={s.n}
                   initial={{ opacity: 0, y: 30 }}
@@ -604,22 +446,22 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
           <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-                Patient Resources
+                {copy.homeResources.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-dark sm:text-5xl">
-                How can we help you today?
+                {copy.homeResources.heading}
               </h2>
             </div>
             <Link
-              href="/services"
+              href={copy.homeResources.viewAllHref}
               className="group inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-dark hover:text-primary"
             >
-              View all services
+              {copy.homeResources.viewAllLabel}
               <span
                 aria-hidden
                 className="inline-block transition-transform duration-300 group-hover:translate-x-1"
               >
-                →
+                {copy.homeResources.viewAllIcon}
               </span>
             </Link>
           </div>
@@ -627,7 +469,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
           <LocalPracticeLinks topic="home" />
 
           <div className="mt-8 sm:mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-            {quickLinks.map((q, i) => (
+            {copy.homeResources.links.map((q, i) => (
               <QuickLinkCard
                 key={q.href}
                 title={q.title}
@@ -645,20 +487,24 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-              Google reviews
+              {copy.homeReviews.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-dark sm:text-5xl">
-              Real stories. <span className="text-primary">Real relief.</span>
+              {copy.homeReviews.headingBefore}
+              <span className="text-primary">{copy.homeReviews.headingAccent}</span>
             </h2>
             <p className="mt-4 text-base text-slate-600">
-              {meta.rating.toFixed(1)} from {meta.reviewCount} Google reviews.{" "}
+              {meta.rating.toFixed(1)}
+              {copy.homeReviews.ratingLead}
+              {meta.reviewCount}
+              {copy.homeReviews.ratingTail}
               <a
                 href={meta.reviewsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-primary underline-offset-4 hover:underline"
               >
-                View all Google reviews
+                {copy.homeReviews.viewAllLabel}
               </a>
             </p>
           </div>
@@ -691,10 +537,10 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                 <div className="flex items-center justify-between gap-3">
                   <span className="text-5xl leading-none text-primary">“</span>
                   <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-                    Google
+                    {copy.homeReviews.sourceLabel}
                   </span>
                 </div>
-                <div className="mt-2 flex items-center gap-0.5" aria-label="5 stars">
+                <div className="mt-2 flex items-center gap-0.5" aria-label={copy.homeReviews.starsLabel}>
                   {[0, 1, 2, 3, 4].map((star) => (
                     <svg
                       key={star}
@@ -715,7 +561,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                     {t.name}
                   </p>
                   <p className="text-xs uppercase tracking-wider text-slate-500">
-                    {t.relativeTime ?? "Posted on Google"}
+                    {t.relativeTime ?? copy.homeReviews.postedFallback}
                   </p>
                 </div>
               </article>
@@ -729,40 +575,30 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-              West metro
+              {copy.homeNeighborhoods.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-2xl font-bold tracking-tight text-dark sm:text-3xl">
-              Neighborhoods we see every week
+              {copy.homeNeighborhoods.heading}
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-slate-600">
-              One clinic at 6200 Excelsior Blvd, Suite 201, Saint Louis Park,
-              MN 55416. Patients come from the cities below.
+              {copy.homeNeighborhoods.body}
             </p>
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            {[
-              ["saint-louis-park", "Saint Louis Park"],
-              ["edina", "Edina"],
-              ["hopkins", "Hopkins"],
-              ["minnetonka", "Minnetonka"],
-              ["minneapolis", "Minneapolis"],
-              ["golden-valley", "Golden Valley"],
-              ["richfield", "Richfield"],
-              ["plymouth", "Plymouth"],
-            ].map(([slug, name]) => (
+            {copy.homeNeighborhoods.areas.map((area) => (
               <Link
-                key={slug}
-                href={`/areas-we-serve/${slug}`}
+                key={area.href}
+                href={area.href}
                 className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-dark transition hover:border-primary hover:text-primary"
               >
-                {name}
+                {area.label}
               </Link>
             ))}
             <Link
-              href="/areas-we-serve"
+              href={copy.homeNeighborhoods.allHref}
               className="rounded-full border border-primary/30 bg-primary/5 px-4 py-2 text-sm font-semibold text-primary"
             >
-              All areas we serve
+              {copy.homeNeighborhoods.allLabel}
             </Link>
           </div>
         </div>
@@ -779,14 +615,14 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
             className="text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-              New patients
+              {copy.homeFaqs.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-dark sm:text-4xl">
-              Questions we hear in Saint Louis Park
+              {copy.homeFaqs.heading}
             </h2>
           </motion.div>
           <dl className="mt-10 space-y-4">
-            {homeFaqs.map((f) => (
+            {copy.homeFaqs.items.map((f) => (
               <motion.div
                 key={f.q}
                 initial={{ opacity: 0, y: 16 }}
@@ -827,20 +663,17 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
           >
             <div className="lg:col-span-5">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Ask A Question
+                {copy.homeQuestion.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Have a question? Send us a message.
+                {copy.homeQuestion.heading}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-primary"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Wondering if chiropractic care is right for you, curious about
-                a treatment, or need help scheduling? Fill out the form and
-                we&rsquo;ll get back to you shortly no appointment needed
-                to reach out.
+                {copy.homeQuestion.body}
               </p>
 
               <ul className="mt-8 space-y-4 text-sm text-slate-700">
@@ -861,7 +694,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                   </span>
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-                      Prefer to call?
+                      {copy.homeQuestion.callLabel}
                     </p>
                     <a
                       href={siteConfig.phoneHref}
@@ -889,7 +722,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                   </span>
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-                      Office
+                      {copy.homeQuestion.officeLabel}
                     </p>
                     <p className="mt-0.5 font-semibold text-[#0F172A]">
                       {siteConfig.address.full}
@@ -902,7 +735,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
             <div className="lg:col-span-7">
               <div className="relative overflow-hidden rounded-2xl border-t-4 border-primary bg-white p-5 shadow-sm ring-1 ring-slate-200 sm:p-7">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-600">
-                  Send a Message
+                  {copy.homeQuestion.formEyebrow}
                 </p>
                 <div className="mt-5 h-[600px] w-full sm:h-[640px]">
                   <iframe
@@ -925,7 +758,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                     data-height="441"
                     data-layout-iframe-id="inline-gOVyxQpZhEh5JDPGljU0-home"
                     data-form-id="gOVyxQpZhEh5JDPGljU0"
-                    title="Ask a question form"
+                    title={copy.homeQuestion.formTitle}
                   />
                 </div>
                 <Script
@@ -949,17 +782,18 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-              Visit Us
+              {copy.homeVisit.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-dark sm:text-4xl">
-              Find us in <span className="text-primary">Saint Louis Park</span>
+              {copy.homeVisit.headingBefore}
+              <span className="text-primary">{copy.homeVisit.headingAccent}</span>
             </h2>
             <span
               aria-hidden
               className="mx-auto mt-4 block h-1 w-16 rounded-full bg-primary"
             />
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-600">
-              6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416.
+              {copy.homeVisit.addressLine}
             </p>
           </motion.div>
 
@@ -979,35 +813,33 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                 />
                 <div className="relative">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
-                    Hours
+                    {copy.homeVisit.hoursTitle}
                   </p>
                   <ul className="mt-3 space-y-1.5 text-sm">
-                    <li className="flex items-baseline justify-between gap-3 border-b border-white/5 pb-1.5">
-                      <span className="font-semibold">Mon · Thu</span>
-                      <span className="text-white/75">8:30–11:30 · 2:30–5:30</span>
-                    </li>
-                    <li className="flex items-baseline justify-between gap-3 border-b border-white/5 pb-1.5">
-                      <span className="font-semibold">Tue · Fri</span>
-                      <span className="text-white/75">8:30 – 11:30am</span>
-                    </li>
-                    <li className="flex items-baseline justify-between gap-3 border-b border-white/5 pb-1.5">
-                      <span className="font-semibold">Wed</span>
-                      <span className="text-white/75">10:00 – 12:00pm</span>
-                    </li>
-                    <li className="flex items-baseline justify-between gap-3 border-b border-white/5 pb-1.5">
-                      <span className="font-semibold">Sat</span>
-                      <span className="text-white/75">By Appointment</span>
-                    </li>
-                    <li className="flex items-baseline justify-between gap-3">
-                      <span className="font-semibold">Sun</span>
-                      <span className="text-white/55">Closed</span>
-                    </li>
+                    {copy.homeVisit.hours.map((row, index) => {
+                      const last = index === copy.homeVisit.hours.length - 1;
+                      return (
+                        <li
+                          key={row.day}
+                          className={
+                            last
+                              ? "flex items-baseline justify-between gap-3"
+                              : "flex items-baseline justify-between gap-3 border-b border-white/5 pb-1.5"
+                          }
+                        >
+                          <span className="font-semibold">{row.day}</span>
+                          <span className={last ? "text-white/55" : "text-white/75"}>
+                            {row.time}
+                          </span>
+                        </li>
+                      );
+                    })}
                   </ul>
 
                   <div className="mt-6 grid grid-cols-2 gap-4 border-t border-white/10 pt-5 text-sm">
                     <div>
                       <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-primary">
-                        Address
+                        {copy.homeVisit.addressLabel}
                       </p>
                       <p className="mt-1.5 leading-snug text-white/85">
                         {siteConfig.address.street}
@@ -1018,7 +850,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                     </div>
                     <div>
                       <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-primary">
-                        Phone
+                        {copy.homeVisit.phoneLabel}
                       </p>
                       <a
                         href={siteConfig.phoneHref}
@@ -1034,7 +866,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
               {/* Map column */}
               <div className="relative min-h-[300px] lg:col-span-3 lg:min-h-0">
                 <iframe
-                  title="Levitt Chiropractic Center map"
+                  title={copy.homeVisit.mapTitle}
                   src={siteConfig.mapsEmbedUrl}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -1046,7 +878,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#0F172A] shadow-lg shadow-black/30 ring-1 ring-black/10 transition hover:bg-primary hover:text-white sm:text-[13px]"
-                  aria-label="Get directions to Levitt Chiropractic Center"
+                  aria-label={copy.homeVisit.directionsAriaLabel}
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -1060,7 +892,7 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
                   >
                     <polygon points="3 11 22 2 13 21 11 13 3 11" />
                   </svg>
-                  Get Directions
+                  {copy.homeVisit.directionsLabel}
                 </a>
               </div>
             </div>
@@ -1096,8 +928,9 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
             transition={{ duration: 0.7 }}
             className="font-heading text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl"
           >
-            Ready to feel{" "}
-            <span className="text-primary">like yourself</span> again?
+            {copy.homeCta.headingBefore}
+            <span className="text-primary">{copy.homeCta.headingAccent}</span>
+            {copy.homeCta.headingAfter}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -1106,15 +939,14 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="mx-auto mt-6 max-w-2xl text-lg text-white/80"
           >
-            Call today at{" "}
+            {copy.homeCta.bodyBefore}
             <a
               href={siteConfig.phoneHref}
               className="font-semibold text-primary hover:underline"
             >
-              952-920-7535
-            </a>{" "}
-            or request your appointment online Dr. Levitt is welcoming new
-            patients.
+              {copy.homeCta.phoneLabel}
+            </a>
+            {copy.homeCta.bodyAfter}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1124,21 +956,21 @@ export default function HomeContent({ reviews, meta }: HomeContentProps) {
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
             <Button
-              href="/contact/new-patient-appointment"
+              href={copy.homeCta.newPatientHref}
               variant="primary"
               size="lg"
             >
-              NEW Patient Appointment
+              {copy.homeCta.newPatientLabel}
             </Button>
             <Button
               href={siteConfig.existingPatientAppointmentUrl}
               variant="outline"
               size="lg"
             >
-              Existing Patient Appointment
+              {copy.homeCta.existingPatientLabel}
             </Button>
             <Button href={siteConfig.phoneHref} variant="outline" size="lg">
-              Call 952-920-7535
+              {copy.homeCta.callLabel}
             </Button>
           </motion.div>
         </div>

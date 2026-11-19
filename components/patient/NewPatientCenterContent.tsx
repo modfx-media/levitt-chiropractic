@@ -4,48 +4,15 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { newPatientCenterDefaults as defaults } from "@/lib/designed/defaults/newPatientCenterDefaults";
+import { mergeContent } from "@/lib/designed/merge";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
 
-type Card = {
-  title: string;
-  description: string;
-  href: string;
-  cta: string;
-  icon: React.ReactNode;
-};
-
-const cards: Card[] = [
-  {
-    title: "What to Expect",
-    description:
-      "A friendly walkthrough of your first appointment paperwork, exam, goals, and your personalized care plan.",
-    href: "/new-patient-center/what-to-expect",
-    cta: "Read the Walkthrough",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <path d="M9 11l3 3L22 4" />
-        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-      </svg>
-    ),
-  },
-  {
-    title: "Request an Appointment",
-    description:
-      "Reach out and our team will follow up to confirm a time. New patients are welcome call us with any questions.",
-    href: "/contact/new-patient-appointment",
-    cta: "Request a Visit",
-    icon: (
+function StartHereIcon({ name }: { name: string }) {
+  if (name === "appointment") {
+    return (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -59,27 +26,24 @@ const cards: Card[] = [
         <rect x="3" y="5" width="18" height="16" rx="2" />
         <path d="M3 9h18M8 3v4M16 3v4" />
       </svg>
-    ),
-  },
-];
-
-const steps = [
-  {
-    n: "01",
-    title: "Reach out",
-    body: "Call us or request an appointment online we&rsquo;ll confirm a time that works for you.",
-  },
-  {
-    n: "02",
-    title: "Bring the essentials",
-    body: "Photo ID and comfortable clothing you can move in. Plan to arrive 10–15 minutes early.",
-  },
-  {
-    n: "03",
-    title: "Meet Dr. Levitt",
-    body: "We&rsquo;ll review your history, examine, discuss your goals, and build a plan together.",
-  },
-];
+    );
+  }
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-6 w-6"
+      aria-hidden
+    >
+      <path d="M9 11l3 3L22 4" />
+      <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+    </svg>
+  );
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -90,16 +54,15 @@ const fadeUp = {
   },
 };
 
-export default function NewPatientCenterContent() {
+export default function NewPatientCenterContent({ content }: { content?: unknown }) {
+  const copy = mergeContent(defaults, content);
+
   return (
     <>
       <ServiceHero
-        title="New Patient Center"
-        subtitle="Everything you need to start care with Dr. Levitt paperwork, expectations, and a warm welcome."
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: "New Patient Center" },
-        ]}
+        title={copy.newPatientHero.title}
+        subtitle={copy.newPatientHero.subtitle}
+        crumbs={copy.newPatientHero.crumbs}
       />
 
       {/* SECTION 2 WHITE: INTRO */}
@@ -112,20 +75,17 @@ export default function NewPatientCenterContent() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Welcome
+              {copy.newPatientIntro.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              We&rsquo;ve made starting care easy
+              {copy.newPatientIntro.heading}
             </h2>
             <span
               aria-hidden
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              If chiropractic care is new to you, don&rsquo;t worry we walk
-              you through every step. Download your forms in advance, see
-              what to expect on your first visit, and call us with any
-              questions. We can&rsquo;t wait to meet you.
+              {copy.newPatientIntro.body}
             </p>
           </motion.div>
         </div>
@@ -151,10 +111,10 @@ export default function NewPatientCenterContent() {
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              Start Here
+              {copy.startHere.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              Two ways to prepare
+              {copy.startHere.heading}
             </h2>
             <span
               aria-hidden
@@ -172,7 +132,7 @@ export default function NewPatientCenterContent() {
             }}
             className="mt-8 sm:mt-14 grid gap-6 md:grid-cols-2 lg:gap-8"
           >
-            {cards.map((c) => (
+            {copy.startHereCards.map((c) => (
               <motion.div
                 key={c.href}
                 variants={{
@@ -189,7 +149,7 @@ export default function NewPatientCenterContent() {
                   className="group relative block h-full overflow-hidden rounded-2xl border-t-4 border-[#F97316] bg-[#1E3A5F]/60 p-8 ring-1 ring-white/10 backdrop-blur-sm transition-all hover:-translate-y-1.5 hover:bg-[#1E3A5F]/80 hover:ring-[#F97316]/40"
                 >
                   <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F97316]/15 text-[#F97316] ring-1 ring-[#F97316]/30 transition-colors group-hover:bg-[#F97316] group-hover:text-white">
-                    {c.icon}
+                    <StartHereIcon name={c.icon} />
                   </span>
                   <h3 className="mt-6 font-heading text-2xl font-bold text-white">
                     {c.title}
@@ -230,10 +190,10 @@ export default function NewPatientCenterContent() {
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Quick Checklist
+              {copy.quickChecklist.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Three steps before your visit
+              {copy.quickChecklist.heading}
             </h2>
             <span
               aria-hidden
@@ -251,7 +211,7 @@ export default function NewPatientCenterContent() {
             }}
             className="mt-8 sm:mt-12 grid gap-6 md:grid-cols-3 lg:gap-8"
           >
-            {steps.map((s) => (
+            {copy.quickChecklist.steps.map((s) => (
               <motion.div
                 key={s.n}
                 variants={{
@@ -292,39 +252,39 @@ export default function NewPatientCenterContent() {
               className="lg:col-span-3"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Ready to Schedule?
+                {copy.readyToSchedule.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Let&rsquo;s book your first visit
+                {copy.readyToSchedule.heading}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Call{" "}
+                {copy.readyToSchedule.closingBefore}
                 <a
                   href={siteConfig.phoneHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
                   {siteConfig.phone}
-                </a>{" "}
-                or{" "}
+                </a>
+                {copy.readyToSchedule.closingMiddle}
                 <Link
-                  href="/contact/new-patient-appointment"
+                  href={copy.readyToSchedule.contactHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
-                  request an appointment online
+                  {copy.readyToSchedule.contactLabel}
                 </Link>
-                . We&rsquo;ll be in touch shortly.
+                {copy.readyToSchedule.closingAfter}
               </p>
             </motion.div>
 
             <div className="lg:col-span-2">
               <CtaCard
-                eyebrow="New Patients Welcome"
-                title="Book your first visit"
-                body="Schedule online or call us today."
+                eyebrow={copy.sidebarBooking.eyebrow}
+                title={copy.sidebarBooking.title}
+                body={copy.sidebarBooking.body}
               />
             </div>
           </div>

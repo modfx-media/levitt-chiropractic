@@ -4,34 +4,15 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { aboutDefaults as defaults } from "@/lib/designed/defaults/aboutDefaults";
+import { mergeContent } from "@/lib/designed/merge";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
 
-const policies = [
-  {
-    title: "Appointments",
-    body: "If you would like to make an appointment, please contact our office by phone or email. To request an appointment online, click ‘Contact Us’ a member of our staff will follow up with you.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <rect x="3" y="5" width="18" height="16" rx="2" />
-        <path d="M3 9h18M8 3v4M16 3v4" />
-      </svg>
-    ),
-  },
-  {
-    title: "Financial",
-    body: "Our practice accepts cash, check, and major credit cards. Payment plans and schedules can be discussed upon request.",
-    icon: (
+function PolicyIcon({ name }: { name: string }) {
+  if (name === "financial") {
+    return (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -45,12 +26,10 @@ const policies = [
         <rect x="2" y="6" width="20" height="14" rx="2" />
         <path d="M2 11h20M6 16h4" />
       </svg>
-    ),
-  },
-  {
-    title: "Cancellation",
-    body: "If you would like to cancel an appointment, we ask for at least 24 hours notice. A fee may be charged for a no-show or late cancellation, and patients may be discharged from our practice for repeatedly missing scheduled appointments.",
-    icon: (
+    );
+  }
+  if (name === "cancellation") {
+    return (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -64,15 +43,24 @@ const policies = [
         <circle cx="12" cy="12" r="9" />
         <path d="M12 7v5l3 3" />
       </svg>
-    ),
-  },
-];
-
-const services = [
-  "Back and Neck Pain",
-  "Subluxations",
-  "Headaches",
-];
+    );
+  }
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-6 w-6"
+      aria-hidden
+    >
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M3 9h18M8 3v4M16 3v4" />
+    </svg>
+  );
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -83,16 +71,15 @@ const fadeUp = {
   },
 };
 
-export default function AboutContent() {
+export default function AboutContent({ content }: { content?: unknown }) {
+  const copy = mergeContent(defaults, content);
+
   return (
     <>
       <ServiceHero
-        title="About Us"
-        subtitle="A welcoming chiropractic practice serving Saint Louis Park and the greater Twin Cities since 1987."
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: "About Us" },
-        ]}
+        title={copy.aboutHero.title}
+        subtitle={copy.aboutHero.subtitle}
+        crumbs={copy.aboutHero.crumbs}
       />
 
       {/* SECTION 2 WHITE: WELCOME */}
@@ -105,26 +92,24 @@ export default function AboutContent() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Welcome to Our Practice
+              {copy.aboutWelcome.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Personal, hands-on chiropractic care
+              {copy.aboutWelcome.heading}
             </h2>
             <span
               aria-hidden
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Welcome to Levitt Chiropractic Center. Below you&rsquo;ll find
-              the practical things you need to know about our practice               appointments, payment, and the conditions we treat. Have
-              questions we don&rsquo;t cover here?{" "}
+              {copy.aboutWelcome.bodyBefore}
               <Link
-                href="/contact"
+                href={copy.aboutWelcome.contactHref}
                 className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
               >
-                Contact us
+                {copy.aboutWelcome.contactLabel}
               </Link>
-              .
+              {copy.aboutWelcome.bodyAfter}
             </p>
           </motion.div>
         </div>
@@ -150,10 +135,10 @@ export default function AboutContent() {
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              Practice Policies
+              {copy.howWeWork.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              How we work with our patients
+              {copy.howWeWork.heading}
             </h2>
             <span
               aria-hidden
@@ -171,7 +156,7 @@ export default function AboutContent() {
             }}
             className="mt-8 sm:mt-14 grid gap-6 lg:grid-cols-3 lg:gap-8"
           >
-            {policies.map((p, i) => (
+            {copy.howWeWorkCards.map((p, i) => (
               <motion.div
                 key={p.title}
                 variants={{
@@ -193,7 +178,7 @@ export default function AboutContent() {
                   0{i + 1}
                 </span>
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#F97316]/15 text-[#F97316] ring-1 ring-[#F97316]/30">
-                  {p.icon}
+                  <PolicyIcon name={p.icon} />
                 </span>
                 <h3 className="mt-5 font-heading text-lg font-bold text-white">
                   {p.title}
@@ -219,17 +204,17 @@ export default function AboutContent() {
               className="lg:col-span-3"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Services
+                {copy.conditionsWeTreat.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Conditions we treat
+                {copy.conditionsWeTreat.heading}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                We treat a variety of conditions here at our office, including:
+                {copy.conditionsWeTreat.intro}
               </p>
 
               <motion.ul
@@ -242,7 +227,7 @@ export default function AboutContent() {
                 }}
                 className="mt-6 grid gap-3 sm:grid-cols-2"
               >
-                {services.map((s) => (
+                {copy.conditionsWeTreat.items.map((s) => (
                   <motion.li
                     key={s}
                     variants={{
@@ -276,30 +261,29 @@ export default function AboutContent() {
               </motion.ul>
 
               <p className="mt-7 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Questions about our practice, our policies, or the conditions
-                we treat that aren&rsquo;t answered by this page?{" "}
+                {copy.conditionsWeTreat.closingBefore}
                 <Link
-                  href="/contact"
+                  href={copy.conditionsWeTreat.contactHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
-                  Don&rsquo;t hesitate to contact us
-                </Link>{" "}
- call{" "}
+                  {copy.conditionsWeTreat.contactLabel}
+                </Link>
+                {copy.conditionsWeTreat.callLead}
                 <a
                   href={siteConfig.phoneHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
                   {siteConfig.phone}
                 </a>
-                .
+                {copy.conditionsWeTreat.closingAfter}
               </p>
             </motion.div>
 
             <div className="lg:col-span-2">
               <CtaCard
-                eyebrow="New to Our Practice?"
-                title="Book your first visit"
-                body="Make an appointment with Dr. Levitt today."
+                eyebrow={copy.sidebarBooking.eyebrow}
+                title={copy.sidebarBooking.title}
+                body={copy.sidebarBooking.body}
               />
             </div>
           </div>

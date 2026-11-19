@@ -5,55 +5,15 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { meetTheDoctorDefaults as defaults } from "@/lib/designed/defaults/meetTheDoctorDefaults";
+import { mergeContent } from "@/lib/designed/merge";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
 
-const stats = [
-  { value: "39", label: "Years in private practice" },
-  { value: "1986", label: "Graduated Northwestern College of Chiropractic" },
-  { value: "1981", label: "Began studies at the University of Minnesota" },
-];
-
-const personal = [
-  "Married with 3 grown children",
-  "Loves live music & sporting events",
-  "Enjoys travel and making food",
-];
-
-const techniques = [
-  "Applied Kinesiology",
-  "Koren Specific Technique",
-  "Zone Therapy",
-  "Talsky Tonal Therapy",
-  "Torque Release Technique",
-  "Polarity Testing",
-  "Muscle Testing",
-];
-
-const pillars = [
-  {
-    title: "Chemical",
-    body: "Nutrition, supplements, and chemical balance supporting the body from the inside.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <path d="M9 3h6M10 3v6L4.5 18a2 2 0 001.7 3h11.6a2 2 0 001.7-3L14 9V3" />
-      </svg>
-    ),
-  },
-  {
-    title: "Nutritional",
-    body: "Whole-food guidance and personalized recommendations to fuel healing.",
-    icon: (
+function PillarIcon({ name }: { name: string }) {
+  if (name === "nutritional") {
+    return (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -66,12 +26,10 @@ const pillars = [
       >
         <path d="M12 3a4 4 0 014 4c0 2-1 3-1 4s1 2 1 4a4 4 0 11-8 0c0-2 1-3 1-4s-1-2-1-4a4 4 0 014-4z" />
       </svg>
-    ),
-  },
-  {
-    title: "Structural",
-    body: "Adjustments and soft-tissue work to restore alignment, mobility, and nervous-system function.",
-    icon: (
+    );
+  }
+  if (name === "structural") {
+    return (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -84,9 +42,23 @@ const pillars = [
       >
         <path d="M6 3v18M18 3v18M6 7h12M6 12h12M6 17h12" />
       </svg>
-    ),
-  },
-];
+    );
+  }
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-6 w-6"
+      aria-hidden
+    >
+      <path d="M9 3h6M10 3v6L4.5 18a2 2 0 001.7 3h11.6a2 2 0 001.7-3L14 9V3" />
+    </svg>
+  );
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -97,17 +69,15 @@ const fadeUp = {
   },
 };
 
-export default function MeetTheDoctorContent() {
+export default function MeetTheDoctorContent({ content }: { content?: unknown }) {
+  const copy = mergeContent(defaults, content);
+
   return (
     <>
       <ServiceHero
-        title="Meet Dr. Alan G. Levitt, DC"
-        subtitle="Born and raised in Saint Louis Park combining 39 years of training with a comprehensive, nervous-system-first approach to care."
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: "About Us", href: "/about" },
-          { label: "Meet the Doctor" },
-        ]}
+        title={copy.meetTheDoctorHero.title}
+        subtitle={copy.meetTheDoctorHero.subtitle}
+        crumbs={copy.meetTheDoctorHero.crumbs}
       />
 
       {/* SECTION 2 WHITE: BIO SPLIT */}
@@ -133,8 +103,8 @@ export default function MeetTheDoctorContent() {
                 <div className="relative overflow-hidden rounded-3xl border-t-4 border-[#F97316] bg-[#0F172A] text-white shadow-2xl ring-1 ring-white/10">
                   <div className="relative aspect-[4/5] overflow-hidden bg-[#0F172A]">
                     <Image
-                      src="/images/dr-leviit.png"
-                      alt="Dr. Alan G. Levitt, DC"
+                      src={copy.doctorPortrait.imageSrc}
+                      alt={copy.doctorPortrait.imageAlt}
                       fill
                       sizes="(max-width: 1024px) 100vw, 40vw"
                       className="object-cover"
@@ -146,13 +116,13 @@ export default function MeetTheDoctorContent() {
                   </div>
                   <div className="px-7 py-6">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-300">
-                      Your Chiropractor
+                      {copy.doctorPortrait.eyebrow}
                     </p>
                     <p className="mt-1 font-heading text-xl font-bold text-white">
-                      Dr. Alan G. Levitt, DC
+                      {copy.doctorPortrait.name}
                     </p>
                     <p className="mt-1 text-sm text-white/70">
-                      Saint Louis Park, MN
+                      {copy.doctorPortrait.place}
                     </p>
                   </div>
                 </div>
@@ -167,28 +137,20 @@ export default function MeetTheDoctorContent() {
               className="lg:col-span-7"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                His Story
+                {copy.doctorStory.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Born and raised in Saint Louis Park
+                {copy.doctorStory.heading}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Dr. Levitt was born and raised in Saint Louis Park, Minnesota.
-                He attended local public schools including Saint Louis Park
-                High School. In 1981 he attended the University of Minnesota
-                fulfilling his requirements to attend Chiropractic School.
-                In December 1986 he graduated from Northwestern College of
-                Chiropractic in Bloomington, Minnesota.
+                {copy.doctorStory.lead}
               </p>
               <p className="mt-4 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Dr. Levitt has been in private practice since 1987 in the
-                Saint Louis Park area. He still loves going to work daily to
-                help improve the quality of life of his patients and is
-                always looking to help others on their health journey.
+                {copy.doctorStory.emphasis}
               </p>
             </motion.div>
           </div>
@@ -215,10 +177,10 @@ export default function MeetTheDoctorContent() {
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              Education & Experience
+              {copy.education.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              A career devoted to your spine
+              {copy.education.heading}
             </h2>
             <span
               aria-hidden
@@ -236,7 +198,7 @@ export default function MeetTheDoctorContent() {
             }}
             className="mt-8 sm:mt-14 grid gap-6 sm:grid-cols-3 lg:gap-8"
           >
-            {stats.map((s) => (
+            {copy.education.stats.map((s) => (
               <motion.div
                 key={s.label}
                 variants={{
@@ -278,26 +240,20 @@ export default function MeetTheDoctorContent() {
               className="lg:col-span-7"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                His Unique Approach
+                {copy.approach.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                The nervous system is the starting point
+                {copy.approach.heading}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Dr. Levitt uses a comprehensive approach to patient care.
-                He believes the nervous system plays a critical role in
-                overall health and wellness, and works to optimize it
-                through a unique combination of techniques.
+                {copy.approach.lead}
               </p>
               <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg">
-                By using these techniques together, Dr. Levitt is able to
-                identify areas of dysfunction in the nervous system and
-                create individualized treatment plans that address each
-                patient&rsquo;s specific needs.
+                {copy.approach.body}
               </p>
 
               <motion.ul
@@ -310,7 +266,7 @@ export default function MeetTheDoctorContent() {
                 }}
                 className="mt-7 flex flex-wrap gap-2.5"
               >
-                {techniques.map((t) => (
+                {copy.approach.techniques.map((t) => (
                   <motion.li
                     key={t}
                     variants={{
@@ -342,18 +298,13 @@ export default function MeetTheDoctorContent() {
                   className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#F97316]/15 blur-2xl"
                 />
                 <p className="relative text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-300">
-                  Beyond the Symptoms
+                  {copy.beyondSymptoms.eyebrow}
                 </p>
                 <p className="relative mt-4 text-sm leading-relaxed text-white/80">
-                  Dr. Levitt&rsquo;s approach goes beyond just treating the
-                  symptoms. Instead, he takes a holistic approach that
-                  addresses the underlying causes of health issues focusing
-                  on chemical, nutritional, and structural solutions to
-                  improve the patient&rsquo;s overall health and wellness.
+                  {copy.beyondSymptoms.body}
                 </p>
                 <p className="relative mt-3 text-sm font-semibold leading-relaxed text-orange-200">
-                  Every patient is unique each treatment plan is tailored
-                  to the individual.
+                  {copy.beyondSymptoms.emphasis}
                 </p>
               </div>
             </motion.aside>
@@ -381,10 +332,10 @@ export default function MeetTheDoctorContent() {
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              Three Pillars
+              {copy.pillars.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              Chemical, nutritional, structural
+              {copy.pillars.heading}
             </h2>
             <span
               aria-hidden
@@ -402,7 +353,7 @@ export default function MeetTheDoctorContent() {
             }}
             className="mt-8 sm:mt-14 grid gap-6 lg:grid-cols-3 lg:gap-8"
           >
-            {pillars.map((p, i) => (
+            {copy.pillars.cards.map((p, i) => (
               <motion.div
                 key={p.title}
                 variants={{
@@ -424,7 +375,7 @@ export default function MeetTheDoctorContent() {
                   0{i + 1}
                 </span>
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#F97316]/15 text-[#F97316] ring-1 ring-[#F97316]/30">
-                  {p.icon}
+                  <PillarIcon name={p.icon} />
                 </span>
                 <h3 className="mt-5 font-heading text-lg font-bold text-white">
                   {p.title}
@@ -450,36 +401,28 @@ export default function MeetTheDoctorContent() {
               className="lg:col-span-3"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                When Other Treatments Haven&rsquo;t Worked
+                {copy.difficultCases.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Built for difficult cases
+                {copy.difficultCases.heading}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                One of Dr. Levitt&rsquo;s greatest strengths is his ability
-                to work with difficult cases and patients who have not had
-                satisfactory results with previous treatments. With 39
-                years of experience and training, Dr. Levitt has developed
-                a keen understanding of the human body and its intricacies                 using that knowledge to identify and treat even the most
-                complex health issues.
+                {copy.difficultCases.lead}
               </p>
               <p className="mt-4 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Dr. Levitt is a highly skilled and compassionate chiropractor
-                dedicated to helping his patients achieve optimal health and
-                wellness with individualized plans that address underlying
-                causes for long-term success.
+                {copy.difficultCases.emphasis}
               </p>
             </motion.div>
 
             <div className="lg:col-span-2">
               <CtaCard
-                eyebrow="Difficult Case?"
-                title="Let's find what others missed"
-                body="Schedule a comprehensive evaluation today."
+                eyebrow={copy.sidebarBooking.eyebrow}
+                title={copy.sidebarBooking.title}
+                body={copy.sidebarBooking.body}
               />
             </div>
           </div>
@@ -497,20 +440,17 @@ export default function MeetTheDoctorContent() {
             className="mx-auto max-w-3xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Outside the Office
+              {copy.personal.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Family man, music lover, foodie
+              {copy.personal.heading}
             </h2>
             <span
               aria-hidden
               className="mx-auto mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Dr. Levitt is married with 3 grown children 2 are in
-              college and 1 lives in Colorado. He really enjoys spending
-              time with his wife and children, live music, sporting events,
-              travel, and making food.
+              {copy.personal.body}
             </p>
 
             <motion.ul
@@ -523,7 +463,7 @@ export default function MeetTheDoctorContent() {
               }}
               className="mt-7 flex flex-wrap justify-center gap-2.5"
             >
-              {personal.map((p) => (
+              {copy.personal.items.map((p) => (
                 <motion.li
                   key={p}
                   variants={{
@@ -542,21 +482,21 @@ export default function MeetTheDoctorContent() {
             </motion.ul>
 
             <p className="mt-8 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Ready to meet Dr. Levitt? Call{" "}
+              {copy.personal.closingBefore}
               <a
                 href={siteConfig.phoneHref}
                 className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
               >
                 {siteConfig.phone}
-              </a>{" "}
-              or{" "}
+              </a>
+              {copy.personal.closingMiddle}
               <Link
-                href="/contact"
+                href={copy.personal.contactHref}
                 className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
               >
-                request a visit online
+                {copy.personal.contactLabel}
               </Link>
-              .
+              {copy.personal.closingAfter}
             </p>
           </motion.div>
         </div>
