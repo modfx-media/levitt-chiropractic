@@ -11,7 +11,7 @@ export function cmsDocToMetadata(
   _path: string,
   fallback: Metadata,
 ): Metadata {
-  return mergeCmsMetadata(fallback, doc);
+  return mergeCmsMetadata(fallback, doc, _path);
 }
 
 export async function withCMSMeta(
@@ -21,6 +21,6 @@ export async function withCMSMeta(
   return withCMS(async () => {
     const routed = await queryRoutedContentByPath(path);
     if (!routed) return fallback;
-    return mergeCmsMetadata(fallback, routed.doc);
+    return mergeCmsMetadata(fallback, routed.doc, path);
   }, fallback);
 }

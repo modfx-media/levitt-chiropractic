@@ -18,6 +18,8 @@ import { siteConfig } from "@/lib/siteConfig";
 type BlogPostContentProps = {
   post: BlogPost;
   related: BlogPost[];
+  /** JSON-LD source. Defaults to the visible post. */
+  schemaPost?: BlogPost;
 };
 
 const fadeUp = {
@@ -249,8 +251,9 @@ function wordCountFromBlocks(blocks: BlogBlock[]): number {
   return total;
 }
 
-export function BlogPostContent({ post, related }: BlogPostContentProps) {
-  const wordCount = wordCountFromBlocks(post.blocks);
+export function BlogPostContent({ post, related, schemaPost }: BlogPostContentProps) {
+  const schema = schemaPost ?? post;
+  const wordCount = wordCountFromBlocks(schema.blocks);
   const headings = post.blocks.filter(
     (b): b is Extract<BlogBlock, { type: "h2" }> => b.type === "h2" && Boolean(b.id),
   );
@@ -260,23 +263,23 @@ export function BlogPostContent({ post, related }: BlogPostContentProps) {
       <JsonLd
         id={`ld-blog-${post.slug}`}
         data={blogPostingJsonLd({
-          slug: post.slug,
-          title: post.title,
-          description: post.description,
-          image: post.coverImage,
-          publishedAt: post.publishedAt,
-          updatedAt: post.updatedAt,
-          authorName: post.author.name,
-          authorUrl: post.author.url,
-          keywords: post.tags,
-          articleSection: post.category,
+          slug: schema.slug,
+          title: schema.title,
+          description: schema.description,
+          image: schema.coverImage,
+          publishedAt: schema.publishedAt,
+          updatedAt: schema.updatedAt,
+          authorName: schema.author.name,
+          authorUrl: schema.author.url,
+          keywords: schema.tags,
+          articleSection: schema.category,
           wordCount,
         })}
       />
-      {post.faqs && post.faqs.length > 0 && (
+      {schema.faqs && schema.faqs.length > 0 && (
         <JsonLd
-          id={`ld-blog-faq-${post.slug}`}
-          data={faqPageJsonLd({ faqs: post.faqs })}
+          id={`ld-blog-faq-${schema.slug}`}
+          data={faqPageJsonLd({ faqs: schema.faqs })}
         />
       )}
 

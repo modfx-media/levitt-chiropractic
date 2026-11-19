@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
-import { withCMSMeta } from "@/lib/cms/generateMeta";
+import { blogHeadMetadata, blogSchemaPost } from "@/lib/cms/blogHead";
 import { cmsOnlyDocIsRenderable } from "@/lib/cms/mergeDesigned";
 import { queryRoutedContentByPath } from "@/lib/cms/queries";
 import {
@@ -45,28 +44,15 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = await params;
   const path = `/blog/${slug}`;
-  const post = await resolvePost(slug);
-  if (!post) {
-    return withCMSMeta(
-      path,
-      generateMeta({
-        title: "Post Not Found",
-        description: "The article you're looking for could not be found.",
-        slug: `blog/${slug}`,
-        noindex: true,
-      }),
-    );
-  }
-
-  return withCMSMeta(
-    path,
-    generateMeta({
-      title: post.title,
-      description: post.description,
-      slug: `blog/${post.slug}`,
-      image: post.coverImage,
-    }),
-  );
+  const [post, routed] = await Promise.all([
+    resolvePost(slug),
+    queryRoutedContentByPath(path),
+  ]);
+  return blogHeadMetadata({
+    slug,
+    local: post ?? null,
+    doc: routed?.collection === "posts" ? routed.doc : null,
+  });
 }
 
 export default async function Page(
@@ -74,17 +60,21 @@ export default async function Page(
 ) {
   const { slug } = await params;
   const path = `/blog/${slug}`;
-  const post = await resolvePost(slug);
+  const [post, routed] = await Promise.all([
+    resolvePost(slug),
+    queryRoutedContentByPath(path),
+  ]);
   if (!post) {
-    const routed = await queryRoutedContentByPath(path);
     if (!cmsOnlyDocIsRenderable(routed)) notFound();
     return <CMSRoute path={path}>{null}</CMSRoute>;
   }
 
   const related = getRelatedPosts(post, 3);
+  const schemaPost =
+    routed?.collection === "posts" ? blogSchemaPost(post, routed.doc) : undefined;
   return (
     <CMSRoute path={path}>
-      <BlogPostContent post={post} related={related} />
+      <BlogPostContent post={post} related={related} schemaPost={schemaPost} />
     </CMSRoute>
   );
 }

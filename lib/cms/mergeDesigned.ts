@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fragment, isValidElement, type ReactNode } from "react";
 
+import { generateMeta } from "@/lib/metadata";
 import { mediaPublicUrl } from "./mediaUrl";
 import { absoluteURL, normalizePath } from "./url";
 
@@ -236,111 +237,70 @@ export function mergeCmsJsonLd<T extends Record<string, unknown>>(
   return next as T;
 }
 
-type OgPatch = {
-  title?: string;
-  description?: string;
-  url?: string;
-  images?: Array<{ url: string }>;
+type MetaShape = {
+  title?: string | null;
+  description?: string | null;
+  image?: { url?: string } | string | null;
+  canonicalUrl?: string | null;
+  noIndex?: boolean | null;
+  noFollow?: boolean | null;
 };
 
-function patchOpenGraph(
-  current: Metadata["openGraph"],
-  patch: OgPatch,
-): Metadata["openGraph"] {
-  if (current && typeof current === "object" && !Array.isArray(current)) {
-    return { ...current, ...patch };
-  }
-  return { type: "website", ...patch };
-}
-
-function patchTwitter(
-  current: Metadata["twitter"],
-  patch: { title?: string; description?: string; images?: string[] },
-): Metadata["twitter"] {
-  if (current && typeof current === "object") {
-    return { ...current, ...patch };
-  }
-  return { card: "summary_large_image", ...patch };
-}
-
-function patchRobots(
-  current: Metadata["robots"],
-  noIndex: boolean,
-  noFollow: boolean,
-): Metadata["robots"] {
-  const base =
-    current && typeof current === "object"
-      ? { ...current }
-      : { index: true as const, follow: true as const };
-  if (noIndex) base.index = false;
-  if (noFollow) base.follow = false;
-  if (base.googleBot && typeof base.googleBot === "object") {
-    base.googleBot = {
-      ...base.googleBot,
-      ...(noIndex ? { index: false as const } : {}),
-      ...(noFollow ? { follow: false as const } : {}),
-    };
-  }
-  return base;
-}
-
 /**
- * Field-by-field SEO merge. A blank CMS field keeps the hardcoded value.
- * The document title is not an SEO field: publishing a page whose meta
- * title was left empty must not replace the designed `<title>`.
+ * Same head merge as production commit 04314cf.
+ * A stored meta title is composed with the production suffix, images keep
+ * width, height, and alt, and noIndex/noFollow false means index/follow.
+ * A document with no title leaves the fallback untouched.
  */
 export function mergeCmsMetadata(
   fallback: Metadata,
   doc: Record<string, unknown> | null | undefined,
+  path = "/",
 ): Metadata {
   if (!doc) return fallback;
-  const seo = readCmsSeo(doc);
-  if (!cmsSeoHasContent(seo) && !seo.noIndex && !seo.noFollow) return fallback;
+  const meta = (doc.meta ?? {}) as MetaShape;
+  const title =
+    (typeof meta.title === "string" && meta.title.trim()) ||
+    (typeof doc.title === "string" && doc.title.trim()) ||
+    "";
+  if (!title) return fallback;
 
-  let next: Metadata = { ...fallback };
+  const description =
+    (typeof meta.description === "string" && meta.description.trim()) ||
+    (typeof doc.excerpt === "string" && doc.excerpt.trim()) ||
+    (typeof fallback.description === "string" ? fallback.description : "");
+  const metaImage =
+    typeof meta.image === "string"
+      ? meta.image
+      : meta.image && typeof meta.image === "object" && meta.image.url
+        ? meta.image.url
+        : undefined;
+  const cover = mediaPublicUrl(doc.coverImage);
+  const image =
+    (metaImage && !metaImage.startsWith("/media/") ? metaImage : undefined) ||
+    cover?.url;
+  const canonical = (typeof meta.canonicalUrl === "string" && meta.canonicalUrl.trim()) ||
+    absoluteURL(normalizePath(path));
+  const noindex = meta.noIndex === true;
+  const follow = meta.noFollow !== true;
 
-  if (seo.title) {
-    next = {
-      ...next,
-      title: { absolute: seo.title },
-      openGraph: patchOpenGraph(next.openGraph, { title: seo.title }),
-      twitter: patchTwitter(next.twitter, { title: seo.title }),
-    };
-  }
+  const generated = generateMeta({
+    title,
+    description,
+    slug: path === "/" ? "" : path.replace(/^\//, ""),
+    image,
+    noindex,
+  });
 
-  if (seo.description) {
-    next = {
-      ...next,
-      description: seo.description,
-      openGraph: patchOpenGraph(next.openGraph, { description: seo.description }),
-      twitter: patchTwitter(next.twitter, { description: seo.description }),
-    };
-  }
-
-  if (seo.canonicalUrl) {
-    next = {
-      ...next,
-      alternates: { ...next.alternates, canonical: seo.canonicalUrl },
-      openGraph: patchOpenGraph(next.openGraph, { url: seo.canonicalUrl }),
-    };
-  }
-
-  if (seo.image) {
-    next = {
-      ...next,
-      openGraph: patchOpenGraph(next.openGraph, { images: [{ url: seo.image }] }),
-      twitter: patchTwitter(next.twitter, { images: [seo.image] }),
-    };
-  }
-
-  if (seo.noIndex || seo.noFollow) {
-    next = {
-      ...next,
-      robots: patchRobots(next.robots, seo.noIndex, seo.noFollow),
-    };
-  }
-
-  return next;
+  return {
+    ...fallback,
+    ...generated,
+    alternates: { canonical },
+    robots: {
+      index: !noindex,
+      follow,
+    },
+  };
 }
 
 /** Page-level JSON-LD from CMS SEO/schema fields. Null when those fields are empty. */

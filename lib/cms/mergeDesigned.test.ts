@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { createElement, Fragment } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
+import { blogHeadMetadata, blogPostingFromPost, blogSchemaPost } from "./blogHead";
 import { generateMeta } from "../metadata";
 import {
   childrenAreDesigned,
@@ -69,6 +70,14 @@ function ogDescription(meta: ReturnType<typeof mergeCmsMetadata>): string | unde
   return og.description;
 }
 
+function ogImage(meta: ReturnType<typeof mergeCmsMetadata>) {
+  const og = meta.openGraph;
+  if (!og || Array.isArray(og) || !Array.isArray(og.images)) return null;
+  const image = og.images[0];
+  if (!image || typeof image === "string" || image instanceof URL) return null;
+  return image;
+}
+
 function ogTitle(meta: ReturnType<typeof mergeCmsMetadata>): unknown {
   const og = meta.openGraph;
   if (!og || Array.isArray(og)) return undefined;
@@ -108,11 +117,15 @@ test("published page with an empty layout still renders the designed component",
   assert.doesNotMatch(html, /id="generic"/);
   assert.doesNotMatch(html, /Request an appointment/);
 
-  const meta = mergeCmsMetadata(ABOUT_FALLBACK, published!.doc);
+  const meta = mergeCmsMetadata(ABOUT_FALLBACK, published!.doc, "/about");
   assert.deepEqual(meta.title, {
     absolute: "About Our Practice | Levitt Chiropractic",
   });
   assert.equal(meta.description, "SEO description edited in Payload.");
+  const image = ogImage(meta);
+  assert.equal(image?.width, 1200);
+  assert.equal(image?.height, 630);
+  assert.equal(image?.alt, "About Our Practice | Levitt Chiropractic");
 });
 
 test("draft and published SEO-only edits keep the designed UI and change only the edited tags", () => {
@@ -158,25 +171,31 @@ test("draft and published SEO-only edits keep the designed UI and change only th
   assert.match(publishedHtml, /How we work with our patients/);
   assert.doesNotMatch(publishedHtml, /<h1/);
 
-  const draftMeta = mergeCmsMetadata(ABOUT_FALLBACK, draft!.doc);
-  const publishedMeta = mergeCmsMetadata(ABOUT_FALLBACK, published!.doc);
+  const draftMeta = mergeCmsMetadata(ABOUT_FALLBACK, draft!.doc, "/about");
+  const publishedMeta = mergeCmsMetadata(ABOUT_FALLBACK, published!.doc, "/about");
   assert.equal(draftMeta.description, "Draft meta description");
   assert.equal(publishedMeta.description, "Published meta description");
   assert.deepEqual(draftMeta.title, ABOUT_FALLBACK.title);
   assert.deepEqual(publishedMeta.title, ABOUT_FALLBACK.title);
   assert.equal(ogTitle(publishedMeta), ogTitle(ABOUT_FALLBACK));
   assert.equal(ogDescription(publishedMeta), "Published meta description");
-  assert.deepEqual(publishedMeta.robots, ABOUT_FALLBACK.robots);
+  assert.deepEqual(publishedMeta.robots, { index: true, follow: true });
 });
 
-test("document title and blank SEO fields do not replace hardcoded metadata", () => {
+test("blank meta title uses the document title and noIndex false stays indexable", () => {
   const doc = aboutDoc({
     status: "published",
     meta: { title: "  ", description: "", noIndex: false, noFollow: false },
     layout: [],
   });
-  assert.equal(mergeCmsMetadata(ABOUT_FALLBACK, doc!.doc), ABOUT_FALLBACK);
-  assert.equal(mergeCmsMetadata(ABOUT_FALLBACK, null), ABOUT_FALLBACK);
+  const meta = mergeCmsMetadata(ABOUT_FALLBACK, doc!.doc, "/about");
+  assert.deepEqual(meta.title, ABOUT_FALLBACK.title);
+  assert.deepEqual(meta.robots, { index: true, follow: true });
+  assert.equal(mergeCmsMetadata(ABOUT_FALLBACK, null, "/about"), ABOUT_FALLBACK);
+  assert.equal(
+    mergeCmsMetadata(ABOUT_FALLBACK, { meta: {}, title: "  " }, "/about"),
+    ABOUT_FALLBACK,
+  );
   assert.equal(cmsOverlayJsonLd("/about", doc!.doc), null);
 });
 
@@ -189,35 +208,31 @@ test("robots, canonical, and OG image override only the fields that are set", ()
       image: { url: "https://cdn.example.com/about-og.jpg", alt: "Clinic" },
     },
   };
-  const meta = mergeCmsMetadata(ABOUT_FALLBACK, doc);
+  const meta = mergeCmsMetadata(ABOUT_FALLBACK, doc, "/about");
   assert.equal(
     meta.alternates && "canonical" in meta.alternates
       ? meta.alternates.canonical
       : undefined,
-    "https://www.levittchiropracticcenter.com/about",
+    "/about",
   );
   assert.deepEqual(meta.title, ABOUT_FALLBACK.title);
   assert.equal(meta.description, ABOUT_FALLBACK.description);
-  const robots = meta.robots;
-  assert.ok(robots && typeof robots === "object");
-  if (robots && typeof robots === "object") {
-    assert.equal(robots.index, false);
-    assert.equal(robots.follow, true);
-    assert.ok(robots.googleBot && typeof robots.googleBot === "object");
-    if (robots.googleBot && typeof robots.googleBot === "object") {
-      assert.equal(robots.googleBot.index, false);
-      assert.equal(robots.googleBot["max-image-preview"], "large");
-    }
-  }
-  const og = meta.openGraph;
-  assert.ok(og && !Array.isArray(og));
-  if (og && !Array.isArray(og)) {
-    assert.deepEqual(og.images, [{ url: "https://cdn.example.com/about-og.jpg" }]);
-  }
-  const blocked = mergeCmsMetadata(ABOUT_FALLBACK, {
-    meta: { image: "/media/file.jpg" },
+  assert.deepEqual(meta.robots, { index: false, follow: true });
+  assert.deepEqual(ogImage(meta), {
+    url: "https://cdn.example.com/about-og.jpg",
+    width: 1200,
+    height: 630,
+    alt: "About Our Practice in Saint Louis Park, MN",
   });
-  assert.deepEqual(blocked.openGraph, ABOUT_FALLBACK.openGraph);
+  const blocked = mergeCmsMetadata(
+    ABOUT_FALLBACK,
+    { title: "About Our Practice in Saint Louis Park, MN", meta: { image: "/media/file.jpg" } },
+    "/about",
+  );
+  const blockedImage = ogImage(blocked);
+  assert.equal(blockedImage?.url, "/images/og-default.jpg");
+  assert.equal(blockedImage?.width, 1200);
+  assert.equal(blockedImage?.height, 630);
 });
 
 test("JSON-LD uses CMS schema fields and falls back field by field", () => {
@@ -337,7 +352,7 @@ test("every designed site route keeps its component inside CMSRoute", () => {
   for (const file of pages) {
     const source = readFileSync(file, "utf8");
     const rel = path.relative(siteRoot, file);
-    assert.match(source, /withCMSMeta/, `${rel} must merge CMS metadata`);
+    assert.match(source, /withCMSMeta|blogHeadMetadata/, `${rel} must merge CMS metadata`);
     if (!source.includes("CMSRoute")) continue;
     if (rel === "[...path]/page.tsx") {
       assert.match(source, nullChild);
@@ -356,4 +371,129 @@ test("every designed site route keeps its component inside CMSRoute", () => {
     );
     assert.match(source, /<CMSRoute[\s\S]*<\/CMSRoute>/);
   }
+});
+
+const CMS_ONLY_SLUG = "holistic-chiropractor-whole-body-healing";
+
+test("CMS-only post head matches production and is not Post Not Found", () => {
+  const doc = {
+    title: "Holistic chiropractor whole body healing",
+    slug: CMS_ONLY_SLUG,
+    path: `/blog/${CMS_ONLY_SLUG}`,
+    excerpt: "A whole-body look at how the spine and daily habits interact.",
+    coverImage: { url: "https://cdn.example.com/holistic.jpg", alt: "Clinic treatment room" },
+    meta: {
+      title: "Holistic chiropractor whole body healing",
+      description: "How a holistic chiropractor in Saint Louis Park looks past the sore spot.",
+      noIndex: false,
+      noFollow: false,
+    },
+  };
+  const missing = generateMeta({
+    title: "Post Not Found",
+    description: "The article you're looking for could not be found.",
+    slug: `blog/${CMS_ONLY_SLUG}`,
+    noindex: true,
+  });
+  const head = blogHeadMetadata({ slug: CMS_ONLY_SLUG, local: null, doc });
+  const title = head.title && typeof head.title === "object" && "absolute" in head.title
+    ? head.title.absolute
+    : "";
+
+  assert.match(title, / \| Levitt$/);
+  assert.equal(
+    head.description,
+    "How a holistic chiropractor in Saint Louis Park looks past the sore spot.",
+  );
+  assert.deepEqual(head.robots, { index: true, follow: true });
+  assert.notDeepEqual(head.robots, missing.robots);
+  assert.deepEqual(ogImage(head), {
+    url: "https://cdn.example.com/holistic.jpg",
+    width: 1200,
+    height: 630,
+    alt: "Holistic chiropractor whole body healing",
+  });
+  assert.notEqual(ogImage(head)?.alt, "Post Not Found");
+  const twitter = head.twitter;
+  assert.ok(twitter && typeof twitter === "object" && twitter.title === title);
+
+  const schema = blogSchemaPost(
+    {
+      slug: CMS_ONLY_SLUG,
+      title: "Post Not Found",
+      description: "missing",
+      excerpt: "missing",
+      publishedAt: "2024-01-01",
+      author: { name: "Local", title: "Local", url: "/meet-the-doctor" },
+      category: "Local",
+      tags: [],
+      coverImage: "/images/og-default.jpg",
+      coverAlt: "Post Not Found",
+      readingMinutes: 1,
+      blocks: [],
+    },
+    doc,
+  );
+  const jsonLd = blogPostingFromPost(schema);
+  assert.equal(jsonLd.headline, "Holistic chiropractor whole body healing");
+  assert.equal(
+    jsonLd.description,
+    "How a holistic chiropractor in Saint Louis Park looks past the sore spot.",
+  );
+  assert.notEqual(jsonLd.headline, "Post Not Found");
+});
+
+test("local post head keeps the production suffix, image shape, and CMS BlogPosting", () => {
+  const slug = "applied-kinesiology-minneapolis-chiropractic-care";
+  const local = {
+    slug,
+    title: "Applied kinesiology at the Saint Louis Park office",
+    description: "Local description of applied kinesiology.",
+    excerpt: "Local excerpt",
+    publishedAt: "2024-06-01",
+    author: { name: "Dr. Alan Levitt, D.C.", title: "Chiropractor", url: "/meet-the-doctor" },
+    category: "Chiropractic Care",
+    tags: ["kinesiology"],
+    coverImage: "/images/local-cover.jpg",
+    coverAlt: "Local cover",
+    readingMinutes: 4,
+    blocks: [{ type: "p" as const, text: "Local paragraph about applied kinesiology care." }],
+  };
+  const doc = {
+    title: "Applied kinesiology and chiropractic care in Minneapolis",
+    slug,
+    path: `/blog/${slug}`,
+    excerpt: "CMS excerpt",
+    coverImage: { url: "https://cdn.example.com/kinesiology.jpg", alt: "Adjustment table" },
+    meta: {
+      description: "CMS description of applied kinesiology.",
+      noIndex: false,
+      noFollow: false,
+    },
+  };
+  const head = blogHeadMetadata({ slug, local, doc });
+  const title = head.title && typeof head.title === "object" && "absolute" in head.title
+    ? head.title.absolute
+    : "";
+  assert.match(title, / \| Levitt$/);
+  assert.equal(head.description, "CMS description of applied kinesiology.");
+  assert.deepEqual(head.robots, { index: true, follow: true });
+  assert.equal("googleBot" in (head.robots as object), false);
+  assert.deepEqual(ogImage(head), {
+    url: "https://cdn.example.com/kinesiology.jpg",
+    width: 1200,
+    height: 630,
+    alt: "Applied kinesiology and chiropractic care in Minneapolis",
+  });
+  const twitter = head.twitter;
+  assert.ok(twitter && typeof twitter === "object");
+  if (twitter && typeof twitter === "object") assert.equal(twitter.title, title);
+
+  const visible = blogPostingFromPost(local);
+  const published = blogPostingFromPost(blogSchemaPost(local, doc));
+  assert.equal(visible.headline, local.title);
+  assert.equal(published.headline, doc.title);
+  assert.equal(published.description, "CMS description of applied kinesiology.");
+  assert.notEqual(published.headline, visible.headline);
+  assert.notEqual(published.description, visible.description);
 });
