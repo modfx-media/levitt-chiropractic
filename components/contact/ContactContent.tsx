@@ -5,6 +5,8 @@ import Script from "next/script";
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { contactDefaults as defaults } from "@/lib/designed/defaults/contact";
+import { mergeContent } from "@/lib/designed/merge";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
@@ -24,16 +26,15 @@ const MAP_QUERY = encodeURIComponent(
 const MAP_EMBED = `https://www.google.com/maps?q=${MAP_QUERY}&output=embed`;
 const MAP_LINK = `https://www.google.com/maps/dir/?api=1&destination=${MAP_QUERY}`;
 
-export default function ContactContent() {
+export default function ContactContent({ content }: { content?: unknown }) {
+  const copy = mergeContent(defaults, content);
+
   return (
     <>
       <ServiceHero
-        title="Contact Us"
-        subtitle="We&rsquo;re always happy to hear from you call, message, or stop by the office."
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: "Contact" },
-        ]}
+        title={copy.hero.title}
+        subtitle={copy.hero.subtitle}
+        crumbs={copy.hero.crumbs}
       />
 
       {/* SECTION 2 WHITE: INTRO + CONTACT FORM */}
@@ -48,22 +49,17 @@ export default function ContactContent() {
               className="lg:col-span-5"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Get In Touch
+                {copy.intro.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                We&rsquo;d love to hear from you
+                {copy.intro.title}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                We encourage you to contact us via phone or email. Fill out
-                the form to send us a message. The map below shows the office
-                at 6200 Excelsior Blvd, Suite 201, Saint Louis Park, MN 55416.
-                If you have any questions or comments,
-                please feel free to get in touch we&rsquo;re always happy
-                to hear from you!
+                {copy.intro.body}
               </p>
 
               <ul className="mt-8 space-y-5">
@@ -84,7 +80,7 @@ export default function ContactContent() {
                   </span>
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#0F172A]/60">
-                      Phone
+                      {copy.labels.phone}
                     </p>
                     <a
                       href={siteConfig.phoneHref}
@@ -112,7 +108,7 @@ export default function ContactContent() {
                   </span>
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#0F172A]/60">
-                      Address
+                      {copy.labels.address}
                     </p>
                     <p className="mt-1 text-base leading-relaxed text-[#0F172A]">
                       {siteConfig.address.street}
@@ -140,7 +136,7 @@ export default function ContactContent() {
                   </span>
                   <div className="flex-1">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#0F172A]/60">
-                      Office Hours
+                      {copy.labels.hours}
                     </p>
                     <ul className="mt-2 space-y-1 text-sm text-[#0F172A]">
                       {siteConfig.hours.map((h) => (
@@ -167,7 +163,7 @@ export default function ContactContent() {
             >
               <div className="relative overflow-hidden rounded-2xl border-t-4 border-[#F97316] bg-white p-7 shadow-sm ring-1 ring-slate-200 sm:p-8">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-600">
-                  Send a Message
+                  {copy.form.eyebrow}
                 </p>
                 <div className="mt-6 h-[640px] w-full">
                   <iframe
@@ -190,7 +186,7 @@ export default function ContactContent() {
                     data-height="441"
                     data-layout-iframe-id="inline-gOVyxQpZhEh5JDPGljU0"
                     data-form-id="gOVyxQpZhEh5JDPGljU0"
-                    title="Website Contact Form"
+                    title={copy.form.title}
                   />
                 </div>
                 <Script
@@ -223,17 +219,17 @@ export default function ContactContent() {
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              Find Us
+              {copy.map.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              Come visit our office
+              {copy.map.title}
             </h2>
             <span
               aria-hidden
               className="mx-auto mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-4 text-base text-white/70">
-              Click the map for turn-by-turn directions.
+              {copy.map.note}
             </p>
           </motion.div>
 
@@ -247,7 +243,7 @@ export default function ContactContent() {
             <div className="relative overflow-hidden rounded-2xl border-t-4 border-[#F97316] ring-1 ring-white/10">
               <iframe
                 src={MAP_EMBED}
-                title="Map to Levitt Chiropractic Center"
+                title={copy.map.iframeTitle}
                 width="100%"
                 height="420"
                 loading="lazy"
@@ -259,7 +255,7 @@ export default function ContactContent() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#0F172A] shadow-lg shadow-black/30 ring-1 ring-black/10 transition hover:bg-[#F97316] hover:text-white sm:text-[13px]"
-                aria-label="Get directions to Levitt Chiropractic Center"
+                aria-label={copy.map.directionsAria}
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -273,7 +269,7 @@ export default function ContactContent() {
                 >
                   <polygon points="3 11 22 2 13 21 11 13 3 11" />
                 </svg>
-                Get Directions
+                {copy.map.directionsLabel}
               </a>
             </div>
           </motion.div>
@@ -292,39 +288,39 @@ export default function ContactContent() {
               className="lg:col-span-3"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Ready to Schedule?
+                {copy.schedule.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Skip the message request an appointment
+                {copy.schedule.title}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                If you&rsquo;re ready to book, our{" "}
+                {copy.schedule.beforeLink}{" "}
                 <Link
-                  href="/contact/new-patient-appointment"
+                  href={copy.schedule.linkHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
-                  appointment request form
+                  {copy.schedule.linkLabel}
                 </Link>{" "}
-                gets you on the schedule fastest. Or call{" "}
+                {copy.schedule.beforePhone}{" "}
                 <a
                   href={siteConfig.phoneHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
                   {siteConfig.phone}
                 </a>
-                .
+                {copy.schedule.afterPhone}
               </p>
             </motion.div>
 
             <div className="lg:col-span-2">
               <CtaCard
-                eyebrow="Book a Visit"
-                title="Request an appointment"
-                body="Tell us when you&rsquo;d like to come in."
+                eyebrow={copy.cta.eyebrow}
+                title={copy.cta.title}
+                body={copy.cta.body}
               />
             </div>
           </div>

@@ -5,14 +5,13 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
-import { qaFaqs, type QAFaq } from "@/lib/qaFaqs";
+import { qaDefaults as defaults } from "@/lib/designed/defaults/qa";
+import { mergeContent } from "@/lib/designed/merge";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
 
-type FAQ = QAFaq;
-
-const faqs: FAQ[] = qaFaqs;
+type FAQ = { q: string; a: string[] };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -94,17 +93,15 @@ function FAQAccordion({ faq, i }: { faq: FAQ; i: number }) {
   );
 }
 
-export default function QAContent() {
+export default function QAContent({ content }: { content?: unknown }) {
+  const copy = mergeContent(defaults, content);
+
   return (
     <>
       <ServiceHero
-        title="Q & A"
-        subtitle="Common questions about chiropractic care, adjustments, subluxations, and what to expect answered."
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: "Resources", href: "/resources" },
-          { label: "Q & A" },
-        ]}
+        title={copy.hero.title}
+        subtitle={copy.hero.subtitle}
+        crumbs={copy.hero.crumbs}
       />
 
       {/* SECTION 2 WHITE: INTRO */}
@@ -117,32 +114,31 @@ export default function QAContent() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Questions, Answered
+              {copy.intro.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Everything you wanted to know
+              {copy.intro.title}
             </h2>
             <span
               aria-hidden
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Tap any question below to see the full answer. Don&rsquo;t see
-              what you&rsquo;re looking for?{" "}
+              {copy.intro.lead}{" "}
               <Link
-                href="/contact"
+                href={copy.intro.contactHref}
                 className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
               >
-                Contact us
+                {copy.intro.contactLabel}
               </Link>{" "}
-              or call{" "}
+              {copy.intro.beforePhone}{" "}
               <a
                 href={siteConfig.phoneHref}
                 className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
               >
                 {siteConfig.phone}
               </a>{" "}
- we&rsquo;re always happy to hear from you!
+              {copy.intro.afterPhone}
             </p>
           </motion.div>
         </div>
@@ -168,10 +164,10 @@ export default function QAContent() {
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              7 Common Questions
+              {copy.faq.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              Start exploring
+              {copy.faq.title}
             </h2>
             <span
               aria-hidden
@@ -189,7 +185,7 @@ export default function QAContent() {
             }}
             className="mt-8 sm:mt-12 grid gap-3"
           >
-            {faqs.map((f, i) => (
+            {copy.faq.items.map((f, i) => (
               <FAQAccordion key={f.q} faq={f} i={i} />
             ))}
           </motion.div>
@@ -208,39 +204,39 @@ export default function QAContent() {
               className="lg:col-span-3"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Still Curious?
+                {copy.closing.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Get answers from Dr. Levitt himself
+                {copy.closing.title}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Call{" "}
+                {copy.closing.beforePhone}{" "}
                 <a
                   href={siteConfig.phoneHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
                   {siteConfig.phone}
                 </a>{" "}
-                or{" "}
+                {copy.closing.beforeLink}{" "}
                 <Link
-                  href="/contact"
+                  href={copy.closing.linkHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
-                  send us a message
+                  {copy.closing.linkLabel}
                 </Link>{" "}
- every question gets a real answer.
+                {copy.closing.afterLink}
               </p>
             </motion.div>
 
             <div className="lg:col-span-2">
               <CtaCard
-                eyebrow="Have a Question?"
-                title="Book a consultation"
-                body="Schedule a visit and ask anything in person."
+                eyebrow={copy.cta.eyebrow}
+                title={copy.cta.title}
+                body={copy.cta.body}
               />
             </div>
           </div>

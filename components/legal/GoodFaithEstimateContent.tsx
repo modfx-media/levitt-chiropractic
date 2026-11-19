@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { goodFaithEstimateDefaults as defaults } from "@/lib/designed/defaults/goodFaithEstimate";
+import { mergeContent } from "@/lib/designed/merge";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
 
@@ -15,62 +17,15 @@ const fadeUp = {
   },
 };
 
-type Right = { title: string; body: React.ReactNode };
+export default function GoodFaithEstimateContent({ content }: { content?: unknown }) {
+  const copy = mergeContent(defaults, content);
 
-const rights: Right[] = [
-  {
-    title: "Total expected cost",
-    body: (
-      <>
-        You have the right to receive a Good Faith Estimate for the total
-        expected cost of any non-emergency items or services. This includes
-        related costs like medical tests, prescription drugs, equipment, and
-        hospital fees.
-      </>
-    ),
-  },
-  {
-    title: "In writing, at least 1 business day in advance",
-    body: (
-      <>
-        Make sure your health care provider gives you a Good Faith Estimate
-        in writing at least 1 business day before your medical service or
-        item. You can also ask your health care provider, and any other
-        provider you choose, for a Good Faith Estimate before you schedule
-        an item or service.
-      </>
-    ),
-  },
-  {
-    title: "Dispute bills $400 or more above your estimate",
-    body: (
-      <>
-        If you receive a bill that is at least <strong>$400 more</strong>{" "}
-        than your Good Faith Estimate, you can dispute the bill.
-      </>
-    ),
-  },
-  {
-    title: "Save a copy",
-    body: (
-      <>
-        Make sure to save a copy or picture of your Good Faith Estimate for
-        your records.
-      </>
-    ),
-  },
-];
-
-export default function GoodFaithEstimateContent() {
   return (
     <>
       <ServiceHero
-        title="Good Faith Estimate"
-        subtitle="Your right to know what your care will cost under the No Surprises Act."
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: "Good Faith Estimate" },
-        ]}
+        title={copy.hero.title}
+        subtitle={copy.hero.subtitle}
+        crumbs={copy.hero.crumbs}
       />
 
       {/* SECTION 2 WHITE: INTRO */}
@@ -83,23 +38,20 @@ export default function GoodFaithEstimateContent() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Your Patient Rights
+              {copy.intro.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              You have the right to a Good Faith Estimate
+              {copy.intro.title}
             </h2>
             <span
               aria-hidden
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              You have the right to receive a &ldquo;Good Faith Estimate&rdquo;
-              explaining how much your medical care will cost.
+              {copy.intro.lead}
             </p>
             <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Under the law, health care providers need to give patients who
-              don&rsquo;t have insurance or who are not using insurance an
-              estimate of the bill for medical items and services.
+              {copy.intro.law}
             </p>
           </motion.div>
         </div>
@@ -125,10 +77,10 @@ export default function GoodFaithEstimateContent() {
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              What You&rsquo;re Entitled To
+              {copy.protections.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              Four key protections
+              {copy.protections.title}
             </h2>
             <span
               aria-hidden
@@ -146,7 +98,7 @@ export default function GoodFaithEstimateContent() {
             }}
             className="mt-8 sm:mt-14 grid gap-5 sm:grid-cols-2"
           >
-            {rights.map((r, i) => (
+            {copy.protections.items.map((r, i) => (
               <motion.article
                 key={r.title}
                 variants={{
@@ -168,7 +120,13 @@ export default function GoodFaithEstimateContent() {
                   </h3>
                 </div>
                 <p className="mt-3 text-sm leading-relaxed text-white/75">
-                  {r.body}
+                  {"body" in r ? (
+                    r.body
+                  ) : (
+                    <>
+                      {r.before} <strong>{r.strong}</strong> {r.after}
+                    </>
+                  )}
                 </p>
               </motion.article>
             ))}
@@ -186,37 +144,36 @@ export default function GoodFaithEstimateContent() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Need More Information?
+              {copy.learnMore.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Learn more about your rights
+              {copy.learnMore.title}
             </h2>
             <span
               aria-hidden
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              For questions or more information about your right to a Good
-              Faith Estimate, visit{" "}
+              {copy.learnMore.beforeLink}{" "}
               <a
-                href="https://www.cms.gov/nosurprises"
+                href={copy.learnMore.linkHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
-                cms.gov/nosurprises
+                {copy.learnMore.linkLabel}
               </a>
-              .
+              {copy.learnMore.afterLink}
             </p>
             <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg">
-              To request a Good Faith Estimate from our office, call{" "}
+              {copy.learnMore.beforePhone}{" "}
               <a
                 href={siteConfig.phoneHref}
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
                 {siteConfig.phone}
               </a>
-              .
+              {copy.learnMore.afterPhone}
             </p>
           </motion.div>
         </div>

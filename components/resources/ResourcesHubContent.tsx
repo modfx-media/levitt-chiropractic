@@ -4,26 +4,14 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { resourcesHubDefaults as defaults } from "@/lib/designed/defaults/resourcesHub";
+import { mergeContent } from "@/lib/designed/merge";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
 
-type Resource = {
-  title: string;
-  description: string;
-  href: string;
-  icon: React.ReactNode;
-  group: "Learn" | "Wellness";
-};
-
-const resources: Resource[] = [
-  {
-    title: "About Chiropractic",
-    description:
-      "What chiropractic actually is and how it works a natural, systemic approach to healing.",
-    href: "/resources/about-chiropractic",
-    group: "Learn",
-    icon: (
+const resourceIcons: Record<string, React.ReactNode> = {
+  about: (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -38,14 +26,7 @@ const resources: Resource[] = [
         <path d="M9 11l2 2 4-4" />
       </svg>
     ),
-  },
-  {
-    title: "Q & A",
-    description:
-      "Common questions about adjustments, subluxations, and what to expect answered in plain language.",
-    href: "/resources/qa",
-    group: "Learn",
-    icon: (
+  qa: (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -60,14 +41,7 @@ const resources: Resource[] = [
         <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 18h.01" />
       </svg>
     ),
-  },
-  {
-    title: "Blog & Insights",
-    description:
-      "In-depth articles on spinal health, recovery, and getting the most out of chiropractic care.",
-    href: "/blog",
-    group: "Learn",
-    icon: (
+  blog: (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -82,14 +56,7 @@ const resources: Resource[] = [
         <path d="M8 7h8M8 11h8M8 15h5" />
       </svg>
     ),
-  },
-  {
-    title: "Spinal Wellness Tips",
-    description:
-      "Practical daily habits posture, lifting, sleep, hydration that protect your spine for life.",
-    href: "/resources/wellness-tips",
-    group: "Wellness",
-    icon: (
+  wellness: (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -103,10 +70,7 @@ const resources: Resource[] = [
         <path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4" />
       </svg>
     ),
-  },
-];
-
-const groups: Resource["group"][] = ["Learn", "Wellness"];
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -117,16 +81,15 @@ const fadeUp = {
   },
 };
 
-export default function ResourcesHubContent() {
+export default function ResourcesHubContent({ content }: { content?: unknown }) {
+  const copy = mergeContent(defaults, content);
+
   return (
     <>
       <ServiceHero
-        title="Resources"
-        subtitle="Learn more about your spine, your health, and your care articles, tools, and trusted resources."
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: "Resources" },
-        ]}
+        title={copy.hero.title}
+        subtitle={copy.hero.subtitle}
+        crumbs={copy.hero.crumbs}
       />
 
       {/* SECTION 2 WHITE: INTRO */}
@@ -139,27 +102,24 @@ export default function ResourcesHubContent() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Patient Education
+              {copy.intro.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Knowledge is the first step
+              {copy.intro.title}
             </h2>
             <span
               aria-hidden
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              We&rsquo;ve put together a library of patient resources to help
-              you understand chiropractic care, learn how your spine works,
-              and adopt habits that keep you feeling your best. Browse the
-              topics below or call{" "}
+              {copy.intro.beforePhone}{" "}
               <a
                 href={siteConfig.phoneHref}
                 className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
               >
                 {siteConfig.phone}
               </a>{" "}
-              with any questions.
+              {copy.intro.afterPhone}
             </p>
           </motion.div>
         </div>
@@ -185,10 +145,10 @@ export default function ResourcesHubContent() {
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              Browse by Topic
+              {copy.browse.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              Pick your starting point
+              {copy.browse.title}
             </h2>
             <span
               aria-hidden
@@ -197,8 +157,8 @@ export default function ResourcesHubContent() {
           </motion.div>
 
           <div className="mt-14 space-y-16">
-            {groups.map((groupName) => {
-              const groupItems = resources.filter(
+            {copy.browse.groups.map((groupName) => {
+              const groupItems = copy.browse.resources.filter(
                 (r) => r.group === groupName,
               );
               if (groupItems.length === 0) return null;
@@ -251,7 +211,7 @@ export default function ResourcesHubContent() {
                           className="group relative block h-full overflow-hidden rounded-2xl border-t-4 border-[#F97316] bg-[#1E3A5F]/60 p-7 ring-1 ring-white/10 backdrop-blur-sm transition-all hover:-translate-y-1.5 hover:bg-[#1E3A5F]/80 hover:ring-[#F97316]/40"
                         >
                           <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#F97316]/15 text-[#F97316] ring-1 ring-[#F97316]/30 transition-colors group-hover:bg-[#F97316] group-hover:text-white">
-                            {r.icon}
+                            {resourceIcons[r.icon] ?? resourceIcons.about}
                           </span>
                           <h4 className="mt-5 font-heading text-lg font-bold text-white">
                             {r.title}
@@ -260,7 +220,7 @@ export default function ResourcesHubContent() {
                             {r.description}
                           </p>
                           <span className="mt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-orange-300 transition-colors group-hover:text-[#F97316]">
-                            Explore
+                            {copy.browse.exploreLabel}
                             <svg
                               viewBox="0 0 24 24"
                               fill="none"
@@ -297,39 +257,39 @@ export default function ResourcesHubContent() {
               className="lg:col-span-3"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Still Have Questions?
+                {copy.closing.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Talk to Dr. Levitt directly
+                {copy.closing.title}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Reading helps, but nothing beats a real conversation. Call{" "}
+                {copy.closing.beforePhone}{" "}
                 <a
                   href={siteConfig.phoneHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
                   {siteConfig.phone}
                 </a>{" "}
-                or{" "}
+                {copy.closing.beforeLink}{" "}
                 <Link
-                  href="/contact"
+                  href={copy.closing.linkHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
-                  send us a message
+                  {copy.closing.linkLabel}
                 </Link>{" "}
- every question gets a real answer.
+                {copy.closing.afterLink}
               </p>
             </motion.div>
 
             <div className="lg:col-span-2">
               <CtaCard
-                eyebrow="Have a Question?"
-                title="Book a consultation"
-                body="Schedule a visit and ask anything in person."
+                eyebrow={copy.cta.eyebrow}
+                title={copy.cta.title}
+                body={copy.cta.body}
               />
             </div>
           </div>

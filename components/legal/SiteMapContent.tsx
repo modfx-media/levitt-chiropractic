@@ -4,7 +4,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
-import { sitemapSections } from "@/lib/sitemapEntries";
+import { siteMapDefaults as defaults } from "@/lib/designed/defaults/siteMap";
+import { mergeContent } from "@/lib/designed/merge";
 import type { ServedCity } from "@/lib/areasData";
 import { pseoServices } from "@/lib/pseoServices";
 import { CtaCard } from "@/components/services/CtaCard";
@@ -20,23 +21,24 @@ const fadeUp = {
   },
 };
 
-export default function SiteMapContent({ cities: servedCities }: { cities: ServedCity[] }) {
-  const totalLinks = sitemapSections.reduce(
-    (sum, s) => sum + s.links.length,
-    0,
-  );
+export default function SiteMapContent({
+  cities: servedCities,
+  content,
+}: {
+  cities: ServedCity[];
+  content?: unknown;
+}) {
+  const copy = mergeContent(defaults, content);
+  const totalLinks = copy.sections.reduce((sum, s) => sum + s.links.length, 0);
   const totalAreaPages =
     1 + servedCities.length + servedCities.length * pseoServices.length;
 
   return (
     <>
       <ServiceHero
-        title="Site Map"
-        subtitle="Every page on the Levitt Chiropractic Center, P.A. website organized for quick navigation."
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: "Site Map" },
-        ]}
+        title={copy.hero.title}
+        subtitle={copy.hero.subtitle}
+        crumbs={copy.hero.crumbs}
       />
 
       {/* Intro */}
@@ -50,25 +52,26 @@ export default function SiteMapContent({ cities: servedCities }: { cities: Serve
             className="mx-auto max-w-3xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Full Index
+              {copy.intro.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Find what you need, fast
+              {copy.intro.title}
             </h2>
             <span
               aria-hidden
               className="mx-auto mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-left text-base leading-relaxed text-slate-700 sm:text-lg">
-              {totalLinks + totalAreaPages} pages across {sitemapSections.length + 1} sections.
-              Looking for the machine-readable version?{" "}
+              {totalLinks + totalAreaPages} {copy.intro.pagesAcross}{" "}
+              {copy.sections.length + 1} {copy.intro.sectionsLabel}{" "}
+              {copy.intro.machineReadable}{" "}
               <a
-                href="/sitemap.xml"
+                href={copy.intro.sitemapHref}
                 className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
               >
-                /sitemap.xml
+                {copy.intro.sitemapLabel}
               </a>{" "}
-              is available for search engines.
+              {copy.intro.sitemapTail}
             </p>
           </motion.div>
         </div>
@@ -87,7 +90,7 @@ export default function SiteMapContent({ cities: servedCities }: { cities: Serve
 
         <div className="relative mx-auto max-w-7xl px-6">
           <div className="grid gap-6 sm:gap-7 md:grid-cols-2 lg:grid-cols-3">
-            {sitemapSections.map((section, idx) => (
+            {copy.sections.map((section, idx) => (
               <motion.div
                 key={section.title}
                 variants={fadeUp}
@@ -98,7 +101,8 @@ export default function SiteMapContent({ cities: servedCities }: { cities: Serve
                 className="rounded-2xl border-t-4 border-[#F97316] bg-[#1E3A5F]/60 p-6 shadow-xl ring-1 ring-white/10 backdrop-blur-sm sm:p-7"
               >
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-orange-300">
-                  {String(idx + 1).padStart(2, "0")} · Section
+                  {String(idx + 1).padStart(2, "0")}
+                  {copy.sectionMeta}
                 </p>
                 <h3 className="mt-2 font-heading text-xl font-bold text-white sm:text-2xl">
                   {section.title}
@@ -145,18 +149,21 @@ export default function SiteMapContent({ cities: servedCities }: { cities: Serve
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Areas We Serve · Full Directory
+              {copy.areas.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              All {totalAreaPages.toLocaleString()} local pages
+              {copy.areas.titlePrefix}
+              {totalAreaPages.toLocaleString()}
+              {copy.areas.titleSuffix}
             </h2>
             <span
               aria-hidden
               className="mx-auto mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 text-base leading-relaxed text-slate-600 sm:text-lg">
-              Every Twin Cities community we serve, with all {pseoServices.length} specialty
-              services available locally. Click any city to expand.
+              {copy.areas.bodyPrefix}
+              {pseoServices.length}
+              {copy.areas.bodySuffix}
             </p>
           </motion.div>
 
@@ -172,7 +179,8 @@ export default function SiteMapContent({ cities: servedCities }: { cities: Serve
                       {c.region}
                     </p>
                     <p className="mt-1 truncate font-heading text-base font-bold text-[#0F172A]">
-                      {c.name}, MN
+                      {c.name}
+                      {copy.areas.nameSuffix}
                     </p>
                   </div>
                   <span
@@ -186,17 +194,18 @@ export default function SiteMapContent({ cities: servedCities }: { cities: Serve
                 <ul className="mt-4 space-y-1.5 border-t border-slate-200 pt-4">
                   <li>
                     <Link
-                      href={`/areas-we-serve/${c.slug}`}
+                      href={`${copy.areas.basePath}/${c.slug}`}
                       className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-semibold text-[#0F172A] transition-colors hover:bg-orange-50 hover:text-[#F97316]"
                     >
                       <span aria-hidden className="text-[#F97316]">★</span>
-                      {c.name} overview
+                      {c.name}
+                      {copy.areas.overviewSuffix}
                     </Link>
                   </li>
                   {pseoServices.map((s) => (
                     <li key={s.slug}>
                       <Link
-                        href={`/areas-we-serve/${c.slug}/${s.slug}`}
+                        href={`${copy.areas.basePath}/${c.slug}/${s.slug}`}
                         className="flex items-start gap-2 rounded-md px-2 py-1.5 text-sm text-slate-700 transition-colors hover:bg-orange-50 hover:text-[#F97316]"
                       >
                         <span
@@ -204,7 +213,11 @@ export default function SiteMapContent({ cities: servedCities }: { cities: Serve
                           className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#F97316]/60"
                         />
                         <span>
-                          {s.name} <span className="text-slate-400">in {c.name}</span>
+                          {s.name}{" "}
+                          <span className="text-slate-400">
+                            {copy.areas.inLabel}
+                            {c.name}
+                          </span>
                         </span>
                       </Link>
                     </li>
@@ -220,9 +233,9 @@ export default function SiteMapContent({ cities: servedCities }: { cities: Serve
       <section className="bg-white py-12 sm:py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
           <CtaCard
-            eyebrow="Can't find what you're looking for?"
-            title="We're here to help"
-            body={`Call ${siteConfig.phone} or send us a message we'll point you to the right resource or schedule your visit.`}
+            eyebrow={copy.cta.eyebrow}
+            title={copy.cta.title}
+            body={`${copy.cta.bodyBefore}${siteConfig.phone}${copy.cta.bodyAfter}`}
           />
         </div>
       </section>
