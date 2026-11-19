@@ -114,18 +114,42 @@ export default buildConfig({
   ],
   globals: [Header, Footer, SiteSettings],
   editor: lexicalEditor(),
-  db: vercelPostgresAdapter({
-    pool: { connectionString: databaseUrl },
-    forceUseVercelPostgres: !isLocalhost,
-    push: !disablePush,
-    prodMigrations: [
-      {
-        name: designedContentMigration.name,
-        up: designedContentMigration.up,
-        down: designedContentMigration.down,
-      },
-    ],
-  }),
+  db: (() => {
+    const postgres = vercelPostgresAdapter({
+      pool: { connectionString: databaseUrl },
+      forceUseVercelPostgres: !isLocalhost,
+      push: !disablePush,
+      prodMigrations: [
+        {
+          name: designedContentMigration.name,
+          up: designedContentMigration.up,
+          down: designedContentMigration.down,
+        },
+      ],
+    });
+    // A database created with dev push stores a batch=-1 row. Payload then
+    // asks for confirmation before migrating, and a preview build has no
+    // terminal to answer, so the deploy stops. This migration only adds
+    // columns and tables, so clear that marker and continue.
+    const originalInit = postgres.init.bind(postgres);
+    postgres.init = (args) => {
+      const adapter = originalInit(args);
+      const migrate = adapter.migrate.bind(adapter);
+      adapter.migrate = async (migrateArgs) => {
+        try {
+          await adapter.drizzle.execute(
+            sql`DELETE FROM "payload_migrations" WHERE "batch" = -1`,
+          );
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          if (!/payload_migrations|does not exist/i.test(message)) throw error;
+        }
+        return migrate(migrateArgs);
+      };
+      return adapter;
+    };
+    return postgres;
+  })(),
   plugins: [scheduledPublishPlugin(), ...cmsPlugins()],
   cors: allowedOrigins(),
   csrf: allowedOrigins(),
