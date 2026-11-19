@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import NeckPainContent from "@/components/services/NeckPainContent";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
@@ -17,7 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/neck-pain", fallbackMeta);
 }
 
-export default function NeckPainPage() {
+export default async function NeckPainPage() {
+  const content = await loadPageContent("/neck-pain");
   return (
     <CMSRoute path="/neck-pain">
       <>
@@ -26,7 +28,7 @@ export default function NeckPainPage() {
           slug="neck-pain"
           description="Chiropractic evaluation for neck pain, pinched nerves, and headaches that start in the neck at Levitt Chiropractic Center in Saint Louis Park."
         />
-        <NeckPainContent />
+        <NeckPainContent content={content}  />
       </>
     </CMSRoute>
   );

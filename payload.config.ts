@@ -10,6 +10,14 @@ import { Users } from "./src/cms/collections/Users";
 import { Media } from "./src/cms/collections/Media";
 import { Pages } from "./src/cms/collections/Pages";
 import { Posts } from "./src/cms/collections/Posts";
+import {
+  Cities,
+  Conditions,
+  Faqs,
+  PracticeServices,
+  TeamMembers,
+  Testimonials,
+} from "./src/cms/collections/Catalog";
 import { Header, Footer, SiteSettings } from "./src/cms/globals";
 import { cmsPlugins } from "./src/cms/plugins";
 import { siteConfig } from "./lib/siteConfig";
@@ -91,7 +99,18 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Pages, Posts],
+  collections: [
+    Users,
+    Media,
+    Pages,
+    Posts,
+    Cities,
+    PracticeServices,
+    Conditions,
+    Faqs,
+    Testimonials,
+    TeamMembers,
+  ],
   globals: [Header, Footer, SiteSettings],
   editor: lexicalEditor(),
   db: vercelPostgresAdapter({

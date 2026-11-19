@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import HipaaPolicyContent from "@/components/legal/HipaaPolicyContent";
 
@@ -16,10 +17,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/hipaa-policy", fallbackMeta);
 }
 
-export default function Page() {
+export default async function Page() {
+  const content = await loadPageContent("/hipaa-policy");
   return (
     <CMSRoute path="/hipaa-policy">
-      <HipaaPolicyContent />
+      <HipaaPolicyContent content={content}  />
     </CMSRoute>
   );
 }

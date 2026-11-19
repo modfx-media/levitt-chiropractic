@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import BackPainTreatmentsContent from "@/components/services/BackPainTreatmentsContent";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
@@ -17,7 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/back-pain-treatments", fallbackMeta);
 }
 
-export default function BackPainTreatmentsPage() {
+export default async function BackPainTreatmentsPage() {
+  const content = await loadPageContent("/back-pain-treatments");
   return (
     <CMSRoute path="/back-pain-treatments">
     <>
@@ -26,7 +28,7 @@ export default function BackPainTreatmentsPage() {
         slug="back-pain-treatments"
         description="Chiropractic back pain and sciatica care in Saint Louis Park. Exam first, then adjustments, cold laser, ice, or exercise when the findings support them."
       />
-      <BackPainTreatmentsContent />
+      <BackPainTreatmentsContent content={content}  />
     </>
   
     </CMSRoute>

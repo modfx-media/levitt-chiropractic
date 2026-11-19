@@ -4,6 +4,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { allServedCities, getCityBySlug, withLiveNeighbors } from "@/lib/areasData";
 import { retiredCityTarget } from "@/lib/areaRetirement";
 import { pseoServices, getServiceBySlug } from "@/lib/pseoServices";
@@ -65,6 +66,7 @@ export default async function Page({
   const target = retiredCityTarget(found.slug);
   if (target) permanentRedirect(`/areas-we-serve/${target}/${service.slug}`);
   const city = withLiveNeighbors(found);
+  const content = await loadPageContent(`/areas-we-serve/${city.slug}/${service.slug}`);
 
   return (
     <CMSRoute path={`/areas-we-serve/${city.slug}/${service.slug}`}>
@@ -94,7 +96,7 @@ export default async function Page({
         id={`ld-faq-${city.slug}-${service.slug}`}
         data={faqPageJsonLd({ faqs: cityServiceFaqs(city, service) })}
       />
-      <AreaServicePageContent city={city} service={service} />
+      <AreaServicePageContent content={content} city={city} service={service} />
     </>
     </CMSRoute>
   );

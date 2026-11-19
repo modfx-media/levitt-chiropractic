@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import { getServedCities } from "@/lib/areasData";
 import AreasWeServeContent from "@/components/areas/AreasWeServeContent";
@@ -20,10 +21,11 @@ export async function generateMetadata(): Promise<Metadata> {
   );
 }
 
-export default function Page() {
+export default async function Page() {
+  const content = await loadPageContent("/areas-we-serve");
   return (
     <CMSRoute path="/areas-we-serve">
-      <AreasWeServeContent cities={getServedCities()} />
+      <AreasWeServeContent content={content} cities={getServedCities()}  />
     </CMSRoute>
   );
 }

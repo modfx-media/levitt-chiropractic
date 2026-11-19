@@ -2,15 +2,7 @@
 
 import { motion } from "framer-motion";
 
-import { siteConfig } from "@/lib/siteConfig";
-
-const hoursInline = [
-  { day: "Mon / Thu", time: "8:30–11:30am · 2:30–5:30pm" },
-  { day: "Tue / Fri", time: "8:30am – 11:30am" },
-  { day: "Wed", time: "10:00am – 12:00pm" },
-  { day: "Sat", time: "By Appointment" },
-  { day: "Sun", time: "Closed" },
-];
+import { useSiteShell } from "@/components/layout/SiteShellContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -22,6 +14,8 @@ const fadeUp = {
 };
 
 export function LocationStrip() {
+  const shell = useSiteShell();
+  const hoursInline = shell.hoursInline;
   return (
     <section className="relative bg-white py-16">
       <motion.div
@@ -53,10 +47,10 @@ export function LocationStrip() {
               Address
             </p>
             <p className="mt-1 text-sm leading-relaxed text-[#0F172A]">
-              {siteConfig.address.street}
+              {shell.address.street}
               <br />
-              {siteConfig.address.city}, {siteConfig.address.state}{" "}
-              {siteConfig.address.zip}
+              {shell.address.city}, {shell.address.state}{" "}
+              {shell.address.zip}
             </p>
           </div>
         </div>
@@ -82,10 +76,10 @@ export function LocationStrip() {
               Phone
             </p>
             <a
-              href={siteConfig.phoneHref}
+              href={shell.phoneHref}
               className="mt-1 block text-sm font-semibold text-[#0F172A] transition-colors hover:text-[#F97316]"
             >
-              {siteConfig.phone}
+              {shell.phone}
             </a>
           </div>
         </div>

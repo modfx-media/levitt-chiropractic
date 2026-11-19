@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import CommonChiropracticConditionsContent from "@/components/services/CommonChiropracticConditionsContent";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
@@ -17,7 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/common-chiropractic-conditions", fallbackMeta);
 }
 
-export default function CommonChiropracticConditionsPage() {
+export default async function CommonChiropracticConditionsPage() {
+  const content = await loadPageContent("/common-chiropractic-conditions");
   return (
     <CMSRoute path="/common-chiropractic-conditions">
     <>
@@ -26,7 +28,7 @@ export default function CommonChiropracticConditionsPage() {
         slug="common-chiropractic-conditions"
         description="Chiropractic care for allergies, headaches, sciatica, carpal tunnel, fibromyalgia, joint dysfunction and more in Saint Louis Park, MN."
       />
-      <CommonChiropracticConditionsContent />
+      <CommonChiropracticConditionsContent content={content}  />
     </>
   
     </CMSRoute>

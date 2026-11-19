@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import PrivacyPolicyContent from "@/components/legal/PrivacyPolicyContent";
 
@@ -16,10 +17,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/privacy-policy", fallbackMeta);
 }
 
-export default function Page() {
+export default async function Page() {
+  const content = await loadPageContent("/privacy-policy");
   return (
     <CMSRoute path="/privacy-policy">
-      <PrivacyPolicyContent />
+      <PrivacyPolicyContent content={content}  />
     </CMSRoute>
   );
 }

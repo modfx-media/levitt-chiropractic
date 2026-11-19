@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import FunctionalMedicineContent from "@/components/services/FunctionalMedicineContent";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
@@ -17,7 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/functional-medicine", fallbackMeta);
 }
 
-export default function FunctionalMedicinePage() {
+export default async function FunctionalMedicinePage() {
+  const content = await loadPageContent("/functional-medicine");
   return (
     <CMSRoute path="/functional-medicine">
     <>
@@ -26,7 +28,7 @@ export default function FunctionalMedicinePage() {
         slug="functional-medicine"
         description="Functional medicine in Saint Louis Park, MN. A personalized, whole-person approach to address chronic pain and chronic illness at the root cause."
       />
-      <FunctionalMedicineContent />
+      <FunctionalMedicineContent content={content}  />
     </>
   
     </CMSRoute>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import IcePackCryotherapyContent from "@/components/services/IcePackCryotherapyContent";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
@@ -17,7 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/ice-pack-cryotherapy", fallbackMeta);
 }
 
-export default function IcePackCryotherapyPage() {
+export default async function IcePackCryotherapyPage() {
+  const content = await loadPageContent("/ice-pack-cryotherapy");
   return (
     <CMSRoute path="/ice-pack-cryotherapy">
     <>
@@ -26,7 +28,7 @@ export default function IcePackCryotherapyPage() {
         slug="ice-pack-cryotherapy"
         description="Ice pack cryotherapy in Saint Louis Park, MN to reduce pain, swelling and inflammation. Used in sports medicine and chiropractic rehab."
       />
-      <IcePackCryotherapyContent />
+      <IcePackCryotherapyContent content={content}  />
     </>
   
     </CMSRoute>

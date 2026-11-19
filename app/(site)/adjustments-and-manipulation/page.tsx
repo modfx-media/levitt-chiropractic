@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import AdjustmentsContent from "@/components/services/AdjustmentsContent";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
@@ -18,7 +19,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/adjustments-and-manipulation", fallbackMeta);
 }
 
-export default function AdjustmentsPage() {
+export default async function AdjustmentsPage() {
+  const content = await loadPageContent("/adjustments-and-manipulation");
   return (
     <CMSRoute path="/adjustments-and-manipulation">
     <>
@@ -27,7 +29,7 @@ export default function AdjustmentsPage() {
         slug="adjustments-and-manipulation"
         description="Chiropractic adjustments and spinal manipulation in Saint Louis Park, MN using Diversified Technique, Zone Therapy and Torque Release Technique to relieve pain and restore alignment."
       />
-      <AdjustmentsContent />
+      <AdjustmentsContent content={content}  />
     </>
   
     </CMSRoute>

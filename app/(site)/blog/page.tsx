@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import { getAllPosts } from "@/lib/blog";
 import { mergePublishedCmsPosts } from "@/lib/cms/posts";
@@ -23,6 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
+  const content = await loadPageContent("/blog");
   const localPosts = getAllPosts();
   const rankedPosts = await getLiveRankedBlogPosts();
   const localSlugs = new Set(localPosts.map((p) => p.slug));
@@ -35,7 +37,7 @@ export default async function Page() {
   const posts = await mergePublishedCmsPosts(hardcoded);
   return (
     <CMSRoute path="/blog">
-      <BlogIndexContent posts={posts} />
+      <BlogIndexContent content={content} posts={posts}  />
     </CMSRoute>
   );
 }

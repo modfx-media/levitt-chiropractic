@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, type MotionProps } from "framer-motion";
 
-import { siteConfig } from "@/lib/siteConfig";
+import { useSiteShell } from "@/components/layout/SiteShellContext";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 function PhoneIcon({ className = "" }: { className?: string }) {
@@ -42,28 +42,12 @@ function PinIcon({ className = "" }: { className?: string }) {
   );
 }
 
-const exploreLinks = [
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Adjustments", href: "/adjustments-and-manipulation" },
-  { label: "Back Pain", href: "/back-pain-treatments" },
-  { label: "New Patient Center", href: "/new-patient-center" },
-  { label: "Saint Louis Park office", href: "/areas-we-serve/saint-louis-park" },
-  { label: "Areas We Serve", href: "/areas-we-serve" },
-  { label: "Contact", href: "/contact" },
-];
-
-const legalLinks = [
-  { label: "Site Map", href: "/site-map" },
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "HIPAA Policy", href: "/hipaa-policy" },
-  { label: "Terms of Use", href: "/terms-of-use" },
-  { label: "Good Faith Estimate", href: "/good-faith-estimate" },
-];
-
 export function Footer() {
+  const shell = useSiteShell();
   const reduce = useReducedMotion();
   const year = new Date().getFullYear();
+  const exploreLinks = shell.footer.explore;
+  const legalLinks = shell.footer.legal;
 
   const fadeUp: MotionProps = reduce
     ? {}
@@ -87,54 +71,54 @@ export function Footer() {
               <Link
                 href="/"
                 className="inline-flex items-center gap-2.5"
-                aria-label={`${siteConfig.name} home`}
+                aria-label={`${shell.name} home`}
               >
                 <Image
-                  src="/images/fevicon.png"
-                  alt="Levitt Chiropractic Center logo"
+                  src={shell.logos.markSrc}
+                  alt={shell.logos.markAlt}
                   width={48}
                   height={48}
                   className="h-9 w-9 flex-shrink-0 object-contain"
                 />
                 <Image
-                  src="/images/logo.png"
-                  alt={siteConfig.name}
+                  src={shell.logos.wordmarkSrc}
+                  alt={shell.logos.wordmarkAlt}
                   width={220}
                   height={56}
                   className="h-9 w-auto object-contain"
                 />
               </Link>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-white/65">
-                Chiropractic care in Saint Louis Park since 1999.
+                {shell.footer.blurb}
               </p>
 
               {/* Contact row */}
               <div className="mt-5 space-y-2 text-sm">
                 <a
-                  href={siteConfig.phoneHref}
+                  href={shell.phoneHref}
                   className="inline-flex items-center gap-2 text-white hover:text-primary"
                 >
                   <PhoneIcon className="h-4 w-4 text-primary" />
-                  <span className="font-semibold">{siteConfig.phone}</span>
+                  <span className="font-semibold">{shell.phone}</span>
                 </a>
                 <p className="flex items-start gap-2 text-white/65">
                   <PinIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-                  <span>{siteConfig.address.full}</span>
+                  <span>{shell.address.full}</span>
                 </p>
               </div>
 
               <div className="mt-5 flex flex-wrap gap-2">
                 <Link
-                  href={siteConfig.appointmentUrl}
+                  href={shell.appointmentUrl}
                   className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-orange-600"
                 >
-                  NEW Patient Appointment
+                  {shell.footer.newPatientLabel}
                 </Link>
                 <Link
-                  href={siteConfig.existingPatientAppointmentUrl}
+                  href={shell.existingPatientAppointmentUrl}
                   className="inline-flex items-center justify-center rounded-full border border-white/25 px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:border-primary hover:text-primary"
                 >
-                  Existing Patient Appointment
+                  {shell.footer.existingPatientLabel}
                 </Link>
               </div>
             </div>
@@ -142,7 +126,7 @@ export function Footer() {
             {/* Explore */}
             <div className="lg:col-span-3">
               <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">
-                Explore
+                {shell.footer.exploreTitle}
               </h3>
               <ul className="mt-4 space-y-2.5 text-sm">
                 {exploreLinks.map((l) => (
@@ -161,7 +145,7 @@ export function Footer() {
             {/* Legal */}
             <div className="lg:col-span-4">
               <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">
-                Legal
+                {shell.footer.legalTitle}
               </h3>
               <ul className="mt-4 space-y-2.5 text-sm">
                 {legalLinks.map((l) => (
@@ -181,15 +165,15 @@ export function Footer() {
           {/* Bottom bar */}
           <div className="mt-10 flex flex-col items-start gap-3 border-t border-white/10 pt-5 text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
             <p>
-              © {year} {siteConfig.name} All Rights Reserved.
+              © {year} {shell.name} All Rights Reserved.
             </p>
             <a
-              href="https://modfxmedia.com/"
+              href={shell.footer.poweredByHref}
               target="_blank"
               rel="noopener noreferrer"
               className="font-semibold uppercase tracking-[0.14em] transition-colors hover:text-primary"
             >
-              Powered by ModFXMedia
+              {shell.footer.poweredByLabel}
             </a>
           </div>
         </div>

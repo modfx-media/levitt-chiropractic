@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import { getServedCities } from "@/lib/areasData";
 import SiteMapContent from "@/components/legal/SiteMapContent";
@@ -20,10 +21,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/site-map", fallbackMeta);
 }
 
-export default function Page() {
+export default async function Page() {
+  const content = await loadPageContent("/site-map");
   return (
     <CMSRoute path="/site-map">
-      <SiteMapContent cities={getServedCities()} />
+      <SiteMapContent content={content} cities={getServedCities()}  />
     </CMSRoute>
   );
 }

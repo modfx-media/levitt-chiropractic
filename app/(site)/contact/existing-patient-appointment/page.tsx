@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import AppointmentRequestContent from "@/components/contact/AppointmentRequestContent";
 
@@ -16,10 +17,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/contact/existing-patient-appointment", fallbackMeta);
 }
 
-export default function Page() {
+export default async function Page() {
+  const content = await loadPageContent("/contact/existing-patient-appointment");
   return (
     <CMSRoute path="/contact/existing-patient-appointment">
-      <AppointmentRequestContent variant="existing" />
+      <AppointmentRequestContent content={content} variant="existing"  />
     </CMSRoute>
   );
 }

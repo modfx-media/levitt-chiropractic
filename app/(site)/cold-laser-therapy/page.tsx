@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import ColdLaserTherapyContent from "@/components/services/ColdLaserTherapyContent";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
@@ -17,7 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/cold-laser-therapy", fallbackMeta);
 }
 
-export default function ColdLaserTherapyPage() {
+export default async function ColdLaserTherapyPage() {
+  const content = await loadPageContent("/cold-laser-therapy");
   return (
     <CMSRoute path="/cold-laser-therapy">
       <>
@@ -26,7 +28,7 @@ export default function ColdLaserTherapyPage() {
           slug="cold-laser-therapy"
           description="Handheld cold laser therapy at Levitt Chiropractic Center in Saint Louis Park, used after an exam for selected soft-tissue and joint pain."
         />
-        <ColdLaserTherapyContent />
+        <ColdLaserTherapyContent content={content}  />
       </>
     </CMSRoute>
   );
