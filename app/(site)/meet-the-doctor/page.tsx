@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import { physicianJsonLd } from "@/lib/jsonLd";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -17,12 +18,13 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/meet-the-doctor", fallbackMeta);
 }
 
-export default function Page() {
+export default async function Page() {
+  const content = await loadPageContent("/meet-the-doctor");
   return (
     <CMSRoute path="/meet-the-doctor">
       <>
         <JsonLd id="ld-physician" data={physicianJsonLd()} />
-        <MeetTheDoctorContent />
+        <MeetTheDoctorContent content={content}  />
       </>
     </CMSRoute>
   );

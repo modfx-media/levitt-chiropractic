@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import CryotherapyContent from "@/components/services/CryotherapyContent";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
@@ -17,7 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/cryotherapy", fallbackMeta);
 }
 
-export default function CryotherapyPage() {
+export default async function CryotherapyPage() {
+  const content = await loadPageContent("/cryotherapy");
   return (
     <CMSRoute path="/cryotherapy">
     <>
@@ -26,7 +28,7 @@ export default function CryotherapyPage() {
         slug="cryotherapy"
         description="Cryotherapy in Saint Louis Park, MN ice pack and whole-body cold therapy to reduce pain, swelling and inflammation."
       />
-      <CryotherapyContent />
+      <CryotherapyContent content={content}  />
     </>
   
     </CMSRoute>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import TestimonialsContent from "@/components/testimonials/TestimonialsContent";
 import { getDisplayedGoogleReviews } from "@/lib/google-reviews";
@@ -17,11 +18,12 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function TestimonialsPage() {
+  const content = await loadPageContent("/testimonials");
   const payload = await getDisplayedGoogleReviews();
 
   return (
     <CMSRoute path="/testimonials">
-      <TestimonialsContent
+      <TestimonialsContent content={content}
         items={payload.reviews.map((review) => ({
           name: review.name,
           quote: review.quote,

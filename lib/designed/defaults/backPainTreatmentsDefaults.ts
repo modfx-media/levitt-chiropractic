@@ -1,0 +1,140 @@
+export const backPainTreatmentsDefaults = {
+  hero: {
+    title: "Back Pain Treatment, Including Sciatica",
+    subtitle:
+      "A mechanical exam for low-back pain and nerve pain down the leg. Drug-free care when the findings support it, and a referral when they do not.",
+    crumbs: [
+      { label: "Home", href: "/" },
+      { label: "Services", href: "/services" },
+      { label: "Common Chiropractic Conditions", href: "/common-chiropractic-conditions" },
+      { label: "Back Pain Treatments" },
+    ],
+  },
+  intro: {
+    eyebrow: "Low back pain",
+    title: "Most backs we see are mechanical. Some are not.",
+    mechanical:
+      "Back pain here is the ache from a desk, a lift, a long drive, or a weekend project, plus the leg pain that sometimes comes with it. Medication can take the edge off. Surgery has a place for a narrow set of nerve problems. Neither is the opening conversation for a joint or disc problem we can examine in Suite 201.",
+    sciatica:
+      "Sciatica is the name for irritation of the sciatic nerve. The nerve runs from the low back, through the buttock, and down the leg. When it is irritated, people feel pain, numbness, tingling, or weakness along that path. Bulging discs, a spinal joint that is not moving well, and muscle spasm can all increase pressure on it. Treating the word “sciatica” without finding which of those is involved does not help.",
+    beforeNeck: "Both local back pain and sciatica, when the exam supports that label, are treated here. Neck pain is a different complaint. Neck pain that stays in the neck is covered under",
+    neck: { href: "/neck-pain", label: "neck pain" },
+  },
+  patterns: {
+    eyebrow: "Patterns",
+    title: "Four ways back pain shows up",
+    intro: "These are descriptions, not diagnoses. Two of them can exist in the same person. The point of the list is to give you language for the history.",
+    items: [
+      { title: "Local lumbar ache", body: "Pain stays in the low back. Sitting, lifting, or standing up changes it. The leg feels normal." },
+      { title: "Pain that travels", body: "A line of pain, numbness, or tingling leaves the back and goes into the buttock, thigh, or calf. This is the pattern people call sciatica, and it still needs a cause." },
+      { title: "Stiff, guarded back", body: "The muscles lock after a lift, a long day at a desk, or a night of poor sleep. Motion is limited. The pain is broad rather than a thin line down one leg." },
+      { title: "A back that keeps returning", body: "The same spot flares every few weeks. Sometimes the driver is a joint that does not move well. Sometimes it is a disc, a hip, or the way the feet hit the ground." },
+    ],
+  },
+  sciatica: {
+    eyebrow: "Sciatica",
+    title: "Leg pain needs a cause, not a stretch you found online",
+    pattern: "A sciatica pattern is pain or sensory change along the nerve, often a line rather than a bruise. Coughing, sitting, or bending can make it louder. The ankle or big toe can feel weak. Those details tell the exam where to look. They do not diagnose you.",
+    sacroiliac: "A common mix-up is the sacroiliac joint, where the base of the spine meets the pelvis. That joint can cause low-back pain and limit motion, and the symptoms overlap sciatica and a herniated disc. The joint can be tested in the exam. If that is the driver, the adjustment is aimed there, not at a disc that was never the problem.",
+    beforeOrthotics: "A local muscle can ache in the buttock without being sciatica. Custom orthotics come up only when the way you stand keeps reloading the same side. They are prescription devices, not drugstore inserts. See the",
+    orthotics: { href: "/custom-foot-orthotics", label: "orthotics" },
+    afterOrthotics: "If the leg is getting weaker, use the red-flag list the same day.",
+  },
+  screen: {
+    title: "Get a medical screen, not an adjustment",
+    items: [
+      "Progressive weakness in a leg or foot, or a foot that starts to drag",
+      "Saddle anesthesia: numbness in the groin or the area that would sit on a bicycle seat",
+      "New loss of bowel or bladder control, or trouble starting urination",
+      "Fever with back pain, or pain plus unexplained weight loss",
+      "Back pain after a major fall or trauma that has not been medically screened",
+      "Pain that wakes you and does not change no matter how you sit, stand, or lie",
+    ],
+    beforeArticle: "Chest pain, sudden shortness of breath, or a story that sounds like infection or cancer is not a chiropractic visit. Call emergency services or your physician. A longer note on spine warning signs is on the",
+    article: { href: "/blog/spine-pain-warning-signs-and-care-options-in-minneapolis", label: "warning-signs article" },
+  },
+  exam: {
+    eyebrow: "In the exam room",
+    title: "What Dr. Levitt is looking for",
+    history: "The history is specific. Where is the pain at its worst. Does it cross the knee. What job, chair, or lift set it off. What makes the leg louder, and what makes the back louder. Prior imaging, prior surgery, and medications another clinician prescribed all belong in that history.",
+    physical: "The physical exam checks motion, the joints that are not moving, nerve strength and sensation when the leg is involved, and whether the hip or the foot is feeding the problem. X-rays are taken when they would change the plan. An MRI is a physician-level decision when the nerve findings are concerning or conservative care is not the right next step. You should hear a working idea, what would change that idea, and which tools are actually on the table.",
+    beforeExpect: "First-visit logistics match the rest of the practice: a photo ID, 10 to 15 minutes for paperwork, clothing you can bend in. The step-by-step is on",
+    expect: { href: "/new-patient-center/what-to-expect", label: "what to expect" },
+    beforeRequest: ". Hours and the Saint Louis Park address are listed below. Call",
+    beforeForm: "or use the",
+    form: { href: "/contact/new-patient-appointment", label: "appointment request" },
+  },
+  tools: {
+    eyebrow: "Tools we use",
+    title: "Care is a small set of services, not a menu you order from",
+    assembled: "After the exam, the plan is assembled from care this clinic already provides.",
+    beforeAdjustments: "Adjustments restore motion at a joint that is not moving the way it should. The technique is Diversified, Zone Therapy, or Torque Release, explained on the",
+    adjustments: { href: "/adjustments-and-manipulation", label: "adjustments" },
+    afterAdjustments: "You should know which one and why before it happens. A high-velocity adjustment is skipped when the red flags above are present.",
+    beforeLaser: "Cold laser is a handheld light, held on the area for 30 seconds to several minutes, with no heat. It is stopped if the findings are not changing. Targeted ice is for hot or freshly irritated tissue, not a whole-body cryotherapy chamber. See",
+    laser: { href: "/cold-laser-therapy", label: "cold laser" },
+    cryotherapy: { href: "/cryotherapy", label: "cryotherapy" },
+    ice: { href: "/ice-pack-cryotherapy", label: "ice" },
+    beforeExercise: "Therapeutic exercise is a few movements for endurance, strength, or mobility between visits. A packet that stays in the car does not count. Details are on the",
+    exercise: { href: "/therapeutic-exercise", label: "exercise" },
+    beforeDisc: "If a disc is the center of the story, the anatomy and the conservative-versus-surgical split are on the",
+    disc: { href: "/degenerative-disc-disease", label: "degenerative disc disease" },
+    beforeArticle: "A supporting article on sciatica care in the Twin Cities is",
+    article: { href: "/blog/sciatica-treatment-minneapolis", label: "here" },
+    afterArticle: "It does not replace an exam.",
+  },
+  between: {
+    eyebrow: "Between visits",
+    title: "Expectations you can actually use",
+    recent: "A recent strain often eases as the joint moves. A back that has hurt for months usually needs the exercises and the lifting habit changed, not only adjustments. We compare today’s exam with the last one.",
+    sitting: "Prolonged sitting flares both local back pain and sciatica. A short walk and the movements you were shown are the usual advice. New leg weakness, or any red flag, means you call instead of pushing through. Care here is drug-free and non-surgical. If a surgeon has already recommended an operation the exam agrees with, we do not argue you out of it.",
+  },
+  cta: {
+    eyebrow: "Back pain",
+    title: "Start with the exam",
+    body: "Tell us whether the pain stays in the back or travels down a leg.",
+  },
+  faqs: {
+    eyebrow: "Common questions",
+    title: "Questions about back pain and sciatica",
+    intro: "These are the questions that change what you do next. They are not outcome claims.",
+    items: [
+      {
+        q: "Is every pain down the leg sciatica?",
+        a: "No. Sciatica means the sciatic nerve is irritated, with pain, numbness, or weakness in the low back and the leg. A sacroiliac problem, a hip, or a local muscle can feel similar. The exam separates them.",
+      },
+      {
+        q: "Can a disc problem cause sciatica?",
+        a: "Yes. A bulging or herniated disc can irritate a nerve root, and so can a stiff joint or a muscle spasm. Which one you have is an exam question. Disc anatomy is part of degenerative disc disease care.",
+      },
+      {
+        q: "Do I need an MRI before the first visit?",
+        a: "Usually no. Imaging is recommended when it would change the plan. Bring films you already have. New weakness, groin numbness, or a bowel or bladder change should not wait on this appointment.",
+      },
+      {
+        q: "What treatments are actually used for back pain here?",
+        a: "Adjustments (Diversified, Zone Therapy, or Torque Release), cold laser, targeted ice, and therapeutic exercise, chosen from the exam. Custom orthotics are added only when the feet are part of the load. Medication and surgery stay with a physician when the findings call for them.",
+      },
+      {
+        q: "How long does back pain take to calm down?",
+        a: "There is no honest number before an exam. Some recent strains feel more mobile within a few visits. Long-standing patterns take longer, and some do not belong here. If the tests are not changing, the plan changes or you are referred.",
+      },
+      {
+        q: "Should I stop moving until the pain is gone?",
+        a: "Not for an ordinary mechanical backache, unless a physician told you to. Short walks and the exercises you are given usually beat a week on the couch. Stop a movement that sharply increases leg pain or weakness.",
+      },
+    ],
+  },
+  related: {
+    eyebrow: "Keep reading",
+    title: "When the back pain overlaps something else",
+    intro: "Back pain and sciatica are covered here. Use the links when the history points somewhere more specific.",
+    links: [
+      { href: "/degenerative-disc-disease", label: "Herniated discs and disc degeneration", note: "Herniated and worn discs, including when a disc is why a leg hurts." },
+      { href: "/adjustments-and-manipulation", label: "Adjustments and manipulation", note: "Diversified, Zone Therapy, and Torque Release." },
+      { href: "/custom-foot-orthotics", label: "Custom foot orthotics", note: "Only when the feet are part of why the back keeps flaring." },
+      { href: "/blog/chiropractic-care-for-chronic-lower-back-pain", label: "Chronic low-back pain article", note: "A supporting article. The exam for sciatica is still here." },
+      { href: "/neck-pain", label: "Neck pain", note: "Neck stiffness and arm symptoms. Low-back pain and sciatica stay here." },
+    ],
+  },
+};

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { siteConfig } from "@/lib/siteConfig";
+import { useSiteShell } from "@/components/layout/SiteShellContext";
 import { useFooterInView } from "@/lib/useFooterInView";
 
 function PhoneIcon({ className = "" }: { className?: string }) {
@@ -45,6 +45,7 @@ function CalendarIcon({ className = "" }: { className?: string }) {
 }
 
 export function StickyBookNowBanner() {
+  const shell = useSiteShell();
   const [visible, setVisible] = useState(false);
   const footerInView = useFooterInView();
 
@@ -69,36 +70,36 @@ export function StickyBookNowBanner() {
         >
           <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2.5 sm:gap-4 sm:px-6 sm:py-3">
             <a
-              href={siteConfig.phoneHref}
+              href={shell.phoneHref}
               className="inline-flex min-w-0 items-center gap-2 rounded-full px-2 py-2 text-sm font-semibold text-white transition-colors hover:text-primary sm:gap-3 sm:px-3 sm:text-base"
-              aria-label={`Call ${siteConfig.phone}`}
+              aria-label={`Call ${shell.phone}`}
             >
               <span className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-full bg-primary/15 text-primary ring-1 ring-primary/30 sm:h-10 sm:w-10">
                 <PhoneIcon className="h-4 w-4 sm:h-5 sm:w-5" />
               </span>
               <span className="flex min-w-0 flex-col leading-tight">
                 <span className="hidden text-[10px] font-semibold uppercase tracking-[0.18em] text-white/60 sm:block">
-                  Call Today
+                  {shell.sticky.callLabel}
                 </span>
-                <span className="hidden truncate sm:inline">{siteConfig.phone}</span>
+                <span className="hidden truncate sm:inline">{shell.phone}</span>
               </span>
             </a>
 
             <div className="flex flex-shrink-0 items-center gap-2 sm:gap-3">
               <Link
-                href={siteConfig.appointmentUrl}
+                href={shell.appointmentUrl}
                 className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-primary px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-white shadow-lg shadow-orange-500/30 transition hover:bg-orange-600 sm:px-5 sm:py-3 sm:text-[12px] sm:tracking-[0.1em]"
               >
                 <CalendarIcon className="hidden h-4 w-4 sm:block" />
-                NEW Patient
-                <span className="-ml-1 hidden sm:inline">Appointment</span>
+                {shell.sticky.newPatientLabel}
+                <span className="-ml-1 hidden sm:inline">{shell.sticky.newPatientRest}</span>
               </Link>
               <Link
-                href={siteConfig.existingPatientAppointmentUrl}
+                href={shell.existingPatientAppointmentUrl}
                 className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-white/25 px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-white transition hover:border-primary hover:text-primary sm:px-5 sm:py-3 sm:text-[12px] sm:tracking-[0.1em]"
               >
-                Existing Patient
-                <span className="-ml-1 hidden sm:inline">Appointment</span>
+                {shell.sticky.existingPatientLabel}
+                <span className="-ml-1 hidden sm:inline">{shell.sticky.existingPatientRest}</span>
               </Link>
             </div>
           </div>

@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { privacyPolicyDefaults as defaults } from "@/lib/designed/defaults/privacyPolicy";
+import { mergeContent } from "@/lib/designed/merge";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
 
@@ -15,203 +17,103 @@ const fadeUp = {
   },
 };
 
-type Section = {
-  id: string;
-  title: string;
-  body: React.ReactNode;
-};
+function PhoneLink() {
+  return (
+    <a
+      href={siteConfig.phoneHref}
+      className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
+    >
+      {siteConfig.phone}
+    </a>
+  );
+}
 
-const sections: Section[] = [
-  {
-    id: "what-we-collect",
-    title: "What We May Collect",
-    body: (
+function PrivacySectionBody({
+  section,
+}: {
+  section: (typeof defaults.sections)[number];
+}) {
+  if (section.kind === "paragraphs" && section.paragraphs) {
+    const paragraphs = section.paragraphs;
+    return (
       <>
-        <p className="mb-4">
-          We may collect the following information:
-        </p>
-        <ul className="list-disc space-y-2 pl-6">
-          <li>Name and job title</li>
-          <li>Contact information including email address</li>
-          <li>
-            Demographic information such as postcode, preferences and interests
-          </li>
-          <li>Other information relevant to customer surveys and/or offers</li>
-        </ul>
+        {paragraphs.map((text, i) => (
+          <p key={i} className={i < paragraphs.length - 1 ? "mb-4" : undefined}>
+            {text}
+          </p>
+        ))}
       </>
-    ),
-  },
-  {
-    id: "how-we-use",
-    title: "How We Use Your Information",
-    body: (
+    );
+  }
+
+  if (section.kind === "list" && section.items) {
+    return (
       <>
-        <p className="mb-4">
-          We require this information to understand your needs and provide you
-          with a better service, and in particular for the following reasons:
-        </p>
+        <p className="mb-4">{section.intro}</p>
         <ul className="list-disc space-y-2 pl-6">
-          <li>Internal record keeping.</li>
-          <li>We may use the information to improve our products and services.</li>
-          <li>
-            We may periodically send promotional email about new products,
-            special offers or other information which we think you may find
-            interesting using the email address which you have provided.
-          </li>
-          <li>
-            From time to time, we may also use your information to contact you
-            for market research purposes. We may contact you by email, phone,
-            fax or mail.
-          </li>
-          <li>
-            We may use the information to customize the website according to
-            your interests.
-          </li>
-          <li>
-            We may provide your information to our third party partners for
-            marketing or promotional purposes.
-          </li>
-          <li className="font-semibold text-[#0F172A]">
-            We will never sell your information.
-          </li>
-        </ul>
-      </>
-    ),
-  },
-  {
-    id: "security",
-    title: "Security",
-    body: (
-      <p>
-        We are committed to ensuring that your information is secure. In order
-        to prevent unauthorized access or disclosure we have put in place
-        suitable physical, electronic and managerial procedures to safeguard
-        and secure the information we collect online.
-      </p>
-    ),
-  },
-  {
-    id: "cookies",
-    title: "How We Use Cookies",
-    body: (
-      <>
-        <p className="mb-4">
-          A cookie is a small file which asks permission to be placed on your
-          computer&rsquo;s hard drive. Once you agree, the file is added and
-          the cookie helps analyze web traffic or lets you know when you visit
-          a particular site. Cookies allow web applications to respond to you
-          as an individual. The web application can tailor its operations to
-          your needs, likes and dislikes by gathering and remembering
-          information about your preferences.
-        </p>
-        <p className="mb-4">
-          We use traffic log cookies to identify which pages are being used.
-          This helps us analyze data about web page traffic and improve our
-          website in order to tailor it to customer needs. We only use this
-          information for statistical analysis purposes and then the data is
-          removed from the system.
-        </p>
-        <p className="mb-4">
-          Overall, cookies help us provide you with a better website, by
-          enabling us to monitor which pages you find useful and which you do
-          not. A cookie in no way gives us access to your computer or any
-          information about you, other than the data you choose to share with
-          us.
-        </p>
-        <p>
-          You can choose to accept or decline cookies. Most web browsers
-          automatically accept cookies, but you can usually modify your browser
-          setting to decline cookies if you prefer. This may prevent you from
-          taking full advantage of the website.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: "external-links",
-    title: "Links to Other Websites",
-    body: (
-      <p>
-        Our website may contain links to enable you to visit other websites of
-        interest easily. However, once you have used these links to leave our
-        site, you should note that we do not have any control over that other
-        website. Therefore, we cannot be responsible for the protection and
-        privacy of any information which you provide whilst visiting such
-        sites and such sites are not governed by this privacy statement. You
-        should exercise caution and look at the privacy statement applicable
-        to the website in question.
-      </p>
-    ),
-  },
-  {
-    id: "controlling",
-    title: "Controlling Your Personal Information",
-    body: (
-      <>
-        <p className="mb-4">
-          You may choose to restrict the collection or use of your personal
-          information in the following ways:
-        </p>
-        <ul className="list-disc space-y-2 pl-6">
-          <li>
-            Whenever you are asked to fill in a form on the website, look for
-            the box that you can click to indicate that you do not want the
-            information to be used by anybody for direct marketing purposes.
-          </li>
-          <li>
-            If you have previously agreed to us using your personal information
-            for direct marketing purposes, you may change your mind at any time
-            by writing to or calling us at{" "}
-            <a
-              href={siteConfig.phoneHref}
-              className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
+          {section.items.map((item, i) => (
+            <li
+              key={i}
+              className={
+                "emphasis" in item && item.emphasis
+                  ? "font-semibold text-[#0F172A]"
+                  : undefined
+              }
             >
-              {siteConfig.phone}
-            </a>
-            .
-          </li>
+              {item.text}
+            </li>
+          ))}
         </ul>
-        <p className="mt-4">
-          We will not sell, distribute or lease your personal information to
-          third parties unless we have your permission or are required by law.
-          We may use your personal information to send you promotional
-          information about third parties which we think you may find
-          interesting if you tell us that you wish this to happen.
-        </p>
-        <p className="mt-4">
-          You may request details of personal information which we hold about
-          you under the Data Protection Act 1998. A small fee will be payable.
-          If you would like a copy of the information held on you please
-          contact us at{" "}
-          <a
-            href={siteConfig.phoneHref}
-            className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
-          >
-            {siteConfig.phone}
-          </a>
-          .
-        </p>
-        <p className="mt-4">
-          If you believe that any information we are holding on you is
-          incorrect or incomplete, please write to or call us as soon as
-          possible at the number above. We will promptly correct any
-          information found to be incorrect.
-        </p>
       </>
-    ),
-  },
-];
+    );
+  }
 
-export default function PrivacyPolicyContent() {
+  if (!section.items || !section.trailing) return null;
+
+  return (
+    <>
+      <p className="mb-4">{section.intro}</p>
+      <ul className="list-disc space-y-2 pl-6">
+        {section.items.map((item, i) => (
+          <li key={i}>
+            {"phone" in item && item.phone ? (
+              <>
+                {item.text}{" "}
+                <PhoneLink />
+                {item.afterPhone}
+              </>
+            ) : (
+              item.text
+            )}
+          </li>
+        ))}
+      </ul>
+      {section.trailing.map((item, i) => (
+        <p key={i} className="mt-4">
+          {"phone" in item && item.phone ? (
+            <>
+              {item.text}{" "}
+              <PhoneLink />
+              {item.afterPhone}
+            </>
+          ) : (
+            item.text
+          )}
+        </p>
+      ))}
+    </>
+  );
+}
+
+export default function PrivacyPolicyContent({ content }: { content?: unknown }) {
+  const copy = mergeContent(defaults, content);
+
   return (
     <>
       <ServiceHero
-        title="Privacy Policy"
-        subtitle="How Levitt Chiropractic Center, P.A. collects, uses, and protects your information."
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: "Privacy Policy" },
-        ]}
+        title={copy.hero.title}
+        subtitle={copy.hero.subtitle}
+        crumbs={copy.hero.crumbs}
       />
 
       {/* SECTION 2 WHITE: INTRO */}
@@ -224,32 +126,23 @@ export default function PrivacyPolicyContent() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Effective 1/14/2013
+              {copy.intro.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Your privacy matters
+              {copy.intro.title}
             </h2>
             <span
               aria-hidden
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              This privacy policy sets out how Levitt Chiropractic Center,
-              P.A. uses and protects any information that you give Levitt
-              Chiropractic Center, P.A. when you use this website.
+              {copy.intro.lead}
             </p>
             <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Levitt Chiropractic Center, P.A. is committed to ensuring that
-              your privacy is protected. Should we ask you to provide certain
-              information by which you can be identified when using this
-              website, then you can be assured that it will only be used in
-              accordance with this privacy statement.
+              {copy.intro.commitment}
             </p>
             <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Levitt Chiropractic Center, P.A. may change this policy from
-              time to time by updating this page. You should check this page
-              from time to time to ensure that you are happy with any changes.
-              This policy is effective from 1/14/2013.
+              {copy.intro.updates}
             </p>
           </motion.div>
         </div>
@@ -259,7 +152,7 @@ export default function PrivacyPolicyContent() {
       <section className="relative bg-slate-50 py-12 sm:py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
           <div className="space-y-10">
-            {sections.map((s, i) => (
+            {copy.sections.map((s, i) => (
               <motion.article
                 key={s.id}
                 id={s.id}
@@ -278,7 +171,7 @@ export default function PrivacyPolicyContent() {
                   </h3>
                 </div>
                 <div className="mt-4 text-base leading-relaxed text-slate-700">
-                  {s.body}
+                  <PrivacySectionBody section={s} />
                 </div>
               </motion.article>
             ))}
@@ -300,25 +193,19 @@ export default function PrivacyPolicyContent() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              Questions About This Policy?
+              {copy.cta.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-              We&rsquo;re happy to help
+              {copy.cta.title}
             </h2>
             <span
               aria-hidden
               className="mx-auto mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 text-base leading-relaxed text-white/75 sm:text-lg">
-              For any questions about how we handle your information, contact
-              our office at{" "}
-              <a
-                href={siteConfig.phoneHref}
-                className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
-              >
-                {siteConfig.phone}
-              </a>
-              .
+              {copy.cta.beforePhone}{" "}
+              <PhoneLink />
+              {copy.cta.afterPhone}
             </p>
           </motion.div>
         </div>

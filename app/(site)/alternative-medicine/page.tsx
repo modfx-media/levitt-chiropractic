@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import AlternativeMedicineContent from "@/components/services/AlternativeMedicineContent";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
@@ -17,7 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/alternative-medicine", fallbackMeta);
 }
 
-export default function AlternativeMedicinePage() {
+export default async function AlternativeMedicinePage() {
+  const content = await loadPageContent("/alternative-medicine");
   return (
     <CMSRoute path="/alternative-medicine">
     <>
@@ -26,7 +28,7 @@ export default function AlternativeMedicinePage() {
         slug="alternative-medicine"
         description="Alternative medicine in Saint Louis Park, MN natural, drug-free therapies including chiropractic, nutritional and lifestyle care from Dr. Alan Levitt."
       />
-      <AlternativeMedicineContent />
+      <AlternativeMedicineContent content={content}  />
     </>
   
     </CMSRoute>

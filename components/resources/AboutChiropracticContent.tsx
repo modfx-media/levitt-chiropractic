@@ -4,15 +4,14 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { aboutChiropracticDefaults as defaults } from "@/lib/designed/defaults/aboutChiropractic";
+import { mergeContent } from "@/lib/designed/merge";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
 
-const principles = [
-  {
-    title: "The Body Heals Itself",
-    body: "Chiropractic is based on the idea that the body is self-sustaining and self-healing given the right conditions, it knows what to do.",
-    icon: (
+const principleIcons: Record<string, React.ReactNode> = {
+  heals: (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -27,11 +26,7 @@ const principles = [
         <path d="M9 11l2 2 4-4" />
       </svg>
     ),
-  },
-  {
-    title: "The Nervous System Runs Everything",
-    body: "Your body is controlled by your brain but the spinal cord and vast network of nerves that carry its messages are just as important.",
-    icon: (
+  nervous: (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -45,11 +40,7 @@ const principles = [
         <path d="M12 2v20M6 5l12 14M18 5L6 19" />
       </svg>
     ),
-  },
-  {
-    title: "No Drugs, No Bandaids",
-    body: "Supplementation and nutrition are part of the bigger picture, but drugs and prescriptions can be bandaids chiropractic treats the source.",
-    icon: (
+  drugs: (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -64,11 +55,7 @@ const principles = [
         <path d="M5 12a3 3 0 000 4l3 3a3 3 0 004 0" />
       </svg>
     ),
-  },
-  {
-    title: "More Than Back & Neck Pain",
-    body: "Chiropractors treat sciatica, joint pain, and many health issues including fibromyalgia, allergies, insomnia, and headaches.",
-    icon: (
+  more: (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -83,17 +70,7 @@ const principles = [
         <path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18" />
       </svg>
     ),
-  },
-];
-
-const treats = [
-  "Sciatica",
-  "Joint Pain",
-  "Fibromyalgia",
-  "Allergies",
-  "Insomnia",
-  "Headaches",
-];
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -104,17 +81,15 @@ const fadeUp = {
   },
 };
 
-export default function AboutChiropracticContent() {
+export default function AboutChiropracticContent({ content }: { content?: unknown }) {
+  const copy = mergeContent(defaults, content);
+
   return (
     <>
       <ServiceHero
-        title="About Chiropractic"
-        subtitle="A natural, systemic approach to healing built on the idea that the body, given the right conditions, knows how to heal itself."
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: "Resources", href: "/resources" },
-          { label: "About Chiropractic" },
-        ]}
+        title={copy.hero.title}
+        subtitle={copy.hero.subtitle}
+        crumbs={copy.hero.crumbs}
       />
 
       {/* SECTION 2 WHITE: WHAT IS CHIROPRACTIC */}
@@ -135,16 +110,15 @@ export default function AboutChiropracticContent() {
                 />
                 <div className="relative overflow-hidden rounded-3xl border-t-4 border-[#F97316] bg-[#0F172A] p-8 text-white shadow-2xl ring-1 ring-white/10">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-300">
-                    A Natural Systemic Approach
+                    {copy.spotlight.eyebrow}
                   </p>
                   <p className="mt-4 font-heading text-4xl font-black leading-tight text-[#F97316]">
-                    The body
+                    {copy.spotlight.line1}
                     <br />
-                    heals itself.
+                    {copy.spotlight.line2}
                   </p>
                   <p className="mt-3 text-sm leading-relaxed text-white/80">
-                    Chiropractic looks at the human body as a whole                     self-sustaining and self-healing when its nervous system
-                    is free to function at its peak.
+                    {copy.spotlight.body}
                   </p>
                 </div>
               </div>
@@ -158,26 +132,20 @@ export default function AboutChiropracticContent() {
               className="lg:col-span-7"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                What Is Chiropractic?
+                {copy.intro.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Looking at the human body as a whole
+                {copy.intro.title}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Chiropractic is a way of looking at the human body as a
-                whole. It&rsquo;s based on the idea that the body is
-                self-sustaining and self-healing.
+                {copy.intro.lead}
               </p>
               <p className="mt-4 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                You know that your body is controlled by your brain, but the
-                spinal cord and vast network of nerves that carry its
-                messages are just as important. When this system is not
-                functioning at its peak, your body&rsquo;s overall
-                performance suffers.
+                {copy.intro.body}
               </p>
             </motion.div>
           </div>
@@ -204,10 +172,10 @@ export default function AboutChiropracticContent() {
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              Four Principles
+              {copy.principles.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              What chiropractic actually is
+              {copy.principles.title}
             </h2>
             <span
               aria-hidden
@@ -225,7 +193,7 @@ export default function AboutChiropracticContent() {
             }}
             className="mt-8 sm:mt-14 grid gap-6 sm:grid-cols-2 lg:gap-8"
           >
-            {principles.map((p, i) => (
+            {copy.principles.items.map((p, i) => (
               <motion.div
                 key={p.title}
                 variants={{
@@ -247,7 +215,7 @@ export default function AboutChiropracticContent() {
                   0{i + 1}
                 </span>
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#F97316]/15 text-[#F97316] ring-1 ring-[#F97316]/30">
-                  {p.icon}
+                  {principleIcons[p.icon] ?? principleIcons.heals}
                 </span>
                 <h3 className="mt-5 font-heading text-lg font-bold text-white">
                   {p.title}
@@ -273,20 +241,17 @@ export default function AboutChiropracticContent() {
               className="lg:col-span-3"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                More Than Pain Relief
+                {copy.conditions.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Conditions chiropractic helps with
+                {copy.conditions.title}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                While it&rsquo;s often perceived that the chiropractor solely
-                treats back and neck pain, this is a small piece of what the
-                profession is capable of handling. Chiropractors are largely
-                called on to deal with many different health issues:
+                {copy.conditions.body}
               </p>
 
               <motion.ul
@@ -299,7 +264,7 @@ export default function AboutChiropracticContent() {
                 }}
                 className="mt-6 flex flex-wrap gap-2.5"
               >
-                {treats.map((t) => (
+                {copy.conditions.treats.map((t) => (
                   <motion.li
                     key={t}
                     variants={{
@@ -318,29 +283,29 @@ export default function AboutChiropracticContent() {
               </motion.ul>
 
               <p className="mt-8 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Got questions? Browse our{" "}
+                {copy.conditions.beforeLink}{" "}
                 <Link
-                  href="/resources/qa"
+                  href={copy.conditions.linkHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
-                  Q&amp;A
+                  {copy.conditions.linkLabel}
                 </Link>{" "}
-                or call{" "}
+                {copy.conditions.beforePhone}{" "}
                 <a
                   href={siteConfig.phoneHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
                   {siteConfig.phone}
                 </a>
-                .
+                {copy.conditions.afterPhone}
               </p>
             </motion.div>
 
             <div className="lg:col-span-2">
               <CtaCard
-                eyebrow="Curious About Care?"
-                title="Try a different approach"
-                body="Book a consultation with Dr. Levitt today."
+                eyebrow={copy.cta.eyebrow}
+                title={copy.cta.title}
+                body={copy.cta.body}
               />
             </div>
           </div>

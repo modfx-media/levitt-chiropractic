@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { siteConfig } from "@/lib/siteConfig";
+import { useSiteShell } from "@/components/layout/SiteShellContext";
 
 const DAY_NAMES = [
   "Sunday",
@@ -96,6 +96,7 @@ function ChevronDownIcon({ className = "" }: { className?: string }) {
 type Variant = "topbar" | "mobile";
 
 export function HeaderHours({ variant = "topbar" }: { variant?: Variant }) {
+  const shell = useSiteShell();
   const [mounted, setMounted] = useState(false);
   const [now, setNow] = useState<Date>(() => new Date());
   const [open, setOpen] = useState(false);
@@ -128,8 +129,8 @@ export function HeaderHours({ variant = "topbar" }: { variant?: Variant }) {
 
   const todayName = DAY_NAMES[now.getDay()];
   const todayEntry = useMemo(
-    () => siteConfig.hours.find((h) => h.day === todayName),
-    [todayName],
+    () => shell.hours.find((h) => h.day === todayName),
+    [shell.hours, todayName],
   );
 
   const status = useMemo(() => {
@@ -247,7 +248,7 @@ export function HeaderHours({ variant = "topbar" }: { variant?: Variant }) {
               Office Hours
             </p>
             <ul className="mt-3 space-y-1.5 text-[13px] normal-case tracking-normal">
-              {siteConfig.hours.map((h) => {
+              {shell.hours.map((h) => {
                 const isToday = mounted && h.day === todayName;
                 return (
                   <li
@@ -281,22 +282,22 @@ export function HeaderHours({ variant = "topbar" }: { variant?: Variant }) {
             </ul>
             <div className="mt-4 flex flex-col gap-2 border-t border-white/10 pt-4 text-xs">
               <a
-                href={siteConfig.phoneHref}
+                href={shell.phoneHref}
                 className="font-semibold text-orange-300 transition-colors hover:text-primary"
               >
-                Call {siteConfig.phone}
+                Call {shell.phone}
               </a>
               <a
-                href={siteConfig.appointmentUrl}
+                href={shell.appointmentUrl}
                 className="font-semibold text-white/80 transition-colors hover:text-white"
               >
-                NEW Patient Appointment →
+                {shell.booking.newPatientLabel}
               </a>
               <a
-                href={siteConfig.existingPatientAppointmentUrl}
+                href={shell.existingPatientAppointmentUrl}
                 className="font-semibold text-white/80 transition-colors hover:text-white"
               >
-                Existing Patient Appointment →
+                {shell.booking.existingPatientLabel}
               </a>
             </div>
           </motion.div>

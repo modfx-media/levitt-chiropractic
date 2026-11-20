@@ -4,9 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { siteConfig } from "@/lib/siteConfig";
+import { useSiteShell } from "@/components/layout/SiteShellContext";
 import {
-  primaryNav,
   isGroup,
   type NavEntry,
   type NavLeaf,
@@ -166,6 +165,8 @@ function MobileEntry({
 }
 
 export function MobileMenu({ open, onClose, pathname }: Props) {
+  const shell = useSiteShell();
+  const primaryNav = shell.nav;
   useEffect(() => {
     if (!open) return;
     const original = document.body.style.overflow;
@@ -210,7 +211,7 @@ export function MobileMenu({ open, onClose, pathname }: Props) {
                 onClick={onClose}
                 className="font-heading text-base font-semibold text-white"
               >
-                {siteConfig.name}
+                {shell.name}
               </Link>
               <button
                 type="button"
@@ -251,7 +252,7 @@ export function MobileMenu({ open, onClose, pathname }: Props) {
 
             <div className="flex-shrink-0 border-t border-white/10 bg-dark p-4 sm:p-6">
               <a
-                href={siteConfig.phoneHref}
+                href={shell.phoneHref}
                 className="flex items-center gap-2 text-base font-semibold text-white"
               >
                 <svg
@@ -266,24 +267,24 @@ export function MobileMenu({ open, onClose, pathname }: Props) {
                 >
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z" />
                 </svg>
-                {siteConfig.phone}
+                {shell.phone}
               </a>
               <Link
-                href={siteConfig.appointmentUrl}
+                href={shell.appointmentUrl}
                 onClick={onClose}
                 className="mt-4 flex w-full items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white hover:bg-orange-600"
               >
-                NEW Patient Appointment
+                {shell.headerCtas.newPatientLabel}
               </Link>
               <Link
-                href={siteConfig.existingPatientAppointmentUrl}
+                href={shell.existingPatientAppointmentUrl}
                 onClick={onClose}
                 className="mt-3 flex w-full items-center justify-center rounded-full border border-white/25 px-5 py-3 text-sm font-semibold text-white hover:border-primary hover:text-primary"
               >
-                Existing Patient Appointment
+                {shell.headerCtas.existingPatientLabel}
               </Link>
               <p className="mt-4 text-sm text-white/70">
-                {siteConfig.address.full}
+                {shell.address.full}
               </p>
             </div>
           </motion.div>

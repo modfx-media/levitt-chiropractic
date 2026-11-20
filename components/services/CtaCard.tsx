@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 
-import { siteConfig } from "@/lib/siteConfig";
+import { useSiteShell } from "@/components/layout/SiteShellContext";
 
 type CtaCardProps = {
   eyebrow?: string;
@@ -16,6 +16,7 @@ export function CtaCard({
   title = "Ready to Feel Better?",
   body = "Make an appointment with Dr. Levitt today.",
 }: CtaCardProps) {
+  const shell = useSiteShell();
   const reduce = useReducedMotion();
 
   return (
@@ -42,13 +43,13 @@ export function CtaCard({
 
         <div className="mt-6 rounded-xl bg-white/5 p-4 ring-1 ring-white/10">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/55">
-            Call Now
+            {shell.booking.callNowLabel}
           </p>
           <a
-            href={siteConfig.phoneHref}
+            href={shell.phoneHref}
             className="mt-1 block font-heading text-xl font-black text-orange-400 transition-colors hover:text-orange-300 sm:text-2xl"
           >
-            {siteConfig.phone}
+            {shell.phone}
           </a>
         </div>
 
@@ -59,16 +60,16 @@ export function CtaCard({
           className="mt-5"
         >
           <Link
-            href={siteConfig.appointmentUrl}
+            href={shell.appointmentUrl}
             className="flex h-12 w-full items-center justify-center rounded-full bg-[#F97316] px-6 text-sm font-bold text-white shadow-md shadow-orange-500/30 transition-colors hover:bg-orange-600"
           >
-            NEW Patient Appointment →
+            {shell.booking.newPatientLabel}
           </Link>
           <Link
-            href={siteConfig.existingPatientAppointmentUrl}
+            href={shell.existingPatientAppointmentUrl}
             className="mt-3 flex h-12 w-full items-center justify-center rounded-full border border-white/25 px-6 text-sm font-bold text-white transition-colors hover:border-[#F97316] hover:text-orange-300"
           >
-            Existing Patient Appointment →
+            {shell.booking.existingPatientLabel}
           </Link>
         </motion.div>
       </div>

@@ -4,34 +4,15 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { whatToExpectDefaults as defaults } from "@/lib/designed/defaults/whatToExpectDefaults";
+import { mergeContent } from "@/lib/designed/merge";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
 
-const steps = [
-  {
-    title: "Paperwork",
-    body: "Appointments at our office typically begin with a bit of paperwork, as you no doubt would expect we&rsquo;ll review what you bring in and answer any questions you have.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-6 w-6"
-        aria-hidden
-      >
-        <path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z" />
-        <path d="M14 3v6h6M8 13h8M8 17h5" />
-      </svg>
-    ),
-  },
-  {
-    title: "Examination & X-Rays",
-    body: "Dr. Levitt will perform a physical examination and take any necessary x-rays to learn more about the cause of your pain.",
-    icon: (
+function StepIcon({ name }: { name: string }) {
+  if (name === "examination") {
+    return (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -45,12 +26,10 @@ const steps = [
         <circle cx="11" cy="11" r="7" />
         <path d="M21 21l-4.3-4.3" />
       </svg>
-    ),
-  },
-  {
-    title: "Discuss Your Goals",
-    body: "We&rsquo;ll discuss your current condition and your goals what you want from treatment, and how chiropractic care can fit into your life.",
-    icon: (
+    );
+  }
+  if (name === "goals") {
+    return (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -63,12 +42,10 @@ const steps = [
       >
         <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
       </svg>
-    ),
-  },
-  {
-    title: "Build Your Plan",
-    body: "We&rsquo;ll come up with a plan of action specifically for you type of treatment, preparation, expected results, and lifestyle changes that may help.",
-    icon: (
+    );
+  }
+  if (name === "plan") {
+    return (
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -82,15 +59,24 @@ const steps = [
         <path d="M9 11l3 3L22 4" />
         <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
       </svg>
-    ),
-  },
-];
-
-const checklist = [
-  "A photo ID",
-  "Plan to arrive 10–15 minutes early to complete intake paperwork",
-  "Comfortable clothing you can move in",
-];
+    );
+  }
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-6 w-6"
+      aria-hidden
+    >
+      <path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z" />
+      <path d="M14 3v6h6M8 13h8M8 17h5" />
+    </svg>
+  );
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -101,17 +87,15 @@ const fadeUp = {
   },
 };
 
-export default function WhatToExpectContent() {
+export default function WhatToExpectContent({ content }: { content?: unknown }) {
+  const copy = mergeContent(defaults, content);
+
   return (
     <>
       <ServiceHero
-        title="What Can I Expect?"
-        subtitle="A welcoming first visit getting to know you, your history, and the goals we&rsquo;re working toward together."
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: "New Patient Center", href: "/new-patient-center" },
-          { label: "What to Expect" },
-        ]}
+        title={copy.whatToExpectHero.title}
+        subtitle={copy.whatToExpectHero.subtitle}
+        crumbs={copy.whatToExpectHero.crumbs}
       />
 
       {/* SECTION 2 WHITE: INTRO */}
@@ -124,25 +108,20 @@ export default function WhatToExpectContent() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              First Visit
+              {copy.firstVisit.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Don&rsquo;t worry we&rsquo;ve got you
+              {copy.firstVisit.heading}
             </h2>
             <span
               aria-hidden
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Maybe you&rsquo;ve heard about chiropractic care through a
-              friend or did some research online. Maybe you&rsquo;re just
-              tired of living in pain. If going to the chiropractor is a new
-              experience for you, don&rsquo;t worry! We&rsquo;re here to help
-              you shed your pain and get back on your feet.
+              {copy.firstVisit.lead}
             </p>
             <p className="mt-4 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Your first visit to our practice will be about getting to know
-              your chiropractor and a chance for us to get to know you!
+              {copy.firstVisit.emphasis}
             </p>
           </motion.div>
         </div>
@@ -168,10 +147,10 @@ export default function WhatToExpectContent() {
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              The Walkthrough
+              {copy.walkthrough.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              Your appointment, step by step
+              {copy.walkthrough.heading}
             </h2>
             <span
               aria-hidden
@@ -189,7 +168,7 @@ export default function WhatToExpectContent() {
             }}
             className="mt-8 sm:mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8"
           >
-            {steps.map((s, i) => (
+            {copy.walkthrough.steps.map((s, i) => (
               <motion.div
                 key={s.title}
                 variants={{
@@ -211,7 +190,7 @@ export default function WhatToExpectContent() {
                   0{i + 1}
                 </span>
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#F97316]/15 text-[#F97316] ring-1 ring-[#F97316]/30">
-                  {s.icon}
+                  <StepIcon name={s.icon} />
                 </span>
                 <h3 className="mt-5 font-heading text-lg font-bold text-white">
                   {s.title}
@@ -238,27 +217,20 @@ export default function WhatToExpectContent() {
               className="lg:col-span-7"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Your Partner in Health
+                {copy.partner.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                With you every step of the way
+                {copy.partner.heading}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                We will take a look at the overall results and, together,
-                come up with a plan of action specifically for you. We will
-                talk about the type of treatment you will be receiving, any
-                preparation necessary before beginning, and when you can
-                expect to see results. We&rsquo;ll also discuss any lifestyle
-                changes that may help you with your goals.
+                {copy.partner.lead}
               </p>
               <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg">
-                As your partner in improving your health, your chiropractor
-                will be with you every step of the way during your treatment.
-                If you have any further questions, call our practice today!
+                {copy.partner.body}
               </p>
             </motion.div>
 
@@ -271,13 +243,13 @@ export default function WhatToExpectContent() {
             >
               <div className="rounded-2xl border-t-4 border-[#F97316] bg-white p-7 shadow-sm ring-1 ring-slate-200">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-600">
-                  Bring With You
+                  {copy.bringWithYou.eyebrow}
                 </p>
                 <h3 className="mt-2 font-heading text-xl font-bold text-[#0F172A]">
-                  Quick checklist
+                  {copy.bringWithYou.heading}
                 </h3>
                 <ul className="mt-5 space-y-3">
-                  {checklist.map((c) => (
+                  {copy.bringWithYou.items.map((c) => (
                     <li
                       key={c}
                       className="flex items-start gap-3 text-sm text-slate-700"
@@ -304,10 +276,7 @@ export default function WhatToExpectContent() {
                   ))}
                 </ul>
                 <div className="mt-6 flex flex-col items-start gap-3">
-                  {[
-                    { label: "NEW Patient Appointment", href: "/contact/new-patient-appointment" },
-                    { label: "Existing Patient Appointment", href: "/contact/existing-patient-appointment" },
-                  ].map((cta) => (
+                  {copy.bringWithYou.actions.map((cta) => (
                     <Link
                       key={cta.href}
                       href={cta.href}
@@ -351,39 +320,39 @@ export default function WhatToExpectContent() {
               className="lg:col-span-3"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-                Schedule Your First Visit
+                {copy.scheduleVisit.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-                Ready when you are
+                {copy.scheduleVisit.heading}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-white/75 sm:text-lg">
-                Call{" "}
+                {copy.scheduleVisit.closingBefore}
                 <a
                   href={siteConfig.phoneHref}
                   className="font-semibold text-orange-300 underline-offset-4 transition-colors hover:underline"
                 >
                   {siteConfig.phone}
-                </a>{" "}
-                or{" "}
+                </a>
+                {copy.scheduleVisit.closingMiddle}
                 <Link
-                  href="/contact/new-patient-appointment"
+                  href={copy.scheduleVisit.contactHref}
                   className="font-semibold text-orange-300 underline-offset-4 transition-colors hover:underline"
                 >
-                  request a visit online
-                </Link>{" "}
- we look forward to meeting you.
+                  {copy.scheduleVisit.contactLabel}
+                </Link>
+                {copy.scheduleVisit.closingAfter}
               </p>
             </motion.div>
 
             <div className="lg:col-span-2">
               <CtaCard
-                eyebrow="New Patients Welcome"
-                title="Book your first visit"
-                body="Make an appointment with Dr. Levitt today."
+                eyebrow={copy.sidebarBooking.eyebrow}
+                title={copy.sidebarBooking.title}
+                body={copy.sidebarBooking.body}
               />
             </div>
           </div>

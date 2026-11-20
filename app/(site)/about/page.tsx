@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import AboutContent from "@/components/about/AboutContent";
 
@@ -15,10 +16,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/about", fallbackMeta);
 }
 
-export default function Page() {
+export default async function Page() {
+  const content = await loadPageContent("/about");
   return (
     <CMSRoute path="/about">
-      <AboutContent />
+      <AboutContent content={content}  />
     </CMSRoute>
   );
 }

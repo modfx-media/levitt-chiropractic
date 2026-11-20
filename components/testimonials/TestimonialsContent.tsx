@@ -5,6 +5,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { testimonialsDefaults as defaults } from "@/lib/designed/defaults/testimonialsDefaults";
+import { mergeContent } from "@/lib/designed/merge";
 import { CtaCard } from "@/components/services/CtaCard";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
@@ -20,6 +22,15 @@ type TestimonialsContentProps = {
   rating: number;
   reviewCount: number;
   reviewsUrl: string;
+  content?: unknown;
+};
+
+type TestimonialLabels = {
+  sourceLabel: string;
+  postedFallback: string;
+  showMoreLabel: string;
+  showLessLabel: string;
+  starsLabel: string;
 };
 
 function excerpt(quote: string, max = 220) {
@@ -51,9 +62,9 @@ function QuoteIcon() {
   );
 }
 
-function FiveStars() {
+function FiveStars({ label }: { label: string }) {
   return (
-    <div className="flex items-center gap-0.5" aria-label="5 stars">
+    <div className="flex items-center gap-0.5" aria-label={label}>
       {[0, 1, 2, 3, 4].map((star) => (
         <svg
           key={star}
@@ -69,7 +80,15 @@ function FiveStars() {
   );
 }
 
-function TestimonialCard({ t, i }: { t: Testimonial; i: number }) {
+function TestimonialCard({
+  t,
+  i,
+  labels,
+}: {
+  t: Testimonial;
+  i: number;
+  labels: TestimonialLabels;
+}) {
   const [open, setOpen] = useState(false);
   const short = excerpt(t.quote);
   const isLong = t.quote.length > short.length + 8;
@@ -98,9 +117,9 @@ function TestimonialCard({ t, i }: { t: Testimonial; i: number }) {
         <QuoteIcon />
       </span>
       <div className="mt-4 flex items-center justify-between gap-3">
-        <FiveStars />
+        <FiveStars label={labels.starsLabel} />
         <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-          Google
+          {labels.sourceLabel}
         </span>
       </div>
 
@@ -124,7 +143,7 @@ function TestimonialCard({ t, i }: { t: Testimonial; i: number }) {
             {t.name}
           </p>
           <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-slate-500">
-            {t.when ?? "Posted on Google"}
+            {t.when ?? labels.postedFallback}
           </p>
         </div>
         {isLong && (
@@ -133,7 +152,7 @@ function TestimonialCard({ t, i }: { t: Testimonial; i: number }) {
             onClick={() => setOpen((v) => !v)}
             className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#F97316] transition-colors hover:text-orange-600"
           >
-            {open ? "Show Less" : "Show More"}
+            {open ? labels.showLessLabel : labels.showMoreLabel}
             <span
               aria-hidden
               className={`transition-transform ${open ? "rotate-180" : ""}`}
@@ -152,17 +171,16 @@ export default function TestimonialsContent({
   rating,
   reviewCount,
   reviewsUrl,
+  content,
 }: TestimonialsContentProps) {
+  const copy = mergeContent(defaults, content);
+
   return (
     <>
       <ServiceHero
-        title="Testimonials"
-        subtitle="What our patients have to say about Dr. Levitt and the team at Levitt Chiropractic Center."
-        crumbs={[
-          { label: "Home", href: "/" },
-          { label: "About Us", href: "/about" },
-          { label: "Testimonials" },
-        ]}
+        title={copy.testimonialsHero.title}
+        subtitle={copy.testimonialsHero.subtitle}
+        crumbs={copy.testimonialsHero.crumbs}
       />
 
       {/* SECTION 2 WHITE: STATS BAR */}
@@ -177,10 +195,10 @@ export default function TestimonialsContent({
           >
             <div className="rounded-2xl border-t-4 border-[#F97316] bg-white p-6 text-center shadow-sm ring-1 ring-slate-200">
               <p className="font-heading text-4xl font-black text-[#0F172A]">
-                39
+                {copy.testimonialsStats.yearsValue}
               </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                Years in practice
+                {copy.testimonialsStats.yearsLabel}
               </p>
             </div>
             <a
@@ -190,18 +208,19 @@ export default function TestimonialsContent({
               className="rounded-2xl border-t-4 border-[#F97316] bg-white p-6 text-center shadow-sm ring-1 ring-slate-200 transition-shadow hover:shadow-md"
             >
               <p className="font-heading text-4xl font-black text-[#0F172A]">
-                {rating.toFixed(1)}★
+                {rating.toFixed(1)}
+                {copy.testimonialsStats.ratingSuffix}
               </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                {reviewCount} Google reviews
+                {reviewCount} {copy.testimonialsStats.reviewsLabel}
               </p>
             </a>
             <div className="rounded-2xl border-t-4 border-[#F97316] bg-white p-6 text-center shadow-sm ring-1 ring-slate-200">
               <p className="font-heading text-4xl font-black text-[#0F172A]">
-                16
+                {copy.testimonialsStats.returnValue}
               </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                Years of return visits (and counting)
+                {copy.testimonialsStats.returnLabel}
               </p>
             </div>
           </motion.div>
@@ -228,10 +247,10 @@ export default function TestimonialsContent({
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              Google reviews
+              {copy.testimonialsGrid.eyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-              Patients in their own words
+              {copy.testimonialsGrid.heading}
             </h2>
             <span
               aria-hidden
@@ -243,7 +262,7 @@ export default function TestimonialsContent({
               rel="noopener noreferrer"
               className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-orange-300 underline-offset-4 hover:underline"
             >
-              View all Google reviews
+              {copy.testimonialsGrid.viewAllLabel}
             </a>
           </motion.div>
 
@@ -259,7 +278,7 @@ export default function TestimonialsContent({
             className="mt-8 sm:mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
           >
             {items.map((t, i) => (
-              <TestimonialCard key={t.name} t={t} i={i} />
+              <TestimonialCard key={t.name} t={t} i={i} labels={copy.testimonialsGrid} />
             ))}
           </motion.div>
           ) : null}
@@ -278,39 +297,39 @@ export default function TestimonialsContent({
               className="lg:col-span-3"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Your Story Next
+                {copy.testimonialsClose.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Ready to feel better?
+                {copy.testimonialsClose.heading}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                Join the patients who trust Dr. Levitt with their care. Call{" "}
+                {copy.testimonialsClose.closingBefore}
                 <a
                   href={siteConfig.phoneHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
                   {siteConfig.phone}
-                </a>{" "}
-                or{" "}
+                </a>
+                {copy.testimonialsClose.closingMiddle}
                 <Link
-                  href="/contact"
+                  href={copy.testimonialsClose.contactHref}
                   className="font-semibold text-[#F97316] underline-offset-4 transition-colors hover:underline"
                 >
-                  request a visit online
-                </Link>{" "}
-                to schedule your first appointment.
+                  {copy.testimonialsClose.contactLabel}
+                </Link>
+                {copy.testimonialsClose.closingAfter}
               </p>
             </motion.div>
 
             <div className="lg:col-span-2">
               <CtaCard
-                eyebrow="Become a Patient"
-                title="Start your story"
-                body="Schedule your first visit with Dr. Levitt today."
+                eyebrow={copy.sidebarBooking.eyebrow}
+                title={copy.sidebarBooking.title}
+                body={copy.sidebarBooking.body}
               />
             </div>
           </div>

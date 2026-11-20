@@ -77,6 +77,14 @@ export const Pages: CollectionConfig = {
       type: "textarea",
     },
     {
+      name: "designed",
+      type: "json",
+      admin: {
+        description:
+          "Section content for the designed page. Blank values keep the hardcoded design. Shape matches lib/designed/defaults.",
+      },
+    },
+    {
       name: "layout",
       type: "blocks",
       blocks: [

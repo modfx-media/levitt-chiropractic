@@ -6,6 +6,8 @@ import { Suspense } from "react";
 import "@/app/globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SiteShellProvider } from "@/components/layout/SiteShellContext";
+import { loadSiteShell } from "@/lib/designed/loadShell";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDisplayedGoogleReviews } from "@/lib/google-reviews";
@@ -75,7 +77,10 @@ export const metadata: Metadata = {
 export default async function SiteLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const { reviews, meta } = await getDisplayedGoogleReviews();
+  const [{ reviews, meta }, shell] = await Promise.all([
+    getDisplayedGoogleReviews(),
+    loadSiteShell(),
+  ]);
 
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
@@ -101,12 +106,14 @@ export default async function SiteLayout({
             })(window, document, "clarity", "script", "yj6lkqtgha");
           `}
         </Script>
-        <Suspense fallback={null}>
-          <ScrollToTop />
-        </Suspense>
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SiteShellProvider value={shell}>
+          <Suspense fallback={null}>
+            <ScrollToTop />
+          </Suspense>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </SiteShellProvider>
         <JsonLd id="ld-website" data={websiteJsonLd()} />
         <JsonLd
           id="ld-localbusiness"

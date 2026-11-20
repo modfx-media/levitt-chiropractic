@@ -71,6 +71,12 @@ export interface Config {
     media: Media;
     pages: Page;
     posts: Post;
+    cities: City;
+    'practice-services': PracticeService;
+    conditions: Condition;
+    faqs: Faq;
+    testimonials: Testimonial;
+    team: Team;
     redirects: Redirect;
     search: Search;
     'payload-kv': PayloadKv;
@@ -85,6 +91,12 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    cities: CitiesSelect<false> | CitiesSelect<true>;
+    'practice-services': PracticeServicesSelect<false> | PracticeServicesSelect<true>;
+    conditions: ConditionsSelect<false> | ConditionsSelect<true>;
+    faqs: FaqsSelect<false> | FaqsSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    team: TeamSelect<false> | TeamSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -175,7 +187,6 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
-  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -203,6 +214,18 @@ export interface Page {
   legacyId?: string | null;
   sourceUrl?: string | null;
   excerpt?: string | null;
+  /**
+   * Section content for the designed page. Blank values keep the hardcoded design. Shape matches lib/designed/defaults.
+   */
+  designed?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   layout?:
     | (
         | {
@@ -306,6 +329,127 @@ export interface Post {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cities".
+ */
+export interface City {
+  id: number;
+  slug: string;
+  name: string;
+  county?: string | null;
+  distanceMi?: number | null;
+  population?: number | null;
+  zips?:
+    | {
+        zip: string;
+        id?: string | null;
+      }[]
+    | null;
+  neighbors?:
+    | {
+        name: string;
+        id?: string | null;
+      }[]
+    | null;
+  landmark?: string | null;
+  region?: ('West Metro' | 'Minneapolis' | 'South Metro' | 'North Metro' | 'East Metro' | 'Saint Paul') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "practice-services".
+ */
+export interface PracticeService {
+  id: number;
+  slug: string;
+  name: string;
+  inlineNoun?: string | null;
+  tagline?: string | null;
+  serviceType?: string | null;
+  benefits?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  conditions?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  faqs?:
+    | {
+        q: string;
+        a: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conditions".
+ */
+export interface Condition {
+  id: number;
+  slug: string;
+  name: string;
+  summary?: string | null;
+  href?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs".
+ */
+export interface Faq {
+  id: number;
+  path: string;
+  eyebrow?: string | null;
+  title?: string | null;
+  intro?: string | null;
+  items?:
+    | {
+        q: string;
+        a: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  name: string;
+  quote: string;
+  rating?: number | null;
+  relativeTime?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team".
+ */
+export interface Team {
+  id: number;
+  name: string;
+  shortName?: string | null;
+  jobTitle?: string | null;
+  image?: string | null;
+  bio?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -485,6 +629,30 @@ export interface PayloadLockedDocument {
         value: number | Post;
       } | null)
     | ({
+        relationTo: 'cities';
+        value: number | City;
+      } | null)
+    | ({
+        relationTo: 'practice-services';
+        value: number | PracticeService;
+      } | null)
+    | ({
+        relationTo: 'conditions';
+        value: number | Condition;
+      } | null)
+    | ({
+        relationTo: 'faqs';
+        value: number | Faq;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'team';
+        value: number | Team;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -564,7 +732,6 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
-  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -588,6 +755,7 @@ export interface PagesSelect<T extends boolean = true> {
   legacyId?: T;
   sourceUrl?: T;
   excerpt?: T;
+  designed?: T;
   layout?:
     | T
     | {
@@ -656,6 +824,121 @@ export interface PostsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cities_select".
+ */
+export interface CitiesSelect<T extends boolean = true> {
+  slug?: T;
+  name?: T;
+  county?: T;
+  distanceMi?: T;
+  population?: T;
+  zips?:
+    | T
+    | {
+        zip?: T;
+        id?: T;
+      };
+  neighbors?:
+    | T
+    | {
+        name?: T;
+        id?: T;
+      };
+  landmark?: T;
+  region?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "practice-services_select".
+ */
+export interface PracticeServicesSelect<T extends boolean = true> {
+  slug?: T;
+  name?: T;
+  inlineNoun?: T;
+  tagline?: T;
+  serviceType?: T;
+  benefits?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  conditions?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  faqs?:
+    | T
+    | {
+        q?: T;
+        a?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conditions_select".
+ */
+export interface ConditionsSelect<T extends boolean = true> {
+  slug?: T;
+  name?: T;
+  summary?: T;
+  href?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs_select".
+ */
+export interface FaqsSelect<T extends boolean = true> {
+  path?: T;
+  eyebrow?: T;
+  title?: T;
+  intro?: T;
+  items?:
+    | T
+    | {
+        q?: T;
+        a?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  name?: T;
+  quote?: T;
+  rating?: T;
+  relativeTime?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team_select".
+ */
+export interface TeamSelect<T extends boolean = true> {
+  name?: T;
+  shortName?: T;
+  jobTitle?: T;
+  image?: T;
+  bio?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -763,9 +1046,50 @@ export interface Header {
   id: number;
   tagline?: string | null;
   /**
-   * Does not replace the designed header. Stored for editors only until a designed overlay is reviewed.
+   * Internal note. The designed header reads the fields below.
    */
   navNote?: string | null;
+  placeLabel?: string | null;
+  phone?: string | null;
+  phoneHref?: string | null;
+  addressLine?: string | null;
+  logoMarkSrc?: string | null;
+  logoMarkAlt?: string | null;
+  logoWordmarkSrc?: string | null;
+  logoWordmarkAlt?: string | null;
+  newPatientLabel?: string | null;
+  existingPatientLabel?: string | null;
+  stickyCallLabel?: string | null;
+  stickyNewPatientLabel?: string | null;
+  stickyNewPatientRest?: string | null;
+  stickyExistingPatientLabel?: string | null;
+  stickyExistingPatientRest?: string | null;
+  hours?:
+    | {
+        day: string;
+        hours: string;
+        id?: string | null;
+      }[]
+    | null;
+  hoursInline?:
+    | {
+        day: string;
+        time: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Primary navigation tree. Leave empty to keep the designed menu.
+   */
+  nav?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -776,6 +1100,30 @@ export interface Header {
 export interface Footer {
   id: number;
   blurb?: string | null;
+  /**
+   * Footer sentence on the public site. Leave blank to keep the designed default. The legacy blurb field is not shown.
+   */
+  designedBlurb?: string | null;
+  exploreTitle?: string | null;
+  legalTitle?: string | null;
+  explore?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  legal?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  newPatientLabel?: string | null;
+  existingPatientLabel?: string | null;
+  poweredByLabel?: string | null;
+  poweredByHref?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -787,6 +1135,48 @@ export interface SiteSetting {
   id: number;
   defaultMetaTitle?: string | null;
   defaultMetaDescription?: string | null;
+  practiceName?: string | null;
+  shortName?: string | null;
+  tagline?: string | null;
+  description?: string | null;
+  phone?: string | null;
+  phoneHref?: string | null;
+  phoneE164?: string | null;
+  email?: string | null;
+  foundingDate?: string | null;
+  appointmentUrl?: string | null;
+  existingPatientAppointmentUrl?: string | null;
+  callNowLabel?: string | null;
+  newPatientButtonLabel?: string | null;
+  existingPatientButtonLabel?: string | null;
+  mapsUrl?: string | null;
+  mapsEmbedUrl?: string | null;
+  mapsDirectionsUrl?: string | null;
+  healthgradesUrl?: string | null;
+  address?: {
+    street?: string | null;
+    city?: string | null;
+    state?: string | null;
+    zip?: string | null;
+    full?: string | null;
+  };
+  geo?: {
+    latitude?: number | null;
+    longitude?: number | null;
+  };
+  physician?: {
+    name?: string | null;
+    shortName?: string | null;
+    jobTitle?: string | null;
+    image?: string | null;
+  };
+  hours?:
+    | {
+        day: string;
+        hours: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -797,6 +1187,36 @@ export interface SiteSetting {
 export interface HeaderSelect<T extends boolean = true> {
   tagline?: T;
   navNote?: T;
+  placeLabel?: T;
+  phone?: T;
+  phoneHref?: T;
+  addressLine?: T;
+  logoMarkSrc?: T;
+  logoMarkAlt?: T;
+  logoWordmarkSrc?: T;
+  logoWordmarkAlt?: T;
+  newPatientLabel?: T;
+  existingPatientLabel?: T;
+  stickyCallLabel?: T;
+  stickyNewPatientLabel?: T;
+  stickyNewPatientRest?: T;
+  stickyExistingPatientLabel?: T;
+  stickyExistingPatientRest?: T;
+  hours?:
+    | T
+    | {
+        day?: T;
+        hours?: T;
+        id?: T;
+      };
+  hoursInline?:
+    | T
+    | {
+        day?: T;
+        time?: T;
+        id?: T;
+      };
+  nav?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -807,6 +1227,27 @@ export interface HeaderSelect<T extends boolean = true> {
  */
 export interface FooterSelect<T extends boolean = true> {
   blurb?: T;
+  designedBlurb?: T;
+  exploreTitle?: T;
+  legalTitle?: T;
+  explore?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  legal?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  newPatientLabel?: T;
+  existingPatientLabel?: T;
+  poweredByLabel?: T;
+  poweredByHref?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -818,6 +1259,54 @@ export interface FooterSelect<T extends boolean = true> {
 export interface SiteSettingsSelect<T extends boolean = true> {
   defaultMetaTitle?: T;
   defaultMetaDescription?: T;
+  practiceName?: T;
+  shortName?: T;
+  tagline?: T;
+  description?: T;
+  phone?: T;
+  phoneHref?: T;
+  phoneE164?: T;
+  email?: T;
+  foundingDate?: T;
+  appointmentUrl?: T;
+  existingPatientAppointmentUrl?: T;
+  callNowLabel?: T;
+  newPatientButtonLabel?: T;
+  existingPatientButtonLabel?: T;
+  mapsUrl?: T;
+  mapsEmbedUrl?: T;
+  mapsDirectionsUrl?: T;
+  healthgradesUrl?: T;
+  address?:
+    | T
+    | {
+        street?: T;
+        city?: T;
+        state?: T;
+        zip?: T;
+        full?: T;
+      };
+  geo?:
+    | T
+    | {
+        latitude?: T;
+        longitude?: T;
+      };
+  physician?:
+    | T
+    | {
+        name?: T;
+        shortName?: T;
+        jobTitle?: T;
+        image?: T;
+      };
+  hours?:
+    | T
+    | {
+        day?: T;
+        hours?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -8,12 +8,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --import tsx --test lib/cms/mergeDesigned.test.ts",
+    "test": "node --import tsx --test lib/cms/mergeDesigned.test.ts lib/designed/shell.test.ts lib/designed/contentEqual.test.ts lib/sitemapOverlay.test.ts",
     "payload": "payload",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
     "cms:create-user": "bun --env-file=.env.local scripts/create-first-user.ts",
-    "cms:import": "bun --env-file=.env.local scripts/import-content.ts"
+    "cms:import": "node --import tsx scripts/import-content.ts"
   },
   "dependencies": {
     "@payloadcms/db-vercel-postgres": "^3.90.1",

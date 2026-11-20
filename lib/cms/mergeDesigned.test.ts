@@ -368,6 +368,8 @@ test("every designed site route keeps its component inside CMSRoute", () => {
     if (rel === "[...path]/page.tsx") {
       assert.match(source, nullChild);
       assert.match(source, /cmsOnlyDocIsRenderable/);
+      assert.match(source, /isLivePublicPath/);
+      assert.doesNotMatch(source, /excerpt/);
       continue;
     }
     if (rel === "blog/[slug]/page.tsx") {

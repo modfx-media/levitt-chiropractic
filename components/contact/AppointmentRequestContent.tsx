@@ -5,6 +5,8 @@ import Script from "next/script";
 import { motion } from "framer-motion";
 
 import { siteConfig } from "@/lib/siteConfig";
+import { appointmentRequestDefaults as defaults } from "@/lib/designed/defaults/appointmentRequest";
+import { mergeContent } from "@/lib/designed/merge";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { ServiceHero } from "@/components/services/ServiceHero";
 
@@ -17,86 +19,44 @@ const fadeUp = {
   },
 };
 
-const variants = {
+const forms = {
   new: {
-    title: "New Patient Appointment",
-    subtitle:
-      "Fill out the form and our staff will be in touch shortly let&rsquo;s get you on the schedule.",
-    eyebrow: "Request a Visit",
-    intro:
-      "Fill out the appointment request form and our staff will be in touch shortly. Send us a message!",
-    reasons: [
-      {
-        title: "We&rsquo;ll reach out fast",
-        body: "Our staff will be in touch shortly to confirm your visit and answer any questions.",
-      },
-      {
-        title: "Flexible scheduling",
-        body: "Tell us your preferred days and times we&rsquo;ll do our best to match.",
-      },
-      {
-        title: "First-visit friendly",
-        body: "New to the practice? We&rsquo;ll walk you through paperwork and what to expect.",
-      },
-    ],
-    form: {
-      id: "JKf5DJnpikVe68RzfV0T",
-      name: "\uD83D\uDD35 Website Form (REQUEST APPMT) ",
-      height: "534",
-      title: "Website Appointment Request Form",
-      extraAttrs: {},
-    },
+    id: "JKf5DJnpikVe68RzfV0T",
+    name: "\uD83D\uDD35 Website Form (REQUEST APPMT) ",
+    height: "534",
+    extraAttrs: {} as Record<string, string>,
   },
   existing: {
-    title: "Existing Patient Appointment",
-    subtitle:
-      "Already a patient? Fill out the form and our staff will be in touch shortly to get your next visit on the schedule.",
-    eyebrow: "Book Your Next Visit",
-    intro:
-      "Fill out the existing patient appointment form and our staff will be in touch shortly to confirm your visit.",
-    reasons: [
-      {
-        title: "We&rsquo;ll reach out fast",
-        body: "Our staff will be in touch shortly to confirm your visit and answer any questions.",
-      },
-      {
-        title: "Flexible scheduling",
-        body: "Tell us your preferred days and times we&rsquo;ll do our best to match.",
-      },
-      {
-        title: "Pick up where you left off",
-        body: "We&rsquo;ll review your history and continue your care plan from your last visit.",
-      },
-    ],
-    form: {
-      id: "URmegmIswpVqCJnFftaL",
-      name: "\uD83D\uDD35 Website Form (Existing Patient APPMT) ",
-      height: "562",
-      title: "Website Existing Patient Appointment Form",
-      extraAttrs: {
-        "data-cookie-consent": "true",
-        "data-cookie-consent-provider": "auto",
-      },
+    id: "URmegmIswpVqCJnFftaL",
+    name: "\uD83D\uDD35 Website Form (Existing Patient APPMT) ",
+    height: "562",
+    extraAttrs: {
+      "data-cookie-consent": "true",
+      "data-cookie-consent-provider": "auto",
     },
   },
 };
 
 export default function AppointmentRequestContent({
   variant = "new",
+  content,
 }: {
-  variant?: keyof typeof variants;
+  variant?: "new" | "existing";
+  content?: unknown;
 }) {
-  const { title, subtitle, eyebrow, intro, reasons, form } = variants[variant];
+  const copy = mergeContent(defaults, content);
+  const page = copy[variant];
+  const form = forms[variant];
 
   return (
     <>
       <ServiceHero
-        title={title}
-        subtitle={subtitle}
+        title={page.title}
+        subtitle={page.subtitle}
         crumbs={[
-          { label: "Home", href: "/" },
-          { label: "Contact", href: "/contact" },
-          { label: title },
+          { label: copy.home.label, href: copy.home.href },
+          { label: copy.contact.label, href: copy.contact.href },
+          { label: page.title },
         ]}
       />
 
@@ -112,21 +72,21 @@ export default function AppointmentRequestContent({
               className="lg:col-span-5"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                {eyebrow}
+                {page.eyebrow}
               </p>
               <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-                Send us a message
+                {copy.heading}
               </h2>
               <span
                 aria-hidden
                 className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
               />
               <p className="mt-6 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-                {intro}
+                {page.intro}
               </p>
 
               <ul className="mt-8 space-y-4">
-                {reasons.map((r) => (
+                {page.reasons.map((r) => (
                   <li key={r.title} className="flex items-start gap-4">
                     <span
                       aria-hidden
@@ -160,7 +120,7 @@ export default function AppointmentRequestContent({
 
               <div className="mt-8 rounded-2xl bg-[#0F172A] p-6 text-white ring-1 ring-white/10">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-300">
-                  Prefer to Call?
+                  {copy.call.eyebrow}
                 </p>
                 <a
                   href={siteConfig.phoneHref}
@@ -169,7 +129,7 @@ export default function AppointmentRequestContent({
                   {siteConfig.phone}
                 </a>
                 <p className="mt-1 text-xs text-white/60">
-                  Mon &amp; Thu: 8:30am – 5:30pm
+                  {copy.call.hours}
                 </p>
               </div>
             </motion.div>
@@ -183,10 +143,10 @@ export default function AppointmentRequestContent({
             >
               <div className="relative overflow-hidden rounded-2xl border-t-4 border-[#F97316] bg-white p-7 shadow-sm ring-1 ring-slate-200 sm:p-8">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-orange-600">
-                  Appointment Form
+                  {copy.form.eyebrow}
                 </p>
                 <h3 className="mt-2 font-heading text-2xl font-bold text-[#0F172A]">
-                  Tell us about you
+                  {copy.form.heading}
                 </h3>
 
                 <div className="mt-6 h-[720px] w-full">
@@ -211,7 +171,7 @@ export default function AppointmentRequestContent({
                     data-layout-iframe-id={`inline-${form.id}`}
                     data-form-id={form.id}
                     {...form.extraAttrs}
-                    title={form.title}
+                    title={page.formTitle}
                   />
                 </div>
                 <Script
@@ -220,14 +180,14 @@ export default function AppointmentRequestContent({
                 />
 
                 <p className="mt-6 text-xs text-slate-500">
-                  New to the practice?{" "}
+                  {copy.form.beforeLink}{" "}
                   <Link
-                    href="/new-patient-center/what-to-expect"
+                    href={copy.form.linkHref}
                     className="font-semibold text-[#F97316] underline-offset-4 hover:underline"
                   >
-                    See what to expect
+                    {copy.form.linkLabel}
                   </Link>{" "}
-                  on your first visit.
+                  {copy.form.afterLink}
                 </p>
               </div>
             </motion.div>

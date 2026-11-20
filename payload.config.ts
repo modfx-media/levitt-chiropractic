@@ -10,11 +10,21 @@ import { Users } from "./src/cms/collections/Users";
 import { Media } from "./src/cms/collections/Media";
 import { Pages } from "./src/cms/collections/Pages";
 import { Posts } from "./src/cms/collections/Posts";
+import {
+  Cities,
+  Conditions,
+  Faqs,
+  PracticeServices,
+  TeamMembers,
+  Testimonials,
+} from "./src/cms/collections/Catalog";
 import { Header, Footer, SiteSettings } from "./src/cms/globals";
 import { cmsPlugins } from "./src/cms/plugins";
 import { siteConfig } from "./lib/siteConfig";
 
 import { scheduledPublishPlugin } from "./scheduled-publish";
+import * as designedContentMigration from "./src/migrations/20261119_120000_designed_content";
+import * as footerBlurbMigration from "./src/migrations/20261119_190000_footer_designed_blurb";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
@@ -91,14 +101,61 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Pages, Posts],
+  collections: [
+    Users,
+    Media,
+    Pages,
+    Posts,
+    Cities,
+    PracticeServices,
+    Conditions,
+    Faqs,
+    Testimonials,
+    TeamMembers,
+  ],
   globals: [Header, Footer, SiteSettings],
   editor: lexicalEditor(),
-  db: vercelPostgresAdapter({
-    pool: { connectionString: databaseUrl },
-    forceUseVercelPostgres: !isLocalhost,
-    push: !disablePush,
-  }),
+  db: (() => {
+    const postgres = vercelPostgresAdapter({
+      pool: { connectionString: databaseUrl },
+      forceUseVercelPostgres: !isLocalhost,
+      push: !disablePush,
+      prodMigrations: [
+        {
+          name: designedContentMigration.name,
+          up: designedContentMigration.up,
+          down: designedContentMigration.down,
+        },
+        {
+          name: footerBlurbMigration.name,
+          up: footerBlurbMigration.up,
+          down: footerBlurbMigration.down,
+        },
+      ],
+    });
+    // A database created with dev push stores a batch=-1 row. Payload then
+    // asks for confirmation before migrating, and a preview build has no
+    // terminal to answer, so the deploy stops. This migration only adds
+    // columns and tables, so clear that marker and continue.
+    const originalInit = postgres.init.bind(postgres);
+    postgres.init = (args) => {
+      const adapter = originalInit(args);
+      const migrate = adapter.migrate.bind(adapter);
+      adapter.migrate = async (migrateArgs) => {
+        try {
+          await adapter.drizzle.execute(
+            sql`DELETE FROM "payload_migrations" WHERE "batch" = -1`,
+          );
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          if (!/payload_migrations|does not exist/i.test(message)) throw error;
+        }
+        return migrate(migrateArgs);
+      };
+      return adapter;
+    };
+    return postgres;
+  })(),
   plugins: [scheduledPublishPlugin(), ...cmsPlugins()],
   cors: allowedOrigins(),
   csrf: allowedOrigins(),

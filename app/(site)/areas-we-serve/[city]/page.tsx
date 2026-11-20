@@ -4,6 +4,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { allServedCities, getCityBySlug, getServedCities, withLiveNeighbors } from "@/lib/areasData";
 import { retiredCityTarget } from "@/lib/areaRetirement";
 import { breadcrumbJsonLd, cityServiceAreaJsonLd, faqPageJsonLd } from "@/lib/jsonLd";
@@ -56,6 +57,7 @@ export default async function Page({
   if (target) permanentRedirect(`/areas-we-serve/${target}`);
 
   const city = withLiveNeighbors(found);
+  const content = await loadPageContent(`/areas-we-serve/${city.slug}`);
   const sameRegionCities = getServedCities()
     .filter((c) => c.region === city.region && c.slug !== city.slug)
     .slice(0, 8);
@@ -85,7 +87,7 @@ export default async function Page({
         id={`ld-city-faq-${city.slug}`}
         data={faqPageJsonLd({ faqs: cityFaqs(city) })}
       />
-      <AreaCityPageContent city={city} sameRegionCities={sameRegionCities} />
+      <AreaCityPageContent content={content} city={city} sameRegionCities={sameRegionCities} />
     </>
     </CMSRoute>
   );

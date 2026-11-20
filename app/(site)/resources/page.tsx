@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import ResourcesHubContent from "@/components/resources/ResourcesHubContent";
 
@@ -18,10 +19,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/resources", fallbackMeta);
 }
 
-export default function Page() {
+export default async function Page() {
+  const content = await loadPageContent("/resources");
   return (
     <CMSRoute path="/resources">
-      <ResourcesHubContent />
+      <ResourcesHubContent content={content}  />
     </CMSRoute>
   );
 }

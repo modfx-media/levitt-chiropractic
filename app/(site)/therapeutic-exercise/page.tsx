@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { generateMeta } from "@/lib/metadata";
 import { CMSRoute } from "@/components/cms/CMSRoute";
+import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import TherapeuticExerciseContent from "@/components/services/TherapeuticExerciseContent";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
@@ -17,7 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return withCMSMeta("/therapeutic-exercise", fallbackMeta);
 }
 
-export default function TherapeuticExercisePage() {
+export default async function TherapeuticExercisePage() {
+  const content = await loadPageContent("/therapeutic-exercise");
   return (
     <CMSRoute path="/therapeutic-exercise">
     <>
@@ -26,7 +28,7 @@ export default function TherapeuticExercisePage() {
         slug="therapeutic-exercise"
         description="Therapeutic exercise programs in Saint Louis Park, MN endurance, resistance and flexibility training to restore mobility, strength and quality of life."
       />
-      <TherapeuticExerciseContent />
+      <TherapeuticExerciseContent content={content}  />
     </>
   
     </CMSRoute>

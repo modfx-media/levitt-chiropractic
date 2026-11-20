@@ -16,6 +16,8 @@ import {
   visitFacts,
   zipPhrase,
 } from "@/lib/areaPageCopy";
+import { areaCityDefaults } from "@/lib/designed/defaults/areaCity";
+import { mergeContent } from "@/lib/designed/merge";
 import { ServiceHero } from "@/components/services/ServiceHero";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { CtaCard } from "@/components/services/CtaCard";
@@ -32,35 +34,39 @@ const fadeUp = {
 export default function AreaCityPageContent({
   city,
   sameRegionCities,
+  content,
 }: {
   city: ServedCity;
   sameRegionCities: ServedCity[];
+  content?: unknown;
 }) {
-  const copy = cityIntro(city);
+  const copy = mergeContent(areaCityDefaults, content);
+  const intro = cityIntro(city);
   const why = cityWhyPoints(city);
   const faqs = cityFaqs(city);
   const facts = visitFacts(city);
   const steps = firstVisitSteps(city);
   const corePages = [
-    { href: "/adjustments-and-manipulation", label: "Adjustments" },
-    { href: "/back-pain-treatments", label: "Back pain" },
-    { href: "/cold-laser-therapy", label: "Cold laser" },
-    { href: "/custom-foot-orthotics", label: "Custom orthotics" },
-    { href: "/new-patient-center/what-to-expect", label: "What to expect" },
+    { href: "/adjustments-and-manipulation", label: copy.linkAdjustments },
+    { href: "/back-pain-treatments", label: copy.linkBackPain },
+    { href: "/cold-laser-therapy", label: copy.linkColdLaser },
+    { href: "/custom-foot-orthotics", label: copy.linkOrthotics },
+    { href: "/new-patient-center/what-to-expect", label: copy.linkWhatToExpect },
   ];
 
   return (
     <>
       <ServiceHero
-        title={`Chiropractor in ${city.name}, MN`}
+        title={copy.heroTitle || `Chiropractor in ${city.name}, MN`}
         subtitle={
-          city.distanceMi === 0
+          copy.heroSubtitle ||
+          (city.distanceMi === 0
             ? `Drug-free chiropractic care in ${city.name} — adjustments, cold laser, cryotherapy, and custom orthotics at ${siteConfig.address.full}.`
-            : `${city.name} patients are seen in Saint Louis Park — ${driveLabel(city).toLowerCase()} from ${city.landmark}.`
+            : `${city.name} patients are seen in Saint Louis Park — ${driveLabel(city).toLowerCase()} from ${city.landmark}.`)
         }
         crumbs={[
-          { label: "Home", href: "/" },
-          { label: "Areas We Serve", href: "/areas-we-serve" },
+          { label: copy.crumbHome, href: "/" },
+          { label: copy.crumbAreas, href: "/areas-we-serve" },
           { label: city.name },
         ]}
       />
@@ -74,28 +80,30 @@ export default function AreaCityPageContent({
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              {city.region} · {city.county} County · ZIP {zipPhrase(city)}
+              {copy.introEyebrow ||
+                `${city.region} · ${city.county} County · ZIP ${zipPhrase(city)}`}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              {city.distanceMi === 0
-                ? `Chiropractic care in ${city.name}`
-                : `${city.name} patients, one Saint Louis Park clinic`}
+              {copy.introTitle ||
+                (city.distanceMi === 0
+                  ? `Chiropractic care in ${city.name}`
+                  : `${city.name} patients, one Saint Louis Park clinic`)}
             </h2>
             <span
               aria-hidden
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              {copy.lead}
+              {copy.introLead || intro.lead}
             </p>
             <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg">
-              {copy.support}
+              {copy.introSupport || intro.support}
             </p>
             <p className="mt-4 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              {copy.local}
+              {copy.introLocal || intro.local}
             </p>
             <p className="mt-4 text-base leading-relaxed text-slate-700 sm:text-lg">
-              {copy.typical}
+              {copy.introTypical || intro.typical}
             </p>
           </motion.div>
 
@@ -133,10 +141,10 @@ export default function AreaCityPageContent({
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Why patients from {city.name} come here
+              {copy.whyEyebrow || `Why patients from ${city.name} come here`}
             </p>
             <h2 className="mt-3 font-heading text-2xl font-bold tracking-tight text-[#0F172A] sm:text-3xl">
-              What {city.name} patients should know
+              {copy.whyTitle || `What ${city.name} patients should know`}
             </h2>
           </motion.div>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
@@ -171,10 +179,10 @@ export default function AreaCityPageContent({
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              First visit from {city.name}
+              {copy.visitEyebrow || `First visit from ${city.name}`}
             </p>
             <h2 className="mt-3 font-heading text-2xl font-bold tracking-tight text-[#0F172A] sm:text-3xl">
-              What actually happens
+              {copy.visitTitle}
             </h2>
           </motion.div>
           <div className="mt-10 grid gap-5 md:grid-cols-2">
@@ -188,7 +196,7 @@ export default function AreaCityPageContent({
                 className="rounded-2xl border border-slate-200 bg-slate-50 p-6"
               >
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-orange-600">
-                  Step {String(idx + 1).padStart(2, "0")}
+                  {copy.stepLabel} {String(idx + 1).padStart(2, "0")}
                 </p>
                 <h3 className="mt-2 font-heading text-lg font-bold text-[#0F172A]">
                   {step.title}
@@ -200,7 +208,7 @@ export default function AreaCityPageContent({
             ))}
           </div>
           <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-relaxed text-slate-600">
-            {insuranceNote()}
+            {copy.insuranceNote || insuranceNote()}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             {corePages.map((p) => (
@@ -230,11 +238,11 @@ export default function AreaCityPageContent({
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              Services for {city.name}
+              {copy.servicesEyebrow || `Services for ${city.name}`}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-              Care available to{" "}
-              <span className="text-[#F97316]">{city.name} residents</span>
+              {copy.servicesHeadingLead}{" "}
+              <span className="text-[#F97316]">{copy.servicesHeadingAccent || `${city.name} residents`}</span>
             </h2>
           </motion.div>
 
@@ -279,10 +287,10 @@ export default function AreaCityPageContent({
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              {city.name} questions
+              {copy.faqEyebrow || `${city.name} questions`}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Getting here and getting started
+              {copy.faqTitle}
             </h2>
           </motion.div>
           <div className="mt-10 space-y-4">
@@ -308,10 +316,10 @@ export default function AreaCityPageContent({
           <div className="mx-auto max-w-7xl px-6">
             <div className="mx-auto max-w-2xl text-center">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-                Nearby areas
+                {copy.nearbyEyebrow}
               </p>
               <h2 className="mt-3 font-heading text-2xl font-bold tracking-tight text-[#0F172A] sm:text-3xl">
-                Other {city.region} communities we serve
+                {copy.nearbyTitle || `Other ${city.region} communities we serve`}
               </h2>
             </div>
             <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -324,7 +332,7 @@ export default function AreaCityPageContent({
                   <span>
                     {c.name}
                     <span className="mt-0.5 block text-xs font-normal text-slate-500">
-                      {c.distanceMi === 0 ? "Our office" : `${c.distanceMi} mi`}
+                      {c.distanceMi === 0 ? copy.ourOfficeLabel : `${c.distanceMi} mi`}
                     </span>
                   </span>
                   <span aria-hidden className="text-[#F97316]">
@@ -338,7 +346,7 @@ export default function AreaCityPageContent({
                 href="/areas-we-serve"
                 className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#F97316] hover:text-orange-700"
               >
-                See every area we serve
+                {copy.allAreasLink}
                 <span aria-hidden>→</span>
               </Link>
             </div>
@@ -349,9 +357,12 @@ export default function AreaCityPageContent({
       <section className="bg-white py-12 sm:py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
           <CtaCard
-            eyebrow={`Serving ${city.name}, MN`}
-            title="Book your visit"
-            body={`Call ${siteConfig.phone} or request an appointment online. Most ${city.name} patients are seen within the same week.`}
+            eyebrow={copy.ctaEyebrow || `Serving ${city.name}, MN`}
+            title={copy.ctaTitle}
+            body={
+              copy.ctaBody ||
+              `Call ${siteConfig.phone} or request an appointment online. Most ${city.name} patients are seen within the same week.`
+            }
           />
         </div>
       </section>

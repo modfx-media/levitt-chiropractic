@@ -6,9 +6,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { siteConfig } from "@/lib/siteConfig";
+import { useSiteShell } from "@/components/layout/SiteShellContext";
 import {
-  primaryNav,
   isGroup,
   type NavEntry,
   type NavLeaf,
@@ -16,8 +15,6 @@ import {
 } from "./navData";
 import { MobileMenu } from "./MobileMenu";
 import { HeaderHours } from "./HeaderHours";
-
-const LOGO_SRC = "/images/logo.png";
 
 function PhoneIcon({ className = "" }: { className?: string }) {
   return (
@@ -78,23 +75,24 @@ function isActive(pathname: string, href: string): boolean {
 }
 
 function Logo() {
+  const shell = useSiteShell();
   return (
     <Link
       href="/"
       className="flex flex-shrink-0 items-center gap-2 transition-opacity hover:opacity-90"
-      aria-label={`${siteConfig.name} home`}
+      aria-label={`${shell.name} home`}
     >
       <Image
-        src="/images/fevicon.png"
-        alt="Levitt Chiropractic Center logo"
+        src={shell.logos.markSrc}
+        alt={shell.logos.markAlt}
         width={70}
         height={70}
         priority
         className="h-10 w-10 flex-shrink-0 object-contain sm:h-12 sm:w-12 xl:h-10 xl:w-10 min-[1400px]:h-11 min-[1400px]:w-11 2xl:h-12 2xl:w-12"
       />
       <Image
-        src={LOGO_SRC}
-        alt={siteConfig.name}
+        src={shell.logos.wordmarkSrc}
+        alt={shell.logos.wordmarkAlt}
         width={546}
         height={206}
         priority
@@ -312,6 +310,8 @@ function SubMenu({
 
 export function Navbar() {
   const pathname = usePathname();
+  const shell = useSiteShell();
+  const primaryNav = shell.nav;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -328,24 +328,24 @@ export function Navbar() {
       <div className="hidden border-b border-white/5 bg-dark/80 text-white/70 lg:block">
         <div className="mx-auto flex h-9 max-w-[1520px] items-center justify-between gap-6 px-6 xl:px-5 2xl:px-6 text-[11px] font-medium uppercase tracking-[0.16em]">
           <div className="flex items-center gap-5">
-            <span>Saint Louis Park, MN</span>
+            <span>{shell.placeLabel}</span>
             <span className="h-3 w-px bg-white/15" aria-hidden />
             <HeaderHours variant="topbar" />
           </div>
           <div className="flex items-center gap-5">
             <a
-              href={siteConfig.phoneHref}
+              href={shell.phoneHref}
               className="inline-flex items-center gap-2 transition-colors hover:text-primary"
             >
               <PhoneIcon className="h-3.5 w-3.5 text-primary" />
-              {siteConfig.phone}
+              {shell.phone}
             </a>
             <span className="h-3 w-px bg-white/15" aria-hidden />
             <Link
               href="/contact"
               className="transition-colors hover:text-primary"
             >
-              {siteConfig.address.full}
+              {shell.address.full}
             </Link>
           </div>
         </div>
@@ -382,18 +382,18 @@ export function Navbar() {
           {/* Right CTAs */}
           <div className="flex flex-shrink-0 items-center justify-end gap-2">
             <Link
-              href={siteConfig.appointmentUrl}
+              href={shell.appointmentUrl}
               className="hidden items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-3 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.03em] text-white shadow-lg shadow-orange-500/30 transition hover:bg-orange-600 hover:shadow-xl hover:shadow-orange-500/40 sm:inline-flex min-[1400px]:px-3.5 min-[1400px]:tracking-[0.04em] 2xl:px-4 2xl:text-[11px] 2xl:tracking-[0.05em]"
             >
-              NEW Patient Appointment
+              {shell.headerCtas.newPatientLabel}
               <span aria-hidden className="hidden 2xl:inline">→</span>
             </Link>
 
             <Link
-              href={siteConfig.existingPatientAppointmentUrl}
+              href={shell.existingPatientAppointmentUrl}
               className="hidden items-center justify-center whitespace-nowrap rounded-full border border-white/25 px-3 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.03em] text-white transition hover:border-primary hover:text-primary md:inline-flex min-[1400px]:px-3.5 min-[1400px]:tracking-[0.04em] 2xl:px-4 2xl:text-[11px] 2xl:tracking-[0.05em]"
             >
-              Existing Patient Appointment
+              {shell.headerCtas.existingPatientLabel}
             </Link>
 
             <button

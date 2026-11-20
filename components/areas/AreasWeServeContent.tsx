@@ -13,6 +13,8 @@ import {
 import type { ServedCity } from "@/lib/areasData";
 import { pseoServices } from "@/lib/pseoServices";
 import { siteConfig } from "@/lib/siteConfig";
+import { areasWeServeDefaults } from "@/lib/designed/defaults/areasWeServe";
+import { mergeContent } from "@/lib/designed/merge";
 import { ServiceHero } from "@/components/services/ServiceHero";
 import { LocationStrip } from "@/components/services/LocationStrip";
 import { CtaCard } from "@/components/services/CtaCard";
@@ -44,7 +46,14 @@ function countiesPhrase(cities: ServedCity[]): string {
   return `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
 }
 
-export default function AreasWeServeContent({ cities: servedCities }: { cities: ServedCity[] }) {
+export default function AreasWeServeContent({
+  cities: servedCities,
+  content,
+}: {
+  cities: ServedCity[];
+  content?: unknown;
+}) {
+  const copy = mergeContent(areasWeServeDefaults, content);
   const reduce = useReducedMotion();
   const [region, setRegion] = useState<"All" | ServedCity["region"]>("All");
   const [query, setQuery] = useState("");
@@ -71,9 +80,12 @@ export default function AreasWeServeContent({ cities: servedCities }: { cities: 
   return (
     <>
       <ServiceHero
-        title="Areas We Serve"
-        subtitle={`One Saint Louis Park clinic. ${servedCities.length} Twin Cities communities — each with its own drive, hospital orbit, and complaint pattern. Not a cloned city list.`}
-        crumbs={[{ label: "Home", href: "/" }, { label: "Areas We Serve" }]}
+        title={copy.heroTitle}
+        subtitle={
+          copy.heroSubtitle ||
+          `One Saint Louis Park clinic. ${servedCities.length} Twin Cities communities — each with its own drive, hospital orbit, and complaint pattern. Not a cloned city list.`
+        }
+        crumbs={[{ label: copy.crumbHome, href: "/" }, { label: copy.crumbAreas }]}
       />
 
       {/* Animated stat strip */}
@@ -90,9 +102,9 @@ export default function AreasWeServeContent({ cities: servedCities }: { cities: 
         />
         <div className="relative mx-auto max-w-7xl px-6">
           <div className="grid gap-5 sm:grid-cols-3">
-            <Stat label="Cities Served" target={servedCities.length} suffix="" />
-            <Stat label="Specialty Services" target={totalServices} suffix="" />
-            <Stat label="Local Care Pages" target={totalPages} suffix="+" />
+            <Stat label={copy.statCitiesLabel} target={servedCities.length} suffix="" />
+            <Stat label={copy.statServicesLabel} target={totalServices} suffix="" />
+            <Stat label={copy.statPagesLabel} target={totalPages} suffix={copy.statPagesSuffix} />
           </div>
         </div>
       </section>
@@ -107,25 +119,21 @@ export default function AreasWeServeContent({ cities: servedCities }: { cities: 
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Twin Cities Metro · Minnesota
+              {copy.introEyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Local chiropractic care, built around your community
+              {copy.introTitle}
             </h2>
             <span
               aria-hidden
               className="mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Levitt Chiropractic Center has cared for patients across{" "}
-              {countiesPhrase(servedCities)} counties since 1987. From our
-              office in {siteConfig.address.city}, we welcome patients from
-              communities within about 15 miles of the clinic.
+              {copy.introLead ||
+                `Levitt Chiropractic Center has cared for patients across ${countiesPhrase(servedCities)} counties since 1987. From our office in ${siteConfig.address.city}, we welcome patients from communities within about 15 miles of the clinic.`}
             </p>
             <p className="mt-4 border-l-4 border-[#F97316] pl-6 text-base leading-relaxed text-slate-700 sm:text-lg">
-              Find your city below for a complete view of the chiropractic
-              services available locally adjustments, cold laser, cryotherapy,
-              custom orthotics, therapeutic exercise, and more.
+              {copy.introNote}
             </p>
           </motion.div>
         </div>
@@ -137,7 +145,7 @@ export default function AreasWeServeContent({ cities: servedCities }: { cities: 
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div className="-mx-1 flex flex-nowrap items-center gap-2 overflow-x-auto px-1 pb-1 lg:flex-wrap lg:overflow-visible lg:pb-0">
               <RegionPill
-                label="All"
+                label={copy.filterAllLabel}
                 active={region === "All"}
                 onClick={() => setRegion("All")}
               />
@@ -151,12 +159,12 @@ export default function AreasWeServeContent({ cities: servedCities }: { cities: 
               ))}
             </div>
             <label className="relative block w-full lg:max-w-sm">
-              <span className="sr-only">Search cities</span>
+              <span className="sr-only">{copy.searchLabel}</span>
               <input
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search city, county or ZIP…"
+                placeholder={copy.searchPlaceholder}
                 className="w-full rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm text-[#0F172A] shadow-sm outline-none transition focus:border-[#F97316] focus:ring-2 focus:ring-[#F97316]/30"
               />
             </label>
@@ -176,7 +184,7 @@ export default function AreasWeServeContent({ cities: servedCities }: { cities: 
                 exit={{ opacity: 0 }}
                 className="py-16 text-center text-slate-500"
               >
-                No cities match that filter. Try clearing the search.
+                {copy.emptyMessage}
               </motion.p>
             ) : (
               <motion.div
@@ -212,7 +220,7 @@ export default function AreasWeServeContent({ cities: servedCities }: { cities: 
                           </span>
                         ) : (
                           <span className="rounded-full bg-orange-100 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-orange-700">
-                            Home
+                            {copy.homeBadge}
                           </span>
                         )}
                       </div>
@@ -221,7 +229,7 @@ export default function AreasWeServeContent({ cities: servedCities }: { cities: 
                         {c.zips.length > 2 ? "…" : ""}
                       </p>
                       <p className="mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#F97316]">
-                        View {c.name}
+                        {copy.viewCityLabel} {c.name}
                         <span
                           aria-hidden
                           className="transition-transform group-hover:translate-x-0.5"
@@ -257,11 +265,11 @@ export default function AreasWeServeContent({ cities: servedCities }: { cities: 
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-400">
-              Available in every city
+              {copy.servicesEyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight sm:text-4xl">
-              {totalServices} services,{" "}
-              <span className="text-[#F97316]">one Saint Louis Park clinic</span>
+              {copy.servicesHeadingLead || `${totalServices} services,`}{" "}
+              <span className="text-[#F97316]">{copy.servicesHeadingAccent}</span>
             </h2>
             <span
               aria-hidden
@@ -306,18 +314,18 @@ export default function AreasWeServeContent({ cities: servedCities }: { cities: 
             className="mx-auto max-w-2xl text-center"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">
-              Complete Directory
+              {copy.directoryEyebrow}
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-[#0F172A] sm:text-4xl">
-              Every city, every service
+              {copy.directoryTitle}
             </h2>
             <span
               aria-hidden
               className="mx-auto mt-4 block h-1 w-16 rounded-full bg-[#F97316]"
             />
             <p className="mt-6 text-base leading-relaxed text-slate-600 sm:text-lg">
-              Browse all {totalPages.toLocaleString()} local service pages grouped by community.
-              Click any city to expand the {totalServices} services available there.
+              {copy.directoryBody ||
+                `Browse all ${totalPages.toLocaleString()} local service pages grouped by community. Click any city to expand the ${totalServices} services available there.`}
             </p>
           </motion.div>
 
@@ -351,7 +359,7 @@ export default function AreasWeServeContent({ cities: servedCities }: { cities: 
                       className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-semibold text-[#0F172A] transition-colors hover:bg-orange-50 hover:text-[#F97316]"
                     >
                       <span aria-hidden className="text-[#F97316]">★</span>
-                      {c.name} overview
+                      {c.name} {copy.overviewLabel}
                     </Link>
                   </li>
                   {pseoServices.map((s) => (
@@ -365,7 +373,7 @@ export default function AreasWeServeContent({ cities: servedCities }: { cities: 
                           className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#F97316]/60"
                         />
                         <span>
-                          {s.name} <span className="text-slate-400">in {c.name}</span>
+                          {s.name} <span className="text-slate-400">{copy.inCityLabel} {c.name}</span>
                         </span>
                       </Link>
                     </li>
@@ -381,9 +389,12 @@ export default function AreasWeServeContent({ cities: servedCities }: { cities: 
       <section className="bg-white py-12 sm:py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6">
           <CtaCard
-            eyebrow="Twin Cities Metro · Minnesota"
-            title="Find your city, then book"
-            body={`Pick your community above to see local services, or call ${siteConfig.phone} to talk with our team directly.`}
+            eyebrow={copy.ctaEyebrow}
+            title={copy.ctaTitle}
+            body={
+              copy.ctaBody ||
+              `Pick your community above to see local services, or call ${siteConfig.phone} to talk with our team directly.`
+            }
           />
         </div>
       </section>
