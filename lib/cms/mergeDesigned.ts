@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Fragment, isValidElement, type ReactNode } from "react";
 
-import { composeSeoTitle } from "@/lib/seoTitle";
 import { mediaPublicUrl } from "./mediaUrl";
 import { absoluteURL, normalizePath } from "./url";
 
@@ -301,15 +300,27 @@ function patchRobots(
   return base;
 }
 
+/** Use a published CMS title as the absolute document title, with no brand suffix or length clamp. */
+export function withVerbatimTitle(current: Metadata, title: string): Metadata {
+  const openGraph =
+    current.openGraph && typeof current.openGraph === "object" && !Array.isArray(current.openGraph)
+      ? { ...current.openGraph, title }
+      : { title };
+  const twitter =
+    current.twitter && typeof current.twitter === "object" ? { ...current.twitter, title } : { title };
+  return { ...current, title: { absolute: title }, openGraph, twitter };
+}
+
 /**
- * Overlay only meta fields an editor actually set. Document title, excerpt,
- * and cover image are not SEO fields. Unchecked robots flags leave the
- * hardcoded robots and googleBot tags unchanged.
+ * Overlay only meta fields an editor actually set. A set meta title and
+ * description are copied verbatim. Document title, excerpt, and cover image
+ * are not SEO fields. Unchecked robots flags leave the hardcoded robots and
+ * googleBot tags unchanged.
  */
 export function mergeCmsMetadata(
   fallback: Metadata,
   doc: Record<string, unknown> | null | undefined,
-  path = "/",
+  _path = "/",
 ): Metadata {
   if (!doc) return fallback;
   const meta = (doc.meta ?? {}) as MetaShape;
@@ -333,18 +344,9 @@ export function mergeCmsMetadata(
     return fallback;
   }
 
-  const slug = path === "/" ? "" : path.replace(/^\//, "");
   let next: Metadata = { ...fallback };
 
-  if (title) {
-    const fullTitle = composeSeoTitle(title, slug);
-    next = {
-      ...next,
-      title: { absolute: fullTitle },
-      openGraph: patchOpenGraph(next.openGraph, { title: fullTitle }),
-      twitter: patchTwitter(next.twitter, { title: fullTitle }),
-    };
-  }
+  if (title) next = withVerbatimTitle(next, title);
   if (description) {
     next = {
       ...next,
