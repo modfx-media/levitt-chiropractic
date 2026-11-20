@@ -184,6 +184,83 @@ test("draft and published SEO-only edits keep the designed UI and change only th
   assert.deepEqual(ogImage(publishedMeta), ogImage(ABOUT_FALLBACK));
 });
 
+test("a published CMS title and description are copied verbatim", () => {
+  const verbatim = "Our Story | Drug-Free Pain Relief in Saint Louis Park";
+  const description = "Editor description that must not be rewritten.";
+  const doc = {
+    title: "About Our Practice in Saint Louis Park, MN",
+    meta: { title: verbatim, description },
+  };
+  const homeFallback = generateMeta({
+    title: "Chiropractor in Saint Louis Park, MN",
+    description: "Homepage fallback description.",
+    slug: "",
+  });
+  const areaFallback = generateMeta({
+    title: "Chiropractor in Hopkins, MN",
+    description: "Hopkins fallback description.",
+    slug: "areas-we-serve/hopkins",
+  });
+  const serviceFallback = generateMeta({
+    title: "Cryotherapy in Hopkins, MN",
+    description: "Service fallback description.",
+    slug: "areas-we-serve/hopkins/cryotherapy",
+  });
+
+  for (const [path, fallback] of [
+    ["/", homeFallback],
+    ["/about", ABOUT_FALLBACK],
+    ["/areas-we-serve/hopkins", areaFallback],
+    ["/areas-we-serve/hopkins/cryotherapy", serviceFallback],
+  ] as const) {
+    const meta = mergeCmsMetadata(fallback, doc, path);
+    assert.deepEqual(meta.title, { absolute: verbatim }, path);
+    assert.equal(ogTitle(meta), verbatim, path);
+    assert.equal(meta.twitter && typeof meta.twitter === "object" ? meta.twitter.title : undefined, verbatim);
+    assert.equal(meta.description, description, path);
+    assert.equal(ogDescription(meta), description, path);
+  }
+
+  const empty = { title: "Ignored document title", meta: { title: "  ", description: "" } };
+  assert.equal(mergeCmsMetadata(homeFallback, empty, "/"), homeFallback);
+  assert.equal(mergeCmsMetadata(ABOUT_FALLBACK, empty, "/about"), ABOUT_FALLBACK);
+  assert.equal(mergeCmsMetadata(areaFallback, empty, "/areas-we-serve/hopkins"), areaFallback);
+
+  const blog = blogHeadMetadata({
+    slug: "our-story",
+    local: null,
+    doc: {
+      title: "Document title that must not replace a set SEO title",
+      slug: "our-story",
+      excerpt: "Excerpt fallback",
+      meta: { title: verbatim, description },
+    },
+  });
+  const blogTitle = blog.title && typeof blog.title === "object" && "absolute" in blog.title
+    ? blog.title.absolute
+    : "";
+  assert.equal(blogTitle, verbatim);
+  assert.equal(ogTitle(blog), verbatim);
+  assert.equal(blog.description, description);
+
+  const blogEmpty = blogHeadMetadata({
+    slug: "our-story",
+    local: null,
+    doc: {
+      title: "Document title that must not replace a set SEO title",
+      slug: "our-story",
+      excerpt: "Excerpt fallback",
+      meta: { title: "", description: "" },
+    },
+  });
+  const emptyTitle = blogEmpty.title && typeof blogEmpty.title === "object" && "absolute" in blogEmpty.title
+    ? blogEmpty.title.absolute
+    : "";
+  assert.match(emptyTitle, / \| Levitt$/);
+  assert.notEqual(emptyTitle, verbatim);
+  assert.equal(blogEmpty.description, "Excerpt fallback");
+});
+
 test("publishing a doc with empty meta leaves the hardcoded head unchanged", () => {
   const doc = aboutDoc({
     status: "published",
@@ -413,7 +490,8 @@ test("CMS-only post head matches production and is not Post Not Found", () => {
     ? head.title.absolute
     : "";
 
-  assert.match(title, / \| Levitt$/);
+  assert.equal(title, "Holistic chiropractor whole body healing");
+  assert.equal(ogTitle(head), title);
   assert.equal(
     head.description,
     "How a holistic chiropractor in Saint Louis Park looks past the sore spot.",

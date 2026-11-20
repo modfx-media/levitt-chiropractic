@@ -4,6 +4,7 @@ import type { BlogPost } from "@/lib/blog";
 import { blogPostingJsonLd } from "@/lib/jsonLd";
 import { generateMeta } from "@/lib/metadata";
 
+import { withVerbatimTitle } from "./mergeDesigned";
 import { mediaPublicUrl } from "./mediaUrl";
 import { cmsDocToBlogPost } from "./postToBlog";
 import { absoluteURL, normalizePath } from "./url";
@@ -30,9 +31,9 @@ export function mainBlogCmsHead(
   fallback: Metadata,
 ): Metadata {
   const meta = (doc.meta ?? {}) as MetaShape;
-  const title =
-    (typeof meta.title === "string" && meta.title) ||
-    (typeof doc.title === "string" ? doc.title : undefined);
+  const verbatimTitle =
+    typeof meta.title === "string" && meta.title.trim() ? meta.title.trim() : undefined;
+  const title = verbatimTitle || (typeof doc.title === "string" ? doc.title : undefined);
   const description =
     (typeof meta.description === "string" && meta.description) ||
     (typeof doc.excerpt === "string" ? doc.excerpt : undefined) ||
@@ -62,7 +63,7 @@ export function mainBlogCmsHead(
     noindex,
   });
 
-  return {
+  const head: Metadata = {
     ...fallback,
     ...generated,
     alternates: { canonical },
@@ -71,6 +72,7 @@ export function mainBlogCmsHead(
       follow,
     },
   };
+  return verbatimTitle ? withVerbatimTitle(head, verbatimTitle) : head;
 }
 
 export function blogHeadMetadata(input: {
