@@ -102,10 +102,6 @@ export function firstVisitSteps(city: ServedCity): Array<{ title: string; body: 
   ];
 }
 
-export function insuranceNote(): string {
-  return `Chiropractic coverage depends on your health plan; call ahead and we will tell you what we can verify. No referral is required to book a first visit.`;
-}
-
 export function cityFaqs(city: ServedCity): Array<{ q: string; a: string }> {
   const fact = localFact(city);
   const officeQ =
@@ -135,10 +131,6 @@ export function cityFaqs(city: ServedCity): Array<{ q: string; a: string }> {
         city.distanceMi === 0
           ? `The office is ${siteConfig.address.full}. Give yourself extra minutes the first time so you are not rushed into the exam. Call ${siteConfig.phone}.`
           : `The office is ${siteConfig.address.full}. If you are coming from ${city.name}, give yourself extra minutes the first time so you are not rushed into the exam. Call ${siteConfig.phone}.`,
-    },
-    {
-      q: `Does insurance cover chiropractic in Minnesota?`,
-      a: insuranceNote(),
     },
     {
       q: `What is a red flag that means I should not just “get adjusted”?`,

@@ -12,7 +12,6 @@ import {
   cityWhyPoints,
   driveLabel,
   firstVisitSteps,
-  insuranceNote,
   visitFacts,
   zipPhrase,
 } from "@/lib/areaPageCopy";
@@ -207,9 +206,6 @@ export default function AreaCityPageContent({
               </motion.div>
             ))}
           </div>
-          <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-relaxed text-slate-600">
-            {copy.insuranceNote || insuranceNote()}
-          </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             {corePages.map((p) => (
               <Link
