@@ -1,7 +1,10 @@
 import type { PseoSource } from "./types";
 
 const A = "2026-11-23";
+const B = "2026-11-25";
 const wiki = (id: string, title: string, slug: string): PseoSource => ({ id, title, publisher: "Wikipedia", url: `https://en.wikipedia.org/wiki/${slug}`, accessed: A });
+const wikiB = (id: string, title: string, slug: string): PseoSource => ({ id, title, publisher: "Wikipedia", url: `https://en.wikipedia.org/wiki/${slug}`, accessed: B });
+const official = (id: string, title: string, publisher: string, url: string): PseoSource => ({ id, title, publisher, url, accessed: B });
 const pubmed = (id: string, title: string, pmid: string, journal: string): PseoSource => ({ id, title, publisher: `${journal} (PubMed ${pmid})`, url: `https://pubmed.ncbi.nlm.nih.gov/${pmid}/`, accessed: A });
 
 /** Every source here was fetched on the accessed date while writing the hub copy. */
@@ -29,4 +32,32 @@ export const SRC = {
   gross: pubmed("gross-2015", "Gross A et al. Manipulation and mobilisation for neck pain contrasted against an inactive control or another active treatment", "26397370", "Cochrane Database Syst Rev 2015"),
   bronfort: pubmed("bronfort-2012", "Bronfort G et al. Spinal manipulation, medication, or home exercise with advice for acute and subacute neck pain: a randomized trial", "22213489", "Ann Intern Med 2012"),
   cote: pubmed("cote-2008", "Côté P et al. The burden and determinants of neck pain in workers: Bone and Joint Decade 2000–2010 Task Force", "18204402", "Spine 2008"),
+
+  // Batch 2 city and landmark sources, fetched 2026-11-25.
+  slp: wikiB("slp", "St. Louis Park, Minnesota", "St._Louis_Park,_Minnesota"),
+  peavey: wikiB("peavey", "Peavey–Haglin Experimental Concrete Grain Elevator", "Peavey%E2%80%93Haglin_Experimental_Concrete_Grain_Elevator"),
+  slpCity: official("slp-city", "City of St. Louis Park", "City of St. Louis Park", "https://www.stlouisparkmn.gov/"),
+  bloomington: wikiB("bloomington", "Bloomington, Minnesota", "Bloomington,_Minnesota"),
+  moa: wikiB("moa", "Mall of America", "Mall_of_America"),
+  moaOfficial: official("moa-official", "About Mall of America", "Mall of America", "https://www.mallofamerica.com/about"),
+  hyland: official("hyland", "Hyland Lake Park Reserve", "Three Rivers Park District", "https://www.threeriversparks.org/location/hyland-lake-park-reserve"),
+  refuge: wikiB("refuge", "Minnesota Valley National Wildlife Refuge", "Minnesota_Valley_National_Wildlife_Refuge"),
+  refugeFws: official("refuge-fws", "Minnesota Valley National Wildlife Refuge", "U.S. Fish & Wildlife Service", "https://www.fws.gov/locations/minnesota-valley-national-wildlife-refuge"),
+  saintPaul: wikiB("saint-paul", "Saint Paul, Minnesota", "Saint_Paul,_Minnesota"),
+  roseville: wikiB("roseville", "Roseville, Minnesota", "Roseville,_Minnesota"),
+  rosedale: wikiB("rosedale", "Rosedale Center", "Rosedale_Center"),
+  fridley: wikiB("fridley", "Fridley, Minnesota", "Fridley,_Minnesota"),
+  springbrook: wikiB("springbrook", "Springbrook Nature Center", "Springbrook_Nature_Center"),
+  springbrookCity: official("springbrook-city", "Springbrook Nature Center", "City of Fridley", "https://www.fridleymn.gov/Community-Recreation/Springbrook-Nature-Center"),
+  mapleGrove: wikiB("maple-grove", "Maple Grove, Minnesota", "Maple_Grove,_Minnesota"),
+  arborLakes: wikiB("arbor-lakes", "Arbor Lakes", "Arbor_Lakes"),
+  springLakePark: wikiB("spring-lake-park", "Spring Lake Park, Minnesota", "Spring_Lake_Park,_Minnesota"),
+  springLakeParkCity: official("spring-lake-park-city", "City of Spring Lake Park", "City of Spring Lake Park", "https://springlakeparkmn.gov/"),
+  wayzata: wikiB("wayzata", "Wayzata, Minnesota", "Wayzata,_Minnesota"),
+  lakeMinnetonka: wikiB("lake-minnetonka", "Lake Minnetonka", "Lake_Minnetonka"),
+  i394: wikiB("i394", "Interstate 394", "Interstate_394"),
+  maplewood: wikiB("maplewood", "Maplewood, Minnesota", "Maplewood,_Minnesota"),
+  falconHeights: wikiB("falcon-heights", "Falcon Heights, Minnesota", "Falcon_Heights,_Minnesota"),
+  stateFair: wikiB("state-fair", "Minnesota State Fair", "Minnesota_State_Fair"),
+  stateFairOfficial: official("state-fair-official", "About the Fair", "Minnesota State Fair", "https://www.mnstatefair.org/about"),
 } satisfies Record<string, PseoSource>;

@@ -48,6 +48,11 @@ export const edina: PseoHub = {
         body: "Fairview Southdale Hospital is among the largest employers in Edina. If a hospital or urgent-care visit already ruled out something serious, bring that paperwork; it saves repeating tests and lets us start where they stopped.",
         sourceId: "edina",
       },
+      {
+        title: "A mall trip is not a first exam",
+        body: "Southdale is close enough that some Edina patients hope to attach a visit to an errand they are already making at the mall. That can work for a short follow-up. A first visit is a full exam, not a stop between stores. If you want to combine the two, tell us when you book, and we will look for a morning time that does not rush the exam or the walk through the 1956 building.",
+        sourceId: "southdale",
+      },
     ],
   },
   diagram: {

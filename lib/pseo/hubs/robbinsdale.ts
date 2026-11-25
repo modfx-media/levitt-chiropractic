@@ -77,6 +77,14 @@ export const robbinsdale: PseoHub = {
         "If something in the exam points somewhere else, we say so plainly and help you get to the right provider. That is part of the job.",
       ],
     },
+    {
+      eyebrow: "A village with a short, specific origin story",
+      title: "Parker's Station, a streetcar line, and a hospital that started with 70 beds",
+      paragraphs: [
+        "The community first grew around a railroad flag station near Alfred Parker's farm and was known as Parker's Station. After Minneapolis tried to annex neighboring townships in 1887, local farmers incorporated the Village of Crystal, and later, on April 19, 1893, the 2.9-square-mile village of Robbinsdale was organized[^robbinsdale]. Andrew Bonney Robbins, who platted Robbinsdale Park, could not persuade the Minneapolis Street Railway Company to extend a line, so in 1891 he organized the North Side Street Railway Company and built his own, first with horse cars and then with electricity.",
+        "In 1940, Samuel Samuelson built Victory Hospital in Robbinsdale: a three-story, marble-faced building with five operating rooms and 70 beds. In 1954 it was reorganized as a nonprofit and renamed North Memorial, and it grew from there into a large medical center[^robbinsdale]. We mention that history because a lot of Robbinsdale households already have a relationship with that campus, and because it is part of why this small city feels older and more settled than its square mileage suggests. The annual Whiz Bang Days festival still nods to the Fawcett magazine that began here in 1919. If you are coming in around festival weekend, tell us, so we can pick an hour that is not competing with it.",
+      ],
+    },
   ],
   process: {
     title: "Your first visit from Robbinsdale",
@@ -125,6 +133,7 @@ export const robbinsdale: PseoHub = {
       { q: "Is chiropractic safe if I have osteoporosis?", a: "It depends on the details. Tell us about it; we use gentle, low-force techniques and may ask your physician for more information first." },
       { q: "Can I ask for no cracking?", a: "Yes. Instrument-based and low-force options are available, and you can change your mind at any point." },
       { q: "Is the office accessible?", a: "Please call 952-920-7535 before your visit to talk through access to the second-floor suite and any help you may need." },
+      { q: "When was Robbinsdale organized as its own village?", a: "On April 19, 1893, after a period as Parker's Station and a brief stretch inside the Village of Crystal. The new village covered about 2.9 square miles, close to the 2.98 square miles the city occupies today." },
     ],
   },
   related: {
@@ -133,6 +142,7 @@ export const robbinsdale: PseoHub = {
       { href: "/areas-we-serve/robbinsdale/adjustments-and-manipulation", label: "Adjustments for Robbinsdale", note: "Including gentle options" },
       { href: "/areas-we-serve/robbinsdale/common-chiropractic-conditions", label: "Common conditions", note: "What we see most" },
       { href: "/areas-we-serve/golden-valley", label: "Golden Valley", note: "On the way down Highway 100" },
+      { href: "/areas-we-serve/saint-louis-park", label: "Saint Louis Park", note: "The city where the office sits" },
       { href: "/new-patient-center/what-to-expect", label: "What to expect", note: "Your first visit" },
       { href: "/meet-the-doctor", label: "Meet Dr. Levitt", note: "His background" },
     ],
