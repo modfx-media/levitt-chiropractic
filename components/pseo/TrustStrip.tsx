@@ -17,7 +17,7 @@ export function TrustStrip({ shell }: { shell: SiteShell }) {
     { icon: <BuildingIcon />, title: "In practice since 1987", note: `This Excelsior Blvd office since ${shell.foundingDate}` },
   ];
   return (
-    <section aria-label="About the clinic" className="border-b border-slate-200 bg-white">
+    <section data-pseo-chrome="" aria-label="About the clinic" className="border-b border-slate-200 bg-white">
       <ul className="mx-auto grid max-w-6xl gap-x-8 gap-y-4 px-5 py-6 sm:grid-cols-3 sm:px-6 lg:px-8">
         {items.map((i) => (
           <li key={i.title} className="flex items-center gap-3.5">

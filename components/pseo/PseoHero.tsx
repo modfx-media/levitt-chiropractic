@@ -65,7 +65,7 @@ export function PseoHero({
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">{subtitle}</p>
           ) : null}
 
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
+          <div data-pseo-chrome="" className="mt-8 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
             <Link href={shell.appointmentUrl} className={btnPrimary}>
               <CalendarIcon className="h-[1.125rem] w-[1.125rem]" />
               Book a visit
@@ -77,7 +77,7 @@ export function PseoHero({
             </a>
           </div>
 
-          <p className="mt-6 flex items-start gap-2.5 text-sm leading-relaxed text-white/75">
+          <p data-pseo-chrome="" className="mt-6 flex items-start gap-2.5 text-sm leading-relaxed text-white/75">
             <PinIcon className="mt-0.5 h-4 w-4 shrink-0 text-[#F97316]" />
             <span>
               {shell.address.street}, {shell.address.city}, {shell.address.state} {shell.address.zip}
@@ -90,7 +90,7 @@ export function PseoHero({
         </div>
 
         {/* Desktop-only visit card (on mobile the same details live in the Visit block further down). */}
-        <aside aria-label="Office details" className="hidden rounded-3xl border border-white/10 bg-white/[0.06] p-6 shadow-2xl shadow-black/30 lg:block">
+        <aside data-pseo-chrome="" aria-label="Office details" className="hidden rounded-3xl border border-white/10 bg-white/[0.06] p-6 shadow-2xl shadow-black/30 lg:block">
           <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange-300">Office hours</p>
           <ul className="mt-4 space-y-2.5 text-sm">
             {shell.hoursInline.map((h) => (
