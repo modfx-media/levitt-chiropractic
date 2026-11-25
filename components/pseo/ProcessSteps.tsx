@@ -9,7 +9,7 @@ export function ProcessSteps({ data, sourceIds, tone = "white" }: { data?: PseoH
   if (!data?.steps.length) return null;
   const horizontal = lgCols[data.steps.length];
   return (
-    <Section eyebrow="Step by step" title={data.title} tone={tone}>
+    <Section eyebrow="Step by step" eyebrowChrome title={data.title} tone={tone}>
       {data.intro ? <p className="max-w-[68ch] text-[1.0625rem] leading-[1.75] text-slate-700 sm:text-lg"><RichText text={data.intro} sourceIds={sourceIds} /></p> : null}
       <ol className={`mt-8 grid gap-0 ${horizontal ? `${horizontal} lg:gap-6` : ""}`}>
         {data.steps.map((s, i) => {

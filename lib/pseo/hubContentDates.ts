@@ -1,0 +1,32 @@
+/** Content-change dates for rewritten PSEO city hubs.
+ *  Sitemap lastmod for these paths uses this map first, ahead of a CMS
+ *  `updatedAt` and ahead of the request timestamp, so a rewrite reports
+ *  the day the hub copy actually changed.
+ *
+ *  Batch 1 (PR #11), batch 2 (PR #12), and batch 3 all shipped on 2026-11-25.
+ */
+export const PSEO_HUB_CONTENT_LASTMOD: Record<string, string> = {
+  // Batch 1 — copy rewritten 2026-11-25
+  "/areas-we-serve/edina": "2026-11-25",
+  "/areas-we-serve/hopkins": "2026-11-25",
+  "/areas-we-serve/golden-valley": "2026-11-25",
+  "/areas-we-serve/minneapolis": "2026-11-25",
+  "/areas-we-serve/richfield": "2026-11-25",
+  "/areas-we-serve/minnetonka": "2026-11-25",
+  "/areas-we-serve/robbinsdale": "2026-11-25",
+  // Batch 2 — copy rewritten 2026-11-25
+  "/areas-we-serve/saint-louis-park": "2026-11-25",
+  "/areas-we-serve/bloomington": "2026-11-25",
+  "/areas-we-serve/saint-paul": "2026-11-25",
+  "/areas-we-serve/roseville": "2026-11-25",
+  "/areas-we-serve/fridley": "2026-11-25",
+  "/areas-we-serve/maple-grove": "2026-11-25",
+  "/areas-we-serve/spring-lake-park": "2026-11-25",
+  "/areas-we-serve/wayzata": "2026-11-25",
+  "/areas-we-serve/maplewood": "2026-11-25",
+  "/areas-we-serve/falcon-heights": "2026-11-25",
+  // Batch 3 — copy rewritten 2026-11-25
+  "/areas-we-serve/eagan": "2026-11-25",
+  "/areas-we-serve/orono": "2026-11-25",
+  "/areas-we-serve/burnsville": "2026-11-25",
+};

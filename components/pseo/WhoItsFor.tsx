@@ -6,7 +6,7 @@ import { ArrowIcon, CheckIcon } from "./ui";
 export function WhoItsFor({ data, sourceIds, tone = "white" }: { data?: PseoHub["whoFor"]; sourceIds: string[]; tone?: "white" | "slate" | "warm" }) {
   if (!data || (!data.fits.length && !data.notFits.length)) return null;
   return (
-    <Section eyebrow="Is this the right place" title={data.title} tone={tone}>
+    <Section eyebrow="Is this the right place" eyebrowChrome title={data.title} tone={tone}>
       <div className="grid gap-5 md:grid-cols-2">
         {data.fits.length ? (
           <div className="rounded-3xl border border-emerald-200 bg-emerald-50/50 p-6 sm:p-7">

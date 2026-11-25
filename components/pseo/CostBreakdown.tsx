@@ -5,7 +5,7 @@ import { Section } from "./Section";
 export function CostBreakdown({ data, sourceIds, tone = "slate" }: { data?: PseoHub["cost"]; sourceIds: string[]; tone?: "white" | "slate" | "warm" }) {
   if (!data?.items.length) return null;
   return (
-    <Section eyebrow="Before you book" title={data.title} tone={tone}>
+    <Section eyebrow="Before you book" eyebrowChrome title={data.title} tone={tone}>
       <dl className="grid gap-4 sm:grid-cols-2">
         {data.items.map((i) => (
           <div key={i.label} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_1px_2px_rgba(15,23,42,0.05)] sm:p-6">

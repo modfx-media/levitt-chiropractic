@@ -144,6 +144,7 @@ export const wayzata: PseoHub = {
       { q: "Is Wayzata still in range at eleven miles?", a: "It is. Eleven miles keeps Wayzata inside the 15-mile line. We still treat I-394 as a drive to plan around, especially in the late afternoon." },
       { q: "Can the plan avoid a weekly drive down I-394?", a: "That is the usual way we work from Wayzata. Homework carries the week; the next time on 394 is only if the next look in this office would actually change the movements, or how soon we ask you back." },
       { q: "Is Saturday possible if weekdays are tied to a commute?", a: "Saturday times are held, not walked into. Phone 952-920-7535 and ask the front desk whether a weekend slot remains." },
+      { q: "I work near the lake or along Lake Street in Wayzata. Is the 394 trip predictable?", a: "On most mornings, yes; I-394 is the line most Wayzata patients already know. The unpredictable part is the afternoon westbound return, not the inbound trip to the suite. If you can take a morning appointment, the drive is usually the easy part of the visit. Tell us if you are starting from the lake side or from farther up toward the highway, because those two starts are not the same." },
     ],
   },
   related: {
