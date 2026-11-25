@@ -1,7 +1,7 @@
 /** Shared PSEO-kit primitives: button classes and inline icons (server-only, no client JS). */
 
 export const btnPrimary =
-  "inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#F97316] px-6 text-[0.9375rem] font-bold text-white shadow-lg shadow-orange-500/25 transition-colors hover:bg-orange-600 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#F97316]";
+  "inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#C2410C] px-6 text-[0.9375rem] font-bold text-white shadow-lg shadow-orange-800/25 transition-colors hover:bg-[#9A3412] focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#C2410C]";
 export const btnGhostDark =
   "inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/30 px-6 text-[0.9375rem] font-semibold text-white transition-colors hover:border-white hover:bg-white/5 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-white";
 export const btnGhostLight =

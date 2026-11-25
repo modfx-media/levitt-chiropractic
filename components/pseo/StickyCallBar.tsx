@@ -30,7 +30,7 @@ export function StickyCallBar({ shell }: { shell: SiteShell }) {
         </a>
         <Link
           href={shell.appointmentUrl}
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#F97316] text-[0.9375rem] font-bold text-white shadow-lg shadow-orange-500/30 active:bg-orange-600"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#C2410C] text-[0.9375rem] font-bold text-white shadow-lg shadow-orange-800/30 active:bg-[#9A3412]"
         >
           <CalendarIcon className="h-[1.125rem] w-[1.125rem]" />
           Book a visit
