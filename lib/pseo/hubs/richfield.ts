@@ -54,6 +54,11 @@ export const richfield: PseoHub = {
         body: "Best Buy moved its corporate headquarters to Richfield in 2003 and became the city's largest employer. Desk-heavy jobs mean a lot of neck and upper-back complaints alongside the lower backs.",
         sourceId: "richfield",
       },
+      {
+        title: "Six miles is close, but the Crosstown still has a clock",
+        body: "A headquarters campus in Richfield is only about six miles from Suite 201. That is close enough for a mid-morning visit to fit around a desk day, and far enough that a late-afternoon Crosstown run can still eat the hour. If you work on that campus, tell us the shift, not only the city, so we can pick a time that still leaves room for a full exam and, if walking is part of the plan, a loop at Wood Lake on a different day rather than on the same rushed afternoon. People who jump onto 35W at 5 p.m. often wish they had used Highway 62 to Highway 100 in the morning instead; when you book, say which of those two you actually drive.",
+        sourceId: "richfield",
+      },
     ],
   },
   diagram: {
@@ -136,7 +141,7 @@ export const richfield: PseoHub = {
   faqs: {
     title: "Richfield questions",
     items: [
-      { q: "Which way should I drive from Richfield?", a: "The Crosstown to Highway 100 is the usual choice, about six miles in all, ending at 6200 Excelsior Blvd, Suite 201, Saint Louis Park." },
+      { q: "Which way should I drive from Richfield?", a: "The Crosstown to Highway 100 is the usual choice, about six miles in all, to 6200 Excelsior Blvd, Suite 201, Saint Louis Park." },
       { q: "Is chiropractic care backed by research for low back pain?", a: "Major guidelines list spinal manipulation among non-drug options, and reviews put its benefit roughly level with other accepted options[^qaseem-2017][^rubinstein-2019]." },
       { q: "Should I rest until it stops hurting?", a: "Usually not completely. Gentle activity like walking tends to help ordinary back pain more than bed rest, unless something in your exam says otherwise." },
       { q: "How many visits will I need?", a: "It depends on the exam and how you respond. We set a checkpoint early, and if progress stalls, we say so." },

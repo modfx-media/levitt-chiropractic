@@ -6,9 +6,37 @@ import { minneapolis } from "./minneapolis";
 import { richfield } from "./richfield";
 import { minnetonka } from "./minnetonka";
 import { robbinsdale } from "./robbinsdale";
+import { saintLouisPark } from "./saint-louis-park";
+import { bloomington } from "./bloomington";
+import { saintPaul } from "./saint-paul";
+import { roseville } from "./roseville";
+import { fridley } from "./fridley";
+import { mapleGrove } from "./maple-grove";
+import { springLakePark } from "./spring-lake-park";
+import { wayzata } from "./wayzata";
+import { maplewood } from "./maplewood";
+import { falconHeights } from "./falcon-heights";
 
 const HUBS: Record<string, PseoHub> = Object.fromEntries(
-  [edina, hopkins, goldenValley, minneapolis, richfield, minnetonka, robbinsdale].map((h) => [h.slug, h]),
+  [
+    edina,
+    hopkins,
+    goldenValley,
+    minneapolis,
+    richfield,
+    minnetonka,
+    robbinsdale,
+    saintLouisPark,
+    bloomington,
+    saintPaul,
+    roseville,
+    fridley,
+    mapleGrove,
+    springLakePark,
+    wayzata,
+    maplewood,
+    falconHeights,
+  ].map((h) => [h.slug, h]),
 );
 
 /** Rewritten hubs only; every other city keeps its existing template. */

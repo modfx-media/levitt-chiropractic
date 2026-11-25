@@ -77,6 +77,14 @@ export const goldenValley: PseoHub = {
         "We also tell you what would change our minds. Pain that travels further down a leg, a foot that starts to drag, or numbness that is spreading are reasons to call before the next scheduled visit, not after.",
       ],
     },
+    {
+      eyebrow: "A job city as much as a home city",
+      title: "More people work here than live here",
+      paragraphs: [
+        "Golden Valley's residential population is about 22,552, but more than 30,000 people work in the city because of large employers, including General Mills, whose main corporate headquarters is here, Pentair's U.S. headquarters, and the former Minneapolis-Honeywell campus that now holds Resideo offices[^golden-valley]. KARE, the local NBC affiliate, is also based in Golden Valley. Midday appointments often work well for people whose workplace is already in town, even if their house is a few minutes farther up Highway 100.",
+        "If your week is a General Mills or Pentair desk, tell us that when you book. The exam will spend more time on the neck and upper back, and we can often pick a time that fits a lunch-hour loop down Highway 100 to 6200 Excelsior Blvd, Suite 201, rather than a separate evening trip. Living in Golden Valley and working in Golden Valley is a different scheduling problem than living here and commuting somewhere else, and we would rather hear the actual pattern.",
+      ],
+    },
   ],
   process: {
     title: "A first visit for a Golden Valley patient",
@@ -124,6 +132,7 @@ export const goldenValley: PseoHub = {
       { q: "Does cold laser hurt?", a: "No. It is a low-level light, and most people feel nothing or mild warmth from the device resting on the skin." },
       { q: "Should I stop skiing until my back settles?", a: "Not necessarily. It depends on the exam. Many people can keep moving with some changes, and we will tell you if something needs to pause." },
       { q: "Do you see children or teens?", a: "Call 952-920-7535 to talk through your situation, and we will tell you whether this office is the right fit." },
+      { q: "I work in Golden Valley but live a little farther up the road. Can I come at midday?", a: "Often, yes. The employment base is larger than the residential population, and a mid-day loop down Highway 100 is a common way people fit a visit in." },
     ],
   },
   related: {
@@ -133,6 +142,7 @@ export const goldenValley: PseoHub = {
       { href: "/areas-we-serve/golden-valley/cryotherapy", label: "Targeted cold", note: "For new, irritated strains" },
       { href: "/areas-we-serve/robbinsdale", label: "Robbinsdale", note: "Up Highway 100 from Golden Valley" },
       { href: "/areas-we-serve/minneapolis", label: "Minneapolis", note: "Sharing Wirth Park with Golden Valley" },
+      { href: "/areas-we-serve/saint-louis-park", label: "Saint Louis Park", note: "Four miles down Highway 100" },
       { href: "/new-patient-center/what-to-expect", label: "What to expect", note: "The first appointment" },
     ],
   },
