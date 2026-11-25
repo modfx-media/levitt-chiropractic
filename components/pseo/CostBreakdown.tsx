@@ -2,19 +2,19 @@ import type { PseoHub } from "@/lib/pseo/types";
 import { RichText } from "./RichText";
 import { Section } from "./Section";
 
-export function CostBreakdown({ data, sourceIds }: { data?: PseoHub["cost"]; sourceIds: string[] }) {
+export function CostBreakdown({ data, sourceIds, tone = "slate" }: { data?: PseoHub["cost"]; sourceIds: string[]; tone?: "white" | "slate" | "warm" }) {
   if (!data?.items.length) return null;
   return (
-    <Section eyebrow="Before you book" title={data.title} tone="slate">
-      <dl className="divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
+    <Section eyebrow="Before you book" title={data.title} tone={tone}>
+      <dl className="grid gap-4 sm:grid-cols-2">
         {data.items.map((i) => (
-          <div key={i.label} className="grid gap-1 px-5 py-4 sm:grid-cols-[12rem_1fr] sm:gap-4">
-            <dt className="font-semibold text-[#0F172A]">{i.label}</dt>
-            <dd className="text-slate-700"><RichText text={i.value} sourceIds={sourceIds} /></dd>
+          <div key={i.label} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_1px_2px_rgba(15,23,42,0.05)] sm:p-6">
+            <dt className="font-heading text-base font-bold text-[#0F172A]">{i.label}</dt>
+            <dd className="mt-2 text-[0.9375rem] leading-relaxed text-slate-700 sm:text-base"><RichText text={i.value} sourceIds={sourceIds} /></dd>
           </div>
         ))}
       </dl>
-      {data.note ? <p className="mt-3 text-sm text-slate-500"><RichText text={data.note} sourceIds={sourceIds} /></p> : null}
+      {data.note ? <p className="mt-4 max-w-[68ch] text-sm leading-relaxed text-slate-600"><RichText text={data.note} sourceIds={sourceIds} /></p> : null}
     </Section>
   );
 }

@@ -29,7 +29,7 @@ export const bloomington: PseoHub = {
     ],
   },
   localFacts: {
-    title: "Three Bloomington places that show up in our notes",
+    title: "Four Bloomington places that show up in our notes",
     cards: [
       {
         title: "A mall built on a ballpark",

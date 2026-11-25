@@ -12,8 +12,8 @@ function wrap(text: string, max: number): string[] {
   return lines;
 }
 
-/** Own-drawn route diagram (no third-party map tiles, no client JS). */
-export function SvgDiagram({ data }: { data?: PseoRouteDiagram }) {
+/** Own-drawn route diagram (no third-party map tiles, no client JS). SVG geometry unchanged; only the frame is restyled. */
+export function SvgDiagram({ data, tone = "white" }: { data?: PseoRouteDiagram; tone?: "white" | "slate" | "warm" }) {
   if (!data || data.stops.length < 2) return null;
   const rowH = 104;
   const top = 28;
@@ -21,8 +21,12 @@ export function SvgDiagram({ data }: { data?: PseoRouteDiagram }) {
   const x = 64;
   const titleId = `diagram-${data.title.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`;
   return (
-    <Section eyebrow="Getting here" title={data.title}>
-      <figure className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6">
+    <Section eyebrow="Getting here" title={data.title} tone={tone}>
+      <figure className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_10px_30px_-12px_rgba(15,23,42,0.18)]">
+        <div
+          className="bg-[#FFF7ED]/60 px-4 py-6 sm:px-8 sm:py-10"
+          style={{ backgroundImage: "radial-gradient(rgba(30,58,95,0.10) 1px, transparent 1px)", backgroundSize: "18px 18px" }}
+        >
         <svg viewBox={`0 0 420 ${h}`} role="img" aria-labelledby={titleId} className="mx-auto block h-auto w-full max-w-xl">
           <title id={titleId}>{data.caption}</title>
           <line x1={x} y1={top} x2={x} y2={top + rowH * (data.stops.length - 1)} stroke="#1E3A5F" strokeWidth="6" strokeLinecap="round" />
@@ -47,7 +51,8 @@ export function SvgDiagram({ data }: { data?: PseoRouteDiagram }) {
             );
           })}
         </svg>
-        <figcaption className="mt-3 text-sm leading-relaxed text-slate-600">{data.caption}</figcaption>
+        </div>
+        <figcaption className="border-t border-slate-200 px-5 py-4 text-sm leading-relaxed text-slate-600 sm:px-8">{data.caption}</figcaption>
       </figure>
     </Section>
   );
