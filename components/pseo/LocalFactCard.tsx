@@ -7,7 +7,7 @@ export function LocalFactCard({ data, sourceIds, tone = "slate" }: { data?: Pseo
   if (!data?.cards.length) return null;
   const lg = data.cards.length === 4 || data.cards.length === 2 ? "lg:grid-cols-2" : "lg:grid-cols-3";
   return (
-    <Section eyebrow="Local context" title={data.title} tone={tone}>
+    <Section eyebrow="Local context" eyebrowChrome title={data.title} tone={tone}>
       {data.intro ? <p className="max-w-[68ch] text-[1.0625rem] leading-[1.75] text-slate-700 sm:text-lg"><RichText text={data.intro} sourceIds={sourceIds} /></p> : null}
       <ul className={`pseo-count mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 ${lg}`}>
         {data.cards.map((c) => (

@@ -134,6 +134,8 @@ export const edina: PseoHub = {
       { q: "Can I come on a Saturday?", a: "Saturday visits are by appointment. Weekday hours are Monday through Friday mornings, plus Monday and Thursday afternoons. Call 952-920-7535 to set one up." },
       { q: "I walk the Southdale loop in winter. Is that enough exercise for my back?", a: "For many people steady walking is a solid base. We may add one or two specific movements depending on what the exam shows, and we keep the list short on purpose." },
       { q: "Will it hurt?", a: "Most people feel pressure, not pain. Mild soreness for a day afterward is common and usually fades quickly[^rubinstein-2019]. If you prefer a lighter touch, say so; there are gentler techniques." },
+      { q: "I shop or work around Southdale and thought the office was farther than it is. Is that a regular story?", a: "Yes. People who spend their week at Southdale often overestimate the remaining distance to Suite 201. Once they have done the trip once, many of them start treating it as a local errand rather than a special outing. Mention Southdale when you book if that is your starting point; it helps us suggest a time that does not fight the mall traffic." },
+      { q: "Does it matter which Edina neighborhood I am coming from?", a: "It does, a little. A start near the creek or the Country Club side is not the same drive as a start near Southdale, and the week that goes with those neighborhoods is often different too. Tell us the neighborhood by name. We would rather hear 'near 50th and France' or 'near Southdale' than a vague 'I live in Edina.'" },
     ],
   },
   related: {

@@ -4,6 +4,8 @@ import { ArrowIcon, ClockIcon, PhoneIcon, PinIcon } from "./ui";
 /**
  * NEW. Address + hours + map, rendered OUTSIDE [data-pseo-body] (replaces the
  * shared LocationStrip on PSEO hubs only; LocationStrip itself is untouched).
+ * The whole block is tagged data-pseo-chrome so the shared address, phone and
+ * hours list are not counted in the full-main uniqueness gate.
  *
  * Map facade, zero JS: a native <details>. Closed, it shows our own SVG sketch
  * (no third-party request, no cookies). Opening it reveals a lazy Google Maps
@@ -11,7 +13,7 @@ import { ArrowIcon, ClockIcon, PhoneIcon, PinIcon } from "./ui";
  */
 export function VisitBlock({ shell }: { shell: SiteShell }) {
   return (
-    <section id="visit" aria-labelledby="visit-title" className="border-t border-slate-200/70 bg-slate-50 py-14 sm:py-20">
+    <section id="visit" data-pseo-chrome="" aria-labelledby="visit-title" className="border-t border-slate-200/70 bg-slate-50 py-14 sm:py-20">
       <div className="mx-auto grid max-w-6xl gap-8 px-5 sm:px-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-12 lg:px-8">
         <details data-pseo-chrome="" className="pseo-map overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_10px_30px_-12px_rgba(15,23,42,0.18)]">
           <summary className="relative block aspect-[4/3] cursor-pointer focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#F97316] sm:aspect-[16/10]">

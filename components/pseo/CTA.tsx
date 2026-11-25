@@ -21,7 +21,7 @@ export function CTA({ data }: { data?: PseoHub["cta"] }) {
       <div className="mx-auto max-w-3xl px-5 text-center sm:px-6">
         <h2 className="text-balance font-heading text-[1.875rem] font-black leading-tight sm:text-[2.5rem]">{data.title}</h2>
         <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">{data.body}</p>
-        <div className="mt-8 grid gap-3 sm:flex sm:justify-center">
+        <div data-pseo-chrome="" className="mt-8 grid gap-3 sm:flex sm:justify-center">
           <Link href={siteConfig.appointmentUrl} className={btnPrimary}>
             <CalendarIcon className="h-[1.125rem] w-[1.125rem]" />
             Request a new-patient visit
@@ -31,7 +31,7 @@ export function CTA({ data }: { data?: PseoHub["cta"] }) {
             Call {siteConfig.phone}
           </a>
         </div>
-        <p className="mt-6 inline-flex items-center gap-2 text-sm text-white/60">
+        <p data-pseo-chrome="" className="mt-6 inline-flex items-center gap-2 text-sm text-white/60">
           <PinIcon className="h-4 w-4 text-[#F97316]" />
           {siteConfig.address.full}
         </p>

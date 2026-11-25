@@ -6,7 +6,7 @@ import { ArrowIcon } from "./ui";
 export function RelatedLinks({ data, tone = "white" }: { data?: PseoHub["related"]; tone?: "white" | "slate" | "warm" }) {
   if (!data?.links.length) return null;
   return (
-    <Section eyebrow="Keep reading" title={data.title} tone={tone}>
+    <Section eyebrow="Keep reading" eyebrowChrome title={data.title} tone={tone}>
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {data.links.map((l) => (
           <li key={l.href}>

@@ -13,6 +13,7 @@ const toneBg: Record<Tone, string> = {
 export function Section({
   id,
   eyebrow,
+  eyebrowChrome = false,
   title,
   tone = "white",
   width = "wide",
@@ -20,6 +21,8 @@ export function Section({
 }: {
   id?: string;
   eyebrow?: string;
+  /** When true, the locked kit eyebrow is tagged data-pseo-chrome and skipped by the uniqueness measurer. */
+  eyebrowChrome?: boolean;
   title?: string;
   tone?: Tone;
   /** "wide" = 72rem grid width; "narrow" = 48rem reading width. */
@@ -35,7 +38,10 @@ export function Section({
     >
       <div className={`mx-auto px-5 sm:px-6 lg:px-8 ${width === "narrow" ? "max-w-3xl" : "max-w-6xl"}`}>
         {eyebrow ? (
-          <p className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.2em] text-[#C2410C]">
+          <p
+            {...(eyebrowChrome ? { "data-pseo-chrome": "" } : {})}
+            className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.2em] text-[#C2410C]"
+          >
             <span aria-hidden className="h-0.5 w-6 rounded-full bg-[#F97316]" />
             {eyebrow}
           </p>

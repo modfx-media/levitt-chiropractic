@@ -11,7 +11,7 @@ export function ComparisonTable({ data, sourceIds, tone = "slate" }: { data?: Ps
   if (!data?.rows.length) return null;
   const minWidth = data.columns.length > 2 ? `${data.columns.length * 11}rem` : undefined;
   return (
-    <Section eyebrow="Side by side" title={data.title} tone={tone}>
+    <Section eyebrow="Side by side" eyebrowChrome title={data.title} tone={tone}>
       {data.intro ? <p className="max-w-[68ch] text-[1.0625rem] leading-[1.75] text-slate-700 sm:text-lg"><RichText text={data.intro} sourceIds={sourceIds} /></p> : null}
       <div
         role="region"

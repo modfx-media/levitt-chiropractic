@@ -136,6 +136,9 @@ export const roseville: PseoHub = {
       { q: "Is a nine-mile trip still in range for this clinic?", a: "It is. Nine miles sits comfortably inside the 15-mile line. The drive is still long enough that we try not to waste it on a visit that could have been a phone call." },
       { q: "Can appointments work around a Rosedale shift?", a: "Often. An earlier Highway 36 run is usually smoother than a late-afternoon one. Call 952-920-7535 and ask for a slot that still leaves room for a full exam, not a squeezed lunch break." },
       { q: "Do you have Saturday openings?", a: "Some weekend times can be reserved. If a weekday Highway 36 trip is the problem, ask for the Saturday list at 952-920-7535." },
+      { q: "I usually start near Rosedale or along Highway 36. Which time of day is less of a fight?", a: "Mid-morning, after the early 36 and I-35W rush, is usually calmer than a late-afternoon departure from Rosedale. If Rosedale is your starting point, mention it when you book. The shopping-center traffic has its own clock, and we would rather place you around it than through it." },
+      { q: "Roseville already has clinics closer than this one. Why would I come west?", a: "Most of the Roseville patients we already see are not coming because we are closer. They want a specific doctor and a visit that is not passed along a roster. If that is your reason too, say so when you book; it helps us leave enough time for a first exam that is actually thorough." },
+      { q: "Is Highway 36 the only way you hear about from Roseville?", a: "It is the most common, not the only one. Some people come down Lexington or use I-35W instead, depending on which side of town they start from. Tell us the road you actually sit on. We would rather time the visit around that road than around a generic 'Roseville commute.'" },
     ],
   },
   related: {

@@ -6,7 +6,7 @@ import { Section } from "./Section";
 export function FAQAccordion({ data, sourceIds, tone = "slate" }: { data?: PseoHub["faqs"]; sourceIds: string[]; tone?: "white" | "slate" | "warm" }) {
   if (!data?.items.length) return null;
   return (
-    <Section eyebrow="Questions" title={data.title} tone={tone}>
+    <Section eyebrow="Questions" eyebrowChrome title={data.title} tone={tone}>
       <div className="max-w-4xl space-y-3">
         {data.items.map((f) => (
           <details key={f.q} className="pseo-faq group rounded-2xl border border-slate-200 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.05)] transition-colors open:border-[#F97316]/40 open:shadow-[0_10px_30px_-14px_rgba(15,23,42,0.22)]">

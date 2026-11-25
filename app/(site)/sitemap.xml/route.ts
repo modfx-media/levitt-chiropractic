@@ -15,6 +15,7 @@ import { getAllPosts } from "@/lib/blog";
 import { getLiveRankedBlogPosts } from "@/lib/ranked/posts";
 import { querySitemapOverlay } from "@/lib/cms/queries";
 import { acceptSitemapExtra } from "@/lib/sitemapOverlay";
+import { PSEO_HUB_CONTENT_LASTMOD } from "@/lib/pseo/hubContentDates";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 300;
@@ -94,7 +95,8 @@ export async function GET() {
   const urls = allEntries
     .map((e) => {
       const loc = new URL(e.path, siteConfig.url).toString();
-      const entryLastmod = lastmodByPath.get(e.path) || lastmod;
+      const entryLastmod =
+        PSEO_HUB_CONTENT_LASTMOD[e.path] || lastmodByPath.get(e.path) || lastmod;
       return [
         "  <url>",
         `    <loc>${loc}</loc>`,

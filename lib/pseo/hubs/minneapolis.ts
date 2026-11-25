@@ -127,6 +127,9 @@ export const minneapolis: PseoHub = {
       { q: "Do I need a referral?", a: "No. Minnesota does not require one to see a chiropractor. Bring any notes or imaging you already have." },
       { q: "Can I just do the exercises and skip the adjustments?", a: "For some people, yes. Research suggests home exercise with advice can work about as well for recent neck pain[^bronfort-2012]. We will talk it through honestly." },
       { q: "What should I bring?", a: "A photo ID, comfortable clothes, and any imaging or notes from other providers." },
+      { q: "I live near Bde Maka Ska or Cedar Lake. Is there anything special about that start?", a: "Only that it is a very short trip, and people sometimes treat it like a drop-in. We still want the first visit to be a full exam. Tell us which lake you start from; the parkway traffic around Bde Maka Ska at the end of a summer day is a different clock than a winter morning on the same streets." },
+      { q: "I work downtown and live in the city. Which slot is usually kinder?", a: "A mid-morning appointment, once the inbound rush has already happened, is often easier than leaving downtown at 5. Mention that you are coming from downtown when you book, and we will try not to put you into the worst of that outbound hour." },
+      { q: "I use the Cedar Lake Trail or the parkways to get around. Should I say that in the history?", a: "Yes. A regular trail commute is a different load than a car-only downtown day, even when both start in Minneapolis. Tell us which path and roughly how long. It is one of the more useful details we get from city patients, and it costs almost nothing to mention." },
     ],
   },
   related: {

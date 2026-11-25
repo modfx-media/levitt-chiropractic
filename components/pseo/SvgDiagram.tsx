@@ -21,7 +21,7 @@ export function SvgDiagram({ data, tone = "white" }: { data?: PseoRouteDiagram; 
   const x = 64;
   const titleId = `diagram-${data.title.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`;
   return (
-    <Section eyebrow="Getting here" title={data.title} tone={tone}>
+    <Section eyebrow="Getting here" eyebrowChrome title={data.title} tone={tone}>
       <figure className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_10px_30px_-12px_rgba(15,23,42,0.18)]">
         <div
           className="bg-[#FFF7ED]/60 px-4 py-6 sm:px-8 sm:py-10"
