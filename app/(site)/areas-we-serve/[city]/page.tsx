@@ -11,6 +11,10 @@ import { breadcrumbJsonLd, cityServiceAreaJsonLd, faqPageJsonLd } from "@/lib/js
 import { cityFaqs, cityMetaDescription } from "@/lib/areaPageCopy";
 import { JsonLd } from "@/components/seo/JsonLd";
 import AreaCityPageContent from "@/components/areas/AreaCityPageContent";
+import { PseoHubPage } from "@/components/pseo/PseoHubPage";
+import { getPseoHub, plainText } from "@/lib/pseo/hubs";
+import { areaCityDefaults } from "@/lib/designed/defaults/areaCity";
+import { mergeContent } from "@/lib/designed/merge";
 
 type Params = { city: string };
 
@@ -58,6 +62,11 @@ export default async function Page({
 
   const city = withLiveNeighbors(found);
   const content = await loadPageContent(`/areas-we-serve/${city.slug}`);
+  const hub = getPseoHub(city.slug);
+  const copy = mergeContent(areaCityDefaults, content);
+  const faqs = hub?.faqs
+    ? hub.faqs.items.map((f) => ({ q: plainText(f.q), a: plainText(f.a) }))
+    : cityFaqs(city);
   const sameRegionCities = getServedCities()
     .filter((c) => c.region === city.region && c.slug !== city.slug)
     .slice(0, 8);
@@ -85,9 +94,21 @@ export default async function Page({
       />
       <JsonLd
         id={`ld-city-faq-${city.slug}`}
-        data={faqPageJsonLd({ faqs: cityFaqs(city) })}
+        data={faqPageJsonLd({ faqs })}
       />
-      <AreaCityPageContent content={content} city={city} sameRegionCities={sameRegionCities} />
+      {hub ? (
+        <PseoHubPage
+          hub={hub}
+          title={copy.heroTitle || `Chiropractor in ${city.name}, MN`}
+          crumbs={[
+            { label: copy.crumbHome, href: "/" },
+            { label: copy.crumbAreas, href: "/areas-we-serve" },
+            { label: city.name },
+          ]}
+        />
+      ) : (
+        <AreaCityPageContent content={content} city={city} sameRegionCities={sameRegionCities} />
+      )}
     </>
     </CMSRoute>
   );
