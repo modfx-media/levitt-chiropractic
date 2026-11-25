@@ -131,6 +131,9 @@ export const orono: PseoHub = {
       { q: "The ache started when we opened the dock. Is that worth mentioning?", a: "Yes. Seasonal lifting and the first long days on the water are a common Orono story. Bring a short timeline of when it started and what you have already tried." },
       { q: "Do I need a referral from my physician?", a: "No. Telephone 952-920-7535, or send the request on the site, and mention Orono." },
       { q: "If I return, who do I see?", a: "Dr. Levitt. There is no associate rotation." },
+      { q: "I only get into town on weekends. Can the first visit be a Saturday?", a: "Saturday times exist, but they are reserved ahead rather than filled from a walk-in list. Telephone 952-920-7535 and ask whether one is still open this week. If you are starting from a far bay, say so, because the first fifteen minutes of that drive are not the same as a start near Highway 12." },
+      { q: "I keep a lift in a narrow channel. What should I bring besides a timeline?", a: "The deck shoes you actually wear on the lift, and a sense of whether the tightness starts while you are lifting, while you sit in the boat, or the next morning on land. Those three timings do not point to the same first homework." },
+      { q: "Does ice-out change how you book the first visit?", a: "The roads around the bays can be slower then, and the first long days of lifting often land in the same week. Mention ice-out if it is in the next few days so we can put you in a morning that is not fighting that traffic." },
     ],
   },
   related: {

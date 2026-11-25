@@ -3,7 +3,8 @@
  *  `updatedAt` and ahead of the request timestamp, so a rewrite reports
  *  the day the hub copy actually changed.
  *
- *  Batch 1 (PR #11), batch 2 (PR #12), and batch 3 all shipped on 2026-11-25.
+ *  Batch 1 (PR #11), batch 2 (PR #12), batch 3 (PR #14), and batch 4
+ *  all shipped or were written on 2026-11-25.
  */
 export const PSEO_HUB_CONTENT_LASTMOD: Record<string, string> = {
   // Batch 1 — copy rewritten 2026-11-25
@@ -29,4 +30,8 @@ export const PSEO_HUB_CONTENT_LASTMOD: Record<string, string> = {
   "/areas-we-serve/eagan": "2026-11-25",
   "/areas-we-serve/orono": "2026-11-25",
   "/areas-we-serve/burnsville": "2026-11-25",
+  // Batch 4 — copy written 2026-11-25
+  "/areas-we-serve/lauderdale": "2026-11-25",
+  "/areas-we-serve/columbia-heights": "2026-11-25",
+  "/areas-we-serve/arden-hills": "2026-11-25",
 };
