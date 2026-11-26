@@ -11,7 +11,7 @@ export const goodFaithEstimateDefaults = {
     eyebrow: "Your Patient Rights",
     title: "You have the right to a Good Faith Estimate",
     lead: "You have the right to receive a “Good Faith Estimate” explaining how much your medical care will cost.",
-    law: "Under the law, health care providers need to give patients who don’t have insurance or who are not using insurance an estimate of the bill for medical items and services.",
+    law: "Under the law, health care providers need to give patients an estimate of the bill for medical items and services.",
   },
   protections: {
     eyebrow: "What You’re Entitled To",

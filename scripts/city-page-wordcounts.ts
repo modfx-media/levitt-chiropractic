@@ -9,7 +9,6 @@ import {
   cityServiceIntro,
   cityWhyPoints,
   firstVisitSteps,
-  insuranceNote,
 } from "../lib/areaPageCopy";
 import { localFact } from "../lib/cityLocalFacts";
 import { serviceExtra } from "../lib/serviceCopyExtras";
@@ -41,7 +40,6 @@ function cityWords(city: (typeof servedCities)[number]): number {
     ...cityWhyPoints(city).flatMap((p) => [p.title, p.body]),
     ...firstVisitSteps(city).flatMap((p) => [p.title, p.body]),
     ...cityFaqs(city).flatMap((f) => [f.q, f.a]),
-    insuranceNote(city),
   ]);
 }
 

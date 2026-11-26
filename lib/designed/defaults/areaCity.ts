@@ -19,7 +19,6 @@ export const areaCityDefaults = {
   visitEyebrow: "",
   visitTitle: "What actually happens",
   stepLabel: "Step",
-  insuranceNote: "",
   linkAdjustments: "Adjustments",
   linkBackPain: "Back pain",
   linkColdLaser: "Cold laser",

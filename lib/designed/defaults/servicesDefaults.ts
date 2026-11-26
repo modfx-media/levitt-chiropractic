@@ -107,7 +107,7 @@ export const servicesDefaults = {
     title: "The cards are not a menu you order from",
     boxes: "A new patient does not check twelve boxes. Dr. Levitt asks where it hurts, what changes it, and what has already been tried, then tests motion and, when a limb is involved, strength and sensation. The plan might be one adjustment. It might be ice today and exercise for the week. It might be “see a physician before anyone adjusts you.” Leaving with that last answer is a finished visit.",
     bundle: "Several tools can share a visit without becoming a bundle. Laser does not replace an adjustment. Ice does not move a joint. Orthotics do not fix a disc that has nothing to do with the feet. Functional questions do not cancel a structural finding. If someone offers you a package that uses every card in one visit, that offer did not come from this office.",
-    payment: "What this office does not provide: surgery, injections, and prescription medication. It also does not publish prices here. Payment at the desk is cash, check, or major credit card, and a payment plan can be discussed. We will not guess what a health insurance policy pays.",
+    payment: "What this office does not provide: surgery, injections, and prescription medication. It also does not publish prices here. Payment at the desk is cash, check, or major credit card, and a payment plan can be discussed.",
     beforeExpect: "First-visit logistics match the",
     expect: { href: "/new-patient-center/what-to-expect", label: "what to expect" },
     beforeForm: ": a photo ID, 10 to 15 minutes for paperwork, clothes you can move in. New patients use",
@@ -142,7 +142,7 @@ export const servicesDefaults = {
       },
       {
         q: "Do you list prices?",
-        a: "No. The office does not publish a fee schedule here. Payment accepted at the visit is cash, check, or major credit card, and a payment plan can be discussed. Health insurance and auto-policy benefits are separate questions the office will not guess.",
+        a: "No. The office does not publish a fee schedule here. Payment accepted at the visit is cash, check, or major credit card, and a payment plan can be discussed.",
       },
       {
         q: "Is every card a different clinic?",
