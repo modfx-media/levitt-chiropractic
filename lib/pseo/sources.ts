@@ -88,4 +88,10 @@ export const SRC = {
   savage: wikiB("savage", "Savage, Minnesota", "Savage,_Minnesota"),
   burnsville: wikiB("burnsville", "Burnsville, Minnesota", "Burnsville,_Minnesota"),
   burnsvilleCity: official("burnsville-city", "City of Burnsville", "City of Burnsville", "https://www.burnsvillemn.gov/"),
+
+  // Batch 4 official pages, fetched 2026-11-25.
+  lutherLower: official("luther-lower", "Campus Relocation", "Luther Seminary", "https://www.luthersem.edu/about/campus-relocation/"),
+  heightsTheaterOfficial: official("heights-theater-official", "History & Renovation", "Heights Theater", "https://www.heightstheater.com/about/history-renovation"),
+  riceCreekCommons: official("rice-creek-commons", "Rice Creek Commons", "Ramsey County", "https://www.ramseycountymn.gov/your-government/projects-initiatives/economic-development-initiatives/rice-creek-commons"),
+  tcaapCity: official("tcaap-city", "About TCAAP Redevelopment", "City of Arden Hills", "https://www.cityofardenhills.org/172/TCAAP-Redevelopment"),
 } satisfies Record<string, PseoSource>;

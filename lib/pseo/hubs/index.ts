@@ -19,6 +19,9 @@ import { falconHeights } from "./falcon-heights";
 import { eagan } from "./eagan";
 import { orono } from "./orono";
 import { burnsville } from "./burnsville";
+import { lauderdale } from "./lauderdale";
+import { columbiaHeights } from "./columbia-heights";
+import { ardenHills } from "./arden-hills";
 
 const HUBS: Record<string, PseoHub> = Object.fromEntries(
   [
@@ -42,6 +45,9 @@ const HUBS: Record<string, PseoHub> = Object.fromEntries(
     eagan,
     orono,
     burnsville,
+    lauderdale,
+    columbiaHeights,
+    ardenHills,
   ].map((h) => [h.slug, h]),
 );
 
