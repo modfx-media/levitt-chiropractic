@@ -2,9 +2,11 @@ import type { PseoSource } from "./types";
 
 const A = "2026-11-23";
 const B = "2026-11-25";
+const C = "2026-11-26";
 const wiki = (id: string, title: string, slug: string): PseoSource => ({ id, title, publisher: "Wikipedia", url: `https://en.wikipedia.org/wiki/${slug}`, accessed: A });
 const wikiB = (id: string, title: string, slug: string): PseoSource => ({ id, title, publisher: "Wikipedia", url: `https://en.wikipedia.org/wiki/${slug}`, accessed: B });
 const official = (id: string, title: string, publisher: string, url: string): PseoSource => ({ id, title, publisher, url, accessed: B });
+const officialC = (id: string, title: string, publisher: string, url: string): PseoSource => ({ id, title, publisher, url, accessed: C });
 const pubmed = (id: string, title: string, pmid: string, journal: string): PseoSource => ({ id, title, publisher: `${journal} (PubMed ${pmid})`, url: `https://pubmed.ncbi.nlm.nih.gov/${pmid}/`, accessed: A });
 
 /** Every source here was fetched on the accessed date while writing the hub copy. */
@@ -94,4 +96,16 @@ export const SRC = {
   heightsTheaterOfficial: official("heights-theater-official", "History & Renovation", "Heights Theater", "https://www.heightstheater.com/about/history-renovation"),
   riceCreekCommons: official("rice-creek-commons", "Rice Creek Commons", "Ramsey County", "https://www.ramseycountymn.gov/your-government/projects-initiatives/economic-development-initiatives/rice-creek-commons"),
   tcaapCity: official("tcaap-city", "About TCAAP Redevelopment", "City of Arden Hills", "https://www.cityofardenhills.org/172/TCAAP-Redevelopment"),
+  // Batch 5 official pages, fetched 2026-11-26.
+  shoreviewCity: officialC("shoreview-city", "City of Shoreview", "City of Shoreview", "https://www.shoreviewmn.gov/"),
+  shoreviewTropics: officialC("shoreview-tropics", "Tropics", "Shoreview Community Center", "https://www.shoreviewcommunitycenter.com/Waterpark/Tropics"),
+  vadnaisSnail: officialC("vadnais-snail", "Vadnais-Snail Lakes Regional Park", "Ramsey County", "https://www.ramseycountymn.gov/residents/parks-recreation/parks-trails/find-park/vadnais-snail-lakes-regional-park"),
+  snailTrailStudy: officialC("snail-trail-study", "Snail Lake Regional Park Trail Redevelopment Feasibility Study (August 2022)", "Ramsey County Parks & Recreation", "https://assets.ramseycountymn.gov/files/migrated-files/Snail_Lake_Feasibility_Study_220822_FINAL.pdf"),
+  savageCity: officialC("savage-city", "City of Savage", "City of Savage", "https://www.savagemn.gov/"),
+  savageHistory: officialC("savage-history", "History", "City of Savage", "https://www.savagemn.gov/our-city/about-savage/history"),
+  murphyHanrehan: officialC("murphy-hanrehan", "Murphy-Hanrehan Park Reserve", "Three Rivers Park District", "https://www.threeriversparks.org/location/murphy-hanrehan-park-reserve"),
+  eidemFarm: officialC("eidem-farm", "Historic Eidem Farm", "City of Brooklyn Park", "https://www.brooklynpark.org/eidemfarm/"),
+  eidemHistory: officialC("eidem-history", "History of the Farm", "City of Brooklyn Park", "https://www.brooklynpark.org/our-facilities/eidemfarm/history-of-the-farm/"),
+  bpBlueLine: officialC("bp-blue-line", "Blue Line Route Information", "City of Brooklyn Park", "https://www.brooklynpark.org/blue-line-route-information/"),
+  blueLineBuild: officialC("blue-line-build", "Current questions, project progress", "METRO Blue Line Extension (Metropolitan Council and Hennepin County)", "https://yourblueline.org/build"),
 } satisfies Record<string, PseoSource>;
