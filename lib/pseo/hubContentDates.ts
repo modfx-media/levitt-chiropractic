@@ -4,7 +4,7 @@
  *  the day the hub copy actually changed.
  *
  *  Batch 1 (PR #11), batch 2 (PR #12), batch 3 (PR #14), and batch 4
- *  all shipped or were written on 2026-11-25.
+ *  (PR #15) were written on 2026-11-25; batch 5 on 2026-11-26.
  */
 export const PSEO_HUB_CONTENT_LASTMOD: Record<string, string> = {
   // Batch 1 — copy rewritten 2026-11-25
@@ -34,4 +34,8 @@ export const PSEO_HUB_CONTENT_LASTMOD: Record<string, string> = {
   "/areas-we-serve/lauderdale": "2026-11-25",
   "/areas-we-serve/columbia-heights": "2026-11-25",
   "/areas-we-serve/arden-hills": "2026-11-25",
+  // Batch 5 — copy written 2026-11-26
+  "/areas-we-serve/shoreview": "2026-11-26",
+  "/areas-we-serve/savage": "2026-11-26",
+  "/areas-we-serve/brooklyn-park": "2026-11-26",
 };
