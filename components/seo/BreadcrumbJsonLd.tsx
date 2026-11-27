@@ -11,9 +11,15 @@ export function BreadcrumbJsonLd({ crumbs }: { crumbs: BreadcrumbCrumb[] }) {
   const pathname = usePathname();
   const items = crumbs.map((c, i) => {
     const isLast = i === crumbs.length - 1;
+    const label = (c.label || "").trim();
+    const url = c.href ?? (isLast ? pathname : "/");
+    const fallback =
+      url === "/"
+        ? "Home"
+        : (url.split("/").filter(Boolean).pop() || "Page").replace(/-/g, " ");
     return {
-      name: c.label,
-      url: c.href ?? (isLast ? pathname : "/"),
+      name: label || fallback.replace(/\b\w/g, (ch) => ch.toUpperCase()),
+      url,
     };
   });
 

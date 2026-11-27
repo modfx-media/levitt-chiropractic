@@ -320,10 +320,18 @@ export function faqPageJsonLd(input: { faqs: Array<{ q: string; a: string }> }) 
 export function breadcrumbJsonLd(input: {
   items: Array<{ name: string; url: string }>;
 }) {
+  const items = input.items
+    .map((item) => {
+      const name = (item.name || "").trim();
+      const url = item.url || "/";
+      const fallback = url === "/" ? "Home" : url.split("/").filter(Boolean).pop()?.replace(/-/g, " ") || "Page";
+      return { name: name || fallback.replace(/\b\w/g, (c) => c.toUpperCase()), url };
+    })
+    .filter((item) => item.name.length > 0);
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: input.items.map((item, idx) => ({
+    itemListElement: items.map((item, idx) => ({
       "@type": "ListItem",
       position: idx + 1,
       name: item.name,
@@ -348,25 +356,61 @@ export function cityServiceAreaJsonLd(input: {
     description: input.description,
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": BUSINESS_ID },
+    author: { "@id": PHYSICIAN_ID },
     primaryImageOfPage: absUrl("/images/og-default.jpg"),
     inLanguage: "en-US",
   };
 }
 
 export function physicianJsonLd() {
+  // Credentials below are taken only from the practice's published
+  // Meet the Doctor page (born and raised in Saint Louis Park; University
+  // of Minnesota coursework in 1981; graduated Northwestern College of
+  // Chiropractic in Bloomington in December 1986; private practice in the
+  // Saint Louis Park area since 1987; this suite since 1999). No license
+  // number or degree beyond D.C. is invented here.
   return {
     "@context": "https://schema.org",
     "@type": "Physician",
     "@id": PHYSICIAN_ID,
     name: siteConfig.physician.name,
     honorificPrefix: "Dr.",
+    honorificSuffix: "DC",
     jobTitle: siteConfig.physician.jobTitle,
     medicalSpecialty: "Chiropractic",
+    description:
+      "Born and raised in Saint Louis Park, Minnesota. Graduated from Northwestern College of Chiropractic in Bloomington in December 1986. In private practice in the Saint Louis Park area since 1987, and at 6200 Excelsior Blvd, Suite 201, since 1999.",
     image: absUrl(siteConfig.physician.image),
     url: `${siteConfig.url}/meet-the-doctor`,
     telephone: siteConfig.phoneE164,
     worksFor: { "@id": BUSINESS_ID },
     address: postalAddress(),
+    birthPlace: {
+      "@type": "City",
+      name: "Saint Louis Park",
+      addressRegion: "MN",
+      addressCountry: "US",
+    },
+    alumniOf: [
+      {
+        "@type": "EducationalOrganization",
+        name: "Northwestern College of Chiropractic",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Bloomington",
+          addressRegion: "MN",
+          addressCountry: "US",
+        },
+      },
+    ],
+    hasCredential: {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "Doctor of Chiropractic",
+      recognizedBy: {
+        "@type": "EducationalOrganization",
+        name: "Northwestern College of Chiropractic",
+      },
+    },
     sameAs: [siteConfig.healthgradesUrl],
   };
 }

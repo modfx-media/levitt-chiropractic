@@ -6,6 +6,8 @@ import { loadPageContent } from "@/lib/designed/loadPage";
 import { withCMSMeta } from "@/lib/cms/generateMeta";
 import { getServedCities } from "@/lib/areasData";
 import AreasWeServeContent from "@/components/areas/AreasWeServeContent";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/jsonLd";
 
 export const revalidate = 3600;
 
@@ -25,7 +27,18 @@ export default async function Page() {
   const content = await loadPageContent("/areas-we-serve");
   return (
     <CMSRoute path="/areas-we-serve">
-      <AreasWeServeContent content={content} cities={getServedCities()}  />
+      <>
+        <JsonLd
+          id="ld-areas-crumbs"
+          data={breadcrumbJsonLd({
+            items: [
+              { name: "Home", url: "/" },
+              { name: "Areas We Serve", url: "/areas-we-serve" },
+            ],
+          })}
+        />
+        <AreasWeServeContent content={content} cities={getServedCities()}  />
+      </>
     </CMSRoute>
   );
 }
