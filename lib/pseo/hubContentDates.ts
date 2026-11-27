@@ -27,8 +27,8 @@ export const PSEO_HUB_CONTENT_LASTMOD: Record<string, string> = {
   "/areas-we-serve/maplewood": "2026-11-25",
   "/areas-we-serve/falcon-heights": "2026-11-25",
   // Batch 3 — copy rewritten 2026-11-25
-  "/areas-we-serve/eagan": "2026-11-25",
-  "/areas-we-serve/orono": "2026-11-25",
+  "/areas-we-serve/eagan": "2026-11-27",
+  "/areas-we-serve/orono": "2026-11-27",
   "/areas-we-serve/burnsville": "2026-11-25",
   // Batch 4 — copy written 2026-11-25
   "/areas-we-serve/lauderdale": "2026-11-25",
@@ -38,4 +38,8 @@ export const PSEO_HUB_CONTENT_LASTMOD: Record<string, string> = {
   "/areas-we-serve/shoreview": "2026-11-26",
   "/areas-we-serve/savage": "2026-11-26",
   "/areas-we-serve/brooklyn-park": "2026-11-26",
+  // Batch 6 — copy written 2026-11-27
+  "/areas-we-serve/chanhassen": "2026-11-27",
+  "/areas-we-serve/eden-prairie": "2026-11-27",
+  "/areas-we-serve/plymouth": "2026-11-27",
 };
