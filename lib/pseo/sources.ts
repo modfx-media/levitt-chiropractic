@@ -3,10 +3,12 @@ import type { PseoSource } from "./types";
 const A = "2026-11-23";
 const B = "2026-11-25";
 const C = "2026-11-26";
+const D = "2026-11-27";
 const wiki = (id: string, title: string, slug: string): PseoSource => ({ id, title, publisher: "Wikipedia", url: `https://en.wikipedia.org/wiki/${slug}`, accessed: A });
 const wikiB = (id: string, title: string, slug: string): PseoSource => ({ id, title, publisher: "Wikipedia", url: `https://en.wikipedia.org/wiki/${slug}`, accessed: B });
 const official = (id: string, title: string, publisher: string, url: string): PseoSource => ({ id, title, publisher, url, accessed: B });
 const officialC = (id: string, title: string, publisher: string, url: string): PseoSource => ({ id, title, publisher, url, accessed: C });
+const officialD = (id: string, title: string, publisher: string, url: string): PseoSource => ({ id, title, publisher, url, accessed: D });
 const pubmed = (id: string, title: string, pmid: string, journal: string): PseoSource => ({ id, title, publisher: `${journal} (PubMed ${pmid})`, url: `https://pubmed.ncbi.nlm.nih.gov/${pmid}/`, accessed: A });
 
 /** Every source here was fetched on the accessed date while writing the hub copy. */
@@ -108,4 +110,25 @@ export const SRC = {
   eidemHistory: officialC("eidem-history", "History of the Farm", "City of Brooklyn Park", "https://www.brooklynpark.org/our-facilities/eidemfarm/history-of-the-farm/"),
   bpBlueLine: officialC("bp-blue-line", "Blue Line Route Information", "City of Brooklyn Park", "https://www.brooklynpark.org/blue-line-route-information/"),
   blueLineBuild: officialC("blue-line-build", "Current questions, project progress", "METRO Blue Line Extension (Metropolitan Council and Hennepin County)", "https://yourblueline.org/build"),
+  // Batch 6 official pages, fetched 2026-11-27.
+  eaganCity: officialD("eagan-city", "City of Eagan", "City of Eagan", "https://www.ci.eagan.mn.us/"),
+  eaganGlance: officialD("eagan-glance", "Eagan at a Glance", "City of Eagan", "https://www.ci.eagan.mn.us/at-a-glance-demographics"),
+  eaganCensus: officialD("eagan-census", "QuickFacts: Eagan city, Minnesota", "U.S. Census Bureau", "https://www.census.gov/quickfacts/eagancityminnesota"),
+  cascadeBay: officialD("cascade-bay", "Cascade Bay — Plan Your Visit", "City of Eagan", "https://cityofeagan.com/cb-plan-your-visit"),
+  lebanonHillsOfficial: officialD("lebanon-hills-official", "Lebanon Hills Regional Park", "Dakota County", "https://dakotacountymn.gov/parks/parks-trails/lebanon-hills"),
+  oronoHistory: officialD("orono-history", "Orono History", "City of Orono", "https://www.oronomn.gov/293/Orono-History"),
+  oronoAbout: officialD("orono-about", "About Our Community", "City of Orono", "https://www.oronomn.gov/176/About-Our-Community"),
+  oronoCensus: officialD("orono-census", "QuickFacts: Orono city, Minnesota", "U.S. Census Bureau", "https://www.census.gov/quickfacts/oronocityminnesota"),
+  oronoBigIsland: officialD("orono-big-island", "Big Island Nature Park Management Plan (November 2011)", "City of Orono and Minnehaha Creek Watershed District", "https://www.oronomn.gov/DocumentCenter/View/71/Big-Island-Nature-Park-Managment-Plan--PDF"),
+  paisleyOfficial: officialD("paisley-official", "Paisley Park", "Paisley Park", "https://www.paisleypark.com/"),
+  cdtOfficial: officialD("cdt-official", "Contact Us", "Chanhassen Dinner Theatres", "https://chanhassendt.com/contact-us/"),
+  chanhassenCensus: officialD("chanhassen-census", "QuickFacts: Chanhassen city, Minnesota", "U.S. Census Bureau", "https://www.census.gov/quickfacts/chanhassencityminnesota"),
+  arboretumDirections: officialD("arboretum-directions", "Getting to the Arboretum", "University of Minnesota Landscape Arboretum", "https://arb.umn.edu/visit/gettinghere"),
+  edenPrairieAbout: officialD("eden-prairie-about", "About Eden Prairie", "City of Eden Prairie", "https://www.edenprairie.org/community/about-eden-prairie"),
+  edenPrairieEcon: officialD("eden-prairie-econ", "Economic Development", "City of Eden Prairie", "https://www.edenprairie.org/city-government/departments/community-development/economic-development"),
+  edenPrairieCensus: officialD("eden-prairie-census", "QuickFacts: Eden Prairie city, Minnesota", "U.S. Census Bureau", "https://www.census.gov/quickfacts/fact/table/edenprairiecityminnesota/POP010220"),
+  edenPrairieMaps: officialD("eden-prairie-maps", "City Maps and GIS", "City of Eden Prairie", "https://www.edenprairiemn.gov/community/city-maps-and-gis"),
+  plymouthAbout: officialD("plymouth-about", "About", "City of Plymouth, MN", "https://www.plymouthmn.gov/about"),
+  plymouthCensus: officialD("plymouth-census", "QuickFacts: Plymouth city, Minnesota", "U.S. Census Bureau", "https://www.census.gov/quickfacts/plymouthcityminnesota"),
+  frenchPark: officialD("french-park", "Clifton E. French Regional Park", "Three Rivers Park District", "https://www.threeriversparks.org/location/french-regional-park"),
 } satisfies Record<string, PseoSource>;
