@@ -12,7 +12,7 @@ import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDisplayedGoogleReviews } from "@/lib/google-reviews";
 import { siteConfig } from "@/lib/siteConfig";
-import { localBusinessJsonLd, websiteJsonLd } from "@/lib/jsonLd";
+import { localBusinessJsonLd, physicianJsonLd, websiteJsonLd } from "@/lib/jsonLd";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -119,6 +119,7 @@ export default async function SiteLayout({
           id="ld-localbusiness"
           data={localBusinessJsonLd({ reviews, meta })}
         />
+        <JsonLd id="ld-physician" data={physicianJsonLd()} />
       </body>
     </html>
   );
